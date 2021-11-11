@@ -11,6 +11,11 @@ public class UserController {
     public String Login(Model model) {
         System.out.println("UserController.Login");
         return "user/login";
+
+    }
+    @GetMapping("join")
+    public String join(Model model) {
+        return "user/join";
     }
 
     @GetMapping("myinfo")

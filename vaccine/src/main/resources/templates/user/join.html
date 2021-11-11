@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Join</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h2>백신 예약 시스템 회원가입</h2>
+<div class="join_ID">
+    <h4>아이디</h4>
+    <input type="text" name="user_id" id="user_id" placeholder="아이디를 입력하세요">
+    <button type="button">중복 확인</button>
+</div>
+
+<div class="join_PW">
+    <h4>비밀번호</h4>
+    <input type="password" name="user_pw" id="user_pw" placeholder="비밀번호를 입력하세요">
+    <input type="password" name="user_pw" id="user_pwcheck" placeholder="비밀번호를 다시 입력하세요">
+</div>
+<div class="join_Email">
+    <h4>이메일</h4>
+    <input type="email" name="user_email" id="email" placeholder="이메일을 입력하세요">
+</div>
+<div>
+    <h4>이름</h4>
+    <input type="text" name="user_name" id="user_name" placeholder="이름">
+    <input type="text" name="user_phone" id="user_phone" placeholder="전화번호">
+</div>
+<div>
+    <h4>성별</h4>
+    <input type="radio" id="man" name="sex" value="남성"
+           checked>
+    <label for="man">남성</label>
+    <input type="radio" id="woman" name="sex" value="여성"
+           checked>
+    <label for="woman">여성</label>
+</div>
+
+<div class="goback_login">
+    <button type="button" onclick="location.href='login'">가입 완료</button>
+</div>
+</body>
+</html>
