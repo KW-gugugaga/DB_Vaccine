@@ -1,4 +1,4 @@
-package controller;
+package reservation.vaccine.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class UserController {
+
     @GetMapping("login")
-    public String login(Model model) {
-        model.addAttribute("name", "Yelim");
-        System.out.println("Lohin Controller");
-        return "login2";
+    public String hello(Model model) {
+        model.addAttribute("data", "Yelim");
+        return "user/login";
     }
 }
 
