@@ -18,11 +18,13 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-
-//jsp dependencies 설정
+  
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+  //jsp dependencies 설정
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl:1.2'
-// thymeleaf dependencies 설정
+  // thymeleaf dependencies 설정
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
