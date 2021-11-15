@@ -13,6 +13,7 @@ public class UserInfo {
         private String sex;
         private String phone_num;
         private String rest_addr;
+
         private String ssn1;
         private String ssn2;
 
