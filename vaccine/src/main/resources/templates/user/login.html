@@ -6,21 +6,20 @@
     <title>Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-
 </head>
 <body>
 <form class="login" action="/login" method="post">
     <div class="form-group">
-        <label class="form-label mt-4">Floating labels</label>
+        <label class="form-label mt-4">Login</label>
 
         <div class="form-floating mb-3">
             <label for="ID">ID</label>
-            <input type="text" class="form-control" id="ID" placeholder="아이디">
+            <input type="text" class="form-control" name="ID" id="ID" placeholder="아이디">
         </div>
 
         <div class="form-floating">
             <label for="PW">PW</label>
-            <input type="password" class="form-control" id="PW" placeholder="비밀번호">
+            <input type="password" class="form-control" name="PW" id="PW" placeholder="비밀번호">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">로그인</button>
