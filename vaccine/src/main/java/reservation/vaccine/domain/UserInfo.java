@@ -120,4 +120,23 @@ public class UserInfo {
         public void setSsn2(String ssn2) {
                 this.ssn2 = ssn2;
         }
+
+        @Override
+        public String toString() {
+                return "UserInfo{" +
+                        "Uid=" + Uid +
+                        ", Lid=" + Lid +
+                        ", age=" + age +
+                        ", state=" + state +
+                        ", Uname='" + Uname + '\'' +
+                        ", ID='" + ID + '\'' +
+                        ", PW='" + PW + '\'' +
+                        ", Email='" + Email + '\'' +
+                        ", sex='" + sex + '\'' +
+                        ", phone_num='" + phone_num + '\'' +
+                        ", rest_addr='" + rest_addr + '\'' +
+                        ", ssn1='" + ssn1 + '\'' +
+                        ", ssn2='" + ssn2 + '\'' +
+                        '}';
+        }
 }
