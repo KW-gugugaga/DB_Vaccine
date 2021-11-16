@@ -17,7 +17,8 @@ public class UserService {
     public List<UserInfo> findAll() {
         return userMapper.findAll();
     }
-    public Integer findUserById(String ID) { return userMapper.findUserById(ID); }
+    public UserInfo findUserById(String ID) { return userMapper.findUserById(ID); }
     public String findPWByUid(int Uid) { return userMapper.findPWByUid(Uid); }
     public String findUnameByUid(int Uid) { return userMapper.findUnameByUid(Uid); }
+    public void insertUser(UserInfo userInfo) { userMapper.insertUser(userInfo); }
 }

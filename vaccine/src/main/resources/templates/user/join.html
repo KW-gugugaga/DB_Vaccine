@@ -16,7 +16,7 @@
     <div class="join_PW">
         <h4>비밀번호</h4>
         <input type="password" name="PW" id="PW" placeholder="비밀번호를 입력하세요">
-        <input type="password" name="PW" id="PW_check" placeholder="비밀번호를 다시 입력하세요">
+        <input type="password" name="PW_check" id="PW_check" placeholder="비밀번호를 다시 입력하세요">
     </div>
     <div class="join_Email">
         <h4>이메일</h4>
@@ -25,20 +25,20 @@
     <div>
         <h4>이름</h4>
         <input type="text" name="Uname" id="Uname" placeholder="이름">
-        <input type="text" name="phone_num" id="phone_num" placeholder="전화번호">
+        <input type="text" name="phone_num" id="phone_num" placeholder="-를 포함하여 입력하세요">
     </div>
     <div>
         <h4>성별</h4>
-        <input type="radio" id="man" name="sex" value="남성"
-               checked>
-        <label for="man">남성</label>
-        <input type="radio" id="woman" name="sex" value="여성"
-               checked>
-        <label for="woman">여성</label>
+        <input type="radio" name="sex" value="F" checked="checked">남성
+        <input type="radio" name="sex" value="M" checked>여성s
+    </div>
+    <div>
+        <h4>나이</h4>
+        <input type="number" name="age" id="age" placeholder="나이">
     </div>
     <div>
         <h4>지역</h4>
-        <select name="location">
+        <select name="Lid">
             <option value="2">서울특별시</option>
             <option value="31">경기도</option>
             <option value="32">인천광역시</option>
