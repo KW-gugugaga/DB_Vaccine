@@ -15,12 +15,4 @@
         values(#{Uname}, #{ID}, #{PW}, #{Lid}, #{rest_addr}, #{sex}, #{phone_num}, #{age}, #{ssn1}, #{ssn2}, #{Email})
     </select>
 
-    <!--<select id="findPWByUid" resultType="String" parameterType="int">
-       select PW from user_info where Uid = #{Uid}
-   </select>
-
-   <select id="findUnameByUid" resultType="String" parameterType="int">
-       select Uname from user_info where Uid = #{Uid}
-   </select>-->
-
 </mapper>
