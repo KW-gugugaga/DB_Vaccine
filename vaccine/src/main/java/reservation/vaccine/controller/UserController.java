@@ -13,6 +13,8 @@ import org.springframework.web.servlet.tags.form.SelectTag;
 import reservation.vaccine.domain.UserInfo;
 import reservation.vaccine.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,16 +33,22 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public String PostLogin(Model model, @RequestParam("ID") String ID, @RequestParam("PW") String PW) {
+    public String PostLogin(Model model, HttpServletRequest req,
+                            @RequestParam("ID") String ID, @RequestParam("PW") String PW) {
         System.out.println("UserController.PostLogin");
         System.out.println("ID : " + ID + ", PW : " + PW);
-        Integer Uid = userService.findUserById(ID);
-        if(Uid == null) {
-            System.out.println("아이디 존재하지 않음");
+        UserInfo userInfo = userService.findUserById(ID);
+        HttpSession httpSession = req.getSession();
+        httpSession.setAttribute("user", userInfo);
+        if(userInfo == null) {
+            System.out.println("아이디 또는 비밀번호 오류");
             //팝업
             return "user/login";
+        } else {
+            System.out.println("Uid = " + userInfo.getUid());
+            return "redirect:mainpage";
         }
-        System.out.println("Uid = " + Uid);
+        /*System.out.println("Uid = " + userInfo.getUid());
         String getPW = userService.findPWByUid(Uid);
         System.out.println("getPW = " + getPW);
         if(PW.equals(getPW)) {
@@ -53,7 +61,7 @@ public class UserController {
             System.out.println("비밀번호 불일치");
             //팝업
             return "user/login";
-        }
+        }*/
     }
 
     @GetMapping("join")
@@ -65,7 +73,9 @@ public class UserController {
     public String PostJoin(UserInfo userInfo) {
         System.out.println("UserController.PostJoin");
         System.out.println("To String : " + userInfo.toString());
-        return "mainpage";
+        userService.insertUser(userInfo);
+        //회원가입 성공 팝업
+        return "redirect:login";
     }
 
     @GetMapping("myinfo")
