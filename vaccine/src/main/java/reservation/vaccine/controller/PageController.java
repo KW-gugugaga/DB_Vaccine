@@ -10,7 +10,6 @@ public class PageController {
     @GetMapping("mainpage")
     public String MainPage(Model model) {
         System.out.println("PageController.MainPage");
-        model.addAttribute("name", "Yerim");
         return "mainpage";
     }
 }

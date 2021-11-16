@@ -6,4 +6,16 @@
         select * from user_info
     </select>
 
+    <select id="findUserById" resultType="int" parameterType="String">
+        select Uid from user_info where ID = #{ID}
+    </select>
+
+    <select id="findPWByUid" resultType="String" parameterType="int">
+        select PW from user_info where Uid = #{Uid}
+    </select>
+
+    <select id="findUnameByUid" resultType="String" parameterType="int">
+        select Uname from user_info where Uid = #{Uid}
+    </select>
+
 </mapper>
