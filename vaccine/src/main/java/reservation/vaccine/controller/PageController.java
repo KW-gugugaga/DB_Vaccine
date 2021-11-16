@@ -17,14 +17,27 @@ public class PageController {
         System.out.println("PageController.MainPage");
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
-        String s = user.toString();
-
+        UserInfo userInfo = (UserInfo)user;
+        String s = userInfo.toString();
         System.out.println("s = " + s);
-            if(user == null) {
-                System.out.println("NULL");
-            } else {
-                System.out.println("NOT NULL");
+
+        if(user == null) {
+            System.out.println("NULL");
+            return "user/login";
+        } else {
+            model.addAttribute("Uname", userInfo.getUname());
+            System.out.println("NOT NULL");
         }
-        return "mainpage";
+        return "page/mainpage";
+    }
+
+    @GetMapping("reservation")
+    public String GetReservation(Model model) {
+        return "page/reservation";
+    }
+
+    @GetMapping("news")
+    public String GetNews(Model model) {
+        return "page/news";
     }
 }
