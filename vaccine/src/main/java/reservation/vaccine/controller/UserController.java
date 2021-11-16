@@ -79,21 +79,32 @@ public class UserController {
     }
 
     @GetMapping("myinfo")
-    public String MyInfo(Model model) {
+    public String MyInfo(Model model,HttpServletRequest req) {
         System.out.println("UserController.MyInfo");
-        model.addAttribute("id", "gdf4013");
-        model.addAttribute("name", "Yerim");
-        model.addAttribute("phone_num", "010-1111-1111");
-        model.addAttribute("email", "gdf4013@naver.com");
-        model.addAttribute("location", "seoul");
-        model.addAttribute("age", 23);
+        HttpSession session = req.getSession();
+        Object user = session.getAttribute("user");
+        UserInfo userInfo = (UserInfo) user;
+        String name = userInfo.getUname();
+
+        System.out.println("name = " + name);
+        if (user == null) {
+            System.out.println("NULL");
+        }
+        else
+        {
+            model.addAttribute("id", userInfo.getID());
+            model.addAttribute("name", userInfo.getUname());
+            model.addAttribute("phone_num", userInfo.getPhone_num());
+            model.addAttribute("email", userInfo.getEmail());
+            model.addAttribute("location", userInfo.getLid());
+            model.addAttribute("ssn1", userInfo.getSsn1());
+        }
         return "user/myinfo";
     }
-
     @GetMapping("findAll")
     public String findAll() {
         List<UserInfo> userInfos = userService.findAll();
-        for(UserInfo userInfo : userInfos) {
+        for (UserInfo userInfo : userInfos) {
             System.out.println(userInfo.getUid() + " : " + userInfo.getUname());
         }
         return "mainpage";

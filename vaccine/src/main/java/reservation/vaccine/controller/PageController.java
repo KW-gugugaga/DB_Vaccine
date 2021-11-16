@@ -20,10 +20,10 @@ public class PageController {
         String s = user.toString();
 
         System.out.println("s = " + s);
-        if(user == null) {
-            System.out.println("NULL");
-        } else {
-            System.out.println("NOT NULL");
+            if(user == null) {
+                System.out.println("NULL");
+            } else {
+                System.out.println("NOT NULL");
         }
         return "mainpage";
     }
