@@ -5,67 +5,69 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h2>백신 예약 시스템 회원가입</h2>
-<div class="join_ID">
-    <h4>아이디</h4>
-    <input type="text" name="ID" id="ID" placeholder="아이디를 입력하세요">
-    <button type="button">중복 확인</button>
-</div>
+<form class="join" action="/join" method="post">
+    <h2>백신 예약 시스템 회원가입</h2>
+    <div class="join_ID">
+        <h4>아이디</h4>
+        <input type="text" name="ID" id="ID" placeholder="아이디를 입력하세요">
+        <button type="button">중복 확인</button>
+    </div>
 
-<div class="join_PW">
-    <h4>비밀번호</h4>
-    <input type="password" name="PW" id="PW" placeholder="비밀번호를 입력하세요">
-    <input type="password" name="PW" id="PW_check" placeholder="비밀번호를 다시 입력하세요">
-</div>
-<div class="join_Email">
-    <h4>이메일</h4>
-    <input type="email" name="Email" id="Email" placeholder="이메일을 입력하세요">
-</div>
-<div>
-    <h4>이름</h4>
-    <input type="text" name="Uname" id="Uname" placeholder="이름">
-    <input type="text" name="phone_num" id="phone_num" placeholder="전화번호">
-</div>
-<div>
-    <h4>성별</h4>
-    <input type="radio" id="man" name="sex" value="남성"
-           checked>
-    <label for="man">남성</label>
-    <input type="radio" id="woman" name="sex" value="여성"
-           checked>
-    <label for="woman">여성</label>
-</div>
-<div>
-    <h4>지역</h4>
-    <select name="location">
-        <option value="2">서울특별시</option>
-        <option value="31">경기도</option>
-        <option value="32">인천광역시</option>
-        <option value="33">강원도</option>
-        <option value="41">충청남도</option>
-        <option value="42">대전광역시</option>
-        <option value="43">충청북도</option>
-        <option value="44">세종특별자치시</option>
-        <option value="51">부산광역시</option>
-        <option value="52">울산광역시</option>
-        <option value="53">대구광역시</option>
-        <option value="54">경상북도</option>
-        <option value="55">경상남도</option>
-        <option value="61">전라남도</option>
-        <option value="62">광주광역시</option>
-        <option value="63">전라북도</option>
-        <option value="64">제주특별자치도</option>
-    </select>
-    <input type="text" name="rest_addr" id="rest_addr" placeholder="나머지 주소">
-</div>
-<div>
-    <h4>주민번호</h4>
-    <input type="text" name="ssn1" id="ssn1" placeholder="앞자리">-
-    <input type="text" name="ssn2" id="ssn2" placeholder="뒷자리">
-</div>
-<br>
-<div class="goback_login">
-    <button type="button" onclick="location.href='login'">가입 완료</button>
-</div>
+    <div class="join_PW">
+        <h4>비밀번호</h4>
+        <input type="password" name="PW" id="PW" placeholder="비밀번호를 입력하세요">
+        <input type="password" name="PW" id="PW_check" placeholder="비밀번호를 다시 입력하세요">
+    </div>
+    <div class="join_Email">
+        <h4>이메일</h4>
+        <input type="email" name="Email" id="Email" placeholder="이메일을 입력하세요">
+    </div>
+    <div>
+        <h4>이름</h4>
+        <input type="text" name="Uname" id="Uname" placeholder="이름">
+        <input type="text" name="phone_num" id="phone_num" placeholder="전화번호">
+    </div>
+    <div>
+        <h4>성별</h4>
+        <input type="radio" id="man" name="sex" value="남성"
+               checked>
+        <label for="man">남성</label>
+        <input type="radio" id="woman" name="sex" value="여성"
+               checked>
+        <label for="woman">여성</label>
+    </div>
+    <div>
+        <h4>지역</h4>
+        <select name="location">
+            <option value="2">서울특별시</option>
+            <option value="31">경기도</option>
+            <option value="32">인천광역시</option>
+            <option value="33">강원도</option>
+            <option value="41">충청남도</option>
+            <option value="42">대전광역시</option>
+            <option value="43">충청북도</option>
+            <option value="44">세종특별자치시</option>
+            <option value="51">부산광역시</option>
+            <option value="52">울산광역시</option>
+            <option value="53">대구광역시</option>
+            <option value="54">경상북도</option>
+            <option value="55">경상남도</option>
+            <option value="61">전라남도</option>
+            <option value="62">광주광역시</option>
+            <option value="63">전라북도</option>
+            <option value="64">제주특별자치도</option>
+        </select>
+        <input type="text" name="rest_addr" id="rest_addr" placeholder="나머지 주소">
+    </div>
+    <div>
+        <h4>주민번호</h4>
+        <input type="text" name="ssn1" id="ssn1" placeholder="앞자리">-
+        <input type="text" name="ssn2" id="ssn2" placeholder="뒷자리">
+    </div>
+    <br>
+    <div class="goback_login">
+        <input type="submit" value="회원가입">
+    </div>
+</form>
 </body>
 </html>

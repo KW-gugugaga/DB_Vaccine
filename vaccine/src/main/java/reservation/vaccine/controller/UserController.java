@@ -48,7 +48,7 @@ public class UserController {
             String Uname = userService.findUnameByUid(Uid);
             System.out.println("Uname = " + Uname);
             model.addAttribute("Uname", Uname);
-            return "mainpage";
+            return "redirect:mainpage?Uid=" + Uid;
         } else {
             System.out.println("비밀번호 불일치");
             //팝업
@@ -57,8 +57,15 @@ public class UserController {
     }
 
     @GetMapping("join")
-    public String join(Model model) {
+    public String GetJoin(Model model) {
         return "user/join";
+    }
+
+    @PostMapping("join")
+    public String PostJoin(UserInfo userInfo) {
+        System.out.println("UserController.PostJoin");
+        System.out.println("To String : " + userInfo.toString());
+        return "mainpage";
     }
 
     @GetMapping("myinfo")
