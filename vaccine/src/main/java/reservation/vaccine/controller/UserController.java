@@ -48,20 +48,6 @@ public class UserController {
             System.out.println("Uid = " + userInfo.getUid());
             return "redirect:mainpage";
         }
-        /*System.out.println("Uid = " + userInfo.getUid());
-        String getPW = userService.findPWByUid(Uid);
-        System.out.println("getPW = " + getPW);
-        if(PW.equals(getPW)) {
-            System.out.println("비밀번호 일치");
-            String Uname = userService.findUnameByUid(Uid);
-            System.out.println("Uname = " + Uname);
-            model.addAttribute("Uname", Uname);
-            return "redirect:mainpage?Uid=" + Uid;
-        } else {
-            System.out.println("비밀번호 불일치");
-            //팝업
-            return "user/login";
-        }*/
     }
 
     @GetMapping("join")
@@ -75,7 +61,7 @@ public class UserController {
         System.out.println("To String : " + userInfo.toString());
         userService.insertUser(userInfo);
         //회원가입 성공 팝업
-        return "redirect:login";
+        return "user/login";
     }
 
     @GetMapping("myinfo")
@@ -96,7 +82,7 @@ public class UserController {
         for(UserInfo userInfo : userInfos) {
             System.out.println(userInfo.getUid() + " : " + userInfo.getUname());
         }
-        return "mainpage";
+        return "page/mainpage";
     }
 }
 
