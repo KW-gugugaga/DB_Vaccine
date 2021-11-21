@@ -3,22 +3,28 @@ package reservation.vaccine.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reservation.vaccine.domain.UserInfo;
-import reservation.vaccine.mapper.UserMapper;
+import reservation.vaccine.domain.UserRsv;
+import reservation.vaccine.mapper.Mapper;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class UserService {
 
     @Autowired
-    UserMapper userMapper;
+    Mapper mapper;
 
     public List<UserInfo> findAll() {
-        return userMapper.findAll();
+        return mapper.findAll();
     }
-    public UserInfo findUserById(String ID) { return userMapper.findUserById(ID); }
-    public String findPWByUid(int Uid) { return userMapper.findPWByUid(Uid); }
-    public String findUnameByUid(int Uid) { return userMapper.findUnameByUid(Uid); }
-    public void insertUser(UserInfo userInfo) { userMapper.insertUser(userInfo); }
+    public UserInfo findUserById(String ID) { return mapper.findUserById(ID); }
+    public void insertUser(UserInfo userInfo) { mapper.insertUser(userInfo); }
+    public boolean insertRsv(UserRsv userRsv) {
+        if(mapper.findUserRsv(userRsv.getUid()) == null) {
+            System.out.println("UserService.insertRsv null");
+            mapper.insertRsv(userRsv);
+            return true;
+        } else
+            return false;
+    }
 }

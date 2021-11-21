@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="reservation.vaccine.mapper.UserMapper">
+<mapper namespace="reservation.vaccine.mapper.Mapper">
+
+    <!--user-->
+    <resultMap type="reservation.vaccine.domain.HospitalLocation" id="HospitalLocation">
+        <result column="rest_Haddr" property="rest_Haddr"/>
+    </resultMap>
+
+    <resultMap type="reservation.vaccine.domain.Vaccine" id="Vaccine">
+        <result column="Vname" property="Vname"/>
+        <result column="Vid" property="Vid"/>
+    </resultMap>
+
+    <resultMap type="reservation.vaccine.domain.Hospital" id="Hospital">
+        <result column="Hid" property="Hid"/>
+        <result column="Hname" property="Hname"/>
+        <result column="Htel" property="Htel"/>
+        <result column="rest" property="rest"/>
+        <collection property="hospitalLocation" resultMap="HospitalLocation"/>
+        <collection property="vaccine" resultMap="Vaccine"/>
+    </resultMap>
 
     <select id="findAll" resultType="reservation.vaccine.domain.UserInfo">
         select * from user_info
@@ -13,6 +32,35 @@
     <select id="insertUser" parameterType="reservation.vaccine.domain.UserInfo">
         insert into user_info (Uname, ID, PW, Lid, rest_addr, sex, phone_num, age, ssn1, ssn2, Email)
         values(#{Uname}, #{ID}, #{PW}, #{Lid}, #{rest_addr}, #{sex}, #{phone_num}, #{age}, #{ssn1}, #{ssn2}, #{Email})
+    </select>
+
+    <select id="insertRsv" parameterType="reservation.vaccine.domain.UserRsv">
+        insert into user_rsv (Uid, Vid, Hid_1, date_1, hour_1, Hid_2, date_2, hour_2)
+        values(#{Uid}, #{Vid}, #{Hid_1}, #{date_1}, #{hour_1}, #{Hid_2}, #{date_2}, #{hour_2})
+    </select>
+
+    <select id="findUserRsv" resultType="int" parameterType="int">
+        select Uid
+        from user_rsv
+        where Uid = #{Uid}
+    </select>
+
+    <!--hospital-->
+    <select id="findAllHospitalByUid" resultMap="Hospital" parameterType="int">
+        select h.Hid, h.Hname, hl.rest_Haddr, h.Htel, h.rest, v.Vname
+        from hospital as h, hospital_location as hl, user_info as ui, vaccine as v
+        where h.Hid = hl.Hid and hl.Lid = ui.Lid and ui.Uid = #{Uid} and h.Vid = v.Vid
+        order by h.Hid;
+    </select>
+
+    <select id="findHospitalByHid" resultMap="Hospital" parameterType="int">
+        select h.Hid, h.Hname, hl.rest_Haddr, h.Htel, h.rest, v.Vname, v.Vid
+        from hospital as h, hospital_location as hl, vaccine as v
+        where h.Hid = hl.Hid and h.Vid = v.Vid and h.Hid = #{Hid}
+    </select>
+
+    <select id="reservation" parameterType="int">
+        update hospital set rest = rest - 1 where Hid = #{Hid};
     </select>
 
 </mapper>

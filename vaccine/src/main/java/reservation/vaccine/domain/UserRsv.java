@@ -8,10 +8,21 @@ public class UserRsv {
     private int Hid_1;
     private int Hid_2;
 
-    private String data_1;
-    private String hour_1;
+    private String date_1;
+    private int hour_1;
     private String date_2;
-    private String hour_2;
+    private int hour_2;
+
+    public UserRsv(int uid, int vid, int hid_1, int hid_2, String date_1, int hour_1, String date_2, int hour_2) {
+        Uid = uid;
+        Vid = vid;
+        Hid_1 = hid_1;
+        Hid_2 = hid_2;
+        this.date_1 = date_1;
+        this.hour_1 = hour_1;
+        this.date_2 = date_2;
+        this.hour_2 = hour_2;
+    }
 
     public int getRid() {
         return Rid;
@@ -53,19 +64,19 @@ public class UserRsv {
         Hid_2 = hid_2;
     }
 
-    public String getData_1() {
-        return data_1;
+    public String getDate_1() {
+        return date_1;
     }
 
-    public void setData_1(String data_1) {
-        this.data_1 = data_1;
+    public void setDate_1(String date_1) {
+        this.date_1 = date_1;
     }
 
-    public String getHour_1() {
+    public int getHour_1() {
         return hour_1;
     }
 
-    public void setHour_1(String hour_1) {
+    public void setHour_1(int hour_1) {
         this.hour_1 = hour_1;
     }
 
@@ -77,11 +88,26 @@ public class UserRsv {
         this.date_2 = date_2;
     }
 
-    public String getHour_2() {
+    public int getHour_2() {
         return hour_2;
     }
 
-    public void setHour_2(String hour_2) {
+    public void setHour_2(int hour_2) {
         this.hour_2 = hour_2;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRsv{" +
+                "Rid=" + Rid +
+                ", Uid=" + Uid +
+                ", Vid=" + Vid +
+                ", Hid_1=" + Hid_1 +
+                ", Hid_2=" + Hid_2 +
+                ", date_1='" + date_1 + '\'' +
+                ", hour_1=" + hour_1 +
+                ", date_2='" + date_2 + '\'' +
+                ", hour_2=" + hour_2 +
+                '}';
     }
 }
