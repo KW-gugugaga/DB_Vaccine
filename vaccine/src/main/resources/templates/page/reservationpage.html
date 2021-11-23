@@ -9,6 +9,7 @@
 <form class="reservation" action="/reservation" method="post">
     <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
     <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
+    <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
     <h2 th:text="${hospital.Hname}">병원 이름</h2>
     <h3 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h3>
     <h3 th:text="${hospital.Htel}">병원 전화번호</h3>
