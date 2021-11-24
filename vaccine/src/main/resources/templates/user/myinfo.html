@@ -5,23 +5,41 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div class="id">
-    <p th:text="'아이디 : ' + ${id}"></p>
-</div>
+<h2>내 정보</h2>
 <div class="name">
-    <p th:text="'이름 : ' + ${name}"></p>
+    <p th:text="'이름 : ' + ${userinfo.Uname}"></p>
 </div>
-<div class="email">
-    <p th:text="'email : ' + ${email}"></p>
+<div class="id">
+    <p th:text="'아이디 : ' + ${userinfo.ID}"></p>
+</div>
+<div class="pw">
+    <p th:text="'비밀번호 : ' + ${userinfo.PW}"></p>
+</div>
+<div class="ssn">
+    <p th:text="'주민등록번호 : ' + ${userinfo.ssn1} +'-' + ${userinfo.ssn2} "></p>
+</div>
+<div class="sex">
+    <p th:text="'성별 : ' + ${userinfo.sex}"></p>
 </div>
 <div class="phone_num">
-    <p th:text="'전화번호 : ' + ${phone_num}"></p>
+    <p th:text="'전화번호 : ' + ${userinfo.phone_num}"></p>
 </div>
+<div class="email">
+    <p th:text="'email : ' + ${userinfo.Email}"></p>
+</div>
+
 <div class="location">
-    <p th:text="'주소 : ' + ${location}"></p>
+    <p th:text="'주소 : ' + ${location} + ' ' + ${userinfo.rest_addr}"></p>
 </div>
-<div class="ssn1">
-    <p th:text="'생년월일 : ' + ${ssn1}"></p>
+
+<div class="state">
+    <p th:text="'접종상태 :'  + ${userinfo.state}"></p>
 </div>
+
+<div class="goback_mainpage">
+    <button type="button" onclick="location.href='mainpage'">돌아가기</button>
+    <button type="button" onclick="location.href='modify'">정보수정</button>
+</div>
+
 </body>
 </html>

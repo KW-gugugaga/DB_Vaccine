@@ -15,6 +15,8 @@ public interface Mapper {
     String findPWByUid(int Uid);
     String findUnameByUid(int Uid);
     void insertUser(UserInfo userInfo);
+    void modifyUser(UserInfo userInfo);
+
     void insertRsv(UserRsv userRsv);
     Integer findUserRsv(int Uid);
 

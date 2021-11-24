@@ -27,4 +27,6 @@ public class UserService {
         } else
             return false;
     }
+
+    public void modifyUser(UserInfo userInfo) { mapper.modifyUser(userInfo); }
 }
