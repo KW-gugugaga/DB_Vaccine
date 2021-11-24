@@ -6,7 +6,10 @@
 </head>
 <body>
 <h2>병원 리스트 페이지</h2>
-<h4><p th:text="${user} + '님이 거주하시는 지역의 병원 리스트입니다.'">병원입니다.</p></h4>
+<div>
+    <h4><p th:text="${user} + '님이 거주하시는 지역의 병원 리스트입니다.'">병원입니다.</p></h4>
+    <input type="button" onclick="location.href='mainpage'" value="메인으로 돌아가기">
+</div>
 <table id="hospitalTable">
     <thead>
     <tr>

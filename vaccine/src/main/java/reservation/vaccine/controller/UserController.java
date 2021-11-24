@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -33,7 +35,10 @@ public class UserController {
                             @RequestParam("ID") String ID, @RequestParam("PW") String PW) throws IOException {
         System.out.println("UserController.PostLogin");
         System.out.println("ID : " + ID + ", PW : " + PW);
-        UserInfo userInfo = userService.findUserById(ID);
+        Map<String, String> loginInfo = new HashMap<String, String>();
+        loginInfo.put("ID", ID);
+        loginInfo.put("PW", PW);
+        UserInfo userInfo = userService.findUserById(loginInfo);
         HttpSession httpSession = req.getSession();
         httpSession.setAttribute("user", userInfo);
         if(userInfo == null) {
