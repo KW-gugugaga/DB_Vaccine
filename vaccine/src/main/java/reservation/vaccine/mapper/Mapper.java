@@ -14,6 +14,8 @@ public interface Mapper {
     List<UserInfo> findAll();
     UserInfo findUserByIdPw(Map<String, String> loginInfo);
     void insertUser(UserInfo userInfo);
+    void modifyUser(UserInfo userInfo);
+
     void insertRsv(UserRsv userRsv);
     Integer findUserRsv(int Uid);
 
