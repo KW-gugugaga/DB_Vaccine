@@ -38,7 +38,7 @@ public class UserController {
         Map<String, String> loginInfo = new HashMap<String, String>();
         loginInfo.put("ID", ID);
         loginInfo.put("PW", PW);
-        UserInfo userInfo = userService.findUserById(loginInfo);
+        UserInfo userInfo = userService.findUserByIdPW(loginInfo);
         HttpSession httpSession = req.getSession();
         httpSession.setAttribute("user", userInfo);
         if(userInfo == null) {
@@ -81,7 +81,6 @@ public class UserController {
         int lid=userInfo.getLid();
 
         String location=setLocation(lid);
-
 
         System.out.println("name = " + name);
         if (user == null) {

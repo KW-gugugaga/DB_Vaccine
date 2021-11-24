@@ -7,6 +7,10 @@
 <body>
 
 <h2>내 정보</h2>
+<div>
+    <input type="button" onclick="location.href='mainpage'" value="메인으로 돌아가기">
+</div>
+
 <div class="name">
     <p th:text="'이름 : ' + ${userinfo.Uname}"></p>
 
@@ -34,12 +38,13 @@
     <p th:text="'주소 : ' + ${location} + ' ' + ${userinfo.rest_addr}"></p>
 </div>
 
-<div class="state">
-    <p th:text="'접종상태 :'  + ${userinfo.state}"></p>
+<div class="state">접종상태 :
+    <td th:if = "${userinfo.state==0}" th:text="'미접종'"></td>
+    <td th:if = "${userinfo.state==1}" th:text="'1차 접종자'"></td>
+    <td th:if = "${userinfo.state==2}"th:text="'2차 접종자'"></td>
 </div>
 
-<div class="goback_mainpage">
-    <button type="button" onclick="location.href='mainpage'">돌아가기</button>
+<div class="modify">
     <button type="button" onclick="location.href='modify'">정보수정</button>
 </div>
 
