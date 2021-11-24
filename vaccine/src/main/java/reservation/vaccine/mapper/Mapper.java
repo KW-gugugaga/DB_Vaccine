@@ -6,14 +6,14 @@ import reservation.vaccine.domain.UserRsv;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface Mapper {
 
     //user
     List<UserInfo> findAll();
+    UserInfo findUserByIdPw(Map<String, String> loginInfo);
     UserInfo findUserById(String ID);
-    String findPWByUid(int Uid);
-    String findUnameByUid(int Uid);
     void insertUser(UserInfo userInfo);
     void modifyUser(UserInfo userInfo);
 

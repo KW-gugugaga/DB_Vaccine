@@ -13,10 +13,16 @@ import reservation.vaccine.service.HospitalService;
 import reservation.vaccine.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Vector;
 
 @Controller
 public class PageController {
@@ -53,9 +59,7 @@ public class PageController {
         UserInfo userInfo = (UserInfo)user;
         int Uid = ((UserInfo) user).getUid();
         List<Hospital> hospitals = hospitalService.findAllHospitalByUid(Uid);
-        for(Hospital hospital : hospitals) {
-            System.out.println(hospital.toString());
-        }
+
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("user", userInfo.getUname());
         return "page/hospitalpage";
@@ -67,14 +71,35 @@ public class PageController {
         Hospital hospital = hospitalService.findHospitalByHid(Hid);
         System.out.println(hospital.toString());
         model.addAttribute("hospital", hospital);
-        // 내가 예약한 병원이면 예약취소 버튼 생성
+
+        // 달력 생성
+        LocalDate todayDate = LocalDate.now();
+        LocalDate maxDate = todayDate.plusMonths(1);
+        System.out.println("todayDate = " + todayDate);
+        System.out.println("maxDate = " + maxDate);
+
+        Calendar today = Calendar.getInstance();
+        today.set(todayDate.getYear(), todayDate.getMonth().getValue()-1, 1);
+        int todayMaximum = today.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int todayDay = today.get(Calendar.DAY_OF_WEEK);
+        System.out.println("todayMaximum = " + todayMaximum);
+        System.out.println("todayDay = " + todayDay);
+
+        Calendar maxDay = Calendar.getInstance();
+        maxDay.set(maxDate.getYear(), maxDate.getMonth().getValue()-1, 1);
+        int maxDayMaximum = maxDay.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int maxDayDay = maxDay.get(Calendar.DAY_OF_WEEK);
+        System.out.println("maxDayMaximum = " + maxDayMaximum);
+        System.out.println("maxDayDay = " + maxDayDay);
+
+        // 내가 예약한 병원이면 예약 취소 버튼
         return "page/reservationpage";
     }
 
     @PostMapping("reservation")
-    public String PostReservation(Model model, HttpServletRequest req,
+    public String PostReservation(Model model, HttpServletRequest req, HttpServletResponse res,
                                   @RequestParam("Hid") int Hid, @RequestParam("time") int time,
-                                  @RequestParam("Vid") int Vid) {
+                                  @RequestParam("Vid") int Vid, @RequestParam("Hname") String Hname) throws IOException {
         System.out.println("Hid = " + Hid);
         System.out.println("time = " + time);
         HttpSession session = req.getSession();
@@ -82,16 +107,28 @@ public class PageController {
         UserInfo userInfo = (UserInfo)user;
         int Uid = ((UserInfo) user).getUid();
         LocalDate date = LocalDate.now();
-        System.out.println("date = " + date);
+        LocalDate datePlus14 = date.plusDays(14);
+        String dateString = date.getMonth() + "월 " + date.getDayOfMonth() + "일";
+        String dateStringAfter14 = datePlus14.getMonth() + "월 " + datePlus14.getDayOfMonth() + "일";
+
         UserRsv userRsv = new UserRsv(userInfo.getUid(), Vid, Hid, Hid, date.toString(), time,
-                date.plusDays(14).toString(), time);
+                datePlus14.toString(), time);
         System.out.println(userRsv.toString());
 
-        //이미 예약했을 경우 예약 불가
-        if(userService.insertRsv(userRsv))
+        if(userService.insertRsv(userRsv)) {
             hospitalService.reservation(Hid);
-        else
-            System.out.println("이미 예약 존재");
+            res.setContentType("text/html; charset=euc-kr");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('예약 성공 : " + Hname + "');</script>");
+            out.flush();
+        }
+        else {
+            System.out.println("이미 예약 내역 존재");
+            res.setContentType("text/html; charset=euc-kr");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('예약 불가 : 회원님의 예약 내역이 이미 존재합니다.');</script>");
+            out.flush();
+        }
 
         List<Hospital> hospitals = hospitalService.findAllHospitalByUid(Uid);
         model.addAttribute("hospitals", hospitals);
@@ -102,5 +139,8 @@ public class PageController {
     @GetMapping("news")
     public String GetNews(Model model) {
         return "page/news";
+    }
+
+    private class Date {
     }
 }

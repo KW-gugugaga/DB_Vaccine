@@ -7,6 +7,7 @@ import reservation.vaccine.domain.UserRsv;
 import reservation.vaccine.mapper.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -17,6 +18,7 @@ public class UserService {
     public List<UserInfo> findAll() {
         return mapper.findAll();
     }
+    public UserInfo findUserByIdPW(Map<String, String> login) { return mapper.findUserByIdPw(login); }
     public UserInfo findUserById(String ID) { return mapper.findUserById(ID); }
     public void insertUser(UserInfo userInfo) { mapper.insertUser(userInfo); }
     public boolean insertRsv(UserRsv userRsv) {

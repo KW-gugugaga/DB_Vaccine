@@ -25,6 +25,10 @@
         select * from user_info
     </select>
 
+    <select id="findUserByIdPw" resultType="reservation.vaccine.domain.UserInfo" parameterType="map">
+        select * from user_info where ID = #{ID} and PW = #{PW}
+    </select>
+
     <select id="findUserById" resultType="reservation.vaccine.domain.UserInfo" parameterType="String">
         select * from user_info where ID = #{ID}
     </select>
