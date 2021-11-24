@@ -9,11 +9,38 @@
 <form class="reservation" action="/reservation" method="post">
     <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
     <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
+    <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
     <h2 th:text="${hospital.Hname}">병원 이름</h2>
     <h3 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h3>
     <h3 th:text="${hospital.Htel}">병원 전화번호</h3>
     <h4 th:text="${hospital.vaccine.Vname}">백신 종류</h4>
-    <h4 th:text="${hospital.rest}">잔여 백신 수</h4>
+    <h4 th:text="${hospital.rest} + '개'">잔여 백신 수</h4>
+
+    <div class="calender">
+        <div class="header">
+            <button class="prevBtn" onclick="prevCal()">prev</button>
+            <div class="title">
+                <div class="yearTitle"></div>
+                <div class="monthTitle"></div>
+            </div>
+            <button class="nextBtn" onclick="nextCal()">next</button>
+        </div>
+        <div class="main">
+            <div class="daies">
+                <div class="day">Sun</div>
+                <div class="day">Mon</div>
+                <div class="day">Tue</div>
+                <div class="day">Wed</div>
+                <div class="day">Thu</div>
+                <div class="day">Fri</div>
+                <div class="day">Sat</div>
+            </div>
+            <div class="dates"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="calendar.js"></script>
+
+
     <h4>예약 시간</h4>
     <select name="time">
         <option value="9">오전 9시</option>
@@ -28,4 +55,53 @@
     </select>
     <button type="submit" onclick="location.href='reservation'" value="예약하기">예약하기</button>
 </form>
+<script>
+    let CDDate = new Date();
+    let today = new Date();
+
+    buildCalender();
+
+    function buildCalender() {
+        let prevLast = new Date(CDate.getFullYear(), CDate.getMonth(), 0);
+        let thisFirst = new Date(CDate.getFullYear(), CDate.getMonth(), 1);
+        let thisLast = new Date(CDate.getFullYear(), CDate.getMonth() + 1, 0);
+        document.querySelector(".yearTitle").innerHTML = CDate.getFullYear();
+        document.querySelector(".monthTitle").innerHTML = CDate.getMonth() + 1;
+        let dates = [];
+
+        if(thisFirst.getDay()!=0) {
+            for(let i = 0; i < thisFirst.getDay(); i++) {
+                dates.unshift(prevLast.getDate()-i);
+            }
+        }
+
+        for(let i = 1; i <= thisLast.getDate(); i++) {
+            dates.push(i);
+        }
+
+        for(let i = 1; i <= 13 - thisLast.getDay(); i++) {
+            dates.push(i);
+        }
+
+        let htmlDates = '';
+        for(let i = 0; i < 42; i++) {
+            if(today.getDate()==dates[i] && today.getMonth()==CDate.getMonth() && today.getFullYear()==CDate.getFullYear()) {
+                htmlDates += `<div class="date today">${dates[i]}</div>`;
+            } else {
+                htmlDates += `<div class="date">${dates[i]}</div>`;
+            }
+        }
+        document.querySelector(".dates").innerHTML = htmlDates;
+    }
+
+    function prevCal() {
+        CDate.setMonth(CDate.getMonth()-1);
+        buildCalender();
+    }
+
+    function nextCal() {
+        CDate.setMonth(CDate.getMonth()+1);
+        buildCalender();
+    }
+</script>
 </body>
