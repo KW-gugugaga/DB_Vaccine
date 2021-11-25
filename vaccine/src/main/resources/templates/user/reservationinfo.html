@@ -6,5 +6,23 @@
 </head>
 <body>
 <h2>예약 내역</h2>
+  <div class="userinfo">
+    <tb th:text="'접종자 이름 : ' + ${userinfo.ID}"></tb>
+    <tb th:text="'주민등록번호 : ' + ${userinfo.ssn1} +'-' + ${userinfo.ssn2} "></tb>
+  </div>
+  </div>
+  <div class="sex">
+    <p th:text="'성별 : ' + ${userinfo.sex}"></p>
+  </div>
+  <div class="phone_num">
+    <p th:text="'전화번호 : ' + ${userinfo.phone_num}"></p>
+  </div>
+  <div class="email">
+    <p th:text="'email : ' + ${userinfo.Email}"></p>
+  </div>
+  <div class="location">
+    <p th:text="'주소 : ' + ${location} + ' ' + ${userinfo.rest_addr}"></p>
+  </div>
+
 </body>
 </html>
