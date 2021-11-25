@@ -8,9 +8,10 @@ public class UserRsv {
 
     private int Rid;
     private int Uid;
-    private int Vid;
+    private int Vid_1;
     private int Hid_1;
     private int Hid_2;
+    private int Vid_2;
 
     private String date_1;
     private int hour_1;
@@ -20,11 +21,12 @@ public class UserRsv {
     public UserRsv() {
     }
 
-    public UserRsv(int uid, int vid, int hid_1, int hid_2, String date_1, int hour_1, String date_2, int hour_2) {
+    public UserRsv(int uid, int vid_1, int hid_1, int hid_2, int vid_2, String date_1, int hour_1, String date_2, int hour_2) {
         Uid = uid;
-        Vid = vid;
+        Vid_1 = vid_1;
         Hid_1 = hid_1;
         Hid_2 = hid_2;
+        Vid_2 = vid_2;
         this.date_1 = date_1;
         this.hour_1 = hour_1;
         this.date_2 = date_2;
@@ -47,12 +49,12 @@ public class UserRsv {
         Uid = uid;
     }
 
-    public int getVid() {
-        return Vid;
+    public int getVid_1() {
+        return Vid_1;
     }
 
-    public void setVid(int vid) {
-        Vid = vid;
+    public void setVid_1(int vid_1) {
+        Vid_1 = vid_1;
     }
 
     public int getHid_1() {
@@ -87,6 +89,14 @@ public class UserRsv {
         this.hour_1 = hour_1;
     }
 
+    public int getVid_2() {
+        return Vid_2;
+    }
+
+    public void setVid_2(int vid_2) {
+        Vid_2 = vid_2;
+    }
+
     public String getDate_2() {
         return date_2;
     }
@@ -108,9 +118,10 @@ public class UserRsv {
         return "UserRsv{" +
                 "Rid=" + Rid +
                 ", Uid=" + Uid +
-                ", Vid=" + Vid +
+                ", Vid_1=" + Vid_1 +
                 ", Hid_1=" + Hid_1 +
                 ", Hid_2=" + Hid_2 +
+                ", Vid_2=" + Vid_2 +
                 ", date_1='" + date_1 + '\'' +
                 ", hour_1=" + hour_1 +
                 ", date_2='" + date_2 + '\'' +
