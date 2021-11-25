@@ -1,37 +1,122 @@
 <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <title>Hospital List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241"></script>
+    <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+
+    <style>
+    #hospitalTable{
+        margin:auto;
+    }
+    #map{
+        float:left;
+        margin-left: 30px;
+        width:30%;
+    }
+    #table{
+        float:right;
+        margin-right: 30px;
+        width:60%;
+    }
+
+    </style>
 </head>
 
 <body>
-<h2>병원 리스트 페이지</h2>
-<h4><p th:text="${user} + '님이 거주하시는 지역의 병원 리스트입니다.'">병원입니다.</p></h4>
-<table id="hospitalTable">
-    <thead>
-    <tr>
-        <th>이름</th>
-        <th>주소</th>
-        <th>전화번호</th>
-        <th>접종백신 종류</th>
-        <th>잔여백신 수</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="hospital : ${hospitals}">
-        <form class="login" action="/reservationpage" method="post">
-            <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
-            <td th:text="${hospital.Hname}">Hname</td>
-            <td th:text="${hospital.hospitalLocation.rest_Haddr}">rest_Haddr</td>
-            <td th:text="${hospital.Htel}">Htel</td>
-            <td th:text="${hospital.vaccine.Vname}">Vname</td>
-            <td th:text="${hospital.rest}">rest</td>
-            <td>
-                <button type="submit" onclick="location.href='reservationpage'" value="예약하기">예약하기</button>
-            </td>
-        </form>
-    </tr>
-    </tbody>
-</table>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img alt="Brand" src="img/33.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">메뉴1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">메뉴2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">메뉴3</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<h3>
+    병원 리스트 페이지
+    <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 리스트입니다.'">병원입니다.</p></small>
+</h3>
+
+<div id="map" style="width:500px;height:400px;"></div>
+<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 5
+		};
+
+		var map = new kakao.maps.Map(container, options);
+
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면
+             if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
+        });
+	</script>
+<div id="table">
+    <table id="hospitalTable" class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">이름</th>
+            <th scope="col">주소</th>
+            <th scope="col">전화번호</th>
+            <th scope="col">접종백신 종류</th>
+            <th scope="col">잔여백신 수</th>
+            <th scope="col">예약하기</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="hospital : ${hospitals}">
+            <form class="login" action="/reservationpage" method="post">
+                <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
+                <td th:text="${hospital.Hname}">Hname</td>
+                <td th:text="${hospital.hospitalLocation.rest_Haddr}">rest_Haddr</td>
+                <td th:text="${hospital.Htel}">Htel</td>
+                <td th:text="${hospital.vaccine.Vname}">Vname</td>
+                <td th:text="${hospital.rest}">rest</td>
+                <td>
+                    <button type="submit" onclick="location.href='reservationpage'" value="예약하기">예약하기</button>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
