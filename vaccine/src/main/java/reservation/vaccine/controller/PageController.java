@@ -19,8 +19,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Vector;
 
 @Controller
 public class PageController {
@@ -57,9 +59,7 @@ public class PageController {
         UserInfo userInfo = (UserInfo)user;
         int Uid = ((UserInfo) user).getUid();
         List<Hospital> hospitals = hospitalService.findAllHospitalByUid(Uid);
-        for(Hospital hospital : hospitals) {
-            System.out.println(hospital.toString());
-        }
+
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("user", userInfo.getUname());
         return "page/hospitalpage";
@@ -71,6 +71,27 @@ public class PageController {
         Hospital hospital = hospitalService.findHospitalByHid(Hid);
         System.out.println(hospital.toString());
         model.addAttribute("hospital", hospital);
+
+        // 달력 생성
+        LocalDate todayDate = LocalDate.now();
+        LocalDate maxDate = todayDate.plusMonths(1);
+        System.out.println("todayDate = " + todayDate);
+        System.out.println("maxDate = " + maxDate);
+
+        Calendar today = Calendar.getInstance();
+        today.set(todayDate.getYear(), todayDate.getMonth().getValue()-1, 1);
+        int todayMaximum = today.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int todayDay = today.get(Calendar.DAY_OF_WEEK);
+        System.out.println("todayMaximum = " + todayMaximum);
+        System.out.println("todayDay = " + todayDay);
+
+        Calendar maxDay = Calendar.getInstance();
+        maxDay.set(maxDate.getYear(), maxDate.getMonth().getValue()-1, 1);
+        int maxDayMaximum = maxDay.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int maxDayDay = maxDay.get(Calendar.DAY_OF_WEEK);
+        System.out.println("maxDayMaximum = " + maxDayMaximum);
+        System.out.println("maxDayDay = " + maxDayDay);
+
         // 내가 예약한 병원이면 예약 취소 버튼
         return "page/reservationpage";
     }
@@ -118,5 +139,8 @@ public class PageController {
     @GetMapping("news")
     public String GetNews(Model model) {
         return "page/news";
+    }
+
+    private class Date {
     }
 }

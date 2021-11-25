@@ -25,6 +25,10 @@
         select * from user_info
     </select>
 
+    <select id="findUserByIdPw" resultType="reservation.vaccine.domain.UserInfo" parameterType="map">
+        select * from user_info where ID = #{ID} and PW = #{PW}
+    </select>
+
     <select id="findUserById" resultType="reservation.vaccine.domain.UserInfo" parameterType="String">
         select * from user_info where ID = #{ID}
     </select>
@@ -33,6 +37,15 @@
         insert into user_info (Uname, ID, PW, Lid, rest_addr, sex, phone_num, age, ssn1, ssn2, Email)
         values(#{Uname}, #{ID}, #{PW}, #{Lid}, #{rest_addr}, #{sex}, #{phone_num}, #{age}, #{ssn1}, #{ssn2}, #{Email})
     </select>
+
+    <select id="modifyUser" parameterType="reservation.vaccine.domain.UserInfo">
+        UPDATE user_info
+        SET Uname = #{Uname}, PW = #{PW}, Lid = #{Lid}, rest_addr = #{rest_addr}, phone_num = #{phone_num}, Email = #{Email}
+        WHERE ID = #{ID};
+
+    </select>
+
+    <!--Reservation-->
 
     <select id="insertRsv" parameterType="reservation.vaccine.domain.UserRsv">
         insert into user_rsv (Uid, Vid, Hid_1, date_1, hour_1, Hid_2, date_2, hour_2)
