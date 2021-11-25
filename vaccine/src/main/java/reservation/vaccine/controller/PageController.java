@@ -60,8 +60,16 @@ public class PageController {
         int Uid = ((UserInfo) user).getUid();
         List<Hospital> hospitals = hospitalService.findAllHospitalByUid(Uid);
 
+
+        String location=setLocation(userInfo.getLid());
+        location += " ";
+        String full_loc=location.concat(userInfo.getRest_addr());
+
+        System.out.println("full_loc = " + full_loc);
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("user", userInfo.getUname());
+        model.addAttribute("full_loc",full_loc);
+
         return "page/hospitalpage";
     }
 
@@ -128,5 +136,46 @@ public class PageController {
     }
 
     private class Date {
+    }
+
+    public String setLocation(int lid) {
+
+        String location=null;
+
+        if(lid==2)
+            location="서울특별시";
+        else if(lid==31)
+            location="경기도";
+        else if(lid==32)
+            location="인천광역시";
+        else if(lid==33)
+            location="강원도";
+        else if(lid==41)
+            location="충청남도";
+        else if(lid==42)
+            location="대전광역시";
+        else if(lid==43)
+            location="충청북도";
+        else if(lid==44)
+            location="세종특별자치시";
+        else if(lid==51)
+            location="부산광역시";
+        else if(lid==52)
+            location="울산광역시";
+        else if(lid==53)
+            location="대구광역시";
+        else if(lid==54)
+            location="경상북도";
+        else if(lid==55)
+            location="경상남도";
+        else if(lid==61)
+            location="전라남도";
+        else if(lid==62)
+            location="광주광역시";
+        else if(lid==63)
+            location="전라북도";
+        else if(lid==64)
+            location="제주특별자치도";
+        return location;
     }
 }
