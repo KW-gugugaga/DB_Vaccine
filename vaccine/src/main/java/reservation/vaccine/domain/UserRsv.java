@@ -1,5 +1,9 @@
 package reservation.vaccine.domain;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
+
 public class UserRsv {
 
     private int Rid;
@@ -12,6 +16,9 @@ public class UserRsv {
     private int hour_1;
     private String date_2;
     private int hour_2;
+
+    public UserRsv() {
+    }
 
     public UserRsv(int uid, int vid, int hid_1, int hid_2, String date_1, int hour_1, String date_2, int hour_2) {
         Uid = uid;

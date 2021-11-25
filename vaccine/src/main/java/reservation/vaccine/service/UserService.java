@@ -28,4 +28,8 @@ public class UserService {
         } else
             return false;
     }
+
+    public UserRsv findUserRsv(int Uid) {
+        return mapper.findUserRsv(Uid);
+    }
 }
