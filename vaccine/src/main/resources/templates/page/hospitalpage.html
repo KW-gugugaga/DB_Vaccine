@@ -4,7 +4,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <title>Hospital List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
 
     <style>
     #hospitalTable{
@@ -12,13 +14,17 @@
     }
     #map{
         float:left;
-        margin-left: 30px;
+        margin-left: 3%;
         width:30%;
     }
     #table{
         float:right;
-        margin-right: 30px;
+        margin-right: 3%;
         width:60%;
+    }
+
+    #resbutton {
+        width: 110%;
     }
 
     </style>
@@ -35,9 +41,9 @@
             <span class="navbar-toggler-icon"></span></button>
 
         <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Home
+                    <a class="nav-link active" href="mainpage">Home
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
@@ -55,12 +61,13 @@
     </div>
 </nav>
 <br>
+
 <h3>
     병원 리스트 페이지
     <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 리스트입니다.'">병원입니다.</p></small>
 </h3>
 <hr style="border: 2px">
-<div id="map" style="width:500px;height:400px;"></div>
+<div id="map" style="height:500px;"></div>
 <script th:inline="javascript">
 let name = [[${full_loc}]];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -83,9 +90,19 @@ geocoder.addressSearch(name, function(result, status) {
 
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         console.log(coords);
+
+        var imageSrc = 'img/loc.png', // 마커이미지의 주소입니다
+        imageSize = new kakao.maps.Size(54, 54), // 마커이미지의 크기입니다
+        imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption); // 마커가 표시될 위치입니다
+
+
         // 결과값으로 받은 위치를 마커로 표시합니다
         var marker = new kakao.maps.Marker({
             map: map,
+            image: markerImage,
             position: coords
         });
 
@@ -93,12 +110,34 @@ geocoder.addressSearch(name, function(result, status) {
         map.setCenter(coords);
     }
 });
+    [[${hospitals}]].forEach(item => {
+    console.log(item.hospitalLocation.rest_Haddr);
+    var geocoder2 = new kakao.maps.services.Geocoder();
 
-	</script>
+    // 주소로 좌표를 검색합니다
+    geocoder2.addressSearch(item.hospitalLocation.rest_Haddr, function(result2, status2) {
+
+        // 정상적으로 검색이 완료됐으면
+         if (status2 === kakao.maps.services.Status.OK) {
+
+            var coords2 = new kakao.maps.LatLng(result2[0].y, result2[0].x);
+            console.log(coords2);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords2
+            });
+        }
+    });
+})
+
+
+   </script>
 <div id="table">
     <table id="hospitalTable" class="table table-hover">
         <thead>
-        <tr>
+        <tr style="margin:0 auto;text-align:center">
             <th scope="col">이름</th>
             <th scope="col">주소</th>
             <th scope="col">전화번호</th>
@@ -110,16 +149,17 @@ geocoder.addressSearch(name, function(result, status) {
         </thead>
 
         <tbody>
-        <tr th:each="hospital : ${hospitals}">
+        <tr th:each="hospital : ${hospitals}" style="margin:0 auto;text-align:center">
             <form class="login" action="/reservationpage" method="post">
                 <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
                 <td th:text="${hospital.Hname}">Hname</td>
                 <td th:text="${hospital.hospitalLocation.rest_Haddr}">rest_Haddr</td>
+
                 <td th:text="${hospital.Htel}">Htel</td>
-                <td th:text="${hospital.vaccine.Vname}">Vname</td>
+                <td th:text="${hospital.vaccine.Vname}" >Vname</td>
                 <td th:text="${hospital.rest}">rest</td>
                 <td>
-                    <button type="submit" onclick="location.href='reservationpage'" value="예약하기">예약하기</button>
+                    <button name="resbutton" id="resbutton" type="submit" onclick="location.href='reservationpage'" value="예약하기">예약하기</button>
                 </td>
             </form>
         </tr>
