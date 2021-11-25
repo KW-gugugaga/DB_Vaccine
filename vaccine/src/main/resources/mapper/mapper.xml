@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservation.vaccine.mapper.Mapper">
 
-    <!--user-->
+    <!--resutMap-->
     <resultMap type="reservation.vaccine.domain.HospitalLocation" id="HospitalLocation">
         <result column="rest_Haddr" property="rest_Haddr"/>
     </resultMap>
@@ -21,6 +21,7 @@
         <collection property="vaccine" resultMap="Vaccine"/>
     </resultMap>
 
+    <!--user-->
     <select id="findAll" resultType="reservation.vaccine.domain.UserInfo">
         select * from user_info
     </select>
@@ -42,11 +43,15 @@
         UPDATE user_info
         SET Uname = #{Uname}, PW = #{PW}, Lid = #{Lid}, rest_addr = #{rest_addr}, phone_num = #{phone_num}, Email = #{Email}
         WHERE ID = #{ID};
+    </select>
 
+    <select id="updateUserState" parameterType="reservation.vaccine.domain.UserInfo">
+        UPDATE user_info
+        SET Uname = #{Uname}, PW = #{PW}, Lid = #{Lid}, rest_addr = #{rest_addr}, phone_num = #{phone_num}, Email = #{Email}
+        WHERE ID = #{ID};
     </select>
 
     <!--Reservation-->
-
     <select id="insertRsv" parameterType="reservation.vaccine.domain.UserRsv">
         insert into user_rsv (Uid, Vid, Hid_1, date_1, hour_1, Hid_2, date_2, hour_2)
         values(#{Uid}, #{Vid}, #{Hid_1}, #{date_1}, #{hour_1}, #{Hid_2}, #{date_2}, #{hour_2})

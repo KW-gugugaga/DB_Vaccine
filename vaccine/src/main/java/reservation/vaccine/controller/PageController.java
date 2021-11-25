@@ -46,6 +46,7 @@ public class PageController {
             System.out.println("NULL");
             return "user/login";
         } else {
+
             model.addAttribute("Uname", userInfo.getUname());
             System.out.println("NOT NULL");
         }

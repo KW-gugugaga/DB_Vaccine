@@ -4,7 +4,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <title>Hospital List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
 
     <style>
     #hospitalTable{
@@ -12,13 +14,17 @@
     }
     #map{
         float:left;
-        margin-left: 30px;
+        margin-left: 3%;
         width:30%;
     }
     #table{
         float:right;
-        margin-right: 30px;
+        margin-right: 3%;
         width:60%;
+    }
+
+    #resbutton {
+        width: 110%;
     }
 
     </style>
@@ -27,7 +33,6 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img alt="Brand" src="img/33.png">
         </a>
@@ -60,7 +65,7 @@
     <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 리스트입니다.'">병원입니다.</p></small>
 </h3>
 <hr style="border: 2px">
-<div id="map" style="width:500px;height:400px;"></div>
+<div id="map" style="height:500px;"></div>
 <script th:inline="javascript">
 let name = [[${full_loc}]];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -94,7 +99,7 @@ geocoder.addressSearch(name, function(result, status) {
     }
 });
 
-	</script>
+   </script>
 <div id="table">
     <table id="hospitalTable" class="table table-hover">
         <thead>
@@ -119,7 +124,7 @@ geocoder.addressSearch(name, function(result, status) {
                 <td th:text="${hospital.vaccine.Vname}">Vname</td>
                 <td th:text="${hospital.rest}">rest</td>
                 <td>
-                    <button type="submit" onclick="location.href='reservationpage'" value="예약하기">예약하기</button>
+                    <button name="resbutton" id="resbutton" type="submit" onclick="location.href='reservationpage'" value="예약하기">예약하기</button>
                 </td>
             </form>
         </tr>
