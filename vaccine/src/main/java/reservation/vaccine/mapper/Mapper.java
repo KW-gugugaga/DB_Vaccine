@@ -13,7 +13,10 @@ public interface Mapper {
     //user
     List<UserInfo> findAll();
     UserInfo findUserByIdPw(Map<String, String> loginInfo);
+    UserInfo findUserById(String ID);
     void insertUser(UserInfo userInfo);
+    void modifyUser(UserInfo userInfo);
+
     void insertRsv(UserRsv userRsv);
     UserRsv findUserRsv(int Uid);
 

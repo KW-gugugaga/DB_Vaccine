@@ -18,7 +18,8 @@ public class UserService {
     public List<UserInfo> findAll() {
         return mapper.findAll();
     }
-    public UserInfo findUserById(Map<String, String> login) { return mapper.findUserByIdPw(login); }
+    public UserInfo findUserByIdPW(Map<String, String> login) { return mapper.findUserByIdPw(login); }
+    public UserInfo findUserById(String ID) { return mapper.findUserById(ID); }
     public void insertUser(UserInfo userInfo) { mapper.insertUser(userInfo); }
     public boolean insertRsv(UserRsv userRsv) {
         if(mapper.findUserRsv(userRsv.getUid()) == null) {
@@ -29,7 +30,10 @@ public class UserService {
             return false;
     }
 
+
     public UserRsv findUserRsv(int Uid) {
         return mapper.findUserRsv(Uid);
     }
+
+    public void modifyUser(UserInfo userInfo) { mapper.modifyUser(userInfo); }
 }

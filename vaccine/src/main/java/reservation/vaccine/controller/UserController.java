@@ -39,7 +39,7 @@ public class UserController {
         Map<String, String> loginInfo = new HashMap<String, String>();
         loginInfo.put("ID", ID);
         loginInfo.put("PW", PW);
-        UserInfo userInfo = userService.findUserById(loginInfo);
+        UserInfo userInfo = userService.findUserByIdPW(loginInfo);
         HttpSession httpSession = req.getSession();
         httpSession.setAttribute("user", userInfo);
         if(userInfo == null) {
@@ -78,18 +78,20 @@ public class UserController {
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo) user;
         String name = userInfo.getUname();
+
+        int lid=userInfo.getLid();
+
+        String location=setLocation(lid);
+
         System.out.println("name = " + name);
         if (user == null) {
             System.out.println("NULL");
         }
         else
         {
-            model.addAttribute("id", userInfo.getID());
-            model.addAttribute("name", userInfo.getUname());
-            model.addAttribute("phone_num", userInfo.getPhone_num());
-            model.addAttribute("email", userInfo.getEmail());
-            model.addAttribute("location", userInfo.getLid());
-            model.addAttribute("ssn1", userInfo.getSsn1());
+            model.addAttribute("location", location);
+            model.addAttribute("userinfo", userInfo);
+
         }
         return "user/myinfo";
     }
@@ -103,6 +105,38 @@ public class UserController {
         UserRsv userRsvObj = userService.findUserRsv(userInfo.getUid());
         System.out.println(userRsvObj.toString());
         return "user/reservationinfo";
+      
+    //개인정보 수정
+    @GetMapping("modify")
+    public String GetModify(Model model,HttpServletRequest req) {
+        System.out.println("UserController.Modify");
+        HttpSession session = req.getSession();
+        Object user = session.getAttribute("user");
+        UserInfo userInfo = (UserInfo) user;
+
+        if (user == null) {
+            System.out.println("NULL");
+        }
+        else
+        {
+            model.addAttribute("modifyUserinfo", userInfo);
+        }
+        return "user/modify";
+    }
+
+    @PostMapping("modify")
+    public String PostModify(UserInfo userInfo, HttpServletRequest req, @RequestParam("ID") String ID) {
+
+        System.out.println("UserController.PostModify");
+        userInfo.setID(ID);
+        userService.modifyUser(userInfo);
+        userInfo = userService.findUserById(ID);
+
+        System.out.println("To String : " + userInfo.toString());
+
+        HttpSession httpSession = req.getSession();
+        httpSession.setAttribute("user", userInfo);
+        return "redirect:mainpage";
     }
 
     @GetMapping("findAll")
@@ -113,5 +147,45 @@ public class UserController {
         }
         return "page/mainpage";
     }
-}
 
+    public String setLocation(int lid) {
+
+        String location=null;
+
+        if(lid==2)
+            location="서울특별시";
+        else if(lid==31)
+            location="경기도";
+        else if(lid==32)
+            location="인천광역시";
+        else if(lid==33)
+            location="강원도";
+        else if(lid==41)
+            location="충청남도";
+        else if(lid==42)
+            location="대전광역시";
+        else if(lid==43)
+            location="충청북도";
+        else if(lid==44)
+            location="세종특별자치시";
+        else if(lid==51)
+            location="부산광역시";
+        else if(lid==52)
+            location="울산광역시";
+        else if(lid==53)
+            location="대구광역시";
+        else if(lid==54)
+            location="경상북도";
+        else if(lid==55)
+            location="경상남도";
+        else if(lid==61)
+            location="전라남도";
+        else if(lid==62)
+            location="광주광역시";
+        else if(lid==63)
+            location="전라북도";
+        else if(lid==64)
+            location="제주특별자치도";
+        return location;
+    }
+}
