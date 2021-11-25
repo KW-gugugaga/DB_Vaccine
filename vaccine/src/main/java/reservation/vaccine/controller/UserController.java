@@ -143,7 +143,8 @@ public class UserController {
         }
         else
         {
-            model.addAttribute("userRsv", userRsv);
+            model.addAttribute("userinfo",userInfo);
+            model.addAttribute("userrsv", userRsv);
         }
 
         return "user/reservationinfo";
