@@ -7,11 +7,12 @@
 <body>
 <h4>Welcome to Main Page</h4>
 <p th:text="'안녕하세요. ' + ${Uname} + '님'">안녕하세요. 님</p>
-<p th:if="${state} == 0">미접종자입니다.</p>
-<p th:if="${state} == 1">1차 접종 후 14일 이전입니다.</p>
-<p th:if="${state} == 2">1차 접종 후 14일이 경과되었습니다.</p>
-<p th:if="${state} == 3">2차 접종 후 14일 이전입니다.</p>
-<p th:if="${state} == 3">2차 접종 후 14일이 경과되었습니다.</p>
+<p th:if="${state} == 0">백신 예약 내역이 없습니다.</p>
+<p th:if="${state} == 1">미접종자입니다.</p>
+<p th:if="${state} == 2">1차 접종 후 14일 이전입니다.</p>
+<p th:if="${state} == 3">1차 접종 후 14일이 경과되었습니다.</p>
+<p th:if="${state} == 4">2차 접종 후 14일 이전입니다.</p>
+<p th:if="${state} == 5">2차 접종 후 14일이 경과되었습니다.</p>
 <br>
 <div class="myinfo_button">
     <input type="button" onclick="location.href='myinfo'" value="내 정보 확인">

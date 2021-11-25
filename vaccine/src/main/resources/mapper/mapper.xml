@@ -47,8 +47,8 @@
 
     <select id="updateUserState" parameterType="reservation.vaccine.domain.UserInfo">
         UPDATE user_info
-        SET Uname = #{Uname}, PW = #{PW}, Lid = #{Lid}, rest_addr = #{rest_addr}, phone_num = #{phone_num}, Email = #{Email}
-        WHERE ID = #{ID};
+        SET state = #{state}
+        WHERE Uid = #{Uid};
     </select>
 
     <!--Reservation-->

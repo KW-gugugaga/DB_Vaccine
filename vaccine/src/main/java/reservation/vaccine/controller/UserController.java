@@ -77,7 +77,8 @@ public class UserController {
                 }
             }
             userInfo.setState(state);
-
+            System.out.println(userInfo.toString());
+            userService.updateUserState(userInfo);
             System.out.println("state = " + state);
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("user", userInfo);

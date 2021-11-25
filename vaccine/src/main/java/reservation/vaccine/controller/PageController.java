@@ -41,15 +41,15 @@ public class PageController {
         UserInfo userInfo = (UserInfo)user;
         String s = userInfo.toString();
         System.out.println("s = " + s);
-
         if(user == null) {
             System.out.println("NULL");
             return "user/login";
         } else {
-
+            model.addAttribute("state", userInfo.getState());
             model.addAttribute("Uname", userInfo.getUname());
             System.out.println("NOT NULL");
         }
+
         return "page/mainpage";
     }
 
