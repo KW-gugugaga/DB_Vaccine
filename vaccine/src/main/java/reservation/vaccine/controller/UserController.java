@@ -1,5 +1,6 @@
 package reservation.vaccine.controller;
 
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +43,7 @@ public class UserController {
         loginInfo.put("ID", ID);
         loginInfo.put("PW", PW);
         UserInfo userInfo = userService.findUserByIdPW(loginInfo);
-        HttpSession httpSession = req.getSession();
-        httpSession.setAttribute("user", userInfo);
+        int state = 0;
         if(userInfo == null) {
             res.setContentType("text/html; charset=euc-kr");
             PrintWriter out = res.getWriter();
@@ -50,6 +52,36 @@ public class UserController {
             return "user/login";
         } else {
             System.out.println("Uid = " + userInfo.getUid());
+            UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
+            if(userRsv == null) {
+                state = 0;   // 예약도 안하고 미접종
+            } else {
+                LocalDate today = LocalDate.now();
+                String date_1 = userRsv.getDate_1();
+                LocalDate Date_1 = LocalDate.parse(date_1, DateTimeFormatter.ISO_DATE);
+                if(today.isBefore(Date_1)) {
+                    state = 1;   // 예약했지만 미접종
+                } else {   // 1차 맞음
+                    state = 2;
+                    if(today.isAfter(Date_1.plusDays(14))) {
+                        state = 3;   // 1차 맞고 14일 지남
+                        String date_2 = userRsv.getDate_2();
+                        LocalDate Date_2 = LocalDate.parse(date_2, DateTimeFormatter.ISO_DATE);
+                        if(today.isEqual(Date_2) || today.isAfter(Date_2)) {   // 2차 맞음
+                            state = 4;
+                            if(today.isAfter(Date_2.plusDays(14))) {
+                                state = 5;   // 2차 후 14일 경과
+                            }
+                        }
+                    }
+                }
+            }
+            userInfo.setState(state);
+            System.out.println(userInfo.toString());
+            userService.updateUserState(userInfo);
+            System.out.println("state = " + state);
+            HttpSession httpSession = req.getSession();
+            httpSession.setAttribute("user", userInfo);
             return "redirect:mainpage";
         }
     }
@@ -138,8 +170,15 @@ public class UserController {
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
         System.out.println("To String : " + userRsv.toString());
 
+        if (userRsv == null) {
+            model.addAttribute("noRsv", null);
+        }
+        else
+        {
+            model.addAttribute("userinfo",userInfo);
+            model.addAttribute("userrsv", userRsv);
+        }
         return "user/reservationinfo";
-
     }
 
     @GetMapping("findAll")

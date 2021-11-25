@@ -32,6 +32,13 @@ public class UserService {
     }
 
     public void modifyUser(UserInfo userInfo) { mapper.modifyUser(userInfo); }
-
     public UserRsv findUserRsv(int Uid) { return mapper.findUserRsv(Uid); }
+    public void updateUserState(UserInfo userInfo) { mapper.updateUserState(userInfo);}
+    public void cancelAll(int Uid) {
+        mapper.cancelAll(Uid);
+    }
+
+    public void cancelSecond(int Uid) {
+        mapper.cancelSecond(Uid);
+    }
 }
