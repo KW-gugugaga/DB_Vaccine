@@ -169,14 +169,15 @@ public class UserController {
         UserInfo userInfo = (UserInfo) user;
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
         System.out.println("To String : " + userRsv.toString());
-
+        int state = userInfo.getState();
         if (userRsv == null) {
-            model.addAttribute("noRsv", null);
+            model.addAttribute("state", 0);
         }
         else
         {
             model.addAttribute("userinfo",userInfo);
             model.addAttribute("userrsv", userRsv);
+            model.addAttribute("state",state);
         }
 
         return "user/reservationinfo";
