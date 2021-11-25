@@ -14,7 +14,7 @@
         <input type="text" name="Uname" id="Uname" th:value="${modifyUserinfo.Uname}">
     </div>
     <div class="id" >
-        <p th:text="'아이디 : ' + ${id}"></p>
+        <p th:text="'아이디 : ' + ${modifyUserinfo.ID}"></p>
         <input type="text" name="ID" id="ID" th:value="${modifyUserinfo.ID}" hidden="true">
     </div>
     <div class="pw">비밀번호 :
@@ -35,7 +35,8 @@
 
     <div class="location">
         <select name="Lid">
-            <option value="2">서울특별시</option>
+            <option value="2" th:if = "${modifyUserinfo.Lid==2}"selected>서울특별시</option>
+            <option value="2" th:unless = "${modifyUserinfo.Lid==2}">서울특별시</option>
             <option value="31" th:if = "${modifyUserinfo.Lid==31}"selected>경기도</option>
             <option value="31" th:unless = "${modifyUserinfo.Lid==31}">경기도</option>
             <option value="32" th:if = "${modifyUserinfo.Lid==32}" selected>인천광역시</option>
