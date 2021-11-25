@@ -96,16 +96,6 @@ public class UserController {
         return "user/myinfo";
     }
 
-    @GetMapping("reservationinfo")
-    public String GetReservationInfo(Model model, HttpServletRequest req) {
-        System.out.println("UserController.GetReservationInfo");
-        HttpSession session = req.getSession();
-        Object user = session.getAttribute("user");
-        UserInfo userInfo = (UserInfo) user;
-        UserRsv userRsvObj = userService.findUserRsv(userInfo.getUid());
-        System.out.println(userRsvObj.toString());
-        return "user/reservationinfo";
-
     //개인정보 수정
     @GetMapping("modify")
     public String GetModify(Model model,HttpServletRequest req) {
