@@ -30,5 +30,10 @@ public class UserService {
             return false;
     }
 
+
+    public UserRsv findUserRsv(int Uid) {
+        return mapper.findUserRsv(Uid);
+    }
+
     public void modifyUser(UserInfo userInfo) { mapper.modifyUser(userInfo); }
 }

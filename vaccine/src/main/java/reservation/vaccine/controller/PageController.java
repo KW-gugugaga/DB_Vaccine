@@ -17,12 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Vector;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Controller
 public class PageController {
@@ -72,26 +72,6 @@ public class PageController {
         System.out.println(hospital.toString());
         model.addAttribute("hospital", hospital);
 
-        // 달력 생성
-        LocalDate todayDate = LocalDate.now();
-        LocalDate maxDate = todayDate.plusMonths(1);
-        System.out.println("todayDate = " + todayDate);
-        System.out.println("maxDate = " + maxDate);
-
-        Calendar today = Calendar.getInstance();
-        today.set(todayDate.getYear(), todayDate.getMonth().getValue()-1, 1);
-        int todayMaximum = today.getActualMaximum(Calendar.DAY_OF_MONTH);
-        int todayDay = today.get(Calendar.DAY_OF_WEEK);
-        System.out.println("todayMaximum = " + todayMaximum);
-        System.out.println("todayDay = " + todayDay);
-
-        Calendar maxDay = Calendar.getInstance();
-        maxDay.set(maxDate.getYear(), maxDate.getMonth().getValue()-1, 1);
-        int maxDayMaximum = maxDay.getActualMaximum(Calendar.DAY_OF_MONTH);
-        int maxDayDay = maxDay.get(Calendar.DAY_OF_WEEK);
-        System.out.println("maxDayMaximum = " + maxDayMaximum);
-        System.out.println("maxDayDay = " + maxDayDay);
-
         // 내가 예약한 병원이면 예약 취소 버튼
         return "page/reservationpage";
     }
@@ -99,17 +79,21 @@ public class PageController {
     @PostMapping("reservation")
     public String PostReservation(Model model, HttpServletRequest req, HttpServletResponse res,
                                   @RequestParam("Hid") int Hid, @RequestParam("time") int time,
-                                  @RequestParam("Vid") int Vid, @RequestParam("Hname") String Hname) throws IOException {
+                                  @RequestParam("Vid") int Vid, @RequestParam("Hname") String Hname,
+                                  @RequestParam("date") String resDate) throws IOException, ParseException {
         System.out.println("Hid = " + Hid);
         System.out.println("time = " + time);
+        System.out.println("resDate = " + resDate);
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
         int Uid = ((UserInfo) user).getUid();
-        LocalDate date = LocalDate.now();
-        LocalDate datePlus14 = date.plusDays(14);
-        String dateString = date.getMonth() + "월 " + date.getDayOfMonth() + "일";
-        String dateStringAfter14 = datePlus14.getMonth() + "월 " + datePlus14.getDayOfMonth() + "일";
+
+        //날짜 선택 안하면 다시
+        LocalDate date = LocalDate.parse(resDate, DateTimeFormatter.ISO_DATE);
+        System.out.println("date = " + date);
+        LocalDate datePlus14 = date.plusMonths(1);
+        System.out.println("datePlus14 = " + datePlus14);
 
         UserRsv userRsv = new UserRsv(userInfo.getUid(), Vid, Hid, Hid, date.toString(), time,
                 datePlus14.toString(), time);
@@ -135,6 +119,8 @@ public class PageController {
         model.addAttribute("user", userInfo.getUname());
         return "page/hospitalpage";
     }
+
+
 
     @GetMapping("news")
     public String GetNews(Model model) {

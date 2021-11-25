@@ -52,8 +52,8 @@
         values(#{Uid}, #{Vid}, #{Hid_1}, #{date_1}, #{hour_1}, #{Hid_2}, #{date_2}, #{hour_2})
     </select>
 
-    <select id="findUserRsv" resultType="int" parameterType="int">
-        select Uid
+    <select id="findUserRsv" resultType="reservation.vaccine.domain.UserRsv" parameterType="int">
+        select *
         from user_rsv
         where Uid = #{Uid}
     </select>

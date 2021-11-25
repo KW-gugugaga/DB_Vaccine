@@ -18,7 +18,7 @@ public interface Mapper {
     void modifyUser(UserInfo userInfo);
 
     void insertRsv(UserRsv userRsv);
-    Integer findUserRsv(int Uid);
+    UserRsv findUserRsv(int Uid);
 
     //hospital
     List<Hospital> findAllHospitalByUid(int Uid);
