@@ -104,7 +104,7 @@ public class PageController {
         LocalDate datePlus14 = date.plusMonths(1);
         System.out.println("datePlus14 = " + datePlus14);
 
-        UserRsv userRsv = new UserRsv(userInfo.getUid(), Vid, Hid, Hid, date.toString(), time,
+        UserRsv userRsv = new UserRsv(userInfo.getUid(), Vid, Hid, Hid, Vid, date.toString(), time,
                 datePlus14.toString(), time);
         System.out.println(userRsv.toString());
 
@@ -128,8 +128,6 @@ public class PageController {
         model.addAttribute("user", userInfo.getUname());
         return "page/hospitalpage";
     }
-
-
 
     @GetMapping("news")
     public String GetNews(Model model) {

@@ -178,9 +178,7 @@ public class UserController {
             model.addAttribute("userinfo",userInfo);
             model.addAttribute("userrsv", userRsv);
         }
-
         return "user/reservationinfo";
-
     }
 
     @GetMapping("findAll")

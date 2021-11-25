@@ -5,6 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<form class="cancel_reservation" action="cancel" method="post">
 <h2>예약 내역</h2>
   <div class="userinfo">
     <td th:text="'접종자 이름 : ' + ${userinfo.ID}"></td>
@@ -12,15 +13,15 @@
   </div>
   </div>
   <div class="first">
-    <td th:text="'1차 접종 백신 : ' + ${userrsv.Vid}"></td><br>
+    <td th:text="'1차 접종 백신 : ' + ${userrsv.Vid_1}"></td><br>
     <td th:text="'1차 접종 예약 의료기관 : ' + ${userrsv.Hid_1}"></td><br>
     <td th:text="'1차 접종 예약 일시 : ' + ${userrsv.date_1} + ' ' + ${userrsv.hour_1} + '시'"></td>
   </div>
   <div class="second">
-    <td th:text="'2차 접종 백신 : ' + ${userrsv.Vid}"></td><br>
+    <td th:text="'2차 접종 백신 : ' + ${userrsv.Vid_2}"></td><br>
     <td th:text="'2차 접종 예약 의료기관 : ' + ${userrsv.Hid_2}"></td><br>
     <td th:text="'2차 접종 예약 일시 : ' + ${userrsv.date_2} + ' ' + ${userrsv.hour_2}+ '시'"></td>
   </div>
-
+</form>
 </body>
 </html>

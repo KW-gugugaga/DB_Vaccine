@@ -53,14 +53,22 @@
 
     <!--Reservation-->
     <select id="insertRsv" parameterType="reservation.vaccine.domain.UserRsv">
-        insert into user_rsv (Uid, Vid, Hid_1, date_1, hour_1, Hid_2, date_2, hour_2)
-        values(#{Uid}, #{Vid}, #{Hid_1}, #{date_1}, #{hour_1}, #{Hid_2}, #{date_2}, #{hour_2})
+        insert into user_rsv (Uid, Vid_1, Hid_1, date_1, hour_1, Vid_2, Hid_2, date_2, hour_2)
+        values(#{Uid}, #{Vid_1}, #{Hid_1}, #{date_1}, #{hour_1}, #{Vid_2}, #{Hid_2}, #{date_2}, #{hour_2})
     </select>
 
     <select id="findUserRsv" resultType="reservation.vaccine.domain.UserRsv" parameterType="int">
         select *
         from user_rsv
         where Uid = #{Uid}
+    </select>
+
+    <select id="cancelAll" parameterType="int">
+        delete from user_rsv where Uid = #{Uid};
+    </select>
+
+    <select id="cancelSecond" parameterType="int">
+
     </select>
 
     <!--hospital-->
