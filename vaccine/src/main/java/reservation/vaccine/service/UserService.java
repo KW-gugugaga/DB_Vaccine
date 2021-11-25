@@ -22,6 +22,7 @@ public class UserService {
     public UserInfo findUserById(String ID) { return mapper.findUserById(ID); }
     public void insertUser(UserInfo userInfo) { mapper.insertUser(userInfo); }
     public boolean insertRsv(UserRsv userRsv) {
+
         if(mapper.findUserRsv(userRsv.getUid()) == null) {
             System.out.println("UserService.insertRsv null");
             mapper.insertRsv(userRsv);
@@ -30,10 +31,7 @@ public class UserService {
             return false;
     }
 
-
-    public UserRsv findUserRsv(int Uid) {
-        return mapper.findUserRsv(Uid);
-    }
-
     public void modifyUser(UserInfo userInfo) { mapper.modifyUser(userInfo); }
+
+    public UserRsv findUserRsv(int Uid) { return mapper.findUserRsv(Uid); }
 }
