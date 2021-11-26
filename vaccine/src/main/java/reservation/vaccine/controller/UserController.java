@@ -66,11 +66,13 @@ public class UserController {
                     if(today.isAfter(Date_1.plusDays(14))) {
                         state = 3;   // 1차 맞고 14일 지남
                         String date_2 = userRsv.getDate_2();
-                        LocalDate Date_2 = LocalDate.parse(date_2, DateTimeFormatter.ISO_DATE);
-                        if(today.isEqual(Date_2) || today.isAfter(Date_2)) {   // 2차 맞음
-                            state = 4;
-                            if(today.isAfter(Date_2.plusDays(14))) {
-                                state = 5;   // 2차 후 14일 경과
+                        if(date_2 != null) {
+                            LocalDate Date_2 = LocalDate.parse(date_2, DateTimeFormatter.ISO_DATE);
+                            if(today.isEqual(Date_2) || today.isAfter(Date_2)) {   // 2차 맞음
+                                state = 4;
+                                if(today.isAfter(Date_2.plusDays(14))) {
+                                    state = 5;   // 2차 후 14일 경과
+                                }
                             }
                         }
                     }
@@ -112,9 +114,7 @@ public class UserController {
         String name = userInfo.getUname();
 
         int lid=userInfo.getLid();
-
         String location=setLocation(lid);
-
         System.out.println("name = " + name);
         if (user == null) {
             System.out.println("NULL");
@@ -123,7 +123,6 @@ public class UserController {
         {
             model.addAttribute("location", location);
             model.addAttribute("userinfo", userInfo);
-
         }
         return "user/myinfo";
     }
@@ -168,13 +167,14 @@ public class UserController {
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo) user;
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
-        System.out.println("To String : " + userRsv.toString());
+        //System.out.println("To String : " + userRsv.toString());
         int state = userInfo.getState();
         if (userRsv == null) {
-            model.addAttribute("noRsv", null);
+            model.addAttribute("noRsv", 1);
         }
         else
         {
+            model.addAttribute("noRsv", 0);
             model.addAttribute("userinfo",userInfo);
             model.addAttribute("userrsv", userRsv);
             model.addAttribute("state", state);

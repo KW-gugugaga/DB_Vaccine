@@ -41,4 +41,6 @@ public class UserService {
     public void cancelSecond(int Uid) {
         mapper.cancelSecond(Uid);
     }
+
+    public void updateUserRsv2nd(UserRsv userRsv) { mapper.updateUserRsv2nd(userRsv);}
 }

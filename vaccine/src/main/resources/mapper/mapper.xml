@@ -51,6 +51,12 @@
         WHERE Uid = #{Uid};
     </select>
 
+    <select id="updateUserRsv2nd" parameterType="reservation.vaccine.domain.UserRsv">
+        UPDATE user_rsv
+        SET Vid_2 = #{Vid_2}, Hid_2 = #{Hid_2}, date_2 = #{date_2}, hour_2 = #{hour_2}
+        WHERE Uid = #{Uid};
+    </select>
+
     <!--Reservation-->
     <select id="insertRsv" parameterType="reservation.vaccine.domain.UserRsv">
         insert into user_rsv (Uid, Vid_1, Hid_1, date_1, hour_1, Vid_2, Hid_2, date_2, hour_2)
@@ -86,7 +92,13 @@
     </select>
 
     <select id="reservation" parameterType="int">
+        update hospital set rest = rest - 2 where Hid = #{Hid};
+    </select>
+
+    <select id="reservation2nd" parameterType="int">
         update hospital set rest = rest - 1 where Hid = #{Hid};
     </select>
+
+
 
 </mapper>
