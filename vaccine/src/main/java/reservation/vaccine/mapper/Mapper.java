@@ -32,4 +32,8 @@ public interface Mapper {
     void reservation(int Hid);
     void reservation2nd(int Hid);
 
+    void cancelBackAll(int Hid);
+    void cancelBackAllEach(int Hid);
+    void cancelBack2nd(int Hid);
+
 }

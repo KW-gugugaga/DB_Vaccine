@@ -37,12 +37,6 @@
     <p th:text="'주소 : ' + ${location} + ' ' + ${userinfo.rest_addr}"></p>
 </div>
 
-<div class="state">접종상태 :
-    <td th:if = "${userinfo.state==0}" th:text="'미접종'"></td>
-    <td th:if = "${userinfo.state==1}" th:text="'1차 접종자'"></td>
-    <td th:if = "${userinfo.state==2}"th:text="'2차 접종자'"></td>
-</div>
-
 <div class="modify">
     <button type="button" onclick="location.href='modify'">정보수정</button>
 </div>

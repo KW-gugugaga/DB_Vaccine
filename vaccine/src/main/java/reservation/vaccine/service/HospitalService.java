@@ -19,4 +19,7 @@ public class HospitalService {
     public Hospital findHospitalByHid(int Hid) { return mapper.findHospitalByHid(Hid); }
     public void reservation(int Hid) { mapper.reservation(Hid);}
     public void reservation2nd(int Hid) { mapper.reservation2nd(Hid); }
+    public void cancelBackAll(int Hid) { mapper.cancelBackAll(Hid);}
+    public void cancelBackAllEach(int Hid) { mapper.cancelBackAllEach(Hid);}
+    public void cancelBack2nd(int Hid) { mapper.cancelBack2nd(Hid); }
 }

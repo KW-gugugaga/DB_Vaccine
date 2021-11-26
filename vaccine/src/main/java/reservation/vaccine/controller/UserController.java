@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import reservation.vaccine.domain.Hospital;
 import reservation.vaccine.domain.UserInfo;
 import reservation.vaccine.domain.UserRsv;
+import reservation.vaccine.service.HospitalService;
 import reservation.vaccine.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    HospitalService hospitalService;
 
     @GetMapping("login")
     public String GetLogin(Model model) {
@@ -217,11 +222,22 @@ public class UserController {
         if(cancel_what.equals("전체"))
         {
             userService.cancelAll(Uid);
+            if(userRsv.getHid_1()==userRsv.getHid_2())
+            {
+                hospitalService.cancelBackAll(userRsv.getHid_1());
+            }
+            else
+            {
+                hospitalService.cancelBackAllEach(userRsv.getHid_1());
+                hospitalService.cancelBackAllEach(userRsv.getHid_2());
+            }
+
             System.out.println("전체취소");
         }
         else if(cancel_what.equals("2차"))
         {
             userService.cancelSecond(Uid);
+            hospitalService.cancelBack2nd(userRsv.getHid_2());
             System.out.println("2차취소");
         }
 

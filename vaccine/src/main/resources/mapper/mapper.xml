@@ -79,6 +79,7 @@
         WHERE Uid = #{Uid};
     </select>
 
+
     <!--hospital-->
     <select id="findAllHospitalByUid" resultMap="Hospital" parameterType="int">
         select h.Hid, h.Hname, hl.rest_Haddr, h.Htel, h.rest, v.Vname
@@ -101,6 +102,16 @@
         update hospital set rest = rest - 1 where Hid = #{Hid};
     </select>
 
+    <select id="cancelBackAll" parameterType="int">
+        update hospital set rest = rest + 2 where Hid = #{Hid};
+    </select>
 
+    <select id="cancelBackAllEach" parameterType="int">
+        update hospital set rest = rest + 1 where Hid = #{Hid};
+    </select>
+
+    <select id="cancelBack2nd" parameterType="int">
+        update hospital set rest = rest + 1 where Hid = #{Hid};
+    </select>
 
 </mapper>
