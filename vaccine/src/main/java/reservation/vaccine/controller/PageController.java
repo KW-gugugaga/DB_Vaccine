@@ -149,6 +149,8 @@ public class PageController {
 
         if(userService.insertRsv(userRsv)) {   // 아무것도 없을 때
             hospitalService.reservation(Hid);   // 전체 예약 rest-2
+            userInfo.setState(1);
+            userService.updateUserState(userInfo);
             res.setContentType("text/html; charset=euc-kr");
             PrintWriter out = res.getWriter();
             out.println("<script>alert('1차/2차 백신 예약 성공 : " + Hname + "');</script>");

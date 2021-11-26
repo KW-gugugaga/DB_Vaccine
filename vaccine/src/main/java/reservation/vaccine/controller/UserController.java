@@ -1,6 +1,5 @@
 package reservation.vaccine.controller;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
