@@ -177,7 +177,9 @@ public class UserController {
         {
             model.addAttribute("userinfo",userInfo);
             model.addAttribute("userrsv", userRsv);
+            
             model.addAttribute("state",state);
+
         }
         return "user/reservationinfo";
     }

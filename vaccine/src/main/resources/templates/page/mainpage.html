@@ -1,12 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
     <title>Main Page</title>
-</head>
-<body>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>Main Page</title>
@@ -21,7 +17,6 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img alt="Brand" src="img/33.png">
         </a>
@@ -49,7 +44,7 @@
     </div>
 </nav>
 
-<wrap id=""wrap>
+<wrap id="wrap">
 
 <h4>Welcome to Main Page</h4>
 <p th:text="'안녕하세요. ' + ${Uname} + '님'">안녕하세요. 님</p>
@@ -59,7 +54,6 @@
 <p th:if="${state} == 3">1차 접종 후 14일이 경과되었습니다.</p>
 <p th:if="${state} == 4">2차 접종 후 14일 이전입니다.</p>
 <p th:if="${state} == 5">2차 접종 후 14일이 경과되었습니다.</p>
-<br>
 <div class="myinfo_button">
     <input type="button" onclick="location.href='myinfo'" value="내 정보 확인">
 </div>
