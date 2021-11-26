@@ -16,6 +16,7 @@ public interface Mapper {
     UserInfo findUserById(String ID);
     void insertUser(UserInfo userInfo);
     void modifyUser(UserInfo userInfo);
+    void updateUserRsv2nd(UserRsv userRsv);
 
     void insertRsv(UserRsv userRsv);
     UserRsv findUserRsv(int Uid);
@@ -29,5 +30,6 @@ public interface Mapper {
     List<Hospital> findAllHospitalByUid(int Uid);
     Hospital findHospitalByHid(int Hid);
     void reservation(int Hid);
+    void reservation2nd(int Hid);
 
 }

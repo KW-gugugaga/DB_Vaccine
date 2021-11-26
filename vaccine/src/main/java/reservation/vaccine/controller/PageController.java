@@ -22,10 +22,15 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+
+
 
 @Controller
 public class PageController {
+
+    private int checkRes = 0;
 
     @Autowired
     HospitalService hospitalService;
@@ -54,13 +59,12 @@ public class PageController {
     }
 
     @GetMapping("hospitalpage")
-    public String GetHospitalPage(Model model, HttpServletRequest req) {
+    public String GetHospitalPage(Model model, HttpServletRequest req, HttpServletResponse res) throws IOException {
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
         int Uid = ((UserInfo) user).getUid();
         List<Hospital> hospitals = hospitalService.findAllHospitalByUid(Uid);
-
 
         String location=setLocation(userInfo.getLid());
         location += " ";
@@ -71,18 +75,53 @@ public class PageController {
         model.addAttribute("user", userInfo.getUname());
         model.addAttribute("full_loc",full_loc);
 
+        if(checkRes == 1) {
+            System.out.println("이미 예약 내역 존재");
+            res.setContentType("text/html; charset=euc-kr");
+            PrintWriter out = res.getWriter();
+            out.println("<script>alert('예약 불가 : 회원님의 예약 내역이 이미 존재합니다.');</script>");
+            out.flush();
+            checkRes = 0 ;
+        }
         return "page/hospitalpage";
     }
 
     @PostMapping("reservationpage")
-    public String PostReservationPage(Model model, HttpServletRequest req, @RequestParam("Hid") int Hid) {
+    public String PostReservationPage(Model model, HttpServletRequest req, HttpServletResponse res,
+                                      @RequestParam("Hid") int Hid) throws IOException {
+        System.out.println("PageController.PostReservationPage");
         System.out.println("Hid = " + Hid);
         Hospital hospital = hospitalService.findHospitalByHid(Hid);
         System.out.println(hospital.toString());
         model.addAttribute("hospital", hospital);
-
-        // 내가 예약한 병원이면 예약 취소 버튼
-        return "page/reservationpage";
+        HttpSession session = req.getSession();
+        Object user = session.getAttribute("user");
+        UserInfo userInfo = (UserInfo)user;
+        UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
+        int state = 0;
+        if(userRsv != null) {
+            if(userRsv.getDate_2() == null) {   // 1차만 있고 2차만 없을 때
+                state = 1;
+            }
+        }
+        if(userRsv == null) {
+            return "page/reservationpage";
+        } else if (state == 1){
+            String date_1 = userRsv.getDate_1();
+            LocalDate Date_1 = LocalDate.parse(date_1, DateTimeFormatter.ISO_DATE);
+            LocalDate Date_1Plus = Date_1.plusMonths(1);
+            LocalDate today = LocalDate.now();
+            System.out.println("Date_1 = " + Date_1);
+            System.out.println("Date_1Plus = " + Date_1Plus);
+            System.out.println("today = " + today);
+            long between = ChronoUnit.DAYS.between(today, Date_1Plus);
+            System.out.println("between = " + between);
+            model.addAttribute("between", between);
+            return "page/reservationpage2";
+        } else {
+            checkRes = 1;
+            return "redirect:hospitalpage";
+        }
     }
 
     @PostMapping("reservation")
@@ -108,18 +147,26 @@ public class PageController {
                 datePlus14.toString(), time);
         System.out.println(userRsv.toString());
 
-        if(userService.insertRsv(userRsv)) {
-            hospitalService.reservation(Hid);
+        if(userService.insertRsv(userRsv)) {   // 아무것도 없을 때
+            hospitalService.reservation(Hid);   // 전체 예약 rest-2
+            userInfo.setState(1);
+            userService.updateUserState(userInfo);
             res.setContentType("text/html; charset=euc-kr");
             PrintWriter out = res.getWriter();
-            out.println("<script>alert('예약 성공 : " + Hname + "');</script>");
+            out.println("<script>alert('1차/2차 백신 예약 성공 : " + Hname + "');</script>");
             out.flush();
         }
         else {
-            System.out.println("이미 예약 내역 존재");
+            hospitalService.reservation2nd(Hid);   // 2차 예약 rest-1
+            UserRsv OriginUserRsv = userService.findUserRsv(Uid);
+            OriginUserRsv.setHid_2(Hid);
+            OriginUserRsv.setHour_2(time);
+            OriginUserRsv.setDate_2(resDate);
+            OriginUserRsv.setVid_2(Vid);
+            userService.updateUserRsv2nd(OriginUserRsv);
             res.setContentType("text/html; charset=euc-kr");
             PrintWriter out = res.getWriter();
-            out.println("<script>alert('예약 불가 : 회원님의 예약 내역이 이미 존재합니다.');</script>");
+            out.println("<script>alert('2차 백신 예약 성공 : " + Hname + "');</script>");
             out.flush();
         }
 

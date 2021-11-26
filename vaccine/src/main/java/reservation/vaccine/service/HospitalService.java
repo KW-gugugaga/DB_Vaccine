@@ -18,4 +18,5 @@ public class HospitalService {
     }
     public Hospital findHospitalByHid(int Hid) { return mapper.findHospitalByHid(Hid); }
     public void reservation(int Hid) { mapper.reservation(Hid);}
+    public void reservation2nd(int Hid) { mapper.reservation2nd(Hid); }
 }

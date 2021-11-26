@@ -1,6 +1,5 @@
 package reservation.vaccine.controller;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -114,9 +113,7 @@ public class UserController {
         String name = userInfo.getUname();
 
         int lid=userInfo.getLid();
-
         String location=setLocation(lid);
-
         System.out.println("name = " + name);
         if (user == null) {
             System.out.println("NULL");
@@ -125,7 +122,6 @@ public class UserController {
         {
             model.addAttribute("location", location);
             model.addAttribute("userinfo", userInfo);
-
         }
         return "user/myinfo";
     }
