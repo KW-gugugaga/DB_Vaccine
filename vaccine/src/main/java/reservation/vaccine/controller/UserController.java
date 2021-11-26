@@ -66,11 +66,13 @@ public class UserController {
                     if(today.isAfter(Date_1.plusDays(14))) {
                         state = 3;   // 1차 맞고 14일 지남
                         String date_2 = userRsv.getDate_2();
-                        LocalDate Date_2 = LocalDate.parse(date_2, DateTimeFormatter.ISO_DATE);
-                        if(today.isEqual(Date_2) || today.isAfter(Date_2)) {   // 2차 맞음
-                            state = 4;
-                            if(today.isAfter(Date_2.plusDays(14))) {
-                                state = 5;   // 2차 후 14일 경과
+                        if(date_2 != null) {
+                            LocalDate Date_2 = LocalDate.parse(date_2, DateTimeFormatter.ISO_DATE);
+                            if(today.isEqual(Date_2) || today.isAfter(Date_2)) {   // 2차 맞음
+                                state = 4;
+                                if(today.isAfter(Date_2.plusDays(14))) {
+                                    state = 5;   // 2차 후 14일 경과
+                                }
                             }
                         }
                     }
@@ -162,24 +164,72 @@ public class UserController {
     }
 
     @GetMapping("reservationinfo")
-    public String GetReservationInfo(Model model, HttpServletRequest req) {
-        System.out.println("UserController.GetReservationInfo");
+    public String ReservationInfo(Model model, HttpServletRequest req) {
+        System.out.println("UserController.ReservationInfo");
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo) user;
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
-        System.out.println("To String : " + userRsv.toString());
+        //System.out.println("To String : " + userRsv.toString());
         int state = userInfo.getState();
+
         if (userRsv == null) {
-            model.addAttribute("noRsv", null);
+            model.addAttribute("noRsv", 1); //예약 정보 없음!
         }
         else
         {
+            model.addAttribute("noRsv", 0); //예약 정보 있음
             model.addAttribute("userinfo",userInfo);
             model.addAttribute("userrsv", userRsv);
             model.addAttribute("state", state);
         }
         return "user/reservationinfo";
+    }
+
+    @GetMapping("cancel")
+    public String GetCancel(Model model, HttpServletRequest req) {
+        System.out.println("UserController.GetCancel");
+        HttpSession session = req.getSession();
+        Object user = session.getAttribute("user");
+        UserInfo userInfo = (UserInfo) user;
+        UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
+        //System.out.println("To String : " + userRsv.toString());
+        int state = userInfo.getState();
+        String cancel_what=null;
+
+        if(state ==1)
+            cancel_what="전체"; //전체취소
+        else if(state ==2 || state==3)
+            cancel_what="2차"; //2차 취소
+
+
+        model.addAttribute("userrsv", userRsv);
+        model.addAttribute("cancel_what", cancel_what);
+
+        return "user/cancel";
+    }
+
+    @PostMapping("cancel")
+    public String PostCancel(@RequestParam("Uid") int Uid, @RequestParam("cancel_what") String cancel_what) {
+
+        System.out.println("UserController.PostCancel");
+        UserRsv userRsv = userService.findUserRsv(Uid);
+
+        System.out.println("To String : " + userRsv.toString());
+        System.out.println("Cancel what: " + cancel_what);
+
+        if(cancel_what.equals("전체"))
+        {
+            userService.cancelAll(Uid);
+            System.out.println("전체취소");
+        }
+        else if(cancel_what.equals("2차"))
+        {
+            userService.cancelSecond(Uid);
+            System.out.println("2차취소");
+        }
+
+        return "redirect:mainpage";
     }
 
     @GetMapping("findAll")

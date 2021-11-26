@@ -68,7 +68,9 @@
     </select>
 
     <select id="cancelSecond" parameterType="int">
-
+        UPDATE user_rsv
+        SET Vid_2 = null, Hid_2 = null, date_2 = null, hour_2 = null
+        WHERE Uid = #{Uid};
     </select>
 
     <!--hospital-->
