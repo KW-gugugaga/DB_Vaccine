@@ -10,7 +10,6 @@
         .pw_ok{color:blue; display: none; font-size: 12px}
         .pw_not_ok{color:red; display: none; font-size: 12px}
     </style>
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
     var IDcheck;
@@ -69,13 +68,10 @@
 
             if (!ID || !PW || !Email || !Uname || !phone_num || !sex || !age || !Lid || !rest_addr || !ssn1 || !ssn2) {
                 alert("모든 정보를 입력해주십시오.");
-                console.log("모든 정보 입력");
             } else if (!IDcheck) {
                alert("이미 사용중인 아이디입니다.");
-               console.log("이미 사용중 아이디");
             } else if (PW != PW_check) {
                 alert("비밀번호가 일치하지 않습니다.");
-                console.log("비밀번호 일치 NO");
             } else {
                 join.submit();
             }

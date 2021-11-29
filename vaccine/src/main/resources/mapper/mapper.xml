@@ -57,6 +57,14 @@
         WHERE Uid = #{Uid};
     </select>
 
+    <select id="findUserID" resultType="String" parameterType="map">
+        select ID from user_info where Uname = #{Uname} and Email = #{Email}
+    </select>
+
+    <select id="findUserPW" resultType="String" parameterType="map">
+        select PW from user_info where Uname = #{Uname} and ID = #{ID}
+    </select>
+
     <!--Reservation-->
     <select id="insertRsv" parameterType="reservation.vaccine.domain.UserRsv">
         insert into user_rsv (Uid, Vid_1, Hid_1, date_1, hour_1, Vid_2, Hid_2, date_2, hour_2)

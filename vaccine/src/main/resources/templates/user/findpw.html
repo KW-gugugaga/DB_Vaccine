@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>findIF</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+  <script type="text/javascript">
+        function findPWBtn() {
+            var findPW = document.findPW;
+            var Uname = findPW.Uname.value;
+            var ID = findPW.ID.value;
+
+            if(!Uname || !ID) {
+                alert("모든 정보를 입력해주십시오.");
+            } else {
+                findPW.submit();
+            }
+        };
+    </script>
+</head>
+<body>
+<h2>find PW</h2>
+<span>이름과 아이디를 입력하십시오.</span>
+<form id="findPW" name="findPW" action="findPW" method="post">
+  <div class="Uname">
+    <input type="text" name="Uname" id="Uname" placeholder="이름">
+  </div>
+  <div class="ID">
+    <input type="text" name="ID" id="ID" placeholder="아이디">
+  </div>
+  <div class="findPW_btn">
+    <input type="submit" value="비밀번호 찾기">
+  </div>
+</form>
+</body>
+</html>

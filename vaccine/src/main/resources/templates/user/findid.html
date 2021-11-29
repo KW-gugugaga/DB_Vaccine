@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>findIF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript">
+        function findIDBtn() {
+            var findID = document.findID;
+            var Uname = findID.Uname.value;
+            var Email = join.Email.value;
+
+            if(!Uname || !Email) {
+                alert("모든 정보를 입력해주십시오.");
+            } else {
+                findID.submit();
+            }
+        };
+    </script>
+</head>
+<body>
+<h2>find ID</h2>
+<span>이름과 이메일을 입력하십시오.</span>
+<form id="findID" name="findID" action="findID" method="post">
+    <div class="Uname">
+        <input type="text" name="Uname" id="Uname" placeholder="이름">
+    </div>
+    <div class="Email">
+        <input type="email" name="Email" id="Email" placeholder="이메일">
+    </div>
+    <div class="findID_btn">
+        <input type="submit" value="아이디 찾기">
+    </div>
+</form>
+</body>
+</html>

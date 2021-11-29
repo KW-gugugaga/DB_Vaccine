@@ -18,6 +18,22 @@
             place-items:center;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function findID() {
+            let popupUrl = "/findID";
+            let popupOption = "width = 400px, height = 200px, top = 300px, left = 300px";
+
+            window.open(popupUrl, "아이디 찾기", popupOption);
+        };
+
+        function findPW() {
+            let popupUrl = "/findPW";
+            let popupOption = "width = 400px, height = 200px, top = 300px, left = 300px";
+
+            window.open(popupUrl, "비밀번호 찾기", popupOption);
+        };
+    </script>
 </head>
 <body>
 <!--
@@ -76,25 +92,9 @@
         <br>
         <br>
         <button type="button" class="btn btn btn-primary disabled" onclick="location.href='join'">회원가입</button>
-        <button type="button" class="btn btn btn-primary disabled" onclick="location.href='findID'">아이디 찾기</button>
-        <button type="button" class="btn btn btn-primary disabled" onclick="location.href='findPW'">비밀번호 찾기</button>
-
+        <button type="button" class="btn btn btn-primary disabled" onclick="findID()">아이디 찾기</button>
+        <button type="button" class="btn btn btn-primary disabled" onclick="findPW()">비밀번호 찾기</button>
     </center>
 </form>
-<!--   <div class="login_id">
-       <h4>ID</h4>
-       <input type="text" name="ID" id="ID" placeholder="아이디">
-   </div>
-   <div class="login_pw">
-       <h4>Password</h4>
-       <input type="password" name="PW" id="PW" placeholder="비밀번호">
-   </div>
-   <br>
-   <div class="login_button">
-       <input type="submit" value="로그인">
-   </div>
--->
 </body>
-
-
 </html>

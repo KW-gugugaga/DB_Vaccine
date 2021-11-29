@@ -47,4 +47,12 @@ public class UserService {
     public int checkID(String ID) {
         return mapper.checkID(ID);
     }
+
+    public String findUserID(Map<String, String> inputInfo) {
+        return mapper.findUserID(inputInfo);
+    }
+    public String findUserPW(Map<String, String> inputInfo) {
+        return mapper.findUserPW(inputInfo);
+    }
+
 }

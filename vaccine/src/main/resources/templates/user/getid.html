@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>findIF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+<h2>get ID</h2>
+<span th:if="${state} == 0">
+    <p>일치하는 정보가 없습니다.</p>
+    <input type='button' value="다시 찾기" onclick="location.href='findID'">
+    <input type='button' value="창닫기" onClick='window.close()'>
+</span>
+<span th:if="${state} == 1">
+    <p th:text="'회원님의 ID는 ' + ${userID} + '입니다'">userID</p>
+    <input type='button' value="창닫기" onClick='window.close()'>
+</span>
+</body>
+</html>

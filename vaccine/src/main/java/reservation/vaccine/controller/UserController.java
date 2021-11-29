@@ -303,6 +303,59 @@ public class UserController {
         return location;
     }
 
+    @GetMapping("findID")
+    public String GetFindID(HttpServletRequest req) {
+        return "user/findid";
+    }
+
+    @PostMapping("findID")
+    public String PostFindID(Model model, HttpServletRequest req,
+                         @RequestParam("Uname") String Uname, @RequestParam("Email") String Email) {
+        System.out.println("UserController.findID");
+        System.out.println("Uname = " + Uname);
+        System.out.println("Email = " + Email);
+        Map<String, String> inputInfo = new HashMap<String, String>();
+        inputInfo.put("Uname", Uname);
+        inputInfo.put("Email", Email);
+        String userID = userService.findUserID(inputInfo);
+        if(userID == null) {
+            System.out.println("null");
+            model.addAttribute("state", 0);
+        } else {
+            System.out.println("not null");
+            model.addAttribute("state", 1);
+            model.addAttribute("userID", userID);
+        }
+        return "user/getid";
+    }
+
+    @GetMapping("findPW")
+    public String GetFindPW(HttpServletRequest req) {
+        return "user/findpw";
+    }
+
+    @PostMapping("findPW")
+    public String PostFindPW(Model model, HttpServletRequest req,
+                         @RequestParam("Uname") String Uname, @RequestParam("ID") String ID) {
+        System.out.println("UserController.PostFindPW");
+        System.out.println("Uname = " + Uname);
+        System.out.println("ID = " + ID);
+        Map<String, String> inputInfo = new HashMap<String, String>();
+        inputInfo.put("Uname", Uname);
+        inputInfo.put("ID", ID);
+
+        String userPW = userService.findUserPW(inputInfo);
+        if(userPW == null) {
+            System.out.println("null");
+            model.addAttribute("state", 0);
+        } else {
+            System.out.println("not null");
+            model.addAttribute("state", 1);
+            model.addAttribute("userPW", userPW);
+        }
+        return "user/getpw";
+    }
+
     @GetMapping("logout")
     public String GetLogout(HttpServletRequest req) {
         req.getSession().invalidate();   // 로그아웃

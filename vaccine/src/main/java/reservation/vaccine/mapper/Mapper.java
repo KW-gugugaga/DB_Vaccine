@@ -28,6 +28,9 @@ public interface Mapper {
 
     int checkID(String ID);
 
+    String findUserID(Map<String, String> inputInfo);
+    String findUserPW(Map<String, String> inputInfo);
+
     //hospital
     List<Hospital> findAllHospitalByUid(int Uid);
     Hospital findHospitalByHid(int Hid);
