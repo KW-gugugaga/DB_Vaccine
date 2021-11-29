@@ -2,43 +2,142 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My Information</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /*.info{
+            border: 1px solid black;
+            border-radius: 2px;
+        }*/
+
+        table.type04 {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            text-align: left;
+            line-height: 1.5;
+            margin : 20px 10px;
+        }
+        table.type04 th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table.type04 td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            font-family: 'M PLUS 1 Code', sans-serif;
+        }
+        #wrap{
+            display: grid;
+            place-items: center;
+            min-height: 80vh;
+        }
+
+        /*
+        .line{
+            border: 1px solid black;
+            border-radius: 2em;
+            width:700px;
+            height: 600px;
+        }*/
+
+    </style>
 </head>
-<body>
-<h2>내 정보</h2>
-<div>
-    <input type="button" onclick="location.href='mainpage'" value="메인으로 돌아가기">
-</div>
+<body class="bg-light">
 
-<div class="name">
-    <p th:text="'이름 : ' + ${userinfo.Uname}"></p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
 
-</div>
-<div class="id">
-    <p th:text="'아이디 : ' + ${userinfo.ID}"></p>
-</div>
-<div class="pw">
-    <p th:text="'비밀번호 : ' + ${userinfo.PW}"></p>
-</div>
-<div class="ssn">
-    <p th:text="'주민등록번호 : ' + ${userinfo.ssn1} +'-' + ${userinfo.ssn2} "></p>
-</div>
-<div class="sex">
-    <p th:text="'성별 : ' + ${userinfo.sex}"></p>
-</div>
-<div class="phone_num">
-    <p th:text="'전화번호 : ' + ${userinfo.phone_num}"></p>
-</div>
-<div class="email">
-    <p th:text="'email : ' + ${userinfo.Email}"></p>
-</div>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="mainpage">Home
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="myinfo">내 정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<div class="location">
-    <p th:text="'주소 : ' + ${location} + ' ' + ${userinfo.rest_addr}"></p>
-</div>
+    <wrap id="wrap">
+        <div class="card border-secondary mb-3" style="width: 700px; height: 650px;">
+            <h2 class="card-header">내 정보</h2>
+            <table class="type04 card-body" style="display: grid;">
 
-<div class="modify">
-    <button type="button" onclick="location.href='modify'">정보수정</button>
+                <div class="name">
+                    <tr>
+                        <td class="card-text" th:text="'이름'"></td>
+                        <td class="card-text" th:text="${userinfo.Uname}"></td>
+                    </tr>
+                </div>
+                <div class="id">
+                    <tr>
+                        <td class="card-text"th:text="'아이디'"></td>
+                        <td class="card-text" th:text="${userinfo.ID}"></td>
+                    </tr>
+                </div>
+                <div class="pw">
+                    <tr>
+                        <td class="card-text" th:text="'비밀번호'"></td>
+                        <td class="card-text" th:text="${userinfo.PW}"></td>
+                    </tr>
+                </div>
+                <div class="ssn">
+                    <tr>
+                        <td class="card-text"th:text="'주민등록번호'"></td>
+                        <td class="card-text" th:text="${userinfo.ssn1} +'-' + ${userinfo.ssn2}"></td>
+                    </tr>
+                </div>
+                <div class="sex">
+                    <tr>
+                        <td class="card-text"th:text="'성별'"></td>
+                        <td class="card-text" th:text="${userinfo.sex}"></td>
+                    </tr>
+                </div>
+                <div class="phone_num">
+                    <tr>
+                        <td class="card-text"th:text="'전화번호'"></td>
+                        <td class="card-text" th:text="${userinfo.phone_num}"></td>
+                    </tr>
+                </div>
+                <div class="email">
+                    <tr>
+                        <td class="card-text"th:text="'이메일'"></td>
+                        <td class="card-text" th:text="${userinfo.Email}"></td>
+                    </tr>
+                </div>
+
+                <div class="location">
+                    <tr>
+                        <td class="card-text"th:text="'주소'"></td>
+                        <td class="card-text" th:text="${location} + ' ' + ${userinfo.rest_addr}"></td>
+                    </tr>
+                </div>
+
+            </table>
+        </div>
+    </wrap>
+
+<div class="d-grid gap-2" style="text-align: center;">
+    <button class="btn btn-lg btn-primary" type="button" style="width:700px">정보 수정하기</button>
 </div>
 
 </body>
