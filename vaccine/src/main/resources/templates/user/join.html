@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Join</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style>
         .id_ok{color:blue; display: none; font-size: 12px}
@@ -85,8 +87,46 @@
 
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="hospitalpage" style="font-size:18px; padding-right:35px;padding-left:35px;" >백신 예약</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<center>
+
 <form id="join" name="join" action="join" method="post">
-    <h2>백신 예약 시스템 회원가입</h2>
+        <h3>
+            <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>백신 예약 시스템 회원가입</b></p>
+        </h3>
+
     <div class="join_ID">
         <h4>아이디</h4>
         <input type="text" name="ID" id="ID" placeholder="아이디" required oninput="checkID()">
@@ -97,8 +137,9 @@
     <div class="join_PW">
         <h4>비밀번호</h4>
         <input type="password" name="PW" id="PW" placeholder="비밀번호" required oninput="checkPW()">
+        <h4>비밀번호 확인</h4>
         <input type="password" name="PW_check" id="PW_check" placeholder="비밀번호 확인" required oninput="checkPW()">
-        <span class="pw_ok">비밀번호가 일치합니다.</span>
+        <br><span class="pw_ok">비밀번호가 일치합니다.</span>
         <span class="pw_not_ok">비밀번호가 일치하지 않습니다.</span>
     </div>
     <div class="join_Email">
@@ -108,7 +149,11 @@
     <div>
         <h4>이름</h4>
         <input type="text" name="Uname" id="Uname" placeholder="이름">
-        <input type="text" name="phone_num" id="phone_num" placeholder="전화번호">
+    </div>
+
+    <div>
+        <h4>전화번호</h4>
+        <input type="text" name="phone_num" id="phone_num" placeholder="전화번호"><br>
         <span class="phone" style="color: black; font-size: 12px">-를 빼고 입력하세요.</span>
     </div>
     <div>
@@ -153,5 +198,7 @@
         <input type="button" value="회원가입" onclick="joinBtn()">
     </div>
 </form>
+</center>
+
 </body>
 </html>
