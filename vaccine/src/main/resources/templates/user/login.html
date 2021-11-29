@@ -62,16 +62,22 @@
 
             <div class="form-floating mb-3">
                 <label for="ID">ID</label>
-                <input type="text" class="form-control form-control-lg" name="ID" id="ID" placeholder="아이디" style="width:230px;height:30px; border-radius: 0.5em;">
+                <input type="text" class="form-control form-control-lg" name="ID" id="ID" placeholder="아이디" style="width:250px;height:30px; border-radius: 1em;">
             </div>
 
             <div class="form-floating">
                 <label for="PW">PASSWORD</label>
-                <input type="password" class="form-control form-control-lg" name="PW" id="PW" placeholder="비밀번호" style="width: 230px;height: 30px;border-radius: 0.5em;">
+                <input type="password" class="form-control form-control-lg" name="PW" id="PW" placeholder="비밀번호" style="width: 250px;height: 30px;border-radius: 1em;">
             </div>
         </div>
-        <button type="submit" class="btn btn-secondary">로그인</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='join'">회원가입</button>
+
+        <button type="submit" class="btn btn-primary" style="width:250px; height:30px;border-radius:1em; text-align:center; font-size:16px">로그인</button>
+
+        <br>
+        <br>
+        <button type="button" class="btn btn btn-primary disabled" onclick="location.href='join'">회원가입</button>
+        <button type="button" class="btn btn btn-primary disabled" onclick="location.href='findID'">아이디 찾기</button>
+        <button type="button" class="btn btn btn-primary disabled" onclick="location.href='findPW'">비밀번호 찾기</button>
 
     </center>
 </form>
