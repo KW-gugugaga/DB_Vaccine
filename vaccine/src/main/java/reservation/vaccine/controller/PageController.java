@@ -188,6 +188,11 @@ public class PageController {
         return "page/news";
     }
 
+    @GetMapping("visualization")
+    public String GetVisualization(Model model) {
+        return "page/visualization";
+    }
+
     private class Date {
     }
 
