@@ -107,7 +107,7 @@ public class UserController {
         PrintWriter out = res.getWriter();
         out.println("<script>alert('회원가입을 완료하였습니다.');</script>");
         out.flush();
-        return "user/login";
+        return "redirect:login";
     }
 
     @PostMapping("idCheck")
@@ -301,5 +301,11 @@ public class UserController {
         else if(lid==64)
             location="제주특별자치도";
         return location;
+    }
+
+    @GetMapping("logout")
+    public String GetLogout(HttpServletRequest req) {
+        req.getSession().invalidate();   // 로그아웃
+        return "redirect:login";
     }
 }
