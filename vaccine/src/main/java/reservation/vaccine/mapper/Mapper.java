@@ -26,6 +26,8 @@ public interface Mapper {
     void cancelAll(int Uid);
     void cancelSecond(int Uid);
 
+    int checkID(String ID);
+
     //hospital
     List<Hospital> findAllHospitalByUid(int Uid);
     Hospital findHospitalByHid(int Hid);

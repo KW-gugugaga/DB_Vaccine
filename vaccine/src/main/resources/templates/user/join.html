@@ -3,15 +3,45 @@
 <head>
     <title>Join</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .id_ok{color:blue; display: none;}
+        .id_already{color:red; display: none;}
+
+    </style>
 </head>
 <body>
 <form class="join" action="join" method="post">
     <h2>백신 예약 시스템 회원가입</h2>
     <div class="join_ID">
         <h4>아이디</h4>
-        <input type="text" name="ID" id="ID" placeholder="아이디를 입력하세요">
-        <button type="button">중복 확인</button>
+        <input type="text" name="ID" id="ID" placeholder="아이디를 입력하세요" required oninput="checkId()">
+        <span class="id_ok">사용 가능한 아이디입니다.</span>
+        <span class="id_already">이미 사용중인 아이디입니다.</span>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+    function checkId(){
+        var ID = $('#ID').val(); //id값이 "id"인 입력란의 값을 저장
+        $.ajax({
+            url:'/idCheck', //Controller에서 인식할 주소
+            type:'post', //POST 방식으로 전달
+            data:{ID:ID},
+             success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다
+                if(cnt != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+                    $('.id_ok').css("display","inline-block");
+                    $('.id_already').css("display", "none");
+                } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                    $('.id_already').css("display","inline-block");
+                    $('.id_ok').css("display", "none");
+                }
+            },
+            error:function(){
+                alert("에러입니다");
+            }
+        });
+    };
+    </script>
 
     <div class="join_PW">
         <h4>비밀번호</h4>

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import reservation.vaccine.domain.Hospital;
 import reservation.vaccine.domain.UserInfo;
 import reservation.vaccine.domain.UserRsv;
@@ -107,6 +108,14 @@ public class UserController {
         out.println("<script>alert('회원가입을 완료하였습니다.');</script>");
         out.flush();
         return "user/login";
+    }
+
+    @PostMapping("idCheck")
+    @ResponseBody
+    public int PostIdCheck(@RequestParam("ID") String ID) {
+        System.out.println("UserController.PostIdCheck");
+        int count = userService.checkID(ID);
+        return count;
     }
 
     @GetMapping("myinfo")

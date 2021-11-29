@@ -79,6 +79,10 @@
         WHERE Uid = #{Uid};
     </select>
 
+    <select id="checkID" resultType="int" parameterType="String">
+        select count(ID) from user_info where ID = #{ID}
+    </select>
+
 
     <!--hospital-->
     <select id="findAllHospitalByUid" resultMap="Hospital" parameterType="int">

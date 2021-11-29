@@ -114,9 +114,16 @@ public class PageController {
             System.out.println("Date_1 = " + Date_1);
             System.out.println("Date_1Plus = " + Date_1Plus);
             System.out.println("today = " + today);
-            long between = ChronoUnit.DAYS.between(today, Date_1Plus);
-            System.out.println("between = " + between);
-            model.addAttribute("between", between);
+            long min = ChronoUnit.DAYS.between(today, Date_1Plus);
+            long max;
+            System.out.println("min = " + min);
+            if(min < 0) {   // 오늘보다 예약 가능 시작 날짜가 더 앞서 있을 때
+                max = min + 30;
+                min = 0;
+            } else
+                max = min + 30;
+            model.addAttribute("min", min);
+            model.addAttribute("max", max);
             return "page/reservationpage2";
         } else {
             checkRes = 1;

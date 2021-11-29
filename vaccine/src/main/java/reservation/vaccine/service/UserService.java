@@ -43,4 +43,8 @@ public class UserService {
     }
 
     public void updateUserRsv2nd(UserRsv userRsv) { mapper.updateUserRsv2nd(userRsv);}
+
+    public int checkID(String ID) {
+        return mapper.checkID(ID);
+    }
 }
