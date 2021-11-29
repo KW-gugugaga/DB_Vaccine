@@ -10,32 +10,32 @@
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span></button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
 
-                <div class="collapse navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="mainpage">Home
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="myinfo">내 정보</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout">로그아웃</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="mainpage">Home
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="myinfo">내 정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <h1>병원 백신 예약 페이지</h1>
-<form class="reservation" action="/reservation" method="post">
+<form name="reservation" class="reservation" action="/reservation" method="post">
     <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
     <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
     <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
@@ -47,7 +47,7 @@
 
     <div>
         <h4>예약 날짜</h4>
-        <input name="date" autocomplete="off" readonly="readonly" placeholder="예약 날짜 선택">
+        <input name="date" placeholder="예약 날짜 선택">
     </div>
     <script>
         const config = {
@@ -74,7 +74,40 @@
         <option value="17">오후 5시</option>
         <option value="18">오후 6시</option>
     </select>
-    <button type="submit" onclick="location.href='reservation'" value="예약하기">예약하기</button>
-</form>
+    <div class="reservationBtn">
+        <input type="button" value="예약하기" onclick="reservationBtn()">
+    </div>
+    <script type="text/javascript">
+        function reservationBtn() {
+            var reservation = document.reservation;
+            var date = reservation.date.value;
 
+            if (!date) {
+                alert("예약 날짜를 선택하세요.");
+            } else {
+                var today = new Date();
+                var todayYear = today.getFullYear();
+                var todayMonth = today.getMonth() + 1;
+                var todayDate = today.getDate();
+
+                var select = new Date(date);
+                var selectYear = select.getFullYear();
+                var selectMonth = select.getMonth() + 1;
+                var selectDate = select.getDate();
+
+                if(todayYear == selectYear && todayMonth == selectMonth && todayDate == selectDate) {
+                    var todayHours = today.getHours();
+                    var selectHours = select.getHours();
+                    if(todayHours >= selectHours) {
+                        alert("현재 시각 이후부터 예약 가능합니다.");
+                    } else {
+                        reservation.submit();
+                    }
+                } else {
+                    reservation.submit();
+                }
+            }
+    };
+    </script>
+</form>
 </body>

@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -143,6 +144,7 @@ public class PageController {
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
         int Uid = ((UserInfo) user).getUid();
+        LocalDate today = LocalDate.now();
 
         //날짜 선택 안하면 다시
         LocalDate date = LocalDate.parse(resDate, DateTimeFormatter.ISO_DATE);
