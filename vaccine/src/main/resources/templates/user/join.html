@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Join</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style>
         .id_ok{color:blue; display: none; font-size: 12px}
@@ -81,8 +83,17 @@
 
 </head>
 <body>
-<form id="join" name="join" action="join" method="post">
-    <h2>백신 예약 시스템 회원가입</h2>
+
+
+<center>
+    <img src="/img/3.png" alt="Image error" style="padding:40px;">
+</center>>
+    <form id="join" name="join" action="join" method="post">
+    <center>
+        <h3>
+            <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>백신 예약 시스템 회원가입</b></p>
+        </h3>
+
     <div class="join_ID">
         <h4>아이디</h4>
         <input type="text" name="ID" id="ID" placeholder="아이디" required oninput="checkID()">
@@ -90,11 +101,12 @@
         <span class="id_already">이미 사용중인 아이디입니다.</span>
     </div>
 
-    <div class="join_PW">
         <h4>비밀번호</h4>
         <input type="password" name="PW" id="PW" placeholder="비밀번호" required oninput="checkPW()">
+        <h4>비밀번호 확인</h4>
+        <div class="join_PW">
         <input type="password" name="PW_check" id="PW_check" placeholder="비밀번호 확인" required oninput="checkPW()">
-        <span class="pw_ok">비밀번호가 일치합니다.</span>
+        <br><span class="pw_ok">비밀번호가 일치합니다.</span>
         <span class="pw_not_ok">비밀번호가 일치하지 않습니다.</span>
     </div>
     <div class="join_Email">
@@ -104,7 +116,11 @@
     <div>
         <h4>이름</h4>
         <input type="text" name="Uname" id="Uname" placeholder="이름">
-        <input type="text" name="phone_num" id="phone_num" placeholder="전화번호">
+    </div>
+
+    <div>
+        <h4>전화번호</h4>
+        <input type="text" name="phone_num" id="phone_num" placeholder="전화번호"><br>
         <span class="phone" style="color: black; font-size: 12px">-를 빼고 입력하세요.</span>
     </div>
     <div>
@@ -148,6 +164,9 @@
     <div class="goback_login">
         <input type="button" value="회원가입" onclick="joinBtn()">
     </div>
+    </center>
+
 </form>
+
 </body>
 </html>
