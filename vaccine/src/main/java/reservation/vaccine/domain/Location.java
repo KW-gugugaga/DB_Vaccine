@@ -4,6 +4,7 @@ public class Location {
     private int Lid;
     private int population;
     private String Lname;
+    private float ratio;
 
     public int getLid() {
         return Lid;
@@ -27,5 +28,13 @@ public class Location {
 
     public void setLname(String lname) {
         Lname = lname;
+    }
+
+    public float getRatio() {
+        return ratio;
+    }
+
+    public void setRatio(float ratio) {
+        this.ratio = ratio;
     }
 }

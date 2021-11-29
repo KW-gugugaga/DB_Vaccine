@@ -41,7 +41,8 @@
 
     <select id="modifyUser" parameterType="reservation.vaccine.domain.UserInfo">
         UPDATE user_info
-        SET Uname = #{Uname}, PW = #{PW}, Lid = #{Lid}, rest_addr = #{rest_addr}, phone_num = #{phone_num}, Email = #{Email}
+        SET Uname = #{Uname}, PW = #{PW}, Lid = #{Lid}, rest_addr = #{rest_addr}, phone_num = #{phone_num}, Email =
+        #{Email}
         WHERE ID = #{ID};
     </select>
 
@@ -126,6 +127,14 @@
 
     <select id="cancelBackEach" parameterType="int">
         update hospital set rest = rest + 1 where Hid = #{Hid};
+    </select>
+
+    <!--visual-->
+    <select id="visualizeByLocation" resultType="reservation.vaccine.domain.Location">
+        select l.Lid, l.Lname, count(*) / l.population * 1000000 as ratio
+        from location as l, user_info as ui
+        where l.Lid = ui.Lid and ui.state = 5
+        group by l.Lid
     </select>
 
 </mapper>

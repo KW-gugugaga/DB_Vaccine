@@ -1,6 +1,7 @@
 package reservation.vaccine.mapper;
 
 import reservation.vaccine.domain.Hospital;
+import reservation.vaccine.domain.Location;
 import reservation.vaccine.domain.UserInfo;
 import reservation.vaccine.domain.UserRsv;
 
@@ -40,5 +41,7 @@ public interface Mapper {
 
     void cancelBackAll(int Hid);
     void cancelBackEach(int Hid);
+
+    List<Location> visualizeByLocation();
 
 }
