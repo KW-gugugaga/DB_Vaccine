@@ -19,6 +19,7 @@ public class UserRsv {
     private int hour_2;
 
     public UserRsv() {
+
     }
 
     public UserRsv(int uid, int vid_1, int hid_1, int hid_2, int vid_2, String date_1, int hour_1, String date_2, int hour_2) {
@@ -112,6 +113,7 @@ public class UserRsv {
     public void setHour_2(int hour_2) {
         this.hour_2 = hour_2;
     }
+
 
     @Override
     public String toString() {

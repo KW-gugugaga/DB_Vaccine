@@ -66,7 +66,7 @@
     <select id="findUserRsv" resultType="reservation.vaccine.domain.UserRsv" parameterType="int">
         select *
         from user_rsv
-        where Uid = #{Uid}
+        where Uid = #{Uid};
     </select>
 
     <select id="cancelAll" parameterType="int">
@@ -94,6 +94,12 @@
         where h.Hid = hl.Hid and h.Vid = v.Vid and h.Hid = #{Hid}
     </select>
 
+    <select id="findHospitalNameByHid" resultType="String" parameterType="int">
+        select Hname
+        from hospital
+        where Hid = #{Hid};
+    </select>
+
     <select id="reservation" parameterType="int">
         update hospital set rest = rest - 2 where Hid = #{Hid};
     </select>
@@ -106,11 +112,7 @@
         update hospital set rest = rest + 2 where Hid = #{Hid};
     </select>
 
-    <select id="cancelBackAllEach" parameterType="int">
-        update hospital set rest = rest + 1 where Hid = #{Hid};
-    </select>
-
-    <select id="cancelBack2nd" parameterType="int">
+    <select id="cancelBackEach" parameterType="int">
         update hospital set rest = rest + 1 where Hid = #{Hid};
     </select>
 

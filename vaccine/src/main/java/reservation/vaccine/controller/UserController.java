@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import reservation.vaccine.domain.Hospital;
 import reservation.vaccine.domain.UserInfo;
 import reservation.vaccine.domain.UserRsv;
+import reservation.vaccine.domain.Vaccine;
 import reservation.vaccine.service.HospitalService;
 import reservation.vaccine.service.UserService;
 
@@ -171,55 +172,98 @@ public class UserController {
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo) user;
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
+        String Vname1=null, Vname2=null;
+
+
         //System.out.println("To String : " + userRsv.toString());
         int state = userInfo.getState();
 
-        if (userRsv == null) {
-            model.addAttribute("noRsv", 1); //예약 정보 없음!
+        if (userRsv == null) { //미접종, 예약 X
+            model.addAttribute("rsvstate", 0);
         }
-        else
+        else //에약내역이 뭐라도 있음
         {
-            model.addAttribute("noRsv", 0); //예약 정보 있음
+            /*백신 이름 설정*/
+            if(userRsv.getVid_1() == 0)
+                Vname1="화이자";
+            else if(userRsv.getVid_1() == 1)
+                Vname1="모더나";
+            else if(userRsv.getVid_1() == 2)
+                Vname1="아스트라제네카";
+            if(userRsv.getVid_2() == 0)
+                Vname2="화이자";
+            else if(userRsv.getVid_2() == 1)
+                Vname2="모더나";
+            else if(userRsv.getVid_2() == 2)
+                Vname2="아스트라제네카";
+
+            int rsvState = 0;
+            String Hname1=hospitalService.findHospitalNameByHid(userRsv.getHid_1()); //1차 병원이름
+            String Hname2=null;
+
+            if(state==1 && (userRsv.getDate_2()!=null)) //미접종, 예약완료 -> 전체취소
+            {
+                Hname2=hospitalService.findHospitalNameByHid(userRsv.getHid_2()); //2차 병원이름
+                rsvState = 1;
+            }
+            else if(userRsv.getDate_2() == null) //2차 예약 X
+            {
+                if(state == 1) //미접종, 1차 예약 O
+                    rsvState = 2;
+                else if(state==2 || state==3)
+                    rsvState = 3; //1차 접종 후, 1차 예약 O
+            }
+            else if(userRsv.getDate_2()!=null) //2차 예약 O
+            {
+                Hname2=hospitalService.findHospitalNameByHid(userRsv.getHid_2()); //2차 병원이름
+                if(state==2 || state==3) //2차 접종 전
+                    rsvState = 4;
+                else if(state == 4 || state == 5) // //2차 접종 후
+                    rsvState = 5;
+            }
+
+            System.out.println("rsvstate: " + rsvState);
+
+            model.addAttribute("rsvstate", rsvState); //예약 상태
             model.addAttribute("userinfo",userInfo);
             model.addAttribute("userrsv", userRsv);
             model.addAttribute("state", state);
+            model.addAttribute("vname1", Vname1);
+            model.addAttribute("vname2", Vname2);
+            model.addAttribute("hname1", Hname1);
+            model.addAttribute("hname2", Hname2);
         }
+
         return "user/reservationinfo";
     }
 
+
     @GetMapping("cancel")
-    public String GetCancel(Model model, HttpServletRequest req) {
+    public String GetCancel(Model model, HttpServletRequest req, @RequestParam("what") String what) {
         System.out.println("UserController.GetCancel");
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo) user;
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
+        System.out.println("취소할 예약: " + what);
         //System.out.println("To String : " + userRsv.toString());
-        int state = userInfo.getState();
-        String cancel_what=null;
-
-        if(state ==1)
-            cancel_what="전체"; //전체취소
-        else if(state ==2 || state==3)
-            cancel_what="2차"; //2차 취소
-
 
         model.addAttribute("userrsv", userRsv);
-        model.addAttribute("cancel_what", cancel_what);
+        model.addAttribute("what", what);
 
         return "user/cancel";
     }
 
     @PostMapping("cancel")
-    public String PostCancel(@RequestParam("Uid") int Uid, @RequestParam("cancel_what") String cancel_what) {
+    public String PostCancel(@RequestParam("Uid") int Uid, @RequestParam("what") String what) {
 
         System.out.println("UserController.PostCancel");
         UserRsv userRsv = userService.findUserRsv(Uid);
 
         System.out.println("To String : " + userRsv.toString());
-        System.out.println("Cancel what: " + cancel_what);
+        System.out.println("Cancel what: " + what);
 
-        if(cancel_what.equals("전체"))
+        if(what.equals("전체"))
         {
             userService.cancelAll(Uid);
             if(userRsv.getHid_1()==userRsv.getHid_2())
@@ -228,16 +272,22 @@ public class UserController {
             }
             else
             {
-                hospitalService.cancelBackAllEach(userRsv.getHid_1());
-                hospitalService.cancelBackAllEach(userRsv.getHid_2());
+                hospitalService.cancelBackEach(userRsv.getHid_1());
+                hospitalService.cancelBackEach(userRsv.getHid_2());
             }
 
             System.out.println("전체취소");
         }
-        else if(cancel_what.equals("2차"))
+        else if(what.equals("1차"))
+        {
+            userService.cancelAll(Uid);
+            hospitalService.cancelBackEach(userRsv.getHid_1());
+            System.out.println("1차취소");
+        }
+        else if(what.equals("2차"))
         {
             userService.cancelSecond(Uid);
-            hospitalService.cancelBack2nd(userRsv.getHid_2());
+            hospitalService.cancelBackEach(userRsv.getHid_2());
             System.out.println("2차취소");
         }
 
