@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Visualization</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+<div id="piechart" style="width: 700px; height: 400px"></div>
+<script type="text/javascript">
+        google.charts.load('current', {packages : ['corechart']});
+        google.charts.setOnLoadCallback(drawPieChart);
+
+        function drawPieChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Country','percent'],
+                ['Italy',50],
+                ['France',25],
+                ['Spain',25]
+            ]);
+            var options = {
+                title:'그래프 테스트'
+               };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+</body>
+</html>
