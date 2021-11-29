@@ -34,34 +34,45 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span></button>
 
         <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="hospitalpage" style="font-size:18px; padding-right:35px;padding-left:35px;" >백신 예약</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                </li>
+            </ul>
             <ul class="navbar-nav ml-auto">
+
                 <li class="nav-item">
-                    <a class="nav-link active" href="mainpage">Home
-                        <span class="visually-hidden">(current)</span>
-                    </a>
+                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="myinfo">내 정보</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout">로그아웃</a>
+                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 <br>
-
+<center>
 <h3>
-    병원 리스트 페이지
-    <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 리스트입니다.'">병원입니다.</p></small>
+    <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 가능 병원 목록</b></p>
+
+    <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 목록입니다.'">병원입니다.</p></small>
 </h3>
+
+</center>
+
 <hr style="border: 2px">
 <div id="map" style="height:500px;"></div>
 <script th:inline="javascript">
@@ -108,6 +119,9 @@ geocoder.addressSearch(name, function(result, status) {
 });
     [[${hospitals}]].forEach(item => {
     console.log(item.hospitalLocation.rest_Haddr);
+
+    console.log(item.hname);
+
     var geocoder2 = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
@@ -122,7 +136,22 @@ geocoder.addressSearch(name, function(result, status) {
             // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
                 map: map,
-                position: coords2
+                position: coords2,
+                clickable: true
+            });
+
+            // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+            var iwContent = '<div style="padding:5px;font-size:10px;">'+item.hname+'<br>'+'잔여백신:'+item.rest+'</div>'
+                iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+            // 인포윈도우를 생성합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content : iwContent,
+                removable : iwRemoveable
+            });
+            kakao.maps.event.addListener(marker, 'click', function() {
+                // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                infowindow.open(map, marker);
             });
         }
     });

@@ -4,24 +4,17 @@
     <title>Join</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style>
-        .id_ok{color:blue; display: none;}
-        .id_already{color:red; display: none;}
+        .id_ok{color:blue; display: none; font-size: 12px}
+        .id_already{color:red; display: none; font-size: 12px}
 
+        .pw_ok{color:blue; display: none; font-size: 12px}
+        .pw_not_ok{color:red; display: none; font-size: 12px}
     </style>
-</head>
-<body>
-<form class="join" action="join" method="post">
-    <h2>백신 예약 시스템 회원가입</h2>
-    <div class="join_ID">
-        <h4>아이디</h4>
-        <input type="text" name="ID" id="ID" placeholder="아이디를 입력하세요" required oninput="checkId()">
-        <span class="id_ok">사용 가능한 아이디입니다.</span>
-        <span class="id_already">이미 사용중인 아이디입니다.</span>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-    function checkId(){
+    var IDcheck;
+    function checkID() {
         var ID = $('#ID').val(); //id값이 "id"인 입력란의 값을 저장
         $.ajax({
             url:'/idCheck', //Controller에서 인식할 주소
@@ -29,9 +22,13 @@
             data:{ID:ID},
              success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다
                 if(cnt != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+                    IDcheck = 1;
+                    console.log(IDcheck);
                     $('.id_ok').css("display","inline-block");
                     $('.id_already').css("display", "none");
                 } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                    IDcheck = 0;
+                    console.log(IDcheck);
                     $('.id_already').css("display","inline-block");
                     $('.id_ok').css("display", "none");
                 }
@@ -41,21 +38,78 @@
             }
         });
     };
+
+    function checkPW() {
+            var password = join.PW.value;
+            var password_check = join.PW_check.value;
+
+            if (password != password_check) {
+                $('.pw_not_ok').css("display","inline-block");
+                $('.pw_ok').css("display", "none");
+            } else {
+                $('.pw_ok').css("display","inline-block");
+                $('.pw_not_ok').css("display", "none");
+            }
+    };
+
+    function joinBtn() {
+            var join = document.join;
+            var ID = join.ID.value;
+            var PW = join.PW.value;
+            var PW_check = join.PW_check.value;
+            var Email = join.Email.value;
+            var Uname = join.Uname.value;
+            var phone_num = join.PW.value;
+            var sex = join.sex.value;
+            var age = join.age.value;
+            var Lid = join.Lid.value;
+            var rest_addr = join.rest_addr.value;
+            var ssn1 = join.ssn1.value;
+            var ssn2 = join.ssn2.value;
+
+            if (!ID || !PW || !Email || !Uname || !phone_num || !sex || !age || !Lid || !rest_addr || !ssn1 || !ssn2) {
+                alert("모든 정보를 입력해주십시오.");
+                console.log("모든 정보 입력");
+            } else if (!IDcheck) {
+               alert("이미 사용중인 아이디입니다.");
+               console.log("이미 사용중 아이디");
+            } else if (PW != PW_check) {
+                alert("비밀번호가 일치하지 않습니다.");
+                console.log("비밀번호 일치 NO");
+            } else {
+                join.submit();
+            }
+    };
+
     </script>
+
+</head>
+<body>
+<form id="join" name="join" action="join" method="post">
+    <h2>백신 예약 시스템 회원가입</h2>
+    <div class="join_ID">
+        <h4>아이디</h4>
+        <input type="text" name="ID" id="ID" placeholder="아이디" required oninput="checkID()">
+        <span class="id_ok">사용 가능한 아이디입니다.</span>
+        <span class="id_already">이미 사용중인 아이디입니다.</span>
+    </div>
 
     <div class="join_PW">
         <h4>비밀번호</h4>
-        <input type="password" name="PW" id="PW" placeholder="비밀번호를 입력하세요">
-        <input type="password" name="PW_check" id="PW_check" placeholder="비밀번호를 다시 입력하세요">
+        <input type="password" name="PW" id="PW" placeholder="비밀번호" required oninput="checkPW()">
+        <input type="password" name="PW_check" id="PW_check" placeholder="비밀번호 확인" required oninput="checkPW()">
+        <span class="pw_ok">비밀번호가 일치합니다.</span>
+        <span class="pw_not_ok">비밀번호가 일치하지 않습니다.</span>
     </div>
     <div class="join_Email">
         <h4>이메일</h4>
-        <input type="email" name="Email" id="Email" placeholder="이메일을 입력하세요">
+        <input type="email" name="Email" id="Email" placeholder="이메일">
     </div>
     <div>
         <h4>이름</h4>
         <input type="text" name="Uname" id="Uname" placeholder="이름">
-        <input type="text" name="phone_num" id="phone_num" placeholder="-를 포함하여 입력하세요">
+        <input type="text" name="phone_num" id="phone_num" placeholder="전화번호">
+        <span class="phone" style="color: black; font-size: 12px">-를 빼고 입력하세요.</span>
     </div>
     <div>
         <h4>성별</h4>
@@ -64,7 +118,7 @@
     </div>
     <div>
         <h4>나이</h4>
-        <input type="number" name="age" id="age" placeholder="나이">
+        <input type="text" name="age" id="age" placeholder="나이">
     </div>
     <div>
         <h4>지역</h4>
@@ -96,7 +150,7 @@
     </div>
     <br>
     <div class="goback_login">
-        <input type="submit" value="회원가입">
+        <input type="button" value="회원가입" onclick="joinBtn()">
     </div>
 </form>
 </body>
