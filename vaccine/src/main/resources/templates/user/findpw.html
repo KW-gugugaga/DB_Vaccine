@@ -3,8 +3,11 @@
 <head>
   <title>findIF</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
 
-  <script type="text/javascript">
+    <script type="text/javascript">
         function findPWBtn() {
             var findPW = document.findPW;
             var Uname = findPW.Uname.value;
@@ -17,20 +20,26 @@
             }
         };
     </script>
+    <style>
+      *{font-family: 'M PLUS 1 Code', sans-serif;text-align: center;}
+    </style>
 </head>
 <body>
-<h2>find PW</h2>
-<span>이름과 아이디를 입력하십시오.</span>
-<form id="findPW" name="findPW" action="findPW" method="post">
-  <div class="Uname">
-    <input type="text" name="Uname" id="Uname" placeholder="이름">
-  </div>
-  <div class="ID">
-    <input type="text" name="ID" id="ID" placeholder="아이디">
-  </div>
-  <div class="findPW_btn">
-    <input type="submit" value="비밀번호 찾기">
-  </div>
+    <header id="header">
+      <h2>비밀번호 찾기</h2>
+    </header>
+    <span>이름과 아이디를 입력하십시오.</span>
+
+    <form id="findPW" name="findPW" action="findPW" method="post">
+      <div class="Uname">
+        <input type="text" name="Uname" id="Uname" placeholder="이름">
+      </div>
+      <div class="ID">
+        <input type="text" name="ID" id="ID" placeholder="아이디">
+      </div>
+      <div class="findPW_btn">
+        <button type="submit" class="btn btn-secondary" style="width: 190px">비밀번호 찾기
+      </div>
 </form>
 </body>
 </html>
