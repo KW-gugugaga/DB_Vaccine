@@ -11,6 +11,17 @@
 
         .pw_ok{color:blue; display: none; font-size: 12px}
         .pw_not_ok{color:red; display: none; font-size: 12px}
+
+        body{
+            background-image : url('img/v1.jpg');
+            background-size: cover;
+        }
+        .join_box {
+            background-color: #d6cdbf;
+            width: 33%;
+            border-radius: 10px;
+            background-color: rgba( 255, 255, 255, 0.5 );
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
@@ -86,85 +97,87 @@
 
 
 <center>
-    <img src="/img/3.png" alt="Image error" style="padding:40px;">
+    <img src="/img/3.png" alt="Image error" style="padding-top:40px; padding-bottom: 0px;">
 </center>>
+
     <form id="join" name="join" action="join" method="post">
-    <center>
         <h3>
-            <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>백신 예약 시스템 회원가입</b></p>
+            <p style="margin:0 auto; width:500px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>백신 예약 시스템 회원가입</b></p>
         </h3>
+        <div class="join_box" style="margin:0 auto;">
+            <div style="padding:20px;">
+                <div class="join_ID">
+                    <h5>아이디</h5>
+                    <input type="text" name="ID" id="ID" placeholder="아이디" required oninput="checkID()">
+                    <span class="id_ok">사용 가능한 아이디입니다.</span>
+                    <span class="id_already">이미 사용중인 아이디입니다.</span>
+                </div>
 
-    <div class="join_ID">
-        <h4>아이디</h4>
-        <input type="text" name="ID" id="ID" placeholder="아이디" required oninput="checkID()">
-        <span class="id_ok">사용 가능한 아이디입니다.</span>
-        <span class="id_already">이미 사용중인 아이디입니다.</span>
-    </div>
+                <h5>비밀번호</h5>
+                <input type="password" name="PW" id="PW" placeholder="비밀번호" required oninput="checkPW()">
+                <h5>비밀번호 확인</h5>
+                <div class="join_PW">
+                    <input type="password" name="PW_check" id="PW_check" placeholder="비밀번호 확인" required oninput="checkPW()">
+                    <br><span class="pw_ok">비밀번호가 일치합니다.</span>
+                    <span class="pw_not_ok">비밀번호가 일치하지 않습니다.</span>
+                </div>
+                <div class="join_Email">
+                    <h5>이메일</h5>
+                    <input type="email" name="Email" id="Email" placeholder="이메일">
+                </div>
+                <div>
+                    <h5>이름</h5>
+                    <input type="text" name="Uname" id="Uname" placeholder="이름">
+                </div>
 
-        <h4>비밀번호</h4>
-        <input type="password" name="PW" id="PW" placeholder="비밀번호" required oninput="checkPW()">
-        <h4>비밀번호 확인</h4>
-        <div class="join_PW">
-        <input type="password" name="PW_check" id="PW_check" placeholder="비밀번호 확인" required oninput="checkPW()">
-        <br><span class="pw_ok">비밀번호가 일치합니다.</span>
-        <span class="pw_not_ok">비밀번호가 일치하지 않습니다.</span>
-    </div>
-    <div class="join_Email">
-        <h4>이메일</h4>
-        <input type="email" name="Email" id="Email" placeholder="이메일">
-    </div>
-    <div>
-        <h4>이름</h4>
-        <input type="text" name="Uname" id="Uname" placeholder="이름">
-    </div>
-
-    <div>
-        <h4>전화번호</h4>
-        <input type="text" name="phone_num" id="phone_num" placeholder="전화번호"><br>
-        <span class="phone" style="color: black; font-size: 12px">-를 빼고 입력하세요.</span>
-    </div>
-    <div>
-        <h4>성별</h4>
-        <input type="radio" name="sex" value="F" checked="checked">남성
-        <input type="radio" name="sex" value="M" checked>여성
-    </div>
-    <div>
-        <h4>나이</h4>
-        <input type="text" name="age" id="age" placeholder="나이">
-    </div>
-    <div>
-        <h4>지역</h4>
-        <select name="Lid">
-            <option value="2">서울특별시</option>
-            <option value="31">경기도</option>
-            <option value="32">인천광역시</option>
-            <option value="33">강원도</option>
-            <option value="41">충청남도</option>
-            <option value="42">대전광역시</option>
-            <option value="43">충청북도</option>
-            <option value="44">세종특별자치시</option>
-            <option value="51">부산광역시</option>
-            <option value="52">울산광역시</option>
-            <option value="53">대구광역시</option>
-            <option value="54">경상북도</option>
-            <option value="55">경상남도</option>
-            <option value="61">전라남도</option>
-            <option value="62">광주광역시</option>
-            <option value="63">전라북도</option>
-            <option value="64">제주특별자치도</option>
-        </select>
-        <input type="text" name="rest_addr" id="rest_addr" placeholder="나머지 주소">
-    </div>
-    <div>
-        <h4>주민번호</h4>
-        <input type="text" name="ssn1" id="ssn1" placeholder="앞자리">-
-        <input type="text" name="ssn2" id="ssn2" placeholder="뒷자리">
-    </div>
-    <br>
-    <div class="goback_login">
-        <input type="button" value="회원가입" onclick="joinBtn()">
-    </div>
-    </center>
+                <div>
+                    <h5>전화번호</h5>
+                    <input type="text" name="phone_num" id="phone_num" placeholder="전화번호"><br>
+                    <span class="phone" style="color: black; font-size: 12px">-를 빼고 입력하세요.</span>
+                </div>
+                <div>
+                    <h5>성별</h5>
+                    <input type="radio" name="sex" value="F" checked="checked">남성
+                    <input type="radio" name="sex" value="M" checked>여성
+                </div>
+                <div>
+                    <h5>나이</h5>
+                    <input type="text" name="age" id="age" placeholder="나이">
+                </div>
+                <div>
+                    <h5>지역</h5>
+                    <select name="Lid">
+                        <option value="2">서울특별시</option>
+                        <option value="31">경기도</option>
+                        <option value="32">인천광역시</option>
+                        <option value="33">강원도</option>
+                        <option value="41">충청남도</option>
+                        <option value="42">대전광역시</option>
+                        <option value="43">충청북도</option>
+                        <option value="44">세종특별자치시</option>
+                        <option value="51">부산광역시</option>
+                        <option value="52">울산광역시</option>
+                        <option value="53">대구광역시</option>
+                        <option value="54">경상북도</option>
+                        <option value="55">경상남도</option>
+                        <option value="61">전라남도</option>
+                        <option value="62">광주광역시</option>
+                        <option value="63">전라북도</option>
+                        <option value="64">제주특별자치도</option>
+                    </select>
+                    <input type="text" name="rest_addr" id="rest_addr" placeholder="나머지 주소">
+                </div>
+                <div>
+                    <h5>주민번호</h5>
+                    <input type="text" name="ssn1" id="ssn1" placeholder="앞자리">-
+                    <input type="text" name="ssn2" id="ssn2" placeholder="뒷자리">
+                </div>
+                <br>
+                <div class="goback_login">
+                    <input type="button" class="btn btn-dark" value="회원가입" onclick="joinBtn()">
+                </div>
+            </div>
+        </div>
 
 </form>
 

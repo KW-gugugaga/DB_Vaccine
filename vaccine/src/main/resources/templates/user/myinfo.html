@@ -52,26 +52,32 @@
     </style>
 </head>
 <body class="bg-light">
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed;width: 100%;z-index:1; ">
     <div class="container-fluid">
-        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span></button>
 
         <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="hospitalpage" style="font-size:18px; padding-right:35px;padding-left:35px;" >백신 예약</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                </li>
+            </ul>
             <ul class="navbar-nav ml-auto">
+
                 <li class="nav-item">
-                    <a class="nav-link active" href="mainpage">Home
-                        <span class="visually-hidden">(current)</span>
-                    </a>
+                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="myinfo">내 정보</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout">로그아웃</a>
+                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
                 </li>
             </ul>
         </div>
