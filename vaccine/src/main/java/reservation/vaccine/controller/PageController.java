@@ -26,8 +26,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-
-
 @Controller
 public class PageController {
 
@@ -184,6 +182,7 @@ public class PageController {
         model.addAttribute("user", userInfo.getUname());
         return "page/hospitalpage";
     }
+
 
     @GetMapping("news")
     public String GetNews(Model model) {

@@ -137,4 +137,11 @@
         group by l.Lid
     </select>
 
+    <!--review-->
+    <select id="findUserReviewByUidHid" parameterType="map" resultType="int">
+        select RVid
+        from review
+        where Uid = #{Uid} and Hid = #{Hid};
+    </select>
+
 </mapper>

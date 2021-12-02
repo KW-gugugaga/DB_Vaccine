@@ -6,6 +6,7 @@ import reservation.vaccine.domain.Hospital;
 import reservation.vaccine.mapper.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class HospitalService {

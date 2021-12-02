@@ -35,6 +35,7 @@ public interface Mapper {
     //hospital
     List<Hospital> findAllHospitalByUid(int Uid);
     Hospital findHospitalByHid(int Hid);
+    List<Hospital> findHospitalByHid(Map<String, Integer> Hids);
     void reservation(int Hid);
     void reservation2nd(int Hid);
     String findHospitalNameByHid(int Hid);
@@ -42,6 +43,10 @@ public interface Mapper {
     void cancelBackAll(int Hid);
     void cancelBackEach(int Hid);
 
+    //visualization
     List<Location> visualizeByLocation();
+
+    //review
+    Integer findUserReviewByUidHid(Map<String, Integer> info);
 
 }

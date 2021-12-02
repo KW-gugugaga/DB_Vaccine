@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>리뷰 작성하기</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <style>
+        #reviewForm fieldset{
+            display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+            direction: rtl; /* 이모지 순서 반전 */
+            border: 0; /* 필드셋 테두리 제거 */
+        }
+
+        #reviewForm fieldset legend{
+            text-align: left;
+        }
+        #reviewForm input[type=radio]{
+            display: none; /* 라디오박스 감춤 */
+        }
+
+        #reviewForm label{
+            font-size: 1.5em; /* 이모지 크기 */
+            color: transparent; /* 기존 이모지 컬러 제거 */
+            text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+        }
+
+        #reviewForm label:hover{
+            text-shadow: 0 0 0 #f2f196; /* 마우스 호버 */
+        }
+        #reviewForm label:hover ~ label{
+            text-shadow: 0 0 0 #f2f196; /* 마우스 호버 뒤에오는 이모지들 */
+        }
+        #reviewForm input[type=radio]:checked ~ label{
+            text-shadow: 0 0 0 #f2f196; /* 마우스 클릭 체크 */
+        }
+    </style>
+    <script type="text/javascript">
+        function submitReview() {
+            var reviewForm = document.reviewForm;
+            var str = review.value;
+            var length = str.length;
+            console.log(length);
+
+            if(length == 0) {
+                alert('리뷰 내용을 입력하십시오.');
+            } else if(length > 150) {
+                alert('글자수 초과');
+            } else {
+                reviewForm.submit();
+            }
+        }
+    </script>
+</head>
+<body>
+<h4>리뷰 작성하기</h4>
+<p th:text="${Hname}"></p>
+<form name="reviewForm" id="reviewForm" method="post" action="writeReview">
+    <input type="hidden" id="Hname" name="Hname" th:value=${Hname}>
+    <fieldset>
+        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+    </fieldset>
+    <p>리뷰를 남겨주세요(50자까지 등록 가능합니다.)</p>
+    <textarea name="review" id="review" rows="5" cols="60"></textarea>
+    <input type="button" value="리뷰 등록하기" onclick="submitReview()">
+</form>
+</body>
+</html>
