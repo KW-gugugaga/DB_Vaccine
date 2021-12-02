@@ -45,6 +45,8 @@ public interface Mapper {
 
     //visualization
     List<Location> visualizeByLocation();
+    int findVaccinatedByAge(int ageGroup);
+    int findAllByAge(int ageGroup);
 
     //review
     Integer findUserReviewByUidHid(Map<String, Integer> info);

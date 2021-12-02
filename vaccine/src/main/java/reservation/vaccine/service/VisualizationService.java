@@ -15,4 +15,6 @@ public class VisualizationService {
     public List<Location> visualizeByLocation() {
         return mapper.visualizeByLocation();
     }
+    public int findVaccinatedByAge(int ageGroup){return mapper.findVaccinatedByAge(ageGroup);}
+    public int findAllByAge(int ageGroup){return mapper.findAllByAge(ageGroup);}
 }
