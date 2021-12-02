@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed;width: 100%;z-index:1; ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
         </a>
@@ -41,7 +41,6 @@
         </div>
     </div>
 </nav>
-<div style="padding-top: 75px;">
 
 <div id="columnchart" style="width: 700px; height: 400px"></div>
 <script th:inline="javascript">
@@ -71,7 +70,6 @@
             chart.draw(data, options);
         }
     </script>
-</div>
 <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
 </body>
 </html>
