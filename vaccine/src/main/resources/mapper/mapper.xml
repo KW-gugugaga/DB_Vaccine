@@ -137,4 +137,30 @@
         group by l.Lid
     </select>
 
+    <select id="findVaccinatedByAge" resultType="int" parameterType="int">
+        select count(*)
+        from user_info as ui
+        where
+        (
+        ((#{ageGroup}=8) and (ui.age>=80 and ui.state = 5))
+        or
+        ((#{ageGroup} != 8) and (ui.age between #{ageGroup}*10 and (#{ageGroup}*10)+9 and ui.state = 5))
+        or
+        ((#{ageGroup}=1) and (ui.age&lt;20 and ui.state = 5))
+        );
+    </select>
+
+    <select id="findAllByAge" resultType="int" parameterType="int">
+        select count(*)
+        from user_info as ui
+        where
+        (
+        ((#{ageGroup}=8) and (ui.age>=80))
+        or
+        ((#{ageGroup} != 8) and  (ui.age between #{ageGroup}*10 and (#{ageGroup}*10)+9))
+        or
+        ((#{ageGroup}=1) and (ui.age&lt;20))
+        );
+    </select>
+
 </mapper>

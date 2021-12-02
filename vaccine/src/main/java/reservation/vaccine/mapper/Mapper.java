@@ -43,5 +43,7 @@ public interface Mapper {
     void cancelBackEach(int Hid);
 
     List<Location> visualizeByLocation();
+    int findVaccinatedByAge(int ageGroup);
+    int findAllByAge(int ageGroup);
 
 }
