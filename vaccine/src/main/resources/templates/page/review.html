@@ -91,7 +91,7 @@
     </table>
 </span>
 <span th:if="${#strings.equals(userState, '1O')}"> <!--1차만 예약했고 1차 맞았을 때-->
-<table>
+<table >
         <div>
             <tr>
                 <td th:text="'1차 접종 백신'"></td>
@@ -166,22 +166,23 @@
     </table>
 </span>
 <span th:if="${#strings.equals(userState, '2OX')}"> <!--1, 2차 둘다 예약했고 1차만 맞은 경우-->
-<table>
+<table class="table table-hover" style="margin:0 auto;text-align:center; width:60%;"><!--여기만 수정-->
         <div>
-            <tr>
-                <td th:text="'1차 접종 백신'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 백신'"></th>
                 <td th:text="${hospital1.vaccine.Vname}"></td>
                 <span th:if="${#strings.equals(hospitalState, 'same')}">
                     <span th:if="${#strings.equals(reviewState, 'X')}">
-                        <td rowspan="6"><input type="button" value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
+                        <td rowspan="6"><input type="button" class="btn btn-outline-secondary" value="리뷰 작성하기" style="align:center;"th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
                     </span>
+
                     <span th:if="${#strings.equals(reviewState, 'O')}">
                         <td rowspan="6"><input type="button" value="리뷰 수정하기" th:onclick="|javascript:modifyReview(${hospital1.Hid})|"></td>
                     </span>
                 </span>
                 <span th:if="${#strings.equals(hospitalState, 'diff')}"> <!--1차 병원 백신-->
                     <span th:if="${#strings.equals(reviewState1, 'X')}">
-                        <td rowspan="3"><input type="button" value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
+                        <td rowspan="3"><input type="button" class="btn btn-outline-secondary" value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
                     </span>
                     <span th:if="${#strings.equals(reviewState1, 'O')}">
                         <td rowspan="3"><input type="button" value="리뷰 수정하기" th:onclick="|javascript:modifyReview(${hospital1.Hid})|"></td>
@@ -189,18 +190,18 @@
                     <!--표 안에 같이 버튼 넣어놓은거임!-->
                 </span>
             </tr>
-            <tr>
-                <td th:text="'1차 접종 예정 의료기관'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 예정 의료기관'"></th>
                 <td th:text="${hospital1.Hname}"></td>
                 <td></td>
             </tr>
-            <tr>
-                <td th:text="'1차 접종 예정 일시'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 예정 일시'"></th>
                 <td th:text="${userRsv.date_1} + ' ' + ${userRsv.hour_1} + '시'"></td>
                 <td></td>
             </tr>
-            <tr>
-                <td th:text="'2차 접종 백신'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'2차 접종 백신'"></th>
                 <td th:text="${hospital2.vaccine.Vname}"></td>
                 <span th:if="${#strings.equals(hospitalState, 'diff')}">
                     <td rowspan="3"><input type="button" value="리뷰 작성하기" disabled></td>
@@ -208,13 +209,13 @@
                     <!--표 안에 같이 버튼 넣어놓은거임!-->
                 </span>
             </tr>
-            <tr>
-                <td th:text="'2차 접종 예정 의료기관'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'2차 접종 예정 의료기관'"></th>
                 <td th:text="${hospital2.Hname}"></td>
                 <td></td>
             </tr>
-            <tr>
-                <td th:text="'2차 접종 예정 일시'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'2차 접종 예정 일시'"></th>
                 <td th:text="${userRsv.date_2} + ' ' + ${userRsv.hour_2} + '시'"></td>
                 <td></td>
             </tr>
