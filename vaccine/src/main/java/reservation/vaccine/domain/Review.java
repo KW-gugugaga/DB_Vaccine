@@ -7,8 +7,16 @@ public class Review {
     private int star;
 
     private String review;
-    private String RVpw;
-    private String opened;
+
+    public Review() {
+    }
+
+    public Review(int uid, int hid, int star, String review) {
+        Uid = uid;
+        Hid = hid;
+        this.star = star;
+        this.review = review;
+    }
 
     public int getRVid() {
         return RVid;
@@ -48,21 +56,5 @@ public class Review {
 
     public void setReview(String review) {
         this.review = review;
-    }
-
-    public String getRVpw() {
-        return RVpw;
-    }
-
-    public void setRVpw(String RVpw) {
-        this.RVpw = RVpw;
-    }
-
-    public String getOpened() {
-        return opened;
-    }
-
-    public void setOpened(String opened) {
-        this.opened = opened;
     }
 }

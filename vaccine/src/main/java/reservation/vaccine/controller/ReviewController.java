@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import reservation.vaccine.domain.Hospital;
+import reservation.vaccine.domain.Review;
 import reservation.vaccine.domain.UserInfo;
 import reservation.vaccine.domain.UserRsv;
 import reservation.vaccine.service.HospitalService;
@@ -142,17 +143,28 @@ public class ReviewController {
         System.out.println("Hid = " + Hid);
         String Hname = hospitalService.findHospitalNameByHid(Hid);
         model.addAttribute("Hname", Hname);
+        model.addAttribute("Hid", Hid);
         return "review/writereview";
     }
 
     @PostMapping("writeReview")
     public void PostWriteReview(Model model, HttpServletRequest req, HttpServletResponse res,
-                                @RequestParam("rating") int rating, @RequestParam("Hname") String Hname) throws IOException {
+                                @RequestParam("rating") int rating, @RequestParam("Hname") String Hname,
+                                @RequestParam("Hid") int Hid, @RequestParam("review") String reviewText) throws IOException {
         System.out.println("ReviewController.PostWriteReview");
         System.out.println("rating = " + rating);
+        System.out.println("Hid = " + Hid);
+        System.out.println("reviewText = " + reviewText);
+        HttpSession session = req.getSession();
+        Object user = session.getAttribute("user");
+        UserInfo userInfo = (UserInfo)user;
+        Review review = new Review(userInfo.getUid(), Hid, rating, reviewText);
+
         res.setContentType("text/html; charset=euc-kr");
         PrintWriter out = res.getWriter();
-        out.println("<script>alert('리뷰가 등록되었습니다.');window.close();</script>");
+
+        String scriptString = "<script>alert('리뷰가 등록되었습니다. - " + Hname + "');window.close();</script>";
+        out.println(scriptString);
         out.flush();
         return;
     }
