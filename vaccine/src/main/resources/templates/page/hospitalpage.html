@@ -33,7 +33,7 @@
 
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed;width: 100%;z-index:1; ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%; ">
     <div class="container-fluid">
         <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
         </a>
@@ -66,17 +66,16 @@
 </nav>
 <br>
 <center>
-    <div style="padding-top: 75px;">
-        <h3>
-            <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 가능 병원 목록</b></p>
+    <h3>
+        <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 가능 병원 목록</b></p>
 
-            <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 목록입니다.'">병원입니다.</p></small>
-        </h3>
+        <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 목록입니다.'">병원입니다.</p></small>
+    </h3>
     </div>
 </center>
 
 <hr style="border: 2px">
-<div id="map" style="height:500px;display:scroll;position:fixed;"></div>
+<div id="map" style="height:500px;"></div>
 <script th:inline="javascript">
 let name = [[${full_loc}]];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -191,5 +190,5 @@ geocoder.addressSearch(name, function(result, status) {
         </tbody>
     </table>
 </div>
-</div>
+
 </body>
