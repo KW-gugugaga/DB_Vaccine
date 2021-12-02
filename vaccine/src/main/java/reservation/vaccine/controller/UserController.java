@@ -100,14 +100,10 @@ public class UserController {
     }
 
     @PostMapping("join")
-    public String PostJoin(UserInfo userInfo, HttpServletResponse res) throws IOException {
+    public String PostJoin(UserInfo userInfo) throws IOException {
         System.out.println("UserController.PostJoin");
         System.out.println("To String : " + userInfo.toString());
         userService.insertUser(userInfo);
-        res.setContentType("text/html; charset=euc-kr");
-        PrintWriter out = res.getWriter();
-        out.println("<script>alert('회원가입을 완료하였습니다.');</script>");
-        out.flush();
         return "redirect:login";
     }
 
