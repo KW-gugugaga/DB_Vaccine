@@ -105,5 +105,46 @@
     </script>
 </div>
 
+
+<h2>전체 접종률</h2>
+<div id="linecolumnchart" style="width: 900px; height: 500px"></div>
+<script th:inline="javascript">
+        google.charts.load('current', {packages : ['corechart']});
+        google.charts.setOnLoadCallback(drawComboChart);
+
+        function drawComboChart() {
+            var real_data = [[${MonthData}]];
+            var accumulated_data=[[${AccumulatedData}]]
+            console.log(real_data);
+            console.log(accumulated_data);
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'month');
+            data.addColumn('number', '접종완료자');
+            data.addColumn('number', '누적 접종완료자');
+            Object.keys(real_data).forEach(function(key) {
+                data.addRow([ key, real_data[key],accumulated_data[key] ]);
+                console.log(data);
+            });
+            var options = {
+                title : '월별 누적 접종 완료자',
+                hAxis : {
+                    title : '접종 완료자 수',
+                    format: '0'
+                },
+                vAxis : {
+                    title : '월'
+                },
+                seriesType: 'bars',
+                series: {1: {type: 'line'}}
+
+            };
+            var chart = new google.visualization.ComboChart(document.getElementById('linecolumnchart'));
+            chart.draw(data, options);
+        }
+    </script>
+</div>
+
+
 </body>
 </html>

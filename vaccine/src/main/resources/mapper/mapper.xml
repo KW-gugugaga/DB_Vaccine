@@ -142,11 +142,11 @@
         from user_info as ui
         where
         (
-        ((#{ageGroup}=8) and (ui.age>=80 and ui.state = 5))
+        ((#{ageGroup}=8) and (ui.age>=80 and ui.state >= 4))
         or
-        ((#{ageGroup} != 8) and (ui.age between #{ageGroup}*10 and (#{ageGroup}*10)+9 and ui.state = 5))
+        ((#{ageGroup} != 8) and (ui.age between #{ageGroup}*10 and (#{ageGroup}*10)+9 and ui.state >= 4))
         or
-        ((#{ageGroup}=1) and (ui.age&lt;20 and ui.state = 5))
+        ((#{ageGroup}=1) and (ui.age&lt;20 and ui.state >= 4))
         );
     </select>
 
@@ -161,6 +161,12 @@
         or
         ((#{ageGroup}=1) and (ui.age&lt;20))
         );
+    </select>
+
+    <select id="findAllByStateDate2" resultType="int" parameterType="int">
+        select count(*)
+        from user_info as ui, user_rsv as ur
+        where ui.Uid=ur.Uid and month(ur.date_2)=#{month} and ui.state>=4;
     </select>
 
     <!--review-->
@@ -179,6 +185,12 @@
         select *
         from review
         where Uid = #{Uid} and Hid = #{Hid}
+    </select>
+
+    <select id="getAvgStar" resultType="float" parameterType="int">
+        select avg(star)
+        FROM review
+        where Hid = #{Hid};
     </select>
 
 </mapper>

@@ -26,13 +26,13 @@
             text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
         }
 
+        #reviewForm label[for="rate5"]{
+            text-shadow: 0 0 0 #f2f196;
+        }
     </style>
-    <script th:inline="javascript">
+    <script th:inline="javascript" type="text/javascript">
         var rating = [[${review.star}]];
         console.log(rating);
-        if(rating == 5) {
-            document.getElementById("r1").style.text-shadow = "0 0 0 #f2f196";
-        }
     </script>
 </head>
 <body>
@@ -41,11 +41,11 @@
 <div name="reviewForm" id="reviewForm" method="post" action="writeReview">
     <input type="hidden" id="star" name="star" th:value=${review.star}>
     <fieldset>
-        <input type="radio" name="rating" value="5" id="rate1"><label id="r1" for="rate1">⭐</label>
-        <input type="radio" name="rating" value="4" id="rate2"><label id="r2" for="rate2">⭐</label>
-        <input type="radio" name="rating" value="3" id="rate3"><label id="r3" for="rate3">⭐</label>
-        <input type="radio" name="rating" value="2" id="rate4"><label id="r4" for="rate4">⭐</label>
-        <input type="radio" name="rating" value="1" id="rate5"><label id="r5" for="rate5">⭐</label>
+        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
     </fieldset>
     <p th:text="'리뷰 내용 : ' + ${review.review}"></p>
     <input type="button" value="창닫기" onClick='window.close()'>

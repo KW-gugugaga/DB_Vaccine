@@ -44,10 +44,12 @@ public interface Mapper {
     List<Location> visualizeByLocation();
     int findVaccinatedByAge(int ageGroup);
     int findAllByAge(int ageGroup);
+    int findAllByStateDate2(int month);
 
     //review
     Integer findUserReviewByUidHid(Map<String, Integer> info);
     void insertReview(Review review);
     Review findReview(Map<String, Integer> reviewInfo);
+    Float getAvgStar(int Hid);
 
 }

@@ -6,6 +6,8 @@ public class Hospital {
     private int Vid;
     private int rest;
 
+    private String avgStar;
+
     private String Hname;
     private String Htel;
 
@@ -35,6 +37,14 @@ public class Hospital {
 
     public void setRest(int rest) {
         this.rest = rest;
+    }
+
+    public String getAvgStar() {
+        return avgStar;
+    }
+
+    public void setAvgStar(String avgStar) {
+        this.avgStar = avgStar;
     }
 
     public String getHname() {

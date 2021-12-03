@@ -51,11 +51,12 @@
     <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
     <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
     <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
-    <h4 th:text="${hospital.Hname}">병원 이름</h4>
-    <h4 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h4>
-    <h4 th:text="${hospital.Htel}">병원 전화번호</h4>
-    <h4 th:text="${hospital.vaccine.Vname}">백신 종류</h4>
-    <h4 th:text="${hospital.rest} + '개'">잔여 백신 수</h4>
+    <h2 th:text="${hospital.Hname}">병원 이름</h2>
+    <h2 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h2>
+    <h2 th:text="${hospital.Htel}">병원 전화번호</h2>
+    <h2 th:text="${hospital.vaccine.Vname}">백신 종류</h2>
+    <h2 th:text="${hospital.rest} + '개'">잔여 백신 수</h2>
+    <h2 th:text="'⭐ ' + ${avgStar}">별점</h2>
 
     <div>
         <h4>예약 날짜</h4>
@@ -76,7 +77,6 @@
         $(function() {
           $( "input[name='date']" ).datepicker(config);
         });
-
 
     </script>
     <div style="padding-top: 250px">
