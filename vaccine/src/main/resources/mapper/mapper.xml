@@ -163,13 +163,6 @@
         );
     </select>
 
-    <select id="visualizeByLocation" resultType="reservation.vaccine.domain.Location">
-        select l.Lid, l.Lname, count(*) / l.population * 1000000 as ratio
-        from location as l, user_info as ui
-        where l.Lid = ui.Lid and ui.state = 5
-        group by l.Lid
-    </select>
-
     <!--review-->
     <select id="findUserReviewByUidHid" parameterType="map" resultType="int">
         select RVid
