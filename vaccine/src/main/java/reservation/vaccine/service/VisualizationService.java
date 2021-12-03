@@ -17,4 +17,5 @@ public class VisualizationService {
     }
     public int findVaccinatedByAge(int ageGroup){return mapper.findVaccinatedByAge(ageGroup);}
     public int findAllByAge(int ageGroup){return mapper.findAllByAge(ageGroup);}
+    public int findAllByStateDate2(int month){return mapper.findAllByStateDate2(month);}
 }

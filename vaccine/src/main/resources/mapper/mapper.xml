@@ -163,6 +163,12 @@
         );
     </select>
 
+    <select id="findAllByStateDate2" resultType="int" parameterType="int">
+        select count(*)
+        from user_info as ui, user_rsv as ur
+        where ui.Uid=ur.Uid and month(ur.date_2)=#{month} and ui.state>=4;
+    </select>
+
     <!--review-->
     <select id="findUserReviewByUidHid" parameterType="map" resultType="int">
         select RVid
