@@ -83,63 +83,63 @@
         </div>
     </div>
 </nav>
-    <wrap id="wrap">
-        <div class="card border-secondary mb-3" style="width: 600px; height: 92%;">
-            <h2 class="card-header">내 정보</h2>
-            <table class="type04 card-body" style="display: grid; height: 70%">
-                <div class="name">
-                    <tr>
-                        <td class="card-text" th:text="'이름'"></td>
-                        <td class="card-text" th:text="${userinfo.Uname}"></td>
-                    </tr>
-                </div>
-                <div class="id">
-                    <tr>
-                        <td class="card-text"th:text="'아이디'"></td>
-                        <td class="card-text" th:text="${userinfo.ID}"></td>
-                    </tr>
-                </div>
-                <div class="pw">
-                    <tr>
-                        <td class="card-text" th:text="'비밀번호'"></td>
-                        <td class="card-text" th:text="${userinfo.PW}"></td>
-                    </tr>
-                </div>
-                <div class="ssn">
-                    <tr>
-                        <td class="card-text"th:text="'주민등록번호'"></td>
-                        <td class="card-text" th:text="${userinfo.ssn1} +'-' + ${userinfo.ssn2}"></td>
-                    </tr>
-                </div>
-                <div class="sex">
-                    <tr>
-                        <td class="card-text"th:text="'성별'"></td>
-                        <td class="card-text" th:text="${userinfo.sex}"></td>
-                    </tr>
-                </div>
-                <div class="phone_num">
-                    <tr>
-                        <td class="card-text"th:text="'전화번호'"></td>
-                        <td class="card-text" th:text="${userinfo.phone_num}"></td>
-                    </tr>
-                </div>
-                <div class="email">
-                    <tr>
-                        <td class="card-text"th:text="'이메일'"></td>
-                        <td class="card-text" th:text="${userinfo.Email}"></td>
-                    </tr>
-                </div>
+<wrap id="wrap">
+    <div class="card border-secondary mb-3" style="width: 600px; height: 92%;">
+        <h2 class="card-header">내 정보</h2>
+        <table class="type04 card-body" style="display: grid; height: 70%">
+            <div class="name">
+                <tr>
+                    <td class="card-text" th:text="'이름'"></td>
+                    <td class="card-text" th:text="${userinfo.Uname}"></td>
+                </tr>
+            </div>
+            <div class="id">
+                <tr>
+                    <td class="card-text"th:text="'아이디'"></td>
+                    <td class="card-text" th:text="${userinfo.ID}"></td>
+                </tr>
+            </div>
+            <div class="pw">
+                <tr>
+                    <td class="card-text" th:text="'비밀번호'"></td>
+                    <td class="card-text" th:text="${userinfo.PW}"></td>
+                </tr>
+            </div>
+            <div class="ssn">
+                <tr>
+                    <td class="card-text"th:text="'주민등록번호'"></td>
+                    <td class="card-text" th:text="${userinfo.ssn1} +'-' + ${userinfo.ssn2}"></td>
+                </tr>
+            </div>
+            <div class="sex">
+                <tr>
+                    <td class="card-text"th:text="'성별'"></td>
+                    <td class="card-text" th:text="${userinfo.sex}"></td>
+                </tr>
+            </div>
+            <div class="phone_num">
+                <tr>
+                    <td class="card-text"th:text="'전화번호'"></td>
+                    <td class="card-text" th:text="${userinfo.phone_num}"></td>
+                </tr>
+            </div>
+            <div class="email">
+                <tr>
+                    <td class="card-text"th:text="'이메일'"></td>
+                    <td class="card-text" th:text="${userinfo.Email}"></td>
+                </tr>
+            </div>
 
-                <div class="location">
-                    <tr>
-                        <td class="card-text"th:text="'주소'"></td>
-                        <td class="card-text" th:text="${location} + ' ' + ${userinfo.rest_addr}"></td>
-                    </tr>
-                </div>
+            <div class="location">
+                <tr>
+                    <td class="card-text"th:text="'주소'"></td>
+                    <td class="card-text" th:text="${location} + ' ' + ${userinfo.rest_addr}"></td>
+                </tr>
+            </div>
 
-            </table>
-        </div>
-    </wrap>
+        </table>
+    </div>
+</wrap>
 <div class="d-grid gap-2" style="text-align: center;">
     <button class="btn btn-lg btn-primary" type="button" onclick="location.href='modify'" style="width:700px">정보 수정하기</button>
 </div>
