@@ -51,5 +51,6 @@ public interface Mapper {
     void insertReview(Review review);
     Review findReview(Map<String, Integer> reviewInfo);
     Float getAvgStar(int Hid);
+    List<String> findALlReviewByHid(int Hid);
 
 }

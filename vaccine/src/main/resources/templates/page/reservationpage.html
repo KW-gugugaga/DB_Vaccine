@@ -8,13 +8,9 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <style>
-        .clearfix::before, .clearfix::after {display: block; content:''; clear:both;}
-
-    </style>
 
 </head>
-<body>
+<body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px"
@@ -49,6 +45,7 @@
         </div>
     </div>
 </nav>
+<br>
 <center>
     <div>
         <h3>
@@ -58,29 +55,69 @@
     </div>
 </center>
 <form name="reservation" class="reservation" action="/reservation" method="post">
+    <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
+    <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
+    <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
     <div style="float: left; width: 50%; padding-left: 5%">
-        <div style="float: left; width: 50%; padding-left: 15%;">
-            <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
-            <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
-            <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
-            <p th:text="${hospital.Hname}" style="text-align: center;">병원 이름</p>
-            <p th:text="${hospital.hospitalLocation.rest_Haddr}" style="text-align: center;">병원 주소</p>
-            <p th:text="${hospital.Htel}" style="text-align: center;">병원 전화번호</p>
+        <table style="width: 100%;">
+            <tr>
+                <td th:text="${hospital.Hname}"
+                    style="text-align: center; font-weight: bold; width: 50%; font-size: 25px;
+                             text-decoration: underline; text-decoration-color: #d6cdbf; ">병원 이름
+                </td>
+                <td rowspan="3" style="border-left: 1px solid black; text-align: center; width: 50%">
+                    <p th:text="${hospital.vaccine.Vname}" style="text-align: center; font-size: 18px;">백신 종류</p>
+                    <p th:text="'잔여백신 : ' + ${hospital.rest} + '개'" style="text-align: center; font-size: 18px;">잔여 백신
+                        수</p>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="${hospital.hospitalLocation.rest_Haddr}" style="text-align: center; font-size: 15px;"></td>
+            </tr>
+            <tr>
+                <td th:text="${hospital.Htel}" style="text-align: center; font-size: 15px;"></td>
+            </tr>
+        </table>
+        <div style="padding-top: 5%;">
+            <p th:text="'⭐ ' + ${avgStar}"
+               style="font-size: 20px; padding-left: 10%; padding-right: 10%; text-align: center;">별점
+            </p>
+            <center>
+                <h4>
+                    <p style="margin: 0; width:200px; text-align: center; align: center;
+                        border: 4px solid #d6cdbf; padding: 0.3em 1em; border-radius: 2px; font-size: 14px;">
+                        <b>리뷰</b>
+                    </p>
+                </h4>
+            </center>
         </div>
-        <div style="float: right; width=50%; padding-right: 15%">
-            <p th:text="${hospital.vaccine.Vname}" style="text-align: center;">백신 종류</p>
-            <p th:text="${hospital.rest} + '개'" style="text-align: center;">잔여 백신 수</p>
-        </div>
+        <span th:if="${#strings.equals(argStar, '등록된 리뷰가 없습니다.')}">
+            <div>
+                <p th:text="${argStar}"></p>
+            </div>
+        </span>
+        <span th:if="${!#strings.equals(argStar, '등록된 리뷰가 없습니다.')}">
+            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:300px; border: 4px solid gray;
+                        padding-left: 5%; padding-right: 5%; padding-top: 3%; padding-bottom: 3%">
+                <tr th:each="review : ${reviews}">
+                    <td>
+                        <p th:text="'✏ ' + ${review}" style="font-size: 16px; margin: 15px;"></p>
+                    </td>
+                </tr>
+            </div>
+        </span>
     </div>
 
     <div style="float: right; width: 50%; padding-left: 5%; padding-right: 5%;">
-        <h4>예약 날짜</h4>
-        <input name="date" placeholder="예약 날짜 선택">
-        <script>
+        <p style="font-size: 20px; font-weight: bold;">예약 날짜를 선택하세요.</p>
+        <input name="date" style="width: 50%;" placeholder="예약 날짜 선택">
+
+        <script type="text/javascript">
                 const config = {
                 dateFormat: 'yy-mm-dd',
                 showOn : "button",
-                buttonText: "날짜 선택",
+                buttonImage: "img/dateButton.png",
+                buttonImageOnly: true,
                 minDate: 0,
                 maxDate: +30
                 }
@@ -88,28 +125,33 @@
                 $(function() {
                 $( "input[name='date']" ).datepicker(config);
                 });
-
         </script>
 
-        <h4>예약 시간</h4>
-        <select id="time" name="time">
-            <option value="9">오전 9시</option>
-            <option value="10">오전 10시</option>
-            <option value="11">오전 11시</option>
-            <option value="12">오후 12시</option>
-            <option value="14">오후 2시</option>
-            <option value="15">오후 3시</option>
-            <option value="16">오후 4시</option>
-            <option value="17">오후 5시</option>
-            <option value="18">오후 6시</option>
-        </select>
+        <div style="padding-top: 250px">
+            <p style="font-size: 20px; font-weight: bold;">예약 시간을 선택하세요.</p>
+            <select id="time" name="time" style="width: 50%; height: 120%;">
+                <option value="9">오전 9시</option>
+                <option value="10">오전 10시</option>
+                <option value="11">오전 11시</option>
+                <option value="12">오후 12시</option>
+                <option value="14">오후 2시</option>
+                <option value="15">오후 3시</option>
+                <option value="16">오후 4시</option>
+                <option value="17">오후 5시</option>
+                <option value="18">오후 6시</option>
+            </select>
+        </div>
+        <div style="padding-top: 7%;"></div>
         <div class="reservationBtn">
-            <input type="button" value="예약하기" onclick="reservationBtn()">
+            <input type="button" value="예약하기" class="btn btn-dark"
+                   style="width: 90%; height: 40px; border-radius: 1em; text-align: center; font-size: 16px"
+                   onclick="reservationBtn()">
         </div>
         <script type="text/javascript">
                     function reservationBtn() {
                         var reservation = document.reservation;
                         var date = reservation.date.value;
+                        var Hname = reservation.Hname.value;
 
                         if (!date) {
                             alert("예약 날짜를 선택하세요.");
@@ -134,17 +176,16 @@
                                 if(todayHours >= selected) {
                                     alert("현재 시각 이후부터 예약 가능합니다.");
                                 } else {
+                                    alert('1차/2차 백신 예약 성공 : ' + Hname);
                                     reservation.submit();
                                 }
                             } else {
+                                alert('1차/2차 백신 예약 성공 : ' + Hname);
                                 reservation.submit();
                             }
                         }
                     };
-
         </script>
     </div>
-    </br></br>
-    <p th:text="'⭐ ' + ${avgStar}" style="padding-left: 10%; padding-right: 10%; text-align: center;">별점</p>
 </form>
 </body>

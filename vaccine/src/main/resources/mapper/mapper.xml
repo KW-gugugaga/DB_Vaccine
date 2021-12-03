@@ -193,4 +193,11 @@
         where Hid = #{Hid};
     </select>
 
+    <select id="findALlReviewByHid" parameterType="int" resultType="string">
+        select review
+        FROM review
+        where Hid = 1
+        order by RVid;
+    </select>
+
 </mapper>

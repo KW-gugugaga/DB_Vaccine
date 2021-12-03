@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import reservation.vaccine.domain.Review;
 import reservation.vaccine.mapper.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -22,6 +23,9 @@ public class ReviewService {
     }
     public Float getAvgStar(int Hid) {
         return mapper.getAvgStar(Hid);
+    }
+    public List<String> findALlReviewByHid(int Hid) {
+        return mapper.findALlReviewByHid(Hid);
     }
 }
 
