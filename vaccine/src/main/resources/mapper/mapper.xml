@@ -142,11 +142,11 @@
         from user_info as ui
         where
         (
-        ((#{ageGroup}=8) and (ui.age>=80 and ui.state = 5))
+        ((#{ageGroup}=8) and (ui.age>=80 and ui.state >= 4))
         or
-        ((#{ageGroup} != 8) and (ui.age between #{ageGroup}*10 and (#{ageGroup}*10)+9 and ui.state = 5))
+        ((#{ageGroup} != 8) and (ui.age between #{ageGroup}*10 and (#{ageGroup}*10)+9 and ui.state >= 4))
         or
-        ((#{ageGroup}=1) and (ui.age&lt;20 and ui.state = 5))
+        ((#{ageGroup}=1) and (ui.age&lt;20 and ui.state >= 4))
         );
     </select>
 
@@ -161,6 +161,13 @@
         or
         ((#{ageGroup}=1) and (ui.age&lt;20))
         );
+    </select>
+
+    <select id="visualizeByLocation" resultType="reservation.vaccine.domain.Location">
+        select l.Lid, l.Lname, count(*) / l.population * 1000000 as ratio
+        from location as l, user_info as ui
+        where l.Lid = ui.Lid and ui.state = 5
+        group by l.Lid
     </select>
 
     <!--review-->
