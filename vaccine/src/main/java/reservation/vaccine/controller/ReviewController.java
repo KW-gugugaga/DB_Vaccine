@@ -181,6 +181,16 @@ public class ReviewController {
         Review review = reviewService.findReview(reviewInfo);
         System.out.println(review.toString());
         model.addAttribute("review", review);
-        return "review/viewreview";
+        if(review.getStar() == 1) {
+            return "review/viewreview1";
+        } else if(review.getStar() == 2) {
+            return "review/viewreview2";
+        } else if(review.getStar() == 3) {
+            return "review/viewreview3";
+        } else if(review.getStar() == 4) {
+            return "review/viewreview4";
+        } else {
+            return "review/viewreview5";
+        }
     }
 }

@@ -49,5 +49,6 @@ public interface Mapper {
     Integer findUserReviewByUidHid(Map<String, Integer> info);
     void insertReview(Review review);
     Review findReview(Map<String, Integer> reviewInfo);
+    Float getAvgStar(int Hid);
 
 }

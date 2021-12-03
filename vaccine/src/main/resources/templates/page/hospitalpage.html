@@ -6,7 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
 
     <style>
 
@@ -28,6 +29,7 @@
         width: 110%;
     }
 
+
     </style>
 </head>
 
@@ -35,15 +37,18 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%; ">
     <div class="container-fluid">
-        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px"
+                                                     style="padding-bottom:5px">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span></button>
 
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="hospitalpage" style="font-size:18px; padding-right:35px;padding-left:35px;" >백신 예약</a>
+                    <a class="nav-link" href="hospitalpage"
+                       style="font-size:18px; padding-right:35px;padding-left:35px;">백신 예약</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
@@ -67,7 +72,8 @@
 <br>
 <center>
     <h3>
-        <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 가능 병원 목록</b></p>
+        <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약
+            가능 병원 목록</b></p>
 
         <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 목록입니다.'">병원입니다.</p></small>
     </h3>
@@ -157,7 +163,8 @@ geocoder.addressSearch(name, function(result, status) {
         }
     });
 })
-   </script>
+
+</script>
 <div id="table">
     <table id="hospitalTable" class="table table-hover">
         <thead>
@@ -176,14 +183,19 @@ geocoder.addressSearch(name, function(result, status) {
         <tr th:each="hospital : ${hospitals}" style="margin:0 auto;text-align:center">
             <form class="login" action="/reservationpage" method="post">
                 <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
-                <td th:text="${hospital.Hname}">Hname</td>
+                <td>
+                    <p th:text="${hospital.Hname}"></p>
+                    <p th:text="'⭐ ' + ${hospital.avgStar} + ' / 5.0'"></p>
+                </td>
                 <td th:text="${hospital.hospitalLocation.rest_Haddr}">rest_Haddr</td>
 
                 <td th:text="${hospital.Htel}">Htel</td>
-                <td th:text="${hospital.vaccine.Vname}" >Vname</td>
+                <td th:text="${hospital.vaccine.Vname}">Vname</td>
                 <td th:text="${hospital.rest}">rest</td>
                 <td>
-                    <button name="resbutton" id="resbutton" type="submit" onclick="location.href='reservationpage'" value="예약하기">예약하기</button>
+                    <button name="resbutton" id="resbutton" type="submit" onclick="location.href='reservationpage'"
+                            value="예약하기">예약하기
+                    </button>
                 </td>
             </form>
         </tr>

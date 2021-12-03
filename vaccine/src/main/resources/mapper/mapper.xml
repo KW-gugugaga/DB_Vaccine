@@ -181,4 +181,10 @@
         where Uid = #{Uid} and Hid = #{Hid}
     </select>
 
+    <select id="getAvgStar" resultType="float" parameterType="int">
+        select avg(star)
+        FROM review
+        where Hid = #{Hid};
+    </select>
+
 </mapper>

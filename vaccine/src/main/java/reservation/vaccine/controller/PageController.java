@@ -10,6 +10,7 @@ import reservation.vaccine.domain.Hospital;
 import reservation.vaccine.domain.UserInfo;
 import reservation.vaccine.domain.UserRsv;
 import reservation.vaccine.service.HospitalService;
+import reservation.vaccine.service.ReviewService;
 import reservation.vaccine.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,9 @@ public class PageController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ReviewService reviewService;
 
     @GetMapping("mainpage")
     public String GetMainPage(Model model, HttpServletRequest req) {
@@ -64,7 +68,15 @@ public class PageController {
         UserInfo userInfo = (UserInfo)user;
         int Uid = ((UserInfo) user).getUid();
         List<Hospital> hospitals = hospitalService.findAllHospitalByUid(Uid);
-
+        for(Hospital hospital : hospitals) {
+            Float avgStar = reviewService.getAvgStar(hospital.getHid());
+            if(avgStar == null) {
+                hospital.setAvgStar("-");
+            } else {
+                hospital.setAvgStar(Float.toString((float) (Math.round(avgStar*10)/10.0)));
+            }
+            System.out.println("avgStar = " + avgStar);
+        }
         String location=setLocation(userInfo.getLid());
         location += " ";
         String full_loc=location.concat(userInfo.getRest_addr());
@@ -97,6 +109,14 @@ public class PageController {
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
+        Float avg = reviewService.getAvgStar(Hid);
+        String avgStar;
+        if(avg == null) {
+            avgStar = "등록된 리뷰가 없습니다.";
+        } else {
+            avg = (float) (Math.round(avg*10)/10.0);
+            avgStar = Float.toString(avg);
+        }
         int state = 0;
         if(userRsv != null) {
             if(userRsv.getDate_2() == null) {   // 1차만 있고 2차만 없을 때
@@ -104,6 +124,7 @@ public class PageController {
             }
         }
         if(userRsv == null) {
+            model.addAttribute("avgStar", avgStar);
             return "page/reservationpage";
         } else if (state == 1){
             String date_1 = userRsv.getDate_1();
@@ -123,6 +144,7 @@ public class PageController {
                 max = min + 30;
             model.addAttribute("min", min);
             model.addAttribute("max", max);
+            model.addAttribute("avgStar", avgStar);
             return "page/reservationpage2";
         } else {
             checkRes = 1;

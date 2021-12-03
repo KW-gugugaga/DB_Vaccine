@@ -20,5 +20,8 @@ public class ReviewService {
     public Review findReview(Map<String, Integer> reviewInfo) {
         return mapper.findReview(reviewInfo);
     }
+    public Float getAvgStar(int Hid) {
+        return mapper.getAvgStar(Hid);
+    }
 }
 
