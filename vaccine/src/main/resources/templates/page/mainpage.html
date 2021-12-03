@@ -8,14 +8,17 @@
     <title>Main Page</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
-
+    body{
+        background-color:rgba(240, 229, 214, 0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
     div.left {
         width: 50%;
         float: left;
         box-sizing: border-box;
-
+        padding-top:7%;
     }
     div.right {
         width: 50%;
@@ -48,13 +51,13 @@
     }
 
     ul.tabs li.current{
-      background: #ede8e1;
+      background: #cfcac2;
       color: #222;
     }
 
     .tab-content{
       display: none;
-      background: #ede8e1;
+      background: #cfcac2;
       padding: 15px;
       height:50%
     }
@@ -62,59 +65,52 @@
     .tab-content.current{
       display: inherit;
     }
-        .clearfix::before, .clearfix::after{display: block; content: ''; clear: both;}
-        *{margin: 0; padding: 0;}
-        div.left {
-            width: 50%;
-            float: left;
-            box-sizing: border-box;
 
-        }
-        div.right {
-            width: 50%;
-            float: right;
-            box-sizing: border-box;
+    .wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        }
+    .button {
+      width: 200px;
+      height: 45px;
+      font-family: 'Jeju Gothic', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+      color: #000;
+      background-color: #fff;
+      border: none;
+      border-radius: 45px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      outline: none;
+      }
 
-        .container{
-            width: 90%;
-            height: 60%;
-            margin: 0 auto;
-        }
+    .button:hover {
+      background-color: #3E3F3A;
+      box-shadow: 0px 15px 20px rgba(143, 143, 143, 0.46);
+      color: #fff;
+      transform: translateY(-7px);
+    }
+    .text_under {
+        position: relative;
+    }
 
-        ul.tabs{
-            margin-top: 40px;
-            margin-bottom: 5px;
-            padding: 0px;
-            list-style: none;
-        }
-        ul.tabs li{
-            background: none;
-            color: #222;
-            display: inline-block;
-            padding: 10px 15px;
-            cursor: pointer;
-        }
-
-        ul.tabs li.current{
-            background: #ede8e1;
-            color: #222;
-        }
-
-        .tab-content{
-            display: none;
-            background: #ede8e1;
-            padding: 15px;
-            height:50%
-        }
-
-        .tab-content.current{
-            display: inherit;
-        }
-
-
-
+    .text_under::after {
+        content: "";
+        width: 30%;
+        height: 10px;
+        background: #ede8e1;
+        position: absolute;
+        display: inline-block;
+        bottom: 1px;
+        z-index: -1;
+    }
     </style>
 </head>
 <body>
@@ -128,23 +124,10 @@
             <span class="navbar-toggler-icon"></span></button>
 
         <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="hospitalpage"
-                       style="font-size:18px; padding-right:35px;padding-left:35px;">백신 예약</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
-                </li>
-            </ul>
+
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
                 </li>
@@ -154,63 +137,79 @@
 </nav>
 
 <div>
-    <div class="left">
-        <h4>Welcome to Main Page</h4>
-        <p th:text="'안녕하세요. ' + ${Uname} + '님'">안녕하세요. 님</p>
-        <p th:if="${state} == 0">백신 예약 내역이 없습니다.</p>
-        <p th:if="${state} == 1">미접종자입니다.</p>
-        <p th:if="${state} == 2">1차 접종 후 14일 이전입니다.</p>
-        <p th:if="${state} == 3">1차 접종 후 14일이 경과되었습니다.</p>
-        <p th:if="${state} == 4">2차 접종 후 14일 이전입니다.</p>
-        <p th:if="${state} == 5">2차 접종 후 14일이 경과되었습니다.</p>
-        <div class="myinfo_button">
-            <input type="button" onclick="location.href='myinfo'" value="내 정보 확인">
-        </div>
-        <div class="hospitalpage_button">
-            <input type="button" onclick="location.href='hospitalpage'" value="백신 예약하기">
-        </div>
-        <div class="resrvinfo_button">
-            <input type="button" onclick="location.href='reservationinfo'" value="예약 정보 확인">
-        </div>
-        <div class="review_button">
-            <input type="button" onclick="location.href='review'" value="접종 병원 평가하기">
-        </div>
-        <div class="news_button">
-            <input type="button" onclick="location.href='news'" value="최신 정보 확인">
-        </div>
-        <div class="visual_button">
-            <input type="button" onclick="location.href='visualization'" value="Visualization">
-        </div>
+    <div class="left" >
+        <center>
+            <h1 style="padding:4px;">코로나19 백신 예약 시스템</h1>
+            <h2><p style="padding:4px;" th:text="'안녕하세요. ' + ${Uname} + '님'">안녕하세요. 님</p></h2>
+            <h4 style="padding:4px;">
+                <p th:if="${state} == 0">백신 예약 내역이 없습니다.</p>
+                <p th:if="${state} == 1">미접종자입니다.</p>
+                <p th:if="${state} == 2">1차 접종 후 14일 이전입니다.</p>
+                <p th:if="${state} == 3">1차 접종 후 14일이 경과되었습니다.</p>
+                <p th:if="${state} == 4">2차 접종 후 14일 이전입니다.</p>
+                <p th:if="${state} == 5">2차 접종 후 14일이 경과되었습니다.</p>
+            </h4>
+            <div class="wrap">
+                <div class="myinfo_button">
+                    <input class="button" type="button" onclick="location.href='myinfo'" value="내 정보 확인">
+                </div>
+            </div>
+            <br>
+            <div class="wrap">
+                <div class="hospitalpage_button">
+                    <input class="button" type="button" onclick="location.href='hospitalpage'" value="백신 예약하기">
+                </div>
+            </div>
+            <br>
+            <div class="wrap">
+                <div class="resrvinfo_button">
+                    <input class="button" type="button" onclick="location.href='reservationinfo'" value="예약 정보 확인">
+                </div>
+            </div>
+            <br>
+            <div class="wrap">
+                <div class="news_button">
+                    <input class="button" type="button" onclick="location.href='news'" value="최신 정보 확인">
+                </div>
+            </div>
+        </center>
+
+        <br>
 
     </div>
 
-    <div class="right">
-        <script>
+</div>
+
+
+<div class="right">
+    <script>
             $(document).ready(function(){
 
-                $('ul.tabs li').click(function(){
-                    var tab_id = $(this).attr('data-tab');
+            $('ul.tabs li').click(function(){
+            var tab_id = $(this).attr('data-tab');
 
-                    $('ul.tabs li').removeClass('current');
-                    $('.tab-content').removeClass('current');
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
 
-                    $(this).addClass('current');
-                    $("#"+tab_id).addClass('current');
-                })
+            $(this).addClass('current');
+            $("#"+tab_id).addClass('current');
+            })
             })
 
-        </script>
-        <div class="container">
 
-            <ul class="tabs clearfix">
-                <li class="tab-link current" data-tab="tab-1">누적 접종 현황</li>
-                <li class="tab-link" data-tab="tab-2">지역별 접종 현황</li>
-                <li class="tab-link" data-tab="tab-3">나이별 접종 현황</li>
-            </ul>
 
-            <div id="tab-1" class="tab-content current">
-                <div id="linecolumnchart" style="width: 620px; height: 500px"></div>
-                <script th:inline="javascript">
+    </script>
+    <div class="container">
+
+        <ul class="tabs">
+            <li class="tab-link current" data-tab="tab-1">누적 접종 현황</li>
+            <li class="tab-link" data-tab="tab-2">지역별 접종 현황</li>
+            <li class="tab-link" data-tab="tab-3">나이별 접종 현황</li>
+        </ul>
+
+        <div id="tab-1" class="tab-content current">
+            <div id="linecolumnchart" style="width: 620px; height: 500px"></div>
+            <script th:inline="javascript">
                     google.charts.load('current', {packages : ['corechart']});
                     google.charts.setOnLoadCallback(drawComboChart);
 
@@ -244,13 +243,14 @@
                         var chart = new google.visualization.ComboChart(document.getElementById('linecolumnchart'));
                         chart.draw(data, options);
                     }
-                </script>
-            </div>
 
-            </div>
-            <div id="tab-2" class="tab-content"  style="width: 653.64px; height: 530px">
-                <div id="columnchart"></div>
-                <script th:inline="javascript">
+
+            </script>
+        </div>
+    </div>
+    <div id="tab-2" class="tab-content" style="width: 653.64px; height: 530px">
+        <div id="columnchart"></div>
+        <script th:inline="javascript">
                     google.charts.load('current', {packages : ['corechart']});
                     google.charts.setOnLoadCallback(drawColumnChart);
 
@@ -280,12 +280,14 @@
 
 
                     }
-                </script>
-                <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
-            </div>
-            <div id="tab-3" class="tab-content" style="width: 653.64px; height: 530px">
-                <div id="barchart"></div>
-                <script th:inline="javascript">
+
+
+        </script>
+        <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
+    </div>
+    <div id="tab-3" class="tab-content" style="width: 653.64px; height: 530px">
+        <div id="barchart"></div>
+        <script th:inline="javascript">
                     google.charts.load('current', {packages : ['bar']});
                     google.charts.setOnLoadCallback(drawBarChart);
 
@@ -313,82 +315,9 @@
                         var chart = new google.visualization.BarChart(document.getElementById('barchart'));
                         chart.draw(data, options);
                     }
-                </script>
-            </div>
-
-        </div>
-        <div id="tab-2" class="tab-content"  style="width: 653.64px; height: 530px">
-            <div id="columnchart"></div>
-            <script th:inline="javascript">
-                google.charts.load('current', {packages : ['corechart']});
-                google.charts.setOnLoadCallback(drawColumnChart);
-
-                function drawColumnChart() {
-                    var real_data = [[${locationData}]];
-                    console.log(real_data);
-
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'location');
-                    data.addColumn('number', '접종완료자 비율');
-                    Object.keys(real_data).forEach(function(key) {
-                        data.addRow([ key, real_data[key] ]);
-                    });
-                    var options = {
-                        title : '지역별 접종 완료자',
-                        hAxis : {
-                            title : '지역',
-                        },
-                        vAxis : {
-                            title : '접종 완료자 비율'
-                        },
-                        width: 620,
-                        height: 500,
-                    };
-                    var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
-                    chart.draw(data, options);
-
-
-                }
-            </script>
-            <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
-        </div>
-        <div id="tab-3" class="tab-content" style="width: 653.64px; height: 530px">
-            <div id="barchart"></div>
-            <script th:inline="javascript">
-                google.charts.load('current', {packages : ['bar']});
-                google.charts.setOnLoadCallback(drawBarChart);
-
-                function drawBarChart() {
-                    var real_data = [[${AgeData}]];
-                    console.log(real_data);
-
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'age');
-                    data.addColumn('number', '접종완료자 비율');
-                    Object.keys(real_data).forEach(function(key) {
-                        data.addRow([ key, real_data[key] ]);
-                    });
-                    var options = {
-                        title : '나이별 접종 완료자',
-                        hAxis : {
-                            title : '접종 완료자 비율',
-                        },
-                        vAxis : {
-                            title : '나이'
-                        },
-                        is3D: true,
-                        width: 620,
-                        height: 500
-                    };
-                    var chart = new google.visualization.BarChart(document.getElementById('barchart'));
-                    chart.draw(data, options);
-                }
-            </script>
-
-        </div>
-
+        </script>
     </div>
-
+</div>
 </div>
 </div>
 </body>
