@@ -1,15 +1,16 @@
-    <!DOCTYPE html>
-    <html xmlns:th="http://www.thymeleaf.org">
-    <html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
-        <title>Cancel Reservation</title>
-        <style>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <title>Cancel Reservation</title>
+    <style>
             #wrap {
                 min-height: 80vh;
                 place-items: center;
                 display: grid;
+
             }
 
             table.type04 {
@@ -36,46 +37,46 @@
                 font-family: 'M PLUS 1 Code', sans-serif;
             }
         </style>
-        <script>
+    <script>
             function cancel(){
                 var cancel= document.cancel;
                 cancel.submit();
             }
         </script>
-    </head>
-    <body>
+</head>
+<body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span></button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
 
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="mainpage">Home
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="myinfo">내 정보</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout">로그아웃</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="mainpage">Home
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="myinfo">내 정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">로그아웃</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <wrap id="wrap">
-        <div class="card border-secondary mb-3" style="width: 600px; height: 92%;">
-            <h2 class="card-header">내 정보</h2>
-            <form class="cancel_reservation" action="cancel" method="post">
-                <table class="type04 card-body" style="position:absolute; display: grid; height: 70%;">
+<wrap id="wrap">
+    <div class="card border-secondary mb-3" style="width: 600px; height: 80%;">
+        <h2 class="card-header">내 정보</h2>
+        <form class="cancel_reservation" action="cancel" method="post">
+            <table class="type04 card-body" style="position:absolute; display: grid; height: 70%;">
                     <span class="all" th:if="${what}=='전체'">
                         <div>
                             <tr>
@@ -108,48 +109,49 @@
                         </div>
                     </span>
 
-                    <div class="first" th:if="${what}=='1차'">
-                        <div>
-                            <tr>
-                                <td class="card-text" th:text="'1차 접종 백신'"></td>
-                                <td class="card-text" th:text="${userrsv.Vid_1}"></td>
-                            </tr>
-                            <tr>
-                                <td class="card-text" th:text="'1차 접종 예약 의료기관'"></td>
-                                <td class="card-text" th:text="${userrsv.Hid_1}"></td>
-                            </tr>
-                            <tr>
-                                <td class="card-text" th:text="'1차 접종 예약 일시'"></td>
-                                <td class="card-text" th:text="${userrsv.date_1} + ' ' + ${userrsv.hour_1} + '시'"></td>
-                            </tr>
-                        </div>
-                    </div>
-
-                    <div class="second" th:if="${what}=='2차'">
+                <div class="first" th:if="${what}=='1차'">
+                    <div>
                         <tr>
-                            <td class="card-text" th:text="'2차 접종 백신'"></td>
-                            <td class="card-text" th:text="${userrsv.Vid_2}"></td>
+                            <td class="card-text" th:text="'1차 접종 백신'"></td>
+                            <td class="card-text" th:text="${userrsv.Vid_1}"></td>
                         </tr>
                         <tr>
-                            <td class="card-text" th:text="'2차 접종 예약 의료기관'"></td>
-                            <td class="card-text" th:text="${userrsv.Hid_2}"></td>
+                            <td class="card-text" th:text="'1차 접종 예약 의료기관'"></td>
+                            <td class="card-text" th:text="${userrsv.Hid_1}"></td>
                         </tr>
                         <tr>
-                            <td class="card-text" th:text="'2차 접종 예약 일시'"></td>
-                            <td class="card-text" th:text="${userrsv.date_2} + ' ' + ${userrsv.hour_2}+ '시'"></td>
+                            <td class="card-text" th:text="'1차 접종 예약 일시'"></td>
+                            <td class="card-text" th:text="${userrsv.date_1} + ' ' + ${userrsv.hour_1} + '시'"></td>
                         </tr>
                     </div>
-            </form>
-        </div>
-    </wrap>
+                </div>
 
-    <div style="text-align: center;">
-        <h4>해당 예약 내역이 취소됩니다. 취소하시겠습니까?</h4>
-        <input type="text" name="Uid" id="Uid" th:value="${userrsv.Uid}" hidden="true">
-        <input type="text" name="what" id="what" th:value="${what}" hidden="true">
-        <button type="submit" onclick="cancel()" class="btn btn-dark btn-lg">예</button>
-        <button type="button" class="btn btn-dark btn-lg" onclick="location.href='reservationinfo'">아니오</button>
+                <div class="second" th:if="${what}=='2차'">
+                    <tr>
+                        <td class="card-text" th:text="'2차 접종 백신'"></td>
+                        <td class="card-text" th:text="${userrsv.Vid_2}"></td>
+                    </tr>
+                    <tr>
+                        <td class="card-text" th:text="'2차 접종 예약 의료기관'"></td>
+                        <td class="card-text" th:text="${userrsv.Hid_2}"></td>
+                    </tr>
+                    <tr>
+                        <td class="card-text" th:text="'2차 접종 예약 일시'"></td>
+                        <td class="card-text" th:text="${userrsv.date_2} + ' ' + ${userrsv.hour_2}+ '시'"></td>
+                    </tr>
+                </div>
+            </table>
+        </form>
     </div>
+</wrap>
 
-    </body>
-    </html>
+<div style="text-align: center;padding-top:0px;">
+    <h4>해당 예약 내역이 취소됩니다. 취소하시겠습니까?</h4>
+    <input type="text" name="Uid" id="Uid" th:value="${userrsv.Uid}" hidden="true">
+    <input type="text" name="what" id="what" th:value="${what}" hidden="true">
+    <button type="submit" onclick="cancel()" class="btn btn-dark btn-lg">예</button>
+    <button type="button" class="btn btn-dark btn-lg" onclick="location.href='reservationinfo'">아니오</button>
+</div>
+
+</body>
+</html>
