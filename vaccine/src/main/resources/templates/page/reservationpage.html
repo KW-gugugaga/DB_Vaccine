@@ -49,21 +49,31 @@
         </div>
     </div>
 </nav>
-<h1>병원 백신 예약 페이지</h1>
+<center>
+    <div>
+        <h3>
+            <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;">
+                <b>백신 예약 페이지</b></p>
+        </h3>
+    </div>
+</center>
 <form name="reservation" class="reservation" action="/reservation" method="post">
-    <div style="float: left;">
-        <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
-        <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
-        <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
-        <h2 th:text="${hospital.Hname}">병원 이름</h2>
-        <h2 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h2>
-        <h2 th:text="${hospital.Htel}">병원 전화번호</h2>
-        <h2 th:text="${hospital.vaccine.Vname}">백신 종류</h2>
-        <h2 th:text="${hospital.rest} + '개'">잔여 백신 수</h2>
-        <h2 th:text="'⭐ ' + ${avgStar}">별점</h2>
+    <div style="float: left; width: 50%; padding-left: 5%">
+        <div style="float: left; width: 50%; padding-left: 15%;">
+            <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
+            <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
+            <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
+            <p th:text="${hospital.Hname}" style="text-align: center;">병원 이름</p>
+            <p th:text="${hospital.hospitalLocation.rest_Haddr}" style="text-align: center;">병원 주소</p>
+            <p th:text="${hospital.Htel}" style="text-align: center;">병원 전화번호</p>
+        </div>
+        <div style="float: right; width=50%; padding-right: 15%">
+            <p th:text="${hospital.vaccine.Vname}" style="text-align: center;">백신 종류</p>
+            <p th:text="${hospital.rest} + '개'" style="text-align: center;">잔여 백신 수</p>
+        </div>
     </div>
 
-    <div style="float: right;">
+    <div style="float: right; width: 50%; padding-left: 5%; padding-right: 5%;">
         <h4>예약 날짜</h4>
         <input name="date" placeholder="예약 날짜 선택">
         <script>
@@ -82,7 +92,7 @@
         </script>
 
         <h4>예약 시간</h4>
-        <select name="time">
+        <select id="time" name="time">
             <option value="9">오전 9시</option>
             <option value="10">오전 10시</option>
             <option value="11">오전 11시</option>
@@ -97,34 +107,44 @@
             <input type="button" value="예약하기" onclick="reservationBtn()">
         </div>
         <script type="text/javascript">
-            function reservationBtn() {
-                var reservation = document.reservation;
-                var date = reservation.date.value;
+                    function reservationBtn() {
+                        var reservation = document.reservation;
+                        var date = reservation.date.value;
 
-                if (!date) {
-                    alert("예약 날짜를 선택하세요.");
-                } else {
-                    var today = new Date();
-                    var todayYear = today.getFullYear();
-                    var todayMonth = today.getMonth() + 1;
-                    var todayDate = today.getDate();
-
-                    var select = new Date(date);
-                    var selectYear = select.getFullYear();
-                    var selectMonth = select.getMonth() + 1;
-                    var selectDate = select.getDate();
-
-                    if(todayYear == selectYear && todayMonth == selectMonth && todayDate == selectDate) {
-                        var todayHours = today.getHours();
-                        var selectHours = select.getHours();
-                        if(todayHours >= selectHours) {
-                            alert("현재 시각 이후부터 예약 가능합니다.");
+                        if (!date) {
+                            alert("예약 날짜를 선택하세요.");
                         } else {
-                            reservation.submit();
+                            var today = new Date();
+                            var todayYear = today.getFullYear();
+                            var todayMonth = today.getMonth() + 1;
+                            var todayDate = today.getDate();
+
+                            var select = new Date(date);
+                            var selectYear = select.getFullYear();
+                            var selectMonth = select.getMonth() + 1;
+                            var selectDate = select.getDate();
+
+                            var time = document.getElementById("time");
+                            var selected = time.options[time.selectedIndex].value;
+
+                            if(todayYear == selectYear && todayMonth == selectMonth && todayDate == selectDate) {
+                                var todayHours = today.getHours();
+                                console.log(todayHours);
+                                console.log(selected);
+                                if(todayHours >= selected) {
+                                    alert("현재 시각 이후부터 예약 가능합니다.");
+                                } else {
+                                    reservation.submit();
+                                }
+                            } else {
+                                reservation.submit();
+                            }
                         }
-                    }
-            };
+                    };
+
         </script>
     </div>
+    </br></br>
+    <p th:text="'⭐ ' + ${avgStar}" style="padding-left: 10%; padding-right: 10%; text-align: center;">별점</p>
 </form>
 </body>
