@@ -8,55 +8,10 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-</head>
-<body><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span></button>
-
-        <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="hospitalpage" style="font-size:18px; padding-right:35px;padding-left:35px;" >백신 예약</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<h1>병원 백신 예약 페이지</h1>
-<form name="reservation" class="reservation" action="/reservation" method="post">
-    <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
-    <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
-    <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
-    <h2 th:text="${hospital.Hname}">병원 이름</h2>
-    <h2 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h2>
-    <h2 th:text="${hospital.Htel}">병원 전화번호</h2>
-    <h2 th:text="${hospital.vaccine.Vname}">백신 종류</h2>
-    <h2 th:text="${hospital.rest} + '개'">잔여 백신 수</h2>
-    <h2 th:text="'⭐ ' + ${avgStar}">별점</h2>
-
-    <div>
-        <h4>예약 날짜</h4>
-        <input name="date" placeholder="예약 날짜 선택">
-    </div>
-    <script>
+    <style>
+        .clearfix::before, .clearfix::after {display: block; content:''; clear:both;}
+    </style>
+    <script type="text/javascript">
         const config = {
             dateFormat: 'yy-mm-dd',
             showOn : "button",
@@ -66,25 +21,9 @@
         }
 
         $(function() {
-          $( "input[name='date']" ).datepicker(config);
+            $( "input[name='date']" ).datepicker(config);
         });
-    </script>
-    <h4>예약 시간</h4>
-    <select name="time">
-        <option value="9">오전 9시</option>
-        <option value="10">오전 10시</option>
-        <option value="11">오전 11시</option>
-        <option value="12">오후 12시</option>
-        <option value="14">오후 2시</option>
-        <option value="15">오후 3시</option>
-        <option value="16">오후 4시</option>
-        <option value="17">오후 5시</option>
-        <option value="18">오후 6시</option>
-    </select>
-    <div class="reservationBtn">
-        <input type="button" value="예약하기" onclick="reservationBtn()">
-    </div>
-    <script type="text/javascript">
+
         function reservationBtn() {
             var reservation = document.reservation;
             var date = reservation.date.value;
@@ -110,11 +49,80 @@
                     } else {
                         reservation.submit();
                     }
-                } else {
-                    reservation.submit();
                 }
-            }
-    };
+        };
     </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px"
+                                                     style="padding-bottom:5px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="hospitalpage"
+                       style="font-size:18px; padding-right:35px;padding-left:35px;">백신 예약</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<h1>병원 백신 예약 페이지</h1>
+<form name="reservation" class="reservation" action="/reservation" method="post">
+    <section class="clearfix" style="float: left">
+        <div>
+            <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
+            <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
+            <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
+            <h2 th:text="${hospital.Hname}">병원 이름</h2>
+            <h2 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h2>
+            <h2 th:text="${hospital.Htel}">병원 전화번호</h2>
+            <h2 th:text="${hospital.vaccine.Vname}">백신 종류</h2>
+            <h2 th:text="${hospital.rest} + '개'">잔여 백신 수</h2>
+            <h2 th:text="'⭐ ' + ${avgStar}">별점</h2>
+        </div>
+
+        <div>
+            <h4>예약 날짜</h4>
+            <input name="date" placeholder="예약 날짜 선택">
+
+            <h4>예약 시간</h4>
+            <select name="time">
+                <option value="9">오전 9시</option>
+                <option value="10">오전 10시</option>
+                <option value="11">오전 11시</option>
+                <option value="12">오후 12시</option>
+                <option value="14">오후 2시</option>
+                <option value="15">오후 3시</option>
+                <option value="16">오후 4시</option>
+                <option value="17">오후 5시</option>
+                <option value="18">오후 6시</option>
+            </select>
+            <div class="reservationBtn">
+                <input type="button" value="예약하기" onclick="reservationBtn()">
+            </div>
+        </div>
+    </section>
 </form>
 </body>
