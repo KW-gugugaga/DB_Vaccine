@@ -62,6 +62,56 @@
     .tab-content.current{
       display: inherit;
     }
+        .clearfix::before, .clearfix::after{display: block; content: ''; clear: both;}
+        *{margin: 0; padding: 0;}
+        div.left {
+            width: 50%;
+            float: left;
+            box-sizing: border-box;
+
+        }
+        div.right {
+            width: 50%;
+            float: right;
+            box-sizing: border-box;
+
+        }
+
+        .container{
+            width: 90%;
+            height: 60%;
+            margin: 0 auto;
+        }
+
+        ul.tabs{
+            margin-top: 40px;
+            margin-bottom: 5px;
+            padding: 0px;
+            list-style: none;
+        }
+        ul.tabs li{
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        ul.tabs li.current{
+            background: #ede8e1;
+            color: #222;
+        }
+
+        .tab-content{
+            display: none;
+            background: #ede8e1;
+            padding: 15px;
+            height:50%
+        }
+
+        .tab-content.current{
+            display: inherit;
+        }
 
 
 
@@ -138,25 +188,25 @@
         <script>
             $(document).ready(function(){
 
-            $('ul.tabs li').click(function(){
-            var tab_id = $(this).attr('data-tab');
+                $('ul.tabs li').click(function(){
+                    var tab_id = $(this).attr('data-tab');
 
-            $('ul.tabs li').removeClass('current');
-            $('.tab-content').removeClass('current');
+                    $('ul.tabs li').removeClass('current');
+                    $('.tab-content').removeClass('current');
 
-            $(this).addClass('current');
-            $("#"+tab_id).addClass('current');
-            })
+                    $(this).addClass('current');
+                    $("#"+tab_id).addClass('current');
+                })
             })
 
         </script>
         <div class="container">
 
-            <ul class="tabs">
+            <ul class="tabs clearfix">
                 <li class="tab-link current" data-tab="tab-1">누적 접종 현황</li>
                 <li class="tab-link" data-tab="tab-2">지역별 접종 현황</li>
                 <li class="tab-link" data-tab="tab-3">나이별 접종 현황</li>
-           </ul>
+            </ul>
 
             <div id="tab-1" class="tab-content current">
                 <div id="linecolumnchart" style="width: 620px; height: 500px"></div>
@@ -196,6 +246,7 @@
                     }
                 </script>
             </div>
+
             </div>
             <div id="tab-2" class="tab-content"  style="width: 653.64px; height: 530px">
                 <div id="columnchart"></div>
@@ -266,8 +317,79 @@
             </div>
 
         </div>
+        <div id="tab-2" class="tab-content"  style="width: 653.64px; height: 530px">
+            <div id="columnchart"></div>
+            <script th:inline="javascript">
+                google.charts.load('current', {packages : ['corechart']});
+                google.charts.setOnLoadCallback(drawColumnChart);
+
+                function drawColumnChart() {
+                    var real_data = [[${locationData}]];
+                    console.log(real_data);
+
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'location');
+                    data.addColumn('number', '접종완료자 비율');
+                    Object.keys(real_data).forEach(function(key) {
+                        data.addRow([ key, real_data[key] ]);
+                    });
+                    var options = {
+                        title : '지역별 접종 완료자',
+                        hAxis : {
+                            title : '지역',
+                        },
+                        vAxis : {
+                            title : '접종 완료자 비율'
+                        },
+                        width: 620,
+                        height: 500,
+                    };
+                    var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+                    chart.draw(data, options);
+
+
+                }
+            </script>
+            <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
+        </div>
+        <div id="tab-3" class="tab-content" style="width: 653.64px; height: 530px">
+            <div id="barchart"></div>
+            <script th:inline="javascript">
+                google.charts.load('current', {packages : ['bar']});
+                google.charts.setOnLoadCallback(drawBarChart);
+
+                function drawBarChart() {
+                    var real_data = [[${AgeData}]];
+                    console.log(real_data);
+
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'age');
+                    data.addColumn('number', '접종완료자 비율');
+                    Object.keys(real_data).forEach(function(key) {
+                        data.addRow([ key, real_data[key] ]);
+                    });
+                    var options = {
+                        title : '나이별 접종 완료자',
+                        hAxis : {
+                            title : '접종 완료자 비율',
+                        },
+                        vAxis : {
+                            title : '나이'
+                        },
+                        is3D: true,
+                        width: 620,
+                        height: 500
+                    };
+                    var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+                    chart.draw(data, options);
+                }
+            </script>
+
+        </div>
 
     </div>
+
+</div>
 </div>
 </body>
 </html>
