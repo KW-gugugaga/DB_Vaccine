@@ -192,11 +192,17 @@ public class PageController {
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
         Float avg = reviewService.getAvgStar(Hid);
         String avgStar;
+        List<String> reviews = null;
         if(avg == null) {
             avgStar = "등록된 리뷰가 없습니다.";
         } else {
             avg = (float) (Math.round(avg*10)/10.0);
             avgStar = Float.toString(avg);
+            reviews = reviewService.findALlReviewByHid(Hid);
+            for(String review : reviews) {
+                System.out.println("review = " + review);
+            }
+
         }
         int state = 0;
         if(userRsv != null) {
@@ -206,6 +212,7 @@ public class PageController {
         }
         if(userRsv == null) {
             model.addAttribute("avgStar", avgStar);
+            model.addAttribute("reviews", reviews);
             return "page/reservationpage";
         } else if (state == 1){
             String date_1 = userRsv.getDate_1();
@@ -226,6 +233,7 @@ public class PageController {
             model.addAttribute("min", min);
             model.addAttribute("max", max);
             model.addAttribute("avgStar", avgStar);
+            model.addAttribute("reviews", reviews);
             return "page/reservationpage2";
         } else {
             checkRes = 1;
@@ -261,10 +269,10 @@ public class PageController {
             hospitalService.reservation(Hid);   // 전체 예약 rest-2
             userInfo.setState(1);
             userService.updateUserState(userInfo);
-            res.setContentType("text/html; charset=euc-kr");
+            /*res.setContentType("text/html; charset=euc-kr");
             PrintWriter out = res.getWriter();
             out.println("<script>alert('1차/2차 백신 예약 성공 : " + Hname + "');</script>");
-            out.flush();
+            out.flush();*/
         }
         else {
             hospitalService.reservation2nd(Hid);   // 2차 예약 rest-1
@@ -274,16 +282,16 @@ public class PageController {
             OriginUserRsv.setDate_2(resDate);
             OriginUserRsv.setVid_2(Vid);
             userService.updateUserRsv2nd(OriginUserRsv);
-            res.setContentType("text/html; charset=euc-kr");
+            /*res.setContentType("text/html; charset=euc-kr");
             PrintWriter out = res.getWriter();
             out.println("<script>alert('2차 백신 예약 성공 : " + Hname + "');</script>");
-            out.flush();
+            out.flush();*/
         }
 
-        List<Hospital> hospitals = hospitalService.findAllHospitalByUid(Uid);
-        model.addAttribute("hospitals", hospitals);
-        model.addAttribute("user", userInfo.getUname());
-        return "page/hospitalpage";
+        //List<Hospital> hospitals = hospitalService.findAllHospitalByUid(Uid);
+        //model.addAttribute("hospitals", hospitals);
+        //model.addAttribute("user", userInfo.getUname());
+        return "redirect:hospitalpage";
     }
 
 
