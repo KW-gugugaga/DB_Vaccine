@@ -152,54 +152,109 @@
             <ul class="tabs">
                 <li class="tab-link current" data-tab="tab-1">누적 접종 현황</li>
                 <li class="tab-link" data-tab="tab-2">지역별 접종 현황</li>
-                <li class="tab-link" data-tab="tab-3">나이별 접종 현황황</li>
+                <li class="tab-link" data-tab="tab-3">나이별 접종 현황</li>
            </ul>
 
             <div id="tab-1" class="tab-content current">
-                <div id="piechart" ></div>
-                <script type="text/javascript">
-                google.charts.load('current', {packages : ['corechart']});
-                google.charts.setOnLoadCallback(drawPieChart);
+                <div id="linecolumnchart" style="width: 630px; height: 500px"></div>
+                <script th:inline="javascript">
+                    google.charts.load('current', {packages : ['corechart']});
+                    google.charts.setOnLoadCallback(drawComboChart);
 
-                function drawPieChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ['char','percent'],
-                        ['Italy',20],
-                        ['spongebob',40],
-                        ['dora',40]
-                    ]);
-                    var options = {
-                        title:'그래프 테스트'
-                       };
-                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                    chart.draw(data, options);
-                }
+                    function drawComboChart() {
+                        var real_data = [[${MonthData}]];
+                        var accumulated_data=[[${AccumulatedData}]]
+                        console.log(real_data);
+                        console.log(accumulated_data);
 
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'month');
+                        data.addColumn('number', '접종완료자');
+                        data.addColumn('number', '누적 접종완료자');
+                        Object.keys(real_data).forEach(function(key) {
+                            data.addRow([ key, real_data[key],accumulated_data[key] ]);
+                            console.log(data);
+                        });
+                        var options = {
+                            title : '월별 누적 접종 완료자',
+                            hAxis : {
+                                title : '접종 완료자 수',
+                                format: '0'
+                            },
+                            vAxis : {
+                                title : '월'
+                            },
+                            seriesType: 'bars',
+                            series: {1: {type: 'line'}}
+
+                        };
+                        var chart = new google.visualization.ComboChart(document.getElementById('linecolumnchart'));
+                        chart.draw(data, options);
+                    }
                 </script>
+            </div>
             </div>
             <div id="tab-2" class="tab-content">
-                <div id="piechart2"></div>
-                <script type="text/javascript">
-                google.charts.load('current', {packages : ['corechart']});
-                google.charts.setOnLoadCallback(drawPieChart);
+                <div id="columnchart" style="width: 630px; height: 500px"></div>
+                <script th:inline="javascript">
+                    google.charts.load('current', {packages : ['corechart']});
+                    google.charts.setOnLoadCallback(drawColumnChart);
 
-                function drawPieChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ['Country','percent'],
-                        ['Italy',50],
-                        ['France',25],
-                        ['Spain',25]
-                    ]);
-                    var options = {
-                        title:'그래프 테스트'
-                       };
-                    var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
-                    chart.draw(data, options);
-                }
+                    function drawColumnChart() {
+                        var real_data = [[${locationData}]];
+                        console.log(real_data);
 
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'location');
+                        data.addColumn('number', '접종완료자 비율');
+                        Object.keys(real_data).forEach(function(key) {
+                            data.addRow([ key, real_data[key] ]);
+                        });
+                        var options = {
+                            title : '지역별 접종 완료자',
+                            hAxis : {
+                                title : '지역',
+                            },
+                            vAxis : {
+                                title : '접종 완료자 비율'
+                            }
+                        };
+                        var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+                        chart.draw(data, options);
+                    }
+                </script>
+                <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
+            </div>
+            <div id="tab-3" class="tab-content">
+                <div id="barchart" style="width: 630px; height: 500px"></div>
+                <script th:inline="javascript">
+                    google.charts.load('current', {packages : ['bar']});
+                    google.charts.setOnLoadCallback(drawBarChart);
+
+                    function drawBarChart() {
+                        var real_data = [[${AgeData}]];
+                        console.log(real_data);
+
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'age');
+                        data.addColumn('number', '접종완료자 비율');
+                        Object.keys(real_data).forEach(function(key) {
+                            data.addRow([ key, real_data[key] ]);
+                        });
+                        var options = {
+                            title : '나이별 접종 완료자',
+                            hAxis : {
+                                title : '접종 완료자 비율',
+                            },
+                            vAxis : {
+                                title : '나이'
+                            },
+                        };
+                        var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+                        chart.draw(data, options);
+                    }
                 </script>
             </div>
-            <div id="tab-3" class="tab-content">tab content3</div>
 
         </div>
 
