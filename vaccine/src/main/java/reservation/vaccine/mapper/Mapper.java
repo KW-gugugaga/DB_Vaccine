@@ -1,9 +1,6 @@
 package reservation.vaccine.mapper;
 
-import reservation.vaccine.domain.Hospital;
-import reservation.vaccine.domain.Location;
-import reservation.vaccine.domain.UserInfo;
-import reservation.vaccine.domain.UserRsv;
+import reservation.vaccine.domain.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,5 +45,7 @@ public interface Mapper {
 
     //review
     Integer findUserReviewByUidHid(Map<String, Integer> info);
+    void insertReview(Review review);
+    Review findReview(Map<String, Integer> reviewInfo);
 
 }

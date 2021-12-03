@@ -159,18 +159,28 @@ public class ReviewController {
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
         Review review = new Review(userInfo.getUid(), Hid, rating, reviewText);
-
+        reviewService.insertReview(review);
         res.setContentType("text/html; charset=euc-kr");
         PrintWriter out = res.getWriter();
-
-        String scriptString = "<script>alert('리뷰가 등록되었습니다. - " + Hname + "');window.close();</script>";
+        String scriptString = "<script>alert('리뷰가 등록되었습니다.(" + Hname + ")');window.close();</script>";
         out.println(scriptString);
         out.flush();
         return;
     }
 
-    @GetMapping("modifyReview")
-    public String GetModifyReview(Model model, HttpServletRequest req) {
-        return "review/modifyreview";
+    @GetMapping("viewReview")
+    public String GetViewReview(Model model, HttpServletRequest req, @RequestParam("Hid") int Hid) {
+        System.out.println("ReviewController.GetViewReview");
+        System.out.println("Hid = " + Hid);
+        HttpSession session = req.getSession();
+        Object user = session.getAttribute("user");
+        UserInfo userInfo = (UserInfo)user;
+        Map<String, Integer> reviewInfo = new HashMap<String, Integer>();
+        reviewInfo.put("Uid", userInfo.getUid());
+        reviewInfo.put("Hid", Hid);
+        Review review = reviewService.findReview(reviewInfo);
+        System.out.println(review.toString());
+        model.addAttribute("review", review);
+        return "review/viewreview";
     }
 }

@@ -144,4 +144,15 @@
         where Uid = #{Uid} and Hid = #{Hid};
     </select>
 
+    <select id="insertReview" parameterType="reservation.vaccine.domain.Review">
+        insert into review (Uid, Hid, review, star)
+        values(#{Uid}, #{Hid}, #{review}, #{star})
+    </select>
+
+    <select id="findReview" resultType="reservation.vaccine.domain.Review" parameterType="map">
+        select *
+        from review
+        where Uid = #{Uid} and Hid = #{Hid}
+    </select>
+
 </mapper>
