@@ -48,21 +48,23 @@
 <h2>병원 백신 예약 페이지</h2>
 <p style="color:red">※ 1차 예약 내역이 존재하므로 2차 예약만 가능하며, 1차 접종 예약 날짜의 한달 후부터 한달 이내의 예약만 가능합니다.</p>
 <form name="reservation" class="reservation" action="/reservation" method="post">
-    <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
-    <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
-    <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
-    <h2 th:text="${hospital.Hname}">병원 이름</h2>
-    <h2 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h2>
-    <h2 th:text="${hospital.Htel}">병원 전화번호</h2>
-    <h2 th:text="${hospital.vaccine.Vname}">백신 종류</h2>
-    <h2 th:text="${hospital.rest} + '개'">잔여 백신 수</h2>
-    <h2 th:text="'⭐ ' + ${avgStar}">별점</h2>
+    <div styld="float: left; width: 50%">
+        <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
+        <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
+        <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
+        <h2 th:text="${hospital.Hname}">병원 이름</h2>
+        <h2 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h2>
+        <h2 th:text="${hospital.Htel}">병원 전화번호</h2>
+        <h2 th:text="${hospital.vaccine.Vname}">백신 종류</h2>
+        <h2 th:text="${hospital.rest} + '개'">잔여 백신 수</h2>
+        <h2 th:text="'⭐ ' + ${avgStar}">별점</h2>
+    </div>
 
-    <div>
+    <div style="float: right; width: 50%;">
         <h4>예약 날짜</h4>
         <input name="date" placeholder="예약 날짜 선택">
-    </div>
-    <script th:inline="javascript">
+
+        <script th:inline="javascript">
         let min = [[${min}]];
         let max = [[${max}]];
 
@@ -78,56 +80,57 @@
           $( "input[name='date']" ).datepicker(config);
         });
 
-    </script>
-    <div style="padding-top: 250px">
-        <h4>예약 시간</h4>
-        <select name="time">
-            <option value="9">오전 9시</option>
-            <option value="10">오전 10시</option>
-            <option value="11">오전 11시</option>
-            <option value="12">오후 12시</option>
-            <option value="14">오후 2시</option>
-            <option value="15">오후 3시</option>
-            <option value="16">오후 4시</option>
-            <option value="17">오후 5시</option>
-            <option value="18">오후 6시</option>
-        </select>
-    </div>
-    <div class="reservationBtn">
-        <input type="button" value="예약하기" onclick="reservationBtn()">
-    </div>
-    <script type="text/javascript">
-        function reservationBtn() {
-            var reservation = document.reservation;
-            var date = reservation.date.value;
 
-            if (!date) {
-                alert("예약 날짜를 선택하세요.");
-            } else {
-                var today = new Date();
-                var todayYear = today.getFullYear();
-                var todayMonth = today.getMonth() + 1;
-                var todayDate = today.getDate();
+        </script>
+        <div style="padding-top: 250px">
+            <h4>예약 시간</h4>
+            <select name="time">
+                <option value="9">오전 9시</option>
+                <option value="10">오전 10시</option>
+                <option value="11">오전 11시</option>
+                <option value="12">오후 12시</option>
+                <option value="14">오후 2시</option>
+                <option value="15">오후 3시</option>
+                <option value="16">오후 4시</option>
+                <option value="17">오후 5시</option>
+                <option value="18">오후 6시</option>
+            </select>
+        </div>
+        <div class="reservationBtn">
+            <input type="button" value="예약하기" onclick="reservationBtn()">
+        </div>
+        <script type="text/javascript">
+            function reservationBtn() {
+                var reservation = document.reservation;
+                var date = reservation.date.value;
 
-                var select = new Date(date);
-                var selectYear = select.getFullYear();
-                var selectMonth = select.getMonth() + 1;
-                var selectDate = select.getDate();
+                if (!date) {
+                    alert("예약 날짜를 선택하세요.");
+                } else {
+                    var today = new Date();
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
 
-                if(todayYear == selectYear && todayMonth == selectMonth && todayDate == selectDate) {
-                    var todayHours = today.getHours();
-                    var selectHours = select.getHours();
-                    if(todayHours >= selectHours) {
-                        alert("현재 시각 이후부터 예약 가능합니다.");
+                    var select = new Date(date);
+                    var selectYear = select.getFullYear();
+                    var selectMonth = select.getMonth() + 1;
+                    var selectDate = select.getDate();
+
+                    if(todayYear == selectYear && todayMonth == selectMonth && todayDate == selectDate) {
+                        var todayHours = today.getHours();
+                        var selectHours = select.getHours();
+                        if(todayHours >= selectHours) {
+                            alert("현재 시각 이후부터 예약 가능합니다.");
+                        } else {
+                            reservation.submit();
+                        }
                     } else {
                         reservation.submit();
                     }
-                } else {
-                    reservation.submit();
                 }
-            }
-    };
-
-    </script>
+            };
+        </script>
+    </div>
 </form>
 </body>

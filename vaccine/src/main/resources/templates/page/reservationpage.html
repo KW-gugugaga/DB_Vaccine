@@ -10,48 +10,9 @@
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <style>
         .clearfix::before, .clearfix::after {display: block; content:''; clear:both;}
+
     </style>
-    <script type="text/javascript">
-        const config = {
-            dateFormat: 'yy-mm-dd',
-            showOn : "button",
-            buttonText: "날짜 선택",
-            minDate: 0,
-            maxDate: +30
-        }
 
-        $(function() {
-            $( "input[name='date']" ).datepicker(config);
-        });
-
-        function reservationBtn() {
-            var reservation = document.reservation;
-            var date = reservation.date.value;
-
-            if (!date) {
-                alert("예약 날짜를 선택하세요.");
-            } else {
-                var today = new Date();
-                var todayYear = today.getFullYear();
-                var todayMonth = today.getMonth() + 1;
-                var todayDate = today.getDate();
-
-                var select = new Date(date);
-                var selectYear = select.getFullYear();
-                var selectMonth = select.getMonth() + 1;
-                var selectDate = select.getDate();
-
-                if(todayYear == selectYear && todayMonth == selectMonth && todayDate == selectDate) {
-                    var todayHours = today.getHours();
-                    var selectHours = select.getHours();
-                    if(todayHours >= selectHours) {
-                        alert("현재 시각 이후부터 예약 가능합니다.");
-                    } else {
-                        reservation.submit();
-                    }
-                }
-        };
-    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -90,39 +51,80 @@
 </nav>
 <h1>병원 백신 예약 페이지</h1>
 <form name="reservation" class="reservation" action="/reservation" method="post">
-    <section class="clearfix" style="float: left">
-        <div>
-            <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
-            <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
-            <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
-            <h2 th:text="${hospital.Hname}">병원 이름</h2>
-            <h2 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h2>
-            <h2 th:text="${hospital.Htel}">병원 전화번호</h2>
-            <h2 th:text="${hospital.vaccine.Vname}">백신 종류</h2>
-            <h2 th:text="${hospital.rest} + '개'">잔여 백신 수</h2>
-            <h2 th:text="'⭐ ' + ${avgStar}">별점</h2>
-        </div>
+    <div style="float: left;">
+        <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
+        <input type="hidden" id="Vid" name="Vid" th:value=${hospital.vaccine.Vid}>
+        <input type="hidden" id="Hname" name="Hname" th:value=${hospital.Hname}>
+        <h2 th:text="${hospital.Hname}">병원 이름</h2>
+        <h2 th:text="${hospital.hospitalLocation.rest_Haddr}">병원 주소</h2>
+        <h2 th:text="${hospital.Htel}">병원 전화번호</h2>
+        <h2 th:text="${hospital.vaccine.Vname}">백신 종류</h2>
+        <h2 th:text="${hospital.rest} + '개'">잔여 백신 수</h2>
+        <h2 th:text="'⭐ ' + ${avgStar}">별점</h2>
+    </div>
 
-        <div>
-            <h4>예약 날짜</h4>
-            <input name="date" placeholder="예약 날짜 선택">
+    <div style="float: right;">
+        <h4>예약 날짜</h4>
+        <input name="date" placeholder="예약 날짜 선택">
+        <script>
+                const config = {
+                dateFormat: 'yy-mm-dd',
+                showOn : "button",
+                buttonText: "날짜 선택",
+                minDate: 0,
+                maxDate: +30
+                }
 
-            <h4>예약 시간</h4>
-            <select name="time">
-                <option value="9">오전 9시</option>
-                <option value="10">오전 10시</option>
-                <option value="11">오전 11시</option>
-                <option value="12">오후 12시</option>
-                <option value="14">오후 2시</option>
-                <option value="15">오후 3시</option>
-                <option value="16">오후 4시</option>
-                <option value="17">오후 5시</option>
-                <option value="18">오후 6시</option>
-            </select>
-            <div class="reservationBtn">
-                <input type="button" value="예약하기" onclick="reservationBtn()">
-            </div>
+                $(function() {
+                $( "input[name='date']" ).datepicker(config);
+                });
+
+        </script>
+
+        <h4>예약 시간</h4>
+        <select name="time">
+            <option value="9">오전 9시</option>
+            <option value="10">오전 10시</option>
+            <option value="11">오전 11시</option>
+            <option value="12">오후 12시</option>
+            <option value="14">오후 2시</option>
+            <option value="15">오후 3시</option>
+            <option value="16">오후 4시</option>
+            <option value="17">오후 5시</option>
+            <option value="18">오후 6시</option>
+        </select>
+        <div class="reservationBtn">
+            <input type="button" value="예약하기" onclick="reservationBtn()">
         </div>
-    </section>
+        <script type="text/javascript">
+            function reservationBtn() {
+                var reservation = document.reservation;
+                var date = reservation.date.value;
+
+                if (!date) {
+                    alert("예약 날짜를 선택하세요.");
+                } else {
+                    var today = new Date();
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+
+                    var select = new Date(date);
+                    var selectYear = select.getFullYear();
+                    var selectMonth = select.getMonth() + 1;
+                    var selectDate = select.getDate();
+
+                    if(todayYear == selectYear && todayMonth == selectMonth && todayDate == selectDate) {
+                        var todayHours = today.getHours();
+                        var selectHours = select.getHours();
+                        if(todayHours >= selectHours) {
+                            alert("현재 시각 이후부터 예약 가능합니다.");
+                        } else {
+                            reservation.submit();
+                        }
+                    }
+            };
+        </script>
+    </div>
 </form>
 </body>
