@@ -38,7 +38,8 @@
         #wrap{
             display: grid;
             place-items: center;
-            min-height: 80vh;
+            min-height: 50vh;
+            margin-top: 5px;
         }
 
         /*
@@ -86,7 +87,7 @@
 <wrap id="wrap">
     <div class="card border-secondary mb-3" style="width: 600px; height: 95%;">
         <h2 class="card-header">내 정보</h2>
-        <table class="type04 card-body" style="display: grid; height: 70%">
+        <table class="type04 card-body" style="display: grid; height: 70%; padding:14px; padding-top:0;">
             <div class="name">
                 <tr>
                     <td class="card-text" th:text="'이름'"></td>
@@ -141,7 +142,7 @@
     </div>
 </wrap>
 <div class="d-grid gap-2" style="text-align: center;">
-    <button class="btn btn-lg btn-dark" type="button" onclick="location.href='modify'" style="width:300px">정보 수정하기</button>
+    <button class="btn btn-lg btn-dark" type="button" onclick="location.href='modify'" style="width:200px">정보 수정하기</button>
 </div>
 
 </body>
