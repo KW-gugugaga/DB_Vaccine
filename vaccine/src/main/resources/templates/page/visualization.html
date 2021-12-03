@@ -42,6 +42,8 @@
     </div>
 </nav>
 
+<div style="padding-top: 75px;">
+<h2>지역별 접종률</h2>
 <div id="columnchart" style="width: 700px; height: 400px"></div>
 <script th:inline="javascript">
         google.charts.load('current', {packages : ['corechart']});
@@ -71,5 +73,37 @@
         }
     </script>
 <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
+
+<h2>나이별 접종률</h2>
+<div id="barchart" style="width: 900px; height: 500px"></div>
+<script th:inline="javascript">
+        google.charts.load('current', {packages : ['bar']});
+        google.charts.setOnLoadCallback(drawBarChart);
+
+        function drawBarChart() {
+            var real_data = [[${AgeData}]];
+            console.log(real_data);
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'age');
+            data.addColumn('number', '접종완료자 비율');
+            Object.keys(real_data).forEach(function(key) {
+                data.addRow([ key, real_data[key] ]);
+            });
+            var options = {
+                title : '나이별 접종 완료자',
+                hAxis : {
+                    title : '접종 완료자 비율',
+                },
+                vAxis : {
+                    title : '나이'
+                },
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+            chart.draw(data, options);
+        }
+    </script>
+</div>
+
 </body>
 </html>
