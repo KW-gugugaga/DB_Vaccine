@@ -8,9 +8,21 @@
 
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
-
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
 
+    body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
+    #title_1{
+        width:300px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
     #hospitalTable{
         margin:auto;
     }
@@ -72,9 +84,7 @@
 <br>
 <center>
     <h3>
-        <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약
-            가능 병원 목록</b></p>
-
+        <p id="title_1"><b>예약 가능 병원 목록</b></p>
         <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 목록입니다.'">병원입니다.</p></small>
     </h3>
     </div>
