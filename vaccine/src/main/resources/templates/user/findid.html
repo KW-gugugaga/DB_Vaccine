@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <script type="text/javascript">
         function findIDBtn() {
             var findID = document.findID;
@@ -20,24 +21,33 @@
         };
     </script>
     <style>
-        *{font-family: 'M PLUS 1 Code', sans-serif;text-align: center;}
+        *{font-family: 'M PLUS 1 Code', sans-serif; margin: 0 auto; padding: 0;}
+        h2{
+            padding: 5px 15px;
+            background: #eee;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            width: 70%;
+            text-align: center;
+        }
+        .Email{
+            padding-top: 10px;
+        }
     </style>
 </head>
 <body class="bg-light">
-    <header id="header">
         <h2>아이디 찾기</h2>
-    </header>
-<span>이름과 이메일을 입력하십시오.</span>
-<form id="findID" name="findID" action="findID" method="post">
-    <div class="Uname">
-        <input type="text" name="Uname" class="form-control" id="Uname exampleInputEmail1" placeholder="이름">
-    </div>
-    <div class="Email">
-        <input type="email" name="Email" class="form-control" id="Email exampleInputEmail1" area-describedby="emailHelp" placeholder="이메일">
-    </div>
-    <div class="findID_btn">
-        <button type="submit" class="btn btn-secondary" style="width: 190px">아이디 찾기</button>
-    </div>
-</form>
+        <p style="text-align: center">이름과 이메일을 입력하십시오.</p>
+        <form id="findID" name="findID" action="findID" method="post">
+            <div class="Uname" style="width: 70%;">
+                <input type="text" name="Uname" class="form-control" id="Uname exampleInputEmail1" placeholder="이름">
+            </div>
+            <div class="Email" style="width: 70%;">
+                <input type="email" name="Email" class="form-control" id="Email exampleInputEmail1" area-describedby="emailHelp" placeholder="이메일">
+            </div>
+            <div class="findID_btn text-center" style="width: 70%; padding-top: 10px">
+                <button type="submit" class="btn btn-dark" style="width: 190px">아이디 찾기</button>
+            </div>
+        </form>
 </body>
 </html>
