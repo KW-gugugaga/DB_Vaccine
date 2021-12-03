@@ -132,11 +132,13 @@
                     </tr>
                     <button type="button" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
                     <button type="button" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
+                    <button type="button" onclick="location.href='review'">접종 병원 평가</button>
                 </div>
             </span>
 
         <span th:if="${rsvstate}==2">
                 <button type="button" onclick="location.href='cancel?what=1차'">1차 예약 취소</button>
+                <button type="button" onclick="location.href='review'">접종 병원 평가</button>
             </span>
 
         <span th:if="${rsvstate}==4">
@@ -156,6 +158,7 @@
                     <td th:text="${userrsv.date_2} + ' ' + ${userrsv.hour_2} + '시'"></td>
                 </tr>
                 <button type="button" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
+                <button type="button" onclick="location.href='review'">접종 병원 평가</button>
             </span>
 
         <span th:if="${rsvstate}==5">
@@ -174,6 +177,7 @@
                     <td th:text="'2차 접종 예약 일시'"></td>
                     <td th:text="${userrsv.date_2} + ' ' + ${userrsv.hour_2} + '시'"></td>
                 </tr>
+                <button type="button" onclick="location.href='review'">접종 병원 평가</button>
             </span>
     </table>
 </wrap>

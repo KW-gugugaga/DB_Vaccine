@@ -6,24 +6,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
 
     <script type="text/javascript">
   </script>
     <style>
-        *{font-family: 'M PLUS 1 Code', sans-serif;text-align: center;}
-
+        *{font-family: 'M PLUS 1 Code', sans-serif;text-align: center;margin: 0 auto; padding: 0;}
+        h2{
+            padding: 5px 15px;
+            background: #eee;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            width: 70%;
+            text-align: center;
+        }
+        p{
+            padding-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
     </style>
 </head>
-<body>
-<h2>비밀번호 찾기</h2>
-<span th:if="${state} == 0">
-    <p>일치하는 정보가 없습니다.</p>
-    <input type='button' class="btn btn-secondary"value="다시 찾기" onclick="location.href='findPW'">
-    <input type='button' class="btn btn-secondary"value="창닫기" onClick='window.close()'>
-</span>
-<span th:if="${state} == 1">
-    <p th:text="'회원님의 PW는 ' + ${userPW} + '입니다'">userID</p>
-    <input type='button' class="btn btn-secondary" value="창닫기" style="width: 190px;" onClick='window.close()'>
-</span>
+<body class="bg-light">
+    <h2>비밀번호 찾기</h2>
+    <span th:if="${state} == 0">
+        <p>일치하는 정보가 없습니다.</p>
+        <div class="findPW_btn text-center" style="width: 70%; padding-top: 10px">
+            <input type='button' class="btn btn-secondary"value="다시 찾기" onclick="location.href='findPW'">
+        </div>
+    </span>
+    <span th:if="${state} == 1">
+        <p th:text="'회원님의 PW는 ' + ${userPW} + '입니다'">userID</p>
+        <div class="findID_btn text-center" style="width: 70%; padding-top: 10px">
+            <input type='button' class="btn btn-secondary" value="창닫기" style="width: 190px;" onClick='window.close()'>
+        </div>
+    </span>
 </body>
 </html>

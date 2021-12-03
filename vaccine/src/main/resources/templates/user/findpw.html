@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
 
     <script type="text/javascript">
         function findPWBtn() {
@@ -21,24 +22,34 @@
         };
     </script>
     <style>
-      *{font-family: 'M PLUS 1 Code', sans-serif;text-align: center;}
+      *{font-family: 'M PLUS 1 Code', sans-serif; margin: 0 auto; padding: 0;}
+      h2{
+        padding: 5px 15px;
+        background: #eee;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        width: 70%;
+        text-align: center;
+      }
+      .ID{
+        padding-top: 10px;
+      }
     </style>
 </head>
-<body>
-    <header id="header">
-      <h2>비밀번호 찾기</h2>
-    </header>
-    <span>이름과 아이디를 입력하십시오.</span>
+<body class="bg-light">
+    <h2>비밀번호 찾기</h2>
+    <p style="text-align: center">이름과 아이디를 입력하십시오.</p>
 
     <form id="findPW" name="findPW" action="findPW" method="post">
-      <div class="Uname">
-        <input type="text" name="Uname" id="Uname" placeholder="이름">
+      <div class="Uname" style="width: 70%;">
+        <input type="text" name="Uname" class="form-control" id="Uname" placeholder="이름">
       </div>
-      <div class="ID">
-        <input type="text" name="ID" id="ID" placeholder="아이디">
+
+      <div class="ID" style="width: 70%;">
+        <input type="text" name="ID" class="form-control" id="ID" placeholder="아이디">
       </div>
-      <div class="findPW_btn">
-        <button type="submit" class="btn btn-secondary" style="width: 190px">비밀번호 찾기
+      <div class="findID_btn text-center" style="width: 70%; padding-top: 10px">
+        <button type="submit" class="btn btn-dark" style="width: 190px">비밀번호 찾기
       </div>
 </form>
 </body>
