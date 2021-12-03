@@ -36,12 +36,6 @@
         margin-right: 3%;
         width:60%;
     }
-
-    #resbutton {
-        width: 110%;
-    }
-
-
     </style>
 </head>
 
@@ -203,9 +197,17 @@ geocoder.addressSearch(name, function(result, status) {
                 <td th:text="${hospital.vaccine.Vname}">Vname</td>
                 <td th:text="${hospital.rest}">rest</td>
                 <td>
-                    <button name="resbutton" id="resbutton" type="submit" onclick="location.href='reservationpage'"
-                            value="예약하기">예약하기
-                    </button>
+                    <span th:if="${hospital.rest == 0}">
+                        <button name="resbutton" type="submit" onclick="location.href='reservationpage'"
+                                value="예약하기" style="width: 110%;" disabled>예약하기
+                        </button>
+                        <p style="color: red; font-size: 12px;">예약 불가</p>
+                    </span>
+                    <span th:if="${hospital.rest != 0}">
+                        <button name="resbutton" type="submit" onclick="location.href='reservationpage'"
+                                value="예약하기" style="width: 110%;">예약하기
+                        </button>
+                    </span>
                 </td>
             </form>
         </tr>

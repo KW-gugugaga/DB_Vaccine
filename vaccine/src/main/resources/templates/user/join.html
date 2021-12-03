@@ -13,6 +13,16 @@
         .pw_ok{color:blue; display: none; font-size: 12px}
         .pw_not_ok{color:red; display: none; font-size: 12px}
 
+    #title_1{
+        width:430px;
+        background-color:rgba(240,237,226,0.4);
+        text-align:center;
+        border: 5px solid #f0ede4;
+        border-radius: 15px;
+        padding:3px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+        margin:0 auto;
+    }
         body{
             background-image : url('img/v1.jpg');
             background-size: cover;
@@ -116,13 +126,17 @@
 <center>
     <img src="/img/3.png" alt="Image error" style="padding-top:40px; padding-bottom: 0px;">
 </center>
->
+
 
 <form id="join" name="join" action="join" method="post">
-    <h3>
-        <p style="margin:0 auto; width:500px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;">
-            <b>백신 예약 시스템 회원가입</b></p>
+    <br>
+
+    <h3 id="title_1">
+        <b>코로나 백신 예약 시스템 회원가입</b>
+
     </h3>
+    <br>
+
     <div class="join_box" style="margin:0 auto;">
         <div style="padding:20px;">
 
@@ -186,7 +200,7 @@
                     <input class="form-control" type="text" name="age" id="age" placeholder="나이">
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <div>
                     <h5>지역</h5>
@@ -216,8 +230,8 @@
                 <div>
                     <h5>주민번호</h5>
                     <center>
-                    <input class="ssn_css" type="text" name="ssn1" id="ssn1" placeholder="앞자리" style="width:45%;">-
-                    <input class="ssn_css" type="text" name="ssn2" id="ssn2" placeholder="뒷자리" style="width:45%; ">
+                        <input class="ssn_css" type="text" name="ssn1" id="ssn1" placeholder="앞자리" style="width:45%;">-
+                        <input class="ssn_css" type="text" name="ssn2" id="ssn2" placeholder="뒷자리" style="width:45%; ">
                     </center>
                 </div>
             </div>
