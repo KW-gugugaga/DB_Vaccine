@@ -39,16 +39,26 @@
             margin-top: 10px;
         }
     </style>
+    <script>
+        function modifyform(){
+            var modify= document.modify;
+            var Uname = modify.Uname.value;
+            var PW = modify.PW.value;
+            var phone_num = modify.PW.value;
+            var Email = modify.Email.value;
+            var rest_addr = modify.rest_addr.value;
+            if(!Uname || !PW || !phone_num || !Email || !rest_addr){
+                alert("모든 정보를 입력해주십시오.");
+            }
+            else {
+                alert('정보수정에 성공하였습니다.');
+                modify.submit();
+            }
+        }
+
+    </script>
 </head>
 <body class="bg-light">
-
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span></button>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -57,162 +67,141 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span></button>
 
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="hospitalpage" style="font-size:18px; padding-right:35px;padding-left:35px;" >백신 예약</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="hospitalpage" style="font-size:18px; padding-right:35px;padding-left:35px;" >백신 예약</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
-                    </li>
-                </ul>
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
+                </li>
+            </ul>
         </div>
-    </nav>
-
-    <wrap id="wrap">
-        <div class="card border-secondary mb-3" style="width: 600px; height: 92%;">
-            <form class="modify" action="/modify" method="post">
-                <h2 class="card-header">내 정보</h2>
-                <table class="type04 card-body" style="position:absolute; display: grid; height: 70%;">
     </div>
 </nav>
 
-<wrap id="wrap">
-    <div class="card border-secondary mb-3" style="width: 600px; height: 92%;">
-        <h2 class="card-header">내 정보</h2>
-        <form class="modify" action="/modify" method="post">
-            <table class="type04 card-body" style="position:absolute; display: grid; height: 70%;">
+    <wrap id="wrap">
+        <div class="card border-secondary mb-3" style="width: 600px; height: 92%;">
+            <h2 class="card-header">내 정보</h2>
+            <form name="modify" id="modify" class="modify" action="/modify" method="post">
+                <table class="type04 card-body" style="position:absolute; display: grid; height: 70%;">
 
-                <div class="name">
-                    <tr>
-                        <td class="card-text"th:text="'이름'"></td>
-                        <td>
-                         <input type="text" name="Uname" id="Uname" th:value="${modifyUserinfo.Uname}">
+                    <div class="name">
+                        <tr>
+                            <td class="card-text"th:text="'이름'"></td>
+                            <td>
+                                <input type="text" name="Uname" id="Uname" th:value="${modifyUserinfo.Uname}">
+                            </td>
+                        </tr>
+                    </div>
+                    <div class="id" >
+                        <tr>
+                            <td class="card-text"th:text="'아이디'"></td>
+                            <td class="card-text" th:text="${modifyUserinfo.ID}"></td>
+                        </tr>
+                        <input type="text" name="ID" id="ID" th:value="${modifyUserinfo.ID}" hidden="true">
+                    </div>
+                    <div class="pw">
+                        <tr>
+                            <td class="card-text"th:text="'비밀번호'"></td>
+                            <td>
+                                <input type="text" name="PW" id="PW" th:value="${modifyUserinfo.PW}">
+                            </td>
+                        </tr>
+                    </div>
+                    <div class="ssn">
+                        <tr>
+                            <td class="card-text"th:text="'주민등록번호'"></td>
+                            <td class="card-text" th:text="${modifyUserinfo.ssn1} +'-' + ${modifyUserinfo.ssn2}"></td>
+                        </tr>
+                    </div>
+                    <div class="sex">
+                        <tr>
+                            <td class="card-text"th:text="'성별'"></td>
+                            <td class="card-text" th:text="${modifyUserinfo.sex}"></td>
+                        </tr>
+                    </div>
+                    <div class="phone_num">
+                        <tr>
+                            <td class="card-text"th:text="'전화번호'"></td>
+                            <td>
+                                <input type="text" name="phone_num" id="phone_num" th:value="${modifyUserinfo.phone_num}">
+                            </td>
+                        </tr>
+                    </div>
+                    <div class="email">
+                        <tr>
+                            <td class="card-text"th:text="'Email'"></td>
+                            <td>
+                                <input type="email" name="Email" id="Email" th:value="${modifyUserinfo.Email}">
+                            </td>
+                        </tr>
+                    </div>
 
-                            <input type="text" name="Uname" id="Uname" th:value="${modifyUserinfo.Uname}">
-                        </td>
-                    </tr>
-                </div>
-                <div class="id" >
-                    <tr>
-                        <td class="card-text"th:text="'아이디'"></td>
-                        <td class="card-text" th:text="${modifyUserinfo.ID}"></td>
-                    </tr>
-                    <input type="text" name="ID" id="ID" th:value="${modifyUserinfo.ID}" hidden="true">
-                </div>
-                <div class="pw">
-                    <tr>
-                        <td class="card-text"th:text="'비밀번호'"></td>
-                        <td>
-                            <input type="text" name="PW" id="PW" th:value="${modifyUserinfo.PW}">
-                        </td>
-                    </tr>
-                </div>
-                <div class="ssn">
-                    <tr>
-                        <td class="card-text"th:text="'주민등록번호'"></td>
-                        <td class="card-text" th:text="${modifyUserinfo.ssn1} +'-' + ${modifyUserinfo.ssn2}"></td>
-                    </tr>
-                </div>
-                <div class="sex">
-                    <tr>
-                        <td class="card-text"th:text="'성별'"></td>
-                        <td class="card-text" th:text="${modifyUserinfo.sex}"></td>
-                    </tr>
-                </div>
-                <div class="phone_num">
-                    <tr>
-                        <td class="card-text"th:text="'전화번호'"></td>
-                        <td>
-                            <input type="text" name="phone_num" id="phone_num" th:value="${modifyUserinfo.phone_num}">
-                        </td>
-                    </tr>
-                </div>
-                <div class="email">
-                    <tr>
-                        <td class="card-text"th:text="'Email'"></td>
-                        <td>
-                            <input type="email" name="Email" id="Email" th:value="${modifyUserinfo.Email}">
-                        </td>
-                    </tr>
-                </div>
-
-                <div class="location">
-                    <tr>
-                        <td>
-                            <select name="Lid">
-                                <option value="2" th:if = "${modifyUserinfo.Lid==2}"selected>서울특별시</option>
-                                <option value="2" th:unless = "${modifyUserinfo.Lid==2}">서울특별시</option>
-                                <option value="31" th:if = "${modifyUserinfo.Lid==31}"selected>경기도</option>
-                                <option value="31" th:unless = "${modifyUserinfo.Lid==31}">경기도</option>
-                                <option value="32" th:if = "${modifyUserinfo.Lid==32}" selected>인천광역시</option>
-                                <option value="32" th:unless = "${modifyUserinfo.Lid==32}">인천광역시</option>
-                                <option value="33" th:if = "${modifyUserinfo.Lid==33}"selected>강원도</option>
-                                <option value="33" th:unless = "${modifyUserinfo.Lid==33}">강원도</option>
-                                <option value="41" th:if = "${modifyUserinfo.Lid==41}"selected>충청남도</option>
-                                <option value="41" th:unless = "${modifyUserinfo.Lid==41}">충청남도</option>
-                                <option value="42" th:if = "${modifyUserinfo.Lid==42}"selected>대전광역시</option>
-                                <option value="42" th:unless = "${modifyUserinfo.Lid==42}">대전광역시</option>
-                                <option value="43" th:if = "${modifyUserinfo.Lid==43}"selected>충청북도</option>
-                                <option value="43" th:unless = "${modifyUserinfo.Lid==43}">충청북도</option>
-                                <option value="44" th:if = "${modifyUserinfo.Lid==44}"selected>세종특별자치시</option>
-                                <option value="44" th:unless = "${modifyUserinfo.Lid==44}">세종특별자치시</option>
-                                <option value="51" th:if = "${modifyUserinfo.Lid==51}"selected>부산광역시</option>
-                                <option value="51" th:unless = "${modifyUserinfo.Lid==51}">부산광역시</option>
-                                <option value="52" th:if = "${modifyUserinfo.Lid==52}"selected>울산광역시</option>
-                                <option value="52" th:unless = "${modifyUserinfo.Lid==52}">울산광역시</option>
-                                <option value="53" th:if = "${modifyUserinfo.Lid==53}"selected>대구광역시</option>
-                                <option value="53" th:unless = "${modifyUserinfo.Lid==53}">대구광역시</option>
-                                <option value="54" th:if = "${modifyUserinfo.Lid==54}"selected>경상북도</option>
-                                <option value="54" th:unless = "${modifyUserinfo.Lid==54}">경상북도</option>
-                                <option value="55" th:if = "${modifyUserinfo.Lid==55}"selected>경상남도</option>
-                                <option value="55" th:unless = "${modifyUserinfo.Lid==55}">경상남도</option>
-                                <option value="61" th:if = "${modifyUserinfo.Lid==61}"selected>전라남도</option>
-                                <option value="61" th:unless = "${modifyUserinfo.Lid==61}">전라남도</option>
-                                <option value="62" th:if = "${modifyUserinfo.Lid==62}"selected>광주광역시</option>
-                                <option value="62" th:unless = "${modifyUserinfo.Lid==62}">광주광역시</option>
-                                <option value="63" th:if = "${modifyUserinfo.Lid==63}"selected>전라북도</option>
-                                <option value="63" th:unless = "${modifyUserinfo.Lid==63}">전라북도</option>
-                                <option value="64" th:if = "${modifyUserinfo.Lid==64}"selected>제주특별자치도</option>
-                                <option value="64" th:unless = "${modifyUserinfo.Lid==64}">제주특별자치도</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" name="rest_addr" id="rest_addr" th:value="${modifyUserinfo.rest_addr}">
-                        </td>
-                    </tr>
-                </div>
-            </table>
-
-                <div style="margin-top: 0px">
-                    <button type="button" onclick="location.href='mainpage'">돌아가기</button>
-                    <button type="submit">수정완료</button>
-                </div>
+                    <div class="location">
+                        <tr>
+                            <td>
+                                <select name="Lid">
+                                    <option value="2" th:if = "${modifyUserinfo.Lid==2}"selected>서울특별시</option>
+                                    <option value="2" th:unless = "${modifyUserinfo.Lid==2}">서울특별시</option>
+                                    <option value="31" th:if = "${modifyUserinfo.Lid==31}"selected>경기도</option>
+                                    <option value="31" th:unless = "${modifyUserinfo.Lid==31}">경기도</option>
+                                    <option value="32" th:if = "${modifyUserinfo.Lid==32}" selected>인천광역시</option>
+                                    <option value="32" th:unless = "${modifyUserinfo.Lid==32}">인천광역시</option>
+                                    <option value="33" th:if = "${modifyUserinfo.Lid==33}"selected>강원도</option>
+                                    <option value="33" th:unless = "${modifyUserinfo.Lid==33}">강원도</option>
+                                    <option value="41" th:if = "${modifyUserinfo.Lid==41}"selected>충청남도</option>
+                                    <option value="41" th:unless = "${modifyUserinfo.Lid==41}">충청남도</option>
+                                    <option value="42" th:if = "${modifyUserinfo.Lid==42}"selected>대전광역시</option>
+                                    <option value="42" th:unless = "${modifyUserinfo.Lid==42}">대전광역시</option>
+                                    <option value="43" th:if = "${modifyUserinfo.Lid==43}"selected>충청북도</option>
+                                    <option value="43" th:unless = "${modifyUserinfo.Lid==43}">충청북도</option>
+                                    <option value="44" th:if = "${modifyUserinfo.Lid==44}"selected>세종특별자치시</option>
+                                    <option value="44" th:unless = "${modifyUserinfo.Lid==44}">세종특별자치시</option>
+                                    <option value="51" th:if = "${modifyUserinfo.Lid==51}"selected>부산광역시</option>
+                                    <option value="51" th:unless = "${modifyUserinfo.Lid==51}">부산광역시</option>
+                                    <option value="52" th:if = "${modifyUserinfo.Lid==52}"selected>울산광역시</option>
+                                    <option value="52" th:unless = "${modifyUserinfo.Lid==52}">울산광역시</option>
+                                    <option value="53" th:if = "${modifyUserinfo.Lid==53}"selected>대구광역시</option>
+                                    <option value="53" th:unless = "${modifyUserinfo.Lid==53}">대구광역시</option>
+                                    <option value="54" th:if = "${modifyUserinfo.Lid==54}"selected>경상북도</option>
+                                    <option value="54" th:unless = "${modifyUserinfo.Lid==54}">경상북도</option>
+                                    <option value="55" th:if = "${modifyUserinfo.Lid==55}"selected>경상남도</option>
+                                    <option value="55" th:unless = "${modifyUserinfo.Lid==55}">경상남도</option>
+                                    <option value="61" th:if = "${modifyUserinfo.Lid==61}"selected>전라남도</option>
+                                    <option value="61" th:unless = "${modifyUserinfo.Lid==61}">전라남도</option>
+                                    <option value="62" th:if = "${modifyUserinfo.Lid==62}"selected>광주광역시</option>
+                                    <option value="62" th:unless = "${modifyUserinfo.Lid==62}">광주광역시</option>
+                                    <option value="63" th:if = "${modifyUserinfo.Lid==63}"selected>전라북도</option>
+                                    <option value="63" th:unless = "${modifyUserinfo.Lid==63}">전라북도</option>
+                                    <option value="64" th:if = "${modifyUserinfo.Lid==64}"selected>제주특별자치도</option>
+                                    <option value="64" th:unless = "${modifyUserinfo.Lid==64}">제주특별자치도</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" name="rest_addr" id="rest_addr" th:value="${modifyUserinfo.rest_addr}">
+                            </td>
+                        </tr>
+                    </div>
+                </table>
             </form>
         </div>
-
     </wrap>
-
-
-            <div style="margin-top: 750px">
-                <button type="button" onclick="location.href='mainpage'">돌아가기</button>
-                <button type="submit">수정완료</button>
-            </div>
-        </form>
+    <div style="text-align: center;">
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='mainpage'">돌아가기</button>
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="modifyform()">수정완료</button>
     </div>
-</wrap>
 </body>
 </html>
