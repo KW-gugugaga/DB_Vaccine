@@ -25,9 +25,12 @@
     }
 
     .container{
-      width: 90%;
+      width: 100%;
       height: 60%;
       margin: 0 auto;
+      padding: 0;
+      padding-right: 14%;
+
     }
 
     ul.tabs{
@@ -156,7 +159,7 @@
            </ul>
 
             <div id="tab-1" class="tab-content current">
-                <div id="linecolumnchart" style="width: 630px; height: 500px"></div>
+                <div id="linecolumnchart" style="width: 620px; height: 500px"></div>
                 <script th:inline="javascript">
                     google.charts.load('current', {packages : ['corechart']});
                     google.charts.setOnLoadCallback(drawComboChart);
@@ -194,8 +197,8 @@
                 </script>
             </div>
             </div>
-            <div id="tab-2" class="tab-content">
-                <div id="columnchart" style="width: 630px; height: 500px"></div>
+            <div id="tab-2" class="tab-content"  style="width: 653.64px; height: 530px">
+                <div id="columnchart"></div>
                 <script th:inline="javascript">
                     google.charts.load('current', {packages : ['corechart']});
                     google.charts.setOnLoadCallback(drawColumnChart);
@@ -217,16 +220,20 @@
                             },
                             vAxis : {
                                 title : '접종 완료자 비율'
-                            }
+                            },
+                                width: 620,
+                                height: 500,
                         };
                         var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
                         chart.draw(data, options);
+
+
                     }
                 </script>
                 <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
             </div>
-            <div id="tab-3" class="tab-content">
-                <div id="barchart" style="width: 630px; height: 500px"></div>
+            <div id="tab-3" class="tab-content" style="width: 653.64px; height: 530px">
+                <div id="barchart"></div>
                 <script th:inline="javascript">
                     google.charts.load('current', {packages : ['bar']});
                     google.charts.setOnLoadCallback(drawBarChart);
@@ -249,6 +256,8 @@
                             vAxis : {
                                 title : '나이'
                             },
+                                width: 620,
+                                height: 500
                         };
                         var chart = new google.visualization.BarChart(document.getElementById('barchart'));
                         chart.draw(data, options);
