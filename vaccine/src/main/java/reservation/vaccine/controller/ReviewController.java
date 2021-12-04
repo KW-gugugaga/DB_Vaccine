@@ -140,7 +140,6 @@ public class ReviewController {
     @GetMapping("writeReview")
     public String GetWriteReview(Model model, HttpServletRequest req, @RequestParam("Hid") int Hid) {
         System.out.println("ReviewController.GetWriteReview");
-        System.out.println("Hid = " + Hid);
         String Hname = hospitalService.findHospitalNameByHid(Hid);
         model.addAttribute("Hname", Hname);
         model.addAttribute("Hid", Hid);
@@ -152,9 +151,6 @@ public class ReviewController {
                                 @RequestParam("rating") int rating, @RequestParam("Hname") String Hname,
                                 @RequestParam("Hid") int Hid, @RequestParam("review") String reviewText) throws IOException {
         System.out.println("ReviewController.PostWriteReview");
-        System.out.println("rating = " + rating);
-        System.out.println("Hid = " + Hid);
-        System.out.println("reviewText = " + reviewText);
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
@@ -171,7 +167,6 @@ public class ReviewController {
     @GetMapping("viewReview")
     public String GetViewReview(Model model, HttpServletRequest req, @RequestParam("Hid") int Hid) {
         System.out.println("ReviewController.GetViewReview");
-        System.out.println("Hid = " + Hid);
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
@@ -179,7 +174,6 @@ public class ReviewController {
         reviewInfo.put("Uid", userInfo.getUid());
         reviewInfo.put("Hid", Hid);
         Review review = reviewService.findReview(reviewInfo);
-        System.out.println(review.toString());
         model.addAttribute("review", review);
         if(review.getStar() == 1) {
             return "review/viewreview1";
