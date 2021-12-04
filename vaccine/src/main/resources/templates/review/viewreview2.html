@@ -1,12 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>리뷰 수정하기</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
-  <style>
+    <title>리뷰 수정하기</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <style>
         #reviewForm fieldset{
             display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
             direction: rtl; /* 이모지 순서 반전 */
@@ -27,32 +29,48 @@
         }
 
         #reviewForm label[for="rate5"]{
-            text-shadow: 0 0 0 #f2f196;
+            text-shadow: 0 0 0 #faf166;
         }
 
         #reviewForm label[for="rate4"]{
-            text-shadow: 0 0 0 #f2f196;
+            text-shadow: 0 0 0 #faf166;
         }
+
+        body{
+            background-color:rgba(221,212,195,0.31);
+            font-family: 'Jeju Gothic', sans-serif;
+            padding: 10px;
+        }
+
     </style>
-  <script th:inline="javascript" type="text/javascript">
-        var rating = [[${review.star}]];
-        console.log(rating);
-    </script>
 </head>
 <body>
-<h2>리뷰 확인하기</h2>
-<p th:text="${Hname}"></p>
-<div name="reviewForm" id="reviewForm" method="post" action="writeReview">
-  <input type="hidden" id="star" name="star" th:value=${review.star}>
-  <fieldset>
-    <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-    <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-    <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-    <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-    <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-  </fieldset>
-  <p th:text="'리뷰 내용 : ' + ${review.review}"></p>
-  <input type="button" value="창닫기" onClick='window.close()'>
-</div>
+<center>
+    <h4>
+        <p style="padding-top: 15px; width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;">
+            <b>리뷰 확인하기</b></p>
+    </h4>
+    <p th:text="${Hname}" style="padding-top: 10px; text-align: center; font-weight: bold; width: 50%; font-size: 18px;
+                             text-decoration: underline; text-decoration-color: #d6cdbf;"></p>
+    <form name="reviewForm" id="reviewForm" action="deleteReview" method="post">
+        <input type="hidden" id="star" name="star" th:value=${review.star}>
+        <p style="font-weight: bold; font-size: 14px; margin: 0px;">별점</p>
+        <fieldset>
+            <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+            <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+            <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+            <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+            <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+        </fieldset>
+        <p style="padding-top: 5px; font-weight: bold; font-size: 14px;">리뷰 내용</p>
+        <p th:text="'📍 ' + ${review.review}"></p>
+        <input type="button" value="창닫기" class="btn btn-dark"
+               style="width:140px; height:30px;border-radius:1em; text-align:center; font-size:16px"
+               onClick='window.close()'>
+        <input type="button" value="리뷰 삭제하기" class="btn btn-dark"
+               style="width:140px; height:30px;border-radius:1em; text-align:center; font-size:16px"
+               onClick='deleteReview()'>
+    </form>
+</center>
 </body>
 </html>

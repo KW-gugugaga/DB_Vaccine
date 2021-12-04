@@ -50,9 +50,10 @@
     <div>
         <h3>
             <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;">
-                <b>백신 예약 페이지</b></p>
+                <b>2차 백신 백신 예약 페이지</b></p>
         </h3>
     </div>
+    <p style="color: red; font-size: 12px;">※ 1차 백신 예약 내역이 존재하므로 2차 백신만 예약됩니다. 2차 백신 예약은 1차 백신 예약 날짜의 한 달 후부터 한 달 이내의 예약만 가능합니다. ※</p>
 </center>
 <form name="reservation" class="reservation" action="/reservation" method="post">
     <input type="hidden" id="Hid" name="Hid" th:value=${hospital.Hid}>
@@ -179,11 +180,11 @@
                                 if(todayHours >= selected) {
                                     alert("현재 시각 이후부터 예약 가능합니다.");
                                 } else {
-                                    alert('1차/2차 백신 예약 성공 : ' + Hname);
+                                    alert('2차 백신 예약 성공 : ' + Hname);
                                     reservation.submit();
                                 }
                             } else {
-                                alert('1차/2차 백신 예약 성공 : ' + Hname);
+                                alert('2차 백신 예약 성공 : ' + Hname);
                                 reservation.submit();
                             }
                         }

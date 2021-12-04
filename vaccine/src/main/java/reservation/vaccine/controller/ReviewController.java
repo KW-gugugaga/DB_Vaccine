@@ -171,9 +171,11 @@ public class ReviewController {
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
         Map<String, Integer> reviewInfo = new HashMap<String, Integer>();
+        String Hname = hospitalService.findHospitalNameByHid(Hid);
         reviewInfo.put("Uid", userInfo.getUid());
         reviewInfo.put("Hid", Hid);
         Review review = reviewService.findReview(reviewInfo);
+        model.addAttribute("Hname", Hname);
         model.addAttribute("review", review);
         if(review.getStar() == 1) {
             return "review/viewreview1";
