@@ -179,7 +179,7 @@
             <br>
             <div class="wrap">
                 <div class="resrvinfo_button">
-                    <input class="button" type="button" onclick="location.href='reservationinfo'" value="예약 정보 확인">
+                    <input class="button" type="button" onclick="location.href='reservationinfo'" value="예약 확인/취소">
                 </div>
             </div>
             <br>
@@ -223,10 +223,10 @@
             <li class="tab-link" data-tab="tab-3">나이별 접종 현황</li>
         </ul>
 
-        <div id="tab-1" class="tab-content current">
+        <div id="tab-1" class="tab-content current" style="width: 653px;">
             <div id="linecolumnchart" style="width: 620px; height: 500px"></div>
             <script th:inline="javascript">
-                    google.charts.load('current', {packages : ['corechart']});
+                    google.charts.load('45', {packages : ['corechart']});
                     google.charts.setOnLoadCallback(drawComboChart);
 
                     function drawComboChart() {
@@ -264,10 +264,10 @@
             </script>
         </div>
     </div>
-    <div id="tab-2" class="tab-content" style="width: 653.64px; height: 530px">
+    <div id="tab-2" class="tab-content" style="width: 653px; height: 530px">
         <div id="columnchart"></div>
         <script th:inline="javascript">
-                    google.charts.load('current', {packages : ['corechart']});
+                    google.charts.load('45', {packages : ['corechart']});
                     google.charts.setOnLoadCallback(drawColumnChart);
 
                     function drawColumnChart() {
@@ -290,6 +290,7 @@
                             },
                                 width: 620,
                                 height: 500,
+
                         };
                         var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
                         chart.draw(data, options);
@@ -301,10 +302,10 @@
         </script>
         <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
     </div>
-    <div id="tab-3" class="tab-content" style="width: 653.64px; height: 530px">
+    <div id="tab-3" class="tab-content" style="width: 653px; height: 530px">
         <div id="barchart"></div>
         <script th:inline="javascript">
-                    google.charts.load('current', {packages : ['bar']});
+                    google.charts.load('45', {packages : ['bar']});
                     google.charts.setOnLoadCallback(drawBarChart);
 
                     function drawBarChart() {
@@ -321,12 +322,14 @@
                             title : '나이별 접종 완료자',
                             hAxis : {
                                 title : '접종 완료자 비율',
+                                minValue: 0,
                             },
                             vAxis : {
                                 title : '나이'
                             },
                                 width: 620,
-                                height: 500
+                                height: 500,
+
                         };
                         var chart = new google.visualization.BarChart(document.getElementById('barchart'));
                         chart.draw(data, options);
