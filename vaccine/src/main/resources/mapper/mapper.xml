@@ -199,4 +199,9 @@
         order by RVid;
     </select>
 
+    <select id="deleteReview" parameterType="int">
+        delete from review
+        where RVid = #{RVid}
+    </select>
+
 </mapper>

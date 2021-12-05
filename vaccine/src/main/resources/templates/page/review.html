@@ -18,10 +18,18 @@
 
             window.open(popupUrl, "리뷰 확인하기", popupOption);
         };
+
+
+
+
+
+
+
+
     </script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px"
                                                      style="padding-bottom:5px">
@@ -68,22 +76,23 @@
         <h4>예약 내역이 없습니다!</h4>
 </span>
 <span th:if="${#strings.equals(userState, '1X')}"> <!--1차만 예약했고 아직 1차를 안맞았을 때-->
-<table>
+    <p style="color: red; font-size: 12px; text-align: center;">※ 접종 완료 내역이 있을 경우 리뷰를 남길 수 있습니다.</p></td>
+    <table class="table table-hover" style="margin:0 auto;text-align:center; width:60%;">
         <div>
-            <tr>
-                <td th:text="'1차 접종 백신'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 백신'"></th>
                 <td th:text="${hospital.vaccine.Vname}"></td>
-                <td rowspan="3"><input type="button" value="리뷰 작성하기" disabled>
-                <p style="color: red; font-size: 12px;">1차 접종 완료 후 리뷰 작성 가능합니다.</p></td>
-                <!--표 안에 같이 버튼 넣어놓은거임!-->
+                <td rowspan="3"><input type="button" class="btn btn-outline-secondary" value="리뷰 작성하기"
+                                       style="align:center;" disabled>
+                    <!--표 안에 같이 버튼 넣어놓은거임!-->
             </tr>
-            <tr>
-                <td th:text="'1차 접종 예정 의료기관'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 예정 의료기관'"></th>
                 <td th:text="${hospital.Hname}"></td>
                 <td></td>
             </tr>
-            <tr>
-                <td th:text="'1차 접종 예정 일시'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 예정 일시'"></th>
                 <td th:text="${userRsv.date_1} + ' ' + ${userRsv.hour_1} + '시'"></td>
                 <td></td>
             </tr>
@@ -91,26 +100,28 @@
     </table>
 </span>
 <span th:if="${#strings.equals(userState, '1O')}"> <!--1차만 예약했고 1차 맞았을 때-->
-<table >
+<table class="table table-hover" style="margin:0 auto;text-align:center; width:60%;">
         <div>
-            <tr>
-                <td th:text="'1차 접종 백신'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 백신'"></th>
                 <td th:text="${hospital.vaccine.Vname}"></td>
                 <span th:if="${#strings.equals(reviewState, 'X')}">
-                    <td rowspan="3"><input type="button" value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital.Hid})|">
+                    <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                           value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital.Hid})|">
                 </span>
                 <span th:if="${#strings.equals(reviewState, 'O')}">
-                    <td rowspan="3"><input type="button" value="리뷰 확인하기" th:onclick="|javascript:viewReview(${hospital.Hid})|"></td>
+                    <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                           value="리뷰 확인하기" th:onclick="|javascript:viewReview(${hospital.Hid})|"></td>
                     <!--표 안에 같이 버튼 넣어놓은거임!-->
                 </span>
             </tr>
-            <tr>
-                <td th:text="'1차 접종 의료기관'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 예정 의료기관'"></th>
                 <td th:text="${hospital.Hname}"></td>
                 <td></td>
             </tr>
-            <tr>
-                <td th:text="'1차 접종 일시'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 예정 일시'"></th>
                 <td th:text="${userRsv.date_1} + ' ' + ${userRsv.hour_1} + '시'"></td>
                 <td></td>
             </tr>
@@ -118,75 +129,19 @@
     </table>
 </span>
 <span th:if="${#strings.equals(userState, '2XX')}"> <!--1, 2차 예약했고 아직 둘다 안맞았을 때-->
-    <table>
-        <div>
-            <tr>
-                <td th:text="'1차 접종 백신'"></td>
-                <td th:text="${hospital1.vaccine.Vname}"></td>
-                <span th:if="${#strings.equals(hospitalState, 'same')}">
-                    <td rowspan="6"><input type="button" value="리뷰 작성하기" disabled></td>
-                    <p style="color: red; font-size: 12px">접종 완료 내역이 있을 경우 리뷰를 남길 수 있습니다.</p>
-                </span>
-                <span th:if="${#strings.equals(hospitalState, 'diff')}">
-                    <td rowspan="3"><input type="button" value="리뷰 작성하기" disabled></td>
-                    <p style="color: red; font-size: 12px">접종 완료 내역이 있을 경우 리뷰를 남길 수 있습니다.</p>
-                    <!--표 안에 같이 버튼 넣어놓은거임!-->
-                </span>
-            </tr>
-            <tr>
-                <td th:text="'1차 접종 예정 의료기관'"></td>
-                <td th:text="${hospital1.Hname}"></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td th:text="'1차 접종 예정 일시'"></td>
-                <td th:text="${userRsv.date_1} + ' ' + ${userRsv.hour_1} + '시'"></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td th:text="'2차 접종 백신'"></td>
-                <td th:text="${hospital2.vaccine.Vname}"></td>
-                <span th:if="${#strings.equals(hospitalState, 'diff')}">
-                    <td rowspan="3"><input type="button" value="리뷰 작성하기" disabled></td>
-                    <p style="color: red; font-size: 12px">접종 완료 내역이 있을 경우 리뷰를 남길 수 있습니다.</p>
-                    <!--표 안에 같이 버튼 넣어놓은거임!-->
-                </span>
-            </tr>
-            <tr>
-                <td th:text="'2차 접종 예정 의료기관'"></td>
-                <td th:text="${hospital2.Hname}"></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td th:text="'2차 접종 예정 일시'"></td>
-                <td th:text="${userRsv.date_2} + ' ' + ${userRsv.hour_2} + '시'"></td>
-                <td></td>
-            </tr>
-        </div>
-    </table>
-</span>
-<span th:if="${#strings.equals(userState, '2OX')}"> <!--1, 2차 둘다 예약했고 1차만 맞은 경우-->
-<table class="table table-hover" style="margin:0 auto;text-align:center; width:60%;"><!--여기만 수정-->
+    <p style="color: red; font-size: 12px; text-align: center;">※ 접종 완료 내역이 있을 경우 리뷰를 남길 수 있습니다.</p>
+    <table class="table table-hover" style="margin:0 auto;text-align:center; width:60%;">
         <div>
             <tr class="table-light">
                 <th scope="row" th:text="'1차 접종 백신'"></th>
                 <td th:text="${hospital1.vaccine.Vname}"></td>
                 <span th:if="${#strings.equals(hospitalState, 'same')}">
-                    <span th:if="${#strings.equals(reviewState, 'X')}">
-                        <td rowspan="6"><input type="button" class="btn btn-outline-secondary" value="리뷰 작성하기" style="align:center;"th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
-                    </span>
-
-                    <span th:if="${#strings.equals(reviewState, 'O')}">
-                        <td rowspan="6"><input type="button" value="리뷰 확인하기" th:onclick="|javascript:viewReview(${hospital1.Hid})|"></td>
-                    </span>
+                    <td rowspan="6"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                           value="리뷰 작성하기" disabled></td>
                 </span>
-                <span th:if="${#strings.equals(hospitalState, 'diff')}"> <!--1차 병원 백신-->
-                    <span th:if="${#strings.equals(reviewState1, 'X')}">
-                        <td rowspan="3"><input type="button" class="btn btn-outline-secondary" value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
-                    </span>
-                    <span th:if="${#strings.equals(reviewState1, 'O')}">
-                        <td rowspan="3"><input type="button" value="리뷰 확인하기" th:onclick="|javascript:viewReview(${hospital1.Hid})|"></td>
-                    </span>
+                <span th:if="${#strings.equals(hospitalState, 'diff')}">
+                    <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                           value="리뷰 작성하기" disabled></td>
                     <!--표 안에 같이 버튼 넣어놓은거임!-->
                 </span>
             </tr>
@@ -204,8 +159,8 @@
                 <th scope="row" th:text="'2차 접종 백신'"></th>
                 <td th:text="${hospital2.vaccine.Vname}"></td>
                 <span th:if="${#strings.equals(hospitalState, 'diff')}">
-                    <td rowspan="3"><input type="button" value="리뷰 작성하기" disabled></td>
-                    <p style="color: red; font-size: 12px">접종 완료 내역이 있을 경우 리뷰를 남길 수 있습니다.</p>
+                    <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                           value="리뷰 작성하기" disabled></td>
                     <!--표 안에 같이 버튼 넣어놓은거임!-->
                 </span>
             </tr>
@@ -222,60 +177,134 @@
         </div>
     </table>
 </span>
+<span th:if="${#strings.equals(userState, '2OX')}"> <!--1, 2차 둘다 예약했고 1차만 맞은 경우-->
+    <table class="table table-hover" style="margin:0 auto;text-align:center; width:60%;"><!--여기만 수정-->
+            <div>
+                <tr class="table-light">
+                    <th scope="row" th:text="'1차 접종 백신'"></th>
+                    <td th:text="${hospital1.vaccine.Vname}"></td>
+                    <span th:if="${#strings.equals(hospitalState, 'same')}">
+                        <span th:if="${#strings.equals(reviewState, 'X')}">
+                            <td rowspan="6"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                                   value="리뷰 작성하기"
+                                                   th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
+                        </span>
+                        <span th:if="${#strings.equals(reviewState, 'O')}">
+                            <td rowspan="6"><input type="button" value="리뷰 확인하기"
+                                                   th:onclick="|javascript:viewReview(${hospital1.Hid})|"></td>
+                        </span>
+                    </span>
+                    <span th:if="${#strings.equals(hospitalState, 'diff')}"> <!--1차 병원 백신-->
+                        <span th:if="${#strings.equals(reviewState1, 'X')}">
+                            <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                                   value="리뷰 작성하기"
+                                                   th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
+                            <p style="color: red; font-size: 12px; text-align: center;">※ 접종 완료 내역이 있을 경우 리뷰를 남길 수 있습니다.</p>
+                        </span>
+                        <span th:if="${#strings.equals(reviewState1, 'O')}">
+                            <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                                   value="리뷰 확인하기"
+                                                   th:onclick="|javascript:viewReview(${hospital1.Hid})|"></td>
+                        </span>
+                        <!--표 안에 같이 버튼 넣어놓은거임!-->
+                    </span>
+                </tr>
+                <tr class="table-light">
+                    <th scope="row" th:text="'1차 접종 예정 의료기관'"></th>
+                    <td th:text="${hospital1.Hname}"></td>
+                    <td></td>
+                </tr>
+                <tr class="table-light">
+                    <th scope="row" th:text="'1차 접종 예정 일시'"></th>
+                    <td th:text="${userRsv.date_1} + ' ' + ${userRsv.hour_1} + '시'"></td>
+                    <td></td>
+                </tr>
+                <tr class="table-light">
+                    <th scope="row" th:text="'2차 접종 백신'"></th>
+                    <td th:text="${hospital2.vaccine.Vname}"></td>
+                    <span th:if="${#strings.equals(hospitalState, 'diff')}">
+                        <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                               value="리뷰 작성하기" disabled></td>
+
+                        <!--표 안에 같이 버튼 넣어놓은거임!-->
+                    </span>
+                </tr>
+                <tr class="table-light">
+                    <th scope="row" th:text="'2차 접종 예정 의료기관'"></th>
+                    <td th:text="${hospital2.Hname}"></td>
+                    <td></td>
+                </tr>
+                <tr class="table-light">
+                    <th scope="row" th:text="'2차 접종 예정 일시'"></th>
+                    <td th:text="${userRsv.date_2} + ' ' + ${userRsv.hour_2} + '시'"></td>
+                    <td></td>
+                </tr>
+            </div>
+    </table>
+</span>
 <span th:if="${#strings.equals(userState, '2OO')}"> <!--1, 2차 둘다 예약했고 둘 다 맞은 경우-->
-<table>
+<table class="table table-hover" style="margin:0 auto;text-align:center; width:60%;">
         <div>
-            <tr>
-                <td th:text="'1차 접종 백신'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 백신'"></th>
                 <td th:text="${hospital1.vaccine.Vname}"></td>
                 <span th:if="${#strings.equals(hospitalState, 'same')}">
                     <span th:if="${#strings.equals(reviewState, 'X')}">
-                        <td rowspan="6"><input type="button" value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
+                        <td rowspan="6"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                               value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
                     </span>
                     <span th:if="${#strings.equals(reviewState, 'O')}">
-                        <td rowspan="6"><input type="button" value="리뷰 확인하기" th:onclick="|javascript:viewReview(${hospital1.Hid})|"></td>
+                        <td rowspan="6"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                               value="리뷰 확인하기"
+                                               th:onclick="|javascript:viewReview(${hospital1.Hid})|"></td>
                     </span>
                 </span>
                 <span th:if="${#strings.equals(hospitalState, 'diff')}"> <!--1차 병원 백신-->
                     <span th:if="${#strings.equals(reviewState1, 'X')}">
-                        <td rowspan="3"><input type="button" value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
+                        <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                               value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital1.Hid})|"></td>
                     </span>
                     <span th:if="${#strings.equals(reviewState1, 'O')}">
-                        <td rowspan="3"><input type="button" value="리뷰 확인하기" th:onclick="|javascript:viewReview(${hospital1.Hid})|"></td>
+                        <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                               value="리뷰 확인하기"
+                                               th:onclick="|javascript:viewReview(${hospital1.Hid})|"></td>
                     </span>
                     <!--표 안에 같이 버튼 넣어놓은거임!-->
                 </span>
             </tr>
-            <tr>
-                <td th:text="'1차 접종 예정 의료기관'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 의료기관'"></th>
                 <td th:text="${hospital1.Hname}"></td>
                 <td></td>
             </tr>
-            <tr>
-                <td th:text="'1차 접종 예정 일시'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'1차 접종 일시'"></th>
                 <td th:text="${userRsv.date_1} + ' ' + ${userRsv.hour_1} + '시'"></td>
                 <td></td>
             </tr>
-            <tr>
-                <td th:text="'2차 접종 백신'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'2차 접종 백신'"></th>
                 <td th:text="${hospital2.vaccine.Vname}"></td>
                  <span th:if="${#strings.equals(hospitalState, 'diff')}"> <!--1차 병원 백신-->
                     <span th:if="${#strings.equals(reviewState2, 'X')}">
-                        <td rowspan="3"><input type="button" value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital2.Hid})|"></td>
+                        <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                               value="리뷰 작성하기" th:onclick="|javascript:writeReview(${hospital2.Hid})|"></td>
                     </span>
                     <span th:if="${#strings.equals(reviewState2, 'O')}">
-                        <td rowspan="3"><input type="button" value="리뷰 확인하기" th:onclick="|javascript:viewReview(${hospital2.Hid})|"></td>
+                        <td rowspan="3"><input type="button" class="btn btn-outline-secondary" style="align:center;"
+                                               value="리뷰 확인하기"
+                                               th:onclick="|javascript:viewReview(${hospital2.Hid})|"></td>
                     </span>
                      <!--표 안에 같이 버튼 넣어놓은거임!-->
                 </span>
             </tr>
-            <tr>
-                <td th:text="'2차 접종 예정 의료기관'"></td>
+            <tr class="table-light">
+                <th scope="row" th:text="'2차 접종 의료기관'"></th>
                 <td th:text="${hospital2.Hname}"></td>
                 <td></td>
             </tr>
-            <tr>
-                <td th:text="'2차 접종 예정 일시'"></td>
+            <tr class="table-light">
+               <th scope="row" th:text="'2차 접종 일시'"></th>
                 <td th:text="${userRsv.date_2} + ' ' + ${userRsv.hour_2} + '시'"></td>
                 <td></td>
             </tr>

@@ -43,6 +43,16 @@
         }
 
     </style>
+    <script type="text/javascript">
+        function deleteReview() {
+            var reviewForm = document.reviewForm;
+            if (confirm("해당 리뷰가 삭제됩니다 .삭제하시겠습니까?")) {
+                alert('리뷰가 성공적으로 삭제되었습니다.');
+                reviewForm.submit();
+
+            }
+        }
+    </script>
 </head>
 <body>
 <center>
@@ -67,9 +77,9 @@
         <input type="button" value="창닫기" class="btn btn-dark"
                style="width:140px; height:30px;border-radius:1em; text-align:center; font-size:16px"
                onClick='window.close()'>
-        <input type="button" value="리뷰 삭제하기" class="btn btn-dark"
-               style="width:140px; height:30px;border-radius:1em; text-align:center; font-size:16px"
-               onClick='deleteReview()'>
+        <input type="button" class="btn btn-dark"
+               style="width:240px; height:30px;border-radius:1em; text-align:center; font-size:16px"
+               value="리뷰 삭제하기" onclick="deleteReview()">
     </form>
 </center>
 </body>

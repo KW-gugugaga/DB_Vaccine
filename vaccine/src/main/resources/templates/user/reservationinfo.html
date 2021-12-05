@@ -73,10 +73,8 @@
         </div>
     </div>
 </nav>
-
-
     <wrap id="wrap">
-        <p style="width:400px; font-size:large; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 목록</b></p>
+        <h3 style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 목록</b></h3>
 
         <span th:if="${rsvstate}==0">
                 <h4  style="border-radius: 15px 15px 15px 0; border-bottom: 5px solid #B9C4C4; padding: 0.5em; background: #CEDADA;">예약 내역이 없습니다!</h4>
@@ -169,7 +167,7 @@
             </span>
         </table>
     </wrap>
-    <div style="text-align: center;">
+    <div style="text-align: center; padding-bottom: 20px;">
             <div th:if="${rsvstate}==1">
                     <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
                     <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>

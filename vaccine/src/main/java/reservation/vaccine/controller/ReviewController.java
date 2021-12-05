@@ -175,6 +175,7 @@ public class ReviewController {
         reviewInfo.put("Uid", userInfo.getUid());
         reviewInfo.put("Hid", Hid);
         Review review = reviewService.findReview(reviewInfo);
+        model.addAttribute("RVid", review.getRVid());
         model.addAttribute("Hname", Hname);
         model.addAttribute("review", review);
         if(review.getStar() == 1) {
@@ -188,5 +189,16 @@ public class ReviewController {
         } else {
             return "review/viewreview5";
         }
+    }
+
+    @PostMapping("deleteReview")
+    public void PostDeleteReview(Model model, HttpServletRequest req, HttpServletResponse res, @RequestParam("RVid") int RVid) throws IOException {
+        System.out.println("ReviewController.PostDeleteReview");
+        System.out.println("RVid = " + RVid);
+        res.setContentType("text/html; charset=euc-kr");
+        reviewService.deleteReview(RVid);
+        PrintWriter out = res.getWriter();
+        out.println("<script>window.close();</script>");
+        out.flush();
     }
 }
