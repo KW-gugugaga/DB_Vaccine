@@ -4,8 +4,24 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
     <title>Cancel Reservation</title>
+
     <style>
+
+        #title_1{
+        width:300px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
+        body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
             #wrap {
                 min-height: 80vh;
                 place-items: center;
@@ -34,7 +50,6 @@
                 padding: 10px;
                 vertical-align: top;
                 border-bottom: 1px solid #ccc;
-                font-family: 'M PLUS 1 Code', sans-serif;
             }
 
     </style>
@@ -52,33 +67,47 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px"
+                                                     style="padding-bottom:5px">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                 aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span></button>
 
         <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="hospitalpage"
+                       style="font-size:18px; padding-right:35px;padding-left:35px;">백신 예약</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                </li>
+            </ul>
             <ul class="navbar-nav ml-auto">
+
                 <li class="nav-item">
-                    <a class="nav-link active" href="mainpage">Home
-                        <span class="visually-hidden">(current)</span>
-                    </a>
+                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="myinfo">내 정보</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout">로그아웃</a>
+                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<center>
+    <h3>
+        <p id="title_1"><b>예약 가능 병원 목록</b></p>
+        <small class="text-muted"><p th:text="${user} + '님이 거주하시는 지역의 병원 목록입니다.'">병원입니다.</p></small>
+    </h3>
+</center>
 
 <wrap id="wrap">
     <div class="card border-secondary mb-3" style="width: 600px; height: 80%;">
-        <h2 class="card-header">예약 취소</h2>
         <form class="cancel_reservation" name="cancelForm" id="cancelForm" action="cancel" method="post">
             <input type="text" name="Uid" id="Uid" th:value="${userrsv.Uid}" hidden="true">
             <input type="text" name="what" id="what" th:value="${what}" hidden="true">

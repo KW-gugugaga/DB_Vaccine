@@ -8,9 +8,25 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 
+    <style>
+        body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
+
+    #title_1{
+        width:350px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px"
@@ -49,7 +65,7 @@
 <center>
     <div>
         <h3>
-            <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;">
+            <p id="title_1">
                 <b>1차/2차 백신 예약 페이지</b></p>
         </h3>
         <p style="color: red; font-size: 12px;">※ 1차/2차 백신이 함께 에약됩니다. 2차 백신은 예약 날짜 한 달 후로 자동 예약되며 예약 시간은 1차/2차 동일합니다. ※</p>
