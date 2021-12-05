@@ -13,12 +13,16 @@
         body{
             background-image : url('img/v1.jpg');
             background-size: cover;
+            font-family: 'Jeju Gothic', sans-serif;
+
         }
     .login{
             display:grid;
             min-height:80vh;
             place-items:center;
         }
+        input[type=password] {font-family:'Malgun gothic', dotum, sans-serif;}
+
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
@@ -53,13 +57,13 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-dark" style="width:255px; height:30px;border-radius:1em; text-align:center; font-size:16px; font-family: 'Jeju Gothic', sans-serif;">LOGIN</button>
+        <button type="submit" class="btn btn-dark" style="width:255px; height:30px;border-radius:1em; text-align:center; font-size:16px">LOGIN</button>
 
         <br>
         <br>
-        <button type="button" class="btn btn btn-dark disabled" style="font-family: 'Jeju Gothic', sans-serif;" onclick="location.href='join'">회원가입</button>
-        <button type="button" class="btn btn btn-dark disabled" style="font-family: 'Jeju Gothic', sans-serif;" onclick="findID()">아이디 찾기</button>
-        <button type="button" class="btn btn btn-dark disabled" style="font-family: 'Jeju Gothic', sans-serif;" onclick="findPW()">비밀번호 찾기</button>
+        <button type="button" class="btn btn btn-dark disabled" onclick="location.href='join'">회원가입</button>
+        <button type="button" class="btn btn btn-dark disabled" onclick="findID()">아이디 찾기</button>
+        <button type="button" class="btn btn btn-dark disabled" onclick="findPW()">비밀번호 찾기</button>
     </center>
 </form>
 </body>
