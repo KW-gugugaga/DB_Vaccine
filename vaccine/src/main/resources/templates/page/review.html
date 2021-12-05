@@ -4,6 +4,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <title>Review</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
+    <style>
+        body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
+        #title_1{
+        width:300px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+
     <script type="text/javascript">
         function writeReview(Hid) {
             let popupUrl = "/writeReview?Hid=" + Hid;
@@ -18,14 +35,6 @@
 
             window.open(popupUrl, "리뷰 확인하기", popupOption);
         };
-
-
-
-
-
-
-
-
     </script>
 </head>
 <body>
@@ -65,12 +74,9 @@
 </nav>
 <br>
 <center>
-    <div>
         <h3>
-            <p style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;">
-                <b>리뷰 페이지</b></p>
+            <p id="title_1"><b>리뷰 페이지</b></p>
         </h3>
-    </div>
 </center>
 <span th:if="${userState} == 0">
         <h4>예약 내역이 없습니다!</h4>

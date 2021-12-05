@@ -5,12 +5,22 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <title>Modify Information</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 
     <style>
+    body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
+        #title_1{
+        width:300px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
         table.type04 {
             border-collapse: separate;
             border-spacing: 0 15px;
@@ -33,7 +43,6 @@
             padding: 10px;
             vertical-align: top;
             border-bottom: 1px solid #ccc;
-            font-family: 'M PLUS 1 Code', sans-serif;
         }
 
         #wrap {
@@ -94,10 +103,15 @@
         </div>
     </div>
 </nav>
-
+<br>
+<center>
+    <h3>
+        <p id="title_1"><b>내 정보 수정</b></p>
+    </h3>
+</center>
 <wrap id="wrap">
     <div class="card border-secondary mb-3" style="width: 600px; height: 95%;">
-        <h2 class="card-header">내 정보 수정</h2>
+
         <form name="modify" id="modify" class="modify" action="/modify" method="post">
             <table class="type04 card-body" style="display: grid; height: 70%; padding-top:0;">
                 <div class="name">
