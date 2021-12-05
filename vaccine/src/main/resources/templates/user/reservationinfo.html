@@ -7,10 +7,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
     <title>My Reservation Info</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <style>
+         body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
         table.type04 {
             border-collapse: separate;
             border-spacing: 0 15px;
@@ -30,7 +36,7 @@
             padding: 10px;
             vertical-align: top;
             border-bottom: 1px solid #ccc;
-            font-family: 'M PLUS 1 Code', sans-serif;
+            //font-family: 'M PLUS 1 Code', sans-serif;
         }
         #wrap{
             display: grid;
@@ -40,7 +46,6 @@
         }
     </style>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -73,10 +78,8 @@
         </div>
     </div>
 </nav>
-
-
     <wrap id="wrap">
-        <p style="width:400px; font-size:large; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 목록</b></p>
+        <h3 style="width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 목록</b></h3>
 
         <span th:if="${rsvstate}==0">
                 <h4  style="border-radius: 15px 15px 15px 0; border-bottom: 5px solid #B9C4C4; padding: 0.5em; background: #CEDADA;">예약 내역이 없습니다!</h4>
@@ -169,27 +172,26 @@
             </span>
         </table>
     </wrap>
-    <div style="text-align: center;">
+    <div style="text-align: center; padding-bottom: 20px;">
             <div th:if="${rsvstate}==1">
                     <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
                     <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">접종 병원 평가</button>
+                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==2">
                     <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=1차'">1차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">접종 병원 평가</button>
+                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==4">
                     <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">접종 병원 평가</button>
+                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==5">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">접종 병원 평가</button>
+                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
     </div>
-
 </body>
 </html>

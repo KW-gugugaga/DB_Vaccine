@@ -41,8 +41,7 @@
 
     <select id="modifyUser" parameterType="reservation.vaccine.domain.UserInfo">
         UPDATE user_info
-        SET Uname = #{Uname}, PW = #{PW}, Lid = #{Lid}, rest_addr = #{rest_addr}, phone_num = #{phone_num}, Email =
-        #{Email}
+        SET Uname = #{Uname}, PW = #{PW}, Lid = #{Lid}, rest_addr = #{rest_addr}, phone_num = #{phone_num}, Email = #{Email}
         WHERE ID = #{ID};
     </select>
 
@@ -92,7 +91,6 @@
         select count(ID) from user_info where ID = #{ID}
     </select>
 
-
     <!--hospital-->
     <select id="findAllHospitalByUid" resultMap="Hospital" parameterType="int">
         select h.Hid, h.Hname, hl.rest_Haddr, h.Htel, h.rest, v.Vname
@@ -103,8 +101,9 @@
 
     <select id="findHospitalByHid" resultMap="Hospital" parameterType="int">
         select h.Hid, h.Hname, hl.rest_Haddr, h.Htel, h.rest, v.Vname, v.Vid
-        from hospital as h, hospital_location as hl, vaccine as v
-        where h.Hid = hl.Hid and h.Vid = v.Vid and h.Hid = #{Hid}
+        from hospital as h join hospital_location as hl join vaccine as v
+        on h.Hid = hl.Hid and h.Vid = v.Vid
+        where h.Hid = #{Hid};
     </select>
 
     <select id="findHospitalNameByHid" resultType="String" parameterType="int">
@@ -198,6 +197,11 @@
         FROM review
         where Hid = 1
         order by RVid;
+    </select>
+
+    <select id="deleteReview" parameterType="int">
+        delete from review
+        where RVid = #{RVid}
     </select>
 
 </mapper>

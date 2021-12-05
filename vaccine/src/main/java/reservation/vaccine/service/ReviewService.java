@@ -27,5 +27,8 @@ public class ReviewService {
     public List<String> findALlReviewByHid(int Hid) {
         return mapper.findALlReviewByHid(Hid);
     }
+    public void deleteReview(int RVid) {
+        mapper.deleteReview(RVid);
+    }
 }
 

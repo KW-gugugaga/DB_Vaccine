@@ -6,6 +6,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
     <style>
         #reviewForm fieldset{
             display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
@@ -23,17 +25,23 @@
         #reviewForm label{
             font-size: 1.5em; /* 이모지 크기 */
             color: transparent; /* 기존 이모지 컬러 제거 */
-            text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+            text-shadow: 0 0 0 #787878; /* 새 이모지 색상 부여 */
         }
 
         #reviewForm label:hover{
-            text-shadow: 0 0 0 #f2f196; /* 마우스 호버 */
+            text-shadow: 0 0 0 #faf166; /* 마우스 호버 */
         }
         #reviewForm label:hover ~ label{
-            text-shadow: 0 0 0 #f2f196; /* 마우스 호버 뒤에오는 이모지들 */
+            text-shadow: 0 0 0 #faf166; /* 마우스 호버 뒤에오는 이모지들 */
         }
         #reviewForm input[type=radio]:checked ~ label{
-            text-shadow: 0 0 0 #f2f196; /* 마우스 클릭 체크 */
+            text-shadow: 0 0 0 #faf166; /* 마우스 클릭 체크 */
+        }
+
+       body{
+            background-color:rgba(221,212,195,0.31);
+            font-family: 'Jeju Gothic', sans-serif;
+            padding: 10px;
         }
     </style>
     <script type="text/javascript">
@@ -46,29 +54,45 @@
             if(length == 0) {
                 alert('리뷰 내용을 입력하십시오.');
             } else if(length > 150) {
-                alert('글자수 초과');
+                alert('글자수를 초과하였습니다.');
             } else {
                 reviewForm.submit();
             }
         }
+
     </script>
 </head>
 <body>
-<h4>리뷰 작성하기</h4>
-<p th:text="${Hname}"></p>
-<form name="reviewForm" id="reviewForm" method="post" action="writeReview">
-    <input type="hidden" id="Hname" name="Hname" th:value=${Hname}>
-    <input type="hidden" id="Hid" name="Hid" th:value=${Hid}>
-    <fieldset>
-        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-    </fieldset>
-    <p>리뷰를 남겨주세요(50자까지 등록 가능합니다.)</p>
-    <textarea name="review" id="review" rows="5" cols="60"></textarea>
-    <input type="button" value="리뷰 등록하기" onclick="submitReview()">
-</form>
+<center>
+<h4>
+    <p style="padding-top: 15px; width:400px; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;">
+        <b>리뷰 작성하기</b></p>
+</h4>
+
+    <p th:text="${Hname}" style="padding-top: 10px; text-align: center; font-weight: bold; width: 50%; font-size: 18px;
+                             text-decoration: underline; text-decoration-color: #d6cdbf;"></p>
+    <form name="reviewForm" id="reviewForm" method="post" action="writeReview">
+        <input type="hidden" id="Hname" name="Hname" th:value=${Hname}>
+        <input type="hidden" id="Hid" name="Hid" th:value=${Hid}>
+        <p style="font-weight: bold; font-size: 14px; margin: 2px;">별점을 남겨주세요.</p>
+        <fieldset>
+            <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+            <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+            <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+            <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+            <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+        </fieldset>
+
+        <p style="padding-top: 5px; font-weight: bold; font-size: 14px;">리뷰를 남겨주세요.</p>
+        <textarea name="review" id="review" rows="5" cols="60"
+                  style="padding: 10px;
+                        border: 3px solid #d6cdbf;
+                        border-radius: 5px;
+                        font-size: 16px;"></textarea>
+        <input type="button" class="btn btn-dark"
+               style="width:255px; height:30px;border-radius:1em; text-align:center; font-size:16px"
+               value="리뷰 등록하기" onclick="submitReview()">
+    </form>
+</center>
 </body>
 </html>
