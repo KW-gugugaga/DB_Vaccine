@@ -168,18 +168,8 @@ public class UserController {
             model.addAttribute("rsvstate", 0);
         } else { //에약내역이 뭐라도 있음
             /*백신 이름 설정*/
-            if (userRsv.getVid_1() == 0)
-                Vname1 = "화이자";
-            else if (userRsv.getVid_1() == 1)
-                Vname1 = "모더나";
-            else if (userRsv.getVid_1() == 2)
-                Vname1 = "아스트라제네카";
-            if (userRsv.getVid_2() == 0)
-                Vname2 = "화이자";
-            else if (userRsv.getVid_2() == 1)
-                Vname2 = "모더나";
-            else if (userRsv.getVid_2() == 2)
-                Vname2 = "아스트라제네카";
+            Vname1=getVaccineName(userRsv.getVid_1());
+            Vname2=getVaccineName(userRsv.getVid_2());
 
             int rsvState = 0;
             String Hname1 = hospitalService.findHospitalNameByHid(userRsv.getHid_1()); //1차 병원이름
@@ -226,8 +216,29 @@ public class UserController {
         UserInfo userInfo = (UserInfo) user;
         UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
 
+        String Hname1 = null;
+        String Hname2 = null;
+
+        if(what.equals("전체")) {
+            Hname1=hospitalService.findHospitalNameByHid(userRsv.getHid_1());
+            Hname2=hospitalService.findHospitalNameByHid(userRsv.getHid_2());
+        }
+        else if(what.equals("1차")) {
+            Hname1=hospitalService.findHospitalNameByHid(userRsv.getHid_1());
+        }
+        else if(what.equals("2차")) {
+            Hname2=hospitalService.findHospitalNameByHid(userRsv.getHid_2());
+        }
+
+        String Vname1 = getVaccineName(userRsv.getVid_1());
+        String Vname2 = getVaccineName(userRsv.getVid_2());
+
         model.addAttribute("userrsv", userRsv);
         model.addAttribute("what", what);
+        model.addAttribute("vname1", Vname1);
+        model.addAttribute("vname2", Vname2);
+        model.addAttribute("hname1", Hname1);
+        model.addAttribute("hname2", Hname2);
 
         return "user/cancel";
     }
@@ -296,6 +307,17 @@ public class UserController {
         return location;
     }
 
+    public String getVaccineName(int vid){
+        String vaccine=null;
+
+        if (vid == 0)
+            vaccine = "화이자";
+        else if (vid == 1)
+            vaccine = "모더나";
+        else if (vid == 2)
+            vaccine = "아스트라제네카";
+        return vaccine;
+    }
     @GetMapping("findID")
     public String GetFindID(HttpServletRequest req) {
         return "user/findid";
