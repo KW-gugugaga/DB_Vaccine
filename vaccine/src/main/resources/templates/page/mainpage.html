@@ -245,15 +245,29 @@
                         });
                         var options = {
                             title : '월별 누적 접종 완료자',
+                            titleTextStyle : {
+                                fontSize: 18
+                            },
                             hAxis : {
                                 title : '접종 완료자 수',
-                                format: '0'
+                                format: '0',
+                                titleTextStyle: { italic: false},
                             },
                             vAxis : {
-                                title : '월'
+                                title : '월',
+                                titleTextStyle: { italic: false},
                             },
+                            legend: {
+                                textStyle: {fontSize: 12},
+                            },
+
                             seriesType: 'bars',
-                            series: {1: {type: 'line'}}
+                            series: {
+                            0:{color: '#8E8C84'},
+                            1: {type: 'line'}
+                            },
+                            chartArea:{left:100},
+                            fontName: 'Jeju Gothic'
 
                         };
                         var chart = new google.visualization.ComboChart(document.getElementById('linecolumnchart'));
@@ -282,14 +296,27 @@
                         });
                         var options = {
                             title : '지역별 접종 완료자',
+                            titleTextStyle : {
+                                fontSize: 18
+                            },
                             hAxis : {
                                 title : '지역',
+                                titleTextStyle: { italic: false},
                             },
                             vAxis : {
-                                title : '접종 완료자 비율'
+                                title : '접종 완료자 비율',
+                                titleTextStyle: { italic: false},
                             },
-                                width: 620,
-                                height: 500,
+                            legend: {
+                                textStyle: {fontSize: 12},
+                            },
+
+                            width: 620,
+                            height: 500,
+                            colors: ['#8E8C84'],
+
+                            chartArea:{left:100},
+                            fontName: 'Jeju Gothic'
 
                         };
                         var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
@@ -300,7 +327,7 @@
 
 
         </script>
-        <p style="color:red; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
+        <p style="color:#DA0000; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
     </div>
     <div id="tab-3" class="tab-content" style="width: 653px; height: 530px">
         <div id="barchart"></div>
@@ -320,23 +347,34 @@
                         });
                         var options = {
                             title : '나이별 접종 완료자',
+                            titleTextStyle : {
+                                fontSize: 18
+                            },
                             hAxis : {
                                 title : '접종 완료자 비율',
                                 minValue: 0,
+                                titleTextStyle: { italic: false},
                             },
                             vAxis : {
-                                title : '나이'
+                                title : '나이',
+                                titleTextStyle: { italic: false},
                             },
-                                width: 620,
-                                height: 500,
+                            width: 620,
+                            height: 500,
+                            legend: {
+                                textStyle: {fontSize: 12},
+                            },
+                            colors: ['#CFB78B'],
+                            chartArea:{left:100},
+                            fontName: 'Jeju Gothic'
 
                         };
                         var chart = new google.visualization.BarChart(document.getElementById('barchart'));
                         chart.draw(data, options);
                     }
 
-
         </script>
+        <p style="color:#DA0000; font-size: 12px">※ (나이대 별 접종 완료자 수) / (해당 나이대 예약 프로그램 가입자 수)로 나타내었습니다.</p>
     </div>
 
 </div>
