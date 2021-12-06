@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import reservation.vaccine.domain.*;
-import reservation.vaccine.service.HospitalService;
-import reservation.vaccine.service.ReviewService;
-import reservation.vaccine.service.UserService;
-import reservation.vaccine.service.VisualizationService;
+import reservation.vaccine.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +37,9 @@ public class PageController {
 
     @Autowired
     VisualizationService visualizationService;
+
+    @Autowired
+    StatsService coronaVirusDataService;
 
     @GetMapping("mainpage")
     public String GetMainPage(Model model, HttpServletRequest req) {
@@ -258,9 +258,16 @@ public class PageController {
     }
 
     @GetMapping("news")
-    public String GetNews(Model model) {
+    public String korea(Model model) throws IOException {
+
+        List<Stats> koreaStatsList = StatsService.getKoreaCovidDatas();
+
+        model.addAttribute("koreaStats", koreaStatsList);
+
         return "page/news";
+
     }
+
 
     public String setLocation(int lid) {
 
