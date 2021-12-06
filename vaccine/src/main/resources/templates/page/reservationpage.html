@@ -17,13 +17,14 @@
     }
 
     #title_1{
-        width:350px;
+        width:400px;
         text-align:center;
         border: 5px solid #beb8a8;
         padding: 0.4em 1em 0.3em 1em;
         border-radius: 15px;
         box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
     }
+
     </style>
 </head>
 <body>
@@ -66,9 +67,10 @@
     <div>
         <h3>
             <p id="title_1">
-                <b>1차/2차 백신 예약 페이지</b></p>
+                <b>1차/2차 백신 예약</b></p>
         </h3>
-        <p style="color: red; font-size: 12px;">※ 1차/2차 백신이 함께 에약됩니다. 2차 백신은 예약 날짜 한 달 후로 자동 예약되며 예약 시간은 1차/2차 동일합니다. ※</p>
+        <p style="color: red; font-size: 12px; padding-bottom: 50px;">※ 1차/2차 백신이 함께 에약됩니다. 2차 백신은 예약 날짜 한 달 후로 자동 예약되며
+            예약 시간은 1차/2차 동일합니다. ※</p>
     </div>
 </center>
 <form name="reservation" class="reservation" action="/reservation" method="post">
@@ -79,12 +81,12 @@
         <table style="width: 100%;">
             <tr>
                 <td th:text="${hospital.Hname}"
-                    style="text-align: center; font-weight: bold; width: 50%; font-size: 25px;
+                    style="text-align: center; font-weight: bold; width: 50%; font-size: 35px;
                              text-decoration: underline; text-decoration-color: #d6cdbf;">병원 이름
                 </td>
                 <td rowspan="3" style="border-left: 1px solid black; text-align: center; width: 50%">
-                    <p th:text="${hospital.vaccine.Vname}" style="text-align: center; font-size: 18px;">백신 종류</p>
-                    <p th:text="'잔여백신 : ' + ${hospital.rest} + '개'" style="text-align: center; font-size: 18px;">잔여 백신
+                    <p th:text="${hospital.vaccine.Vname}" style="text-align: center; font-size: 24px;">백신 종류</p>
+                    <p th:text="'잔여백신 : ' + ${hospital.rest} + '개'" style="text-align: center; font-size: 24px;">잔여 백신
                         수</p>
                 </td>
             </tr>
@@ -102,13 +104,15 @@
             <center>
                 <h4>
                     <p style="margin: 0; width:200px; text-align: center; align: center;
-                        border: 4px solid #d6cdbf; padding: 0.3em 1em; border-radius: 2px; font-size: 14px;">
+                        border: 4px solid #beb8a8; padding: 0.3em 1em; border-radius: 15px;
+                        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1); font-size: 14px;">
                         <b>리뷰</b>
                     </p>
                 </h4>
             </center>
         </div>
-        <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:300px; border: 4px solid gray;
+        <center>
+            <div style="overflow-y:auto; overflow-x:hidden; width:80%; height:240px; border: 4px solid #DDDAD1;
                         padding-left: 5%; padding-right: 5%; padding-top: 3%; padding-bottom: 3%">
             <span th:if="${reviews != null}">
                 <tr th:each="review : ${reviews}">
@@ -117,12 +121,13 @@
                     </td>
                 </tr>
             </span>
-            <span th:if="${reviews == null}">
+                <span th:if="${reviews == null}">
                 <center>
-                    <p style="text-align: center; font-size: 16px; font-weight: bold; padding-top: 15%; color: #828282;">등록된 리뷰가 없습니다.</p>
+                    <p style="text-align: center; font-size: 16px; font-weight: bold; padding-top: 15%; color: #bdbdbd;">등록된 리뷰가 없습니다.</p>
                 </center>
             </span>
-        </div>
+            </div>
+        </center>
     </div>
 
     <div style="float: right; width: 50%; padding-left: 8%; padding-right: 5%;">
@@ -142,6 +147,7 @@
             $(function() {
                 $( "input[name='date']" ).datepicker(config);
             });
+
         </script>
 
         <div style="padding-top: 250px">
@@ -202,6 +208,7 @@
                             }
                         }
                     };
+
         </script>
     </div>
 </form>
