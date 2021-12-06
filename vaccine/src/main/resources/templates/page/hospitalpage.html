@@ -163,7 +163,6 @@ geocoder.addressSearch(name, function(result, status) {
             });
 
             if (coords !== undefined) {
-
                 var line = new kakao.maps.Polyline(); // for calculating length
 
                 var path = [ coords, coords2 ];
@@ -172,9 +171,6 @@ geocoder.addressSearch(name, function(result, status) {
                 var dist = line.getLength();
                 console.log("길이"+line.getLength());
             }
-
-
-
         }
     });
 })

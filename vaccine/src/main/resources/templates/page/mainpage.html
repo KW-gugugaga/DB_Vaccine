@@ -11,122 +11,122 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
 
-    body{
-        background-color:rgba(221,212,195,0.31);
-        font-family: 'Jeju Gothic', sans-serif;
-    }
-    h1 {
-      width:30%;
-      color: #4f4d46;
-      padding: 0.7rem 0;
-      border-top: 3px solid #4f4d46;
-      border-bottom: 3px solid #4f4d46;
-      padding-top:4%;
-      text-shadow: 2px 2px #cfcac2;
+        body{
+            background-color:rgba(221,212,195,0.31);
+            font-family: 'Jeju Gothic', sans-serif;
+        }
+        h1 {
+            width:30%;
+            color: #4f4d46;
+            padding: 0.7rem 0;
+            border-top: 3px solid #4f4d46;
+            border-bottom: 3px solid #4f4d46;
+            padding-top:4%;
+            text-shadow: 2px 2px #cfcac2;
 
-    }
+        }
 
-    div.left {
-        width: 50%;
-        float: left;
-        box-sizing: border-box;
-        padding-top:7%;
-    }
-    div.right {
-        width: 50%;
-        float: right;
-        box-sizing: border-box;
+        div.left {
+            width: 50%;
+            float: left;
+            box-sizing: border-box;
+            padding-top:7%;
+        }
+        div.right {
+            width: 50%;
+            float: right;
+            box-sizing: border-box;
 
-    }
+        }
 
-    .container{
-      width: 100%;
-      height: 60%;
-      margin: 0 auto;
-      padding: 0;
-      padding-right: 14%;
+        .container{
+            width: 100%;
+            height: 60%;
+            margin: 0 auto;
+            padding: 0;
+            padding-right: 14%;
 
-    }
+        }
 
-    ul.tabs{
-      margin-top: 40px;
-      margin-bottom: 5px;
-      padding: 0px;
-      list-style: none;
-    }
-    ul.tabs li{
-      background: none;
-      color: #222;
-      display: inline-block;
-      padding: 10px 15px;
-      cursor: pointer;
-      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    }
+        ul.tabs{
+            margin-top: 40px;
+            margin-bottom: 5px;
+            padding: 0px;
+            list-style: none;
+        }
+        ul.tabs li{
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    ul.tabs li.current{
-      background: #cfcac2;
-      color: #222;
-      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    }
+        ul.tabs li.current{
+            background: #cfcac2;
+            color: #222;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .tab-content{
-      display: none;
-      background: #cfcac2;
-      padding: 15px;
-      height:50%
-      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    }
+        .tab-content{
+            display: none;
+            background: #cfcac2;
+            padding: 15px;
+            height:50%
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .tab-content.current{
-      display: inherit;
-      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    }
+        .tab-content.current{
+            display: inherit;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .wrap {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        .wrap {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .button {
-      width: 200px;
-      height: 45px;
-      font-family: 'Jeju Gothic', sans-serif;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      font-weight: 500;
-      color: #000;
-      background-color: #fff;
-      border: none;
-      border-radius: 18px;
-      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease 0s;
-      cursor: pointer;
-      outline: none;
-      }
+        .button {
+            width: 200px;
+            height: 45px;
+            font-family: 'Jeju Gothic', sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #000;
+            background-color: #fff;
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
 
-    .button:hover {
-      background-color: #3E3F3A;
-      box-shadow: 0px 15px 20px rgba(143, 143, 143, 0.46);
-      color: #fff;
-      transform: translateY(-7px);
-    }
-    .text_under {
-        position: relative;
-    }
+        .button:hover {
+            background-color: #3E3F3A;
+            box-shadow: 0px 15px 20px rgba(143, 143, 143, 0.46);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+        .text_under {
+            position: relative;
+        }
 
-    .text_under::after {
-        content: "";
-        width: 30%;
-        height: 10px;
-        background: #ede8e1;
-        position: absolute;
-        display: inline-block;
-        bottom: 1px;
-        z-index: -1;
-    }
+        .text_under::after {
+            content: "";
+            width: 30%;
+            height: 10px;
+            background: #ede8e1;
+            position: absolute;
+            display: inline-block;
+            bottom: 1px;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
@@ -199,18 +199,18 @@
 
 <div class="right">
     <script>
-            $(document).ready(function(){
+        $(document).ready(function(){
 
             $('ul.tabs li').click(function(){
-            var tab_id = $(this).attr('data-tab');
+                var tab_id = $(this).attr('data-tab');
 
-            $('ul.tabs li').removeClass('current');
-            $('.tab-content').removeClass('current');
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
 
-            $(this).addClass('current');
-            $("#"+tab_id).addClass('current');
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
             })
-            })
+        })
 
 
 
@@ -226,51 +226,51 @@
         <div id="tab-1" class="tab-content current" style="width: 653px;">
             <div id="linecolumnchart" style="width: 620px; height: 500px"></div>
             <script th:inline="javascript">
-                    google.charts.load('45', {packages : ['corechart']});
-                    google.charts.setOnLoadCallback(drawComboChart);
+                google.charts.load('45', {packages : ['corechart']});
+                google.charts.setOnLoadCallback(drawComboChart);
 
-                    function drawComboChart() {
-                        var real_data = [[${MonthData}]];
-                        var accumulated_data=[[${AccumulatedData}]]
-                        console.log(real_data);
-                        console.log(accumulated_data);
+                function drawComboChart() {
+                    var real_data = [[${MonthData}]];
+                    var accumulated_data=[[${AccumulatedData}]]
+                    console.log(real_data);
+                    console.log(accumulated_data);
 
-                        var data = new google.visualization.DataTable();
-                        data.addColumn('string', 'month');
-                        data.addColumn('number', '월별 접종완료자');
-                        data.addColumn('number', '누적 접종완료자');
-                        Object.keys(real_data).forEach(function(key) {
-                            data.addRow([ key, real_data[key],accumulated_data[key] ]);
-                            console.log(data);
-                        });
-                        var options = {
-                            title : '최근 6개월간 누적 접종 완료자',
-                            titleTextStyle : {
-                                fontSize: 18
-                            },
-                            hAxis : {
-                                title : '월',
-                                format: '0',
-                            },
-                            vAxis : {
-                                title : '접종 완료자 수',
-                            },
-                            legend: {
-                                textStyle: {fontSize: 12},
-                            },
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'month');
+                    data.addColumn('number', '월별 접종완료자');
+                    data.addColumn('number', '누적 접종완료자');
+                    Object.keys(real_data).forEach(function(key) {
+                        data.addRow([ key, real_data[key],accumulated_data[key] ]);
+                        console.log(data);
+                    });
+                    var options = {
+                        title : '최근 6개월간 누적 접종 완료자',
+                        titleTextStyle : {
+                            fontSize: 18
+                        },
+                        hAxis : {
+                            title : '월',
+                            format: '0',
+                        },
+                        vAxis : {
+                            title : '접종 완료자 수',
+                        },
+                        legend: {
+                            textStyle: {fontSize: 12},
+                        },
 
-                            seriesType: 'bars',
-                            series: {
+                        seriesType: 'bars',
+                        series: {
                             0:{color: '#8E8C84'},
                             1: {type: 'line'}
-                            },
-                            chartArea:{left:100},
-                            fontName: 'Jeju Gothic'
+                        },
+                        chartArea:{left:100},
+                        fontName: 'Jeju Gothic'
 
-                        };
-                        var chart = new google.visualization.ComboChart(document.getElementById('linecolumnchart'));
-                        chart.draw(data, options);
-                    }
+                    };
+                    var chart = new google.visualization.ComboChart(document.getElementById('linecolumnchart'));
+                    chart.draw(data, options);
+                }
 
 
             </script>
@@ -279,48 +279,48 @@
     <div id="tab-2" class="tab-content" style="width: 653px; height: 530px">
         <div id="columnchart"></div>
         <script th:inline="javascript">
-                    google.charts.load('45', {packages : ['corechart']});
-                    google.charts.setOnLoadCallback(drawColumnChart);
+            google.charts.load('45', {packages : ['corechart']});
+            google.charts.setOnLoadCallback(drawColumnChart);
 
-                    function drawColumnChart() {
-                        var real_data = [[${locationData}]];
-                        console.log(real_data);
+            function drawColumnChart() {
+                var real_data = [[${locationData}]];
+                console.log(real_data);
 
-                        var data = new google.visualization.DataTable();
-                        data.addColumn('string', 'location');
-                        data.addColumn('number', '접종완료자 비율');
-                        Object.keys(real_data).forEach(function(key) {
-                            data.addRow([ key, real_data[key] ]);
-                        });
-                        var options = {
-                            title : '지역별 접종 완료자',
-                            titleTextStyle : {
-                                fontSize: 18
-                            },
-                            hAxis : {
-                                title : '지역',
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'location');
+                data.addColumn('number', '접종완료자 비율');
+                Object.keys(real_data).forEach(function(key) {
+                    data.addRow([ key, real_data[key] ]);
+                });
+                var options = {
+                    title : '지역별 접종 완료자',
+                    titleTextStyle : {
+                        fontSize: 18
+                    },
+                    hAxis : {
+                        title : '지역',
 
-                            },
-                            vAxis : {
-                                title : '접종 완료자 비율',
-                            },
-                            legend: {
-                                textStyle: {fontSize: 12},
-                            },
+                    },
+                    vAxis : {
+                        title : '접종 완료자 비율',
+                    },
+                    legend: {
+                        textStyle: {fontSize: 12},
+                    },
 
-                            width: 620,
-                            height: 500,
-                            colors: ['#8E8C84'],
+                    width: 620,
+                    height: 500,
+                    colors: ['#8E8C84'],
 
-                            chartArea:{left:100},
-                            fontName: 'Jeju Gothic'
+                    chartArea:{left:100},
+                    fontName: 'Jeju Gothic'
 
-                        };
-                        var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
-                        chart.draw(data, options);
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+                chart.draw(data, options);
 
 
-                    }
+            }
 
 
         </script>
@@ -329,44 +329,44 @@
     <div id="tab-3" class="tab-content" style="width: 653px; height: 530px">
         <div id="barchart"></div>
         <script th:inline="javascript">
-                    google.charts.load('45', {packages : ['bar']});
-                    google.charts.setOnLoadCallback(drawBarChart);
+            google.charts.load('45', {packages : ['bar']});
+            google.charts.setOnLoadCallback(drawBarChart);
 
-                    function drawBarChart() {
-                        var real_data = [[${AgeData}]];
-                        console.log(real_data);
+            function drawBarChart() {
+                var real_data = [[${AgeData}]];
+                console.log(real_data);
 
-                        var data = new google.visualization.DataTable();
-                        data.addColumn('string', 'age');
-                        data.addColumn('number', '접종완료자 비율');
-                        Object.keys(real_data).forEach(function(key) {
-                            data.addRow([ key, real_data[key] ]);
-                        });
-                        var options = {
-                            title : '나이별 접종 완료자',
-                            titleTextStyle : {
-                                fontSize: 18
-                            },
-                            hAxis : {
-                                title : '접종 완료자 비율',
-                                minValue: 0,
-                            },
-                            vAxis : {
-                                title : '나이',
-                            },
-                            width: 620,
-                            height: 500,
-                            legend: {
-                                textStyle: {fontSize: 12},
-                            },
-                            colors: ['#8E8C84'],
-                            chartArea:{left:100},
-                            fontName: 'Jeju Gothic'
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'age');
+                data.addColumn('number', '접종완료자 비율');
+                Object.keys(real_data).forEach(function(key) {
+                    data.addRow([ key, real_data[key] ]);
+                });
+                var options = {
+                    title : '나이별 접종 완료자',
+                    titleTextStyle : {
+                        fontSize: 18
+                    },
+                    hAxis : {
+                        title : '접종 완료자 비율',
+                        minValue: 0,
+                    },
+                    vAxis : {
+                        title : '나이',
+                    },
+                    width: 620,
+                    height: 500,
+                    legend: {
+                        textStyle: {fontSize: 12},
+                    },
+                    colors: ['#8E8C84'],
+                    chartArea:{left:100},
+                    fontName: 'Jeju Gothic'
 
-                        };
-                        var chart = new google.visualization.BarChart(document.getElementById('barchart'));
-                        chart.draw(data, options);
-                    }
+                };
+                var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+                chart.draw(data, options);
+            }
 
         </script>
         <p style="color:#DA0000; font-size: 12px">※ (나이대 별 접종 완료자 수) / (해당 나이대 예약 프로그램 가입자 수)로 나타내었습니다.</p>

@@ -203,5 +203,4 @@
         delete from review
         where RVid = #{RVid}
     </select>
-
 </mapper>
