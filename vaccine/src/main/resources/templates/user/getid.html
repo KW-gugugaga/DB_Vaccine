@@ -1,12 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>findIF</title>
+    <title>getID</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 
     <script type="text/javascript">
     </script>
@@ -39,7 +40,7 @@
     <h2>아이디 찾기</h2>
     <span th:if="${state} == 0" >
         <p>일치하는 정보가 없습니다.</p>
-        <div class="findID_btn text-center" style="width: 70%; padding-top: 10px">
+        <div class="findID_btn text-center" style="width: 70%; padding-top: 10px;" >
             <input type='button' class="btn btn-dark" value="다시 찾기" onclick="location.href='findID'">
             <input type='button' class="btn btn-dark" value="창닫기" onClick='window.close()'>
         </div>
