@@ -55,7 +55,6 @@
             min-height: 50vh;
             margin-top: 5px;
         }
-
         /*
         .line{
             border: 1px solid black;
@@ -123,7 +122,7 @@
             <div class="pw">
                 <tr>
                     <td class="card-text" th:text="'비밀번호'"></td>
-                    <td class="card-text" th:text="${userinfo.PW}"></td>
+                    <td class="card-text" type="password" th:text="${userinfo.PW}"></td>
                 </tr>
             </div>
             <div class="ssn">
