@@ -237,23 +237,23 @@
 
                         var data = new google.visualization.DataTable();
                         data.addColumn('string', 'month');
-                        data.addColumn('number', '접종완료자');
+                        data.addColumn('number', '월별 접종완료자');
                         data.addColumn('number', '누적 접종완료자');
                         Object.keys(real_data).forEach(function(key) {
                             data.addRow([ key, real_data[key],accumulated_data[key] ]);
                             console.log(data);
                         });
                         var options = {
-                            title : '월별 누적 접종 완료자',
+                            title : '최근 6개월간 누적 접종 완료자',
                             titleTextStyle : {
                                 fontSize: 18
                             },
                             hAxis : {
-                                title : '접종 완료자 수',
+                                title : '월',
                                 format: '0',
                             },
                             vAxis : {
-                                title : '월',
+                                title : '접종 완료자 수',
                             },
                             legend: {
                                 textStyle: {fontSize: 12},
