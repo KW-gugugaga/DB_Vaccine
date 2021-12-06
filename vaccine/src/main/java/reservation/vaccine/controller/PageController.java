@@ -39,7 +39,7 @@ public class PageController {
     VisualizationService visualizationService;
 
     @Autowired
-    StatsService coronaVirusDataService;
+    CoronaVirusDataService coronaVirusDataService;
 
     @GetMapping("mainpage")
     public String GetMainPage(Model model, HttpServletRequest req) {
@@ -258,14 +258,13 @@ public class PageController {
     }
 
     @GetMapping("news")
-    public String korea(Model model) throws IOException {
+    public String GetNews(Model model) throws IOException {
 
-        List<Stats> koreaStatsList = StatsService.getKoreaCovidDatas();
+        List<KoreaStats> koreaStatsList = coronaVirusDataService.getKoreaCovidDatas();
 
         model.addAttribute("koreaStats", koreaStatsList);
 
         return "page/news";
-
     }
 
 
