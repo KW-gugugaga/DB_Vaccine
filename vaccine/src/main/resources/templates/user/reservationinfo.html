@@ -181,23 +181,27 @@
     </wrap>
     <div style="text-align: center; padding-bottom: 20px;">
             <div th:if="${rsvstate}==1">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==2">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=1차'">1차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=1차'">1차 예약 취소</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+            </div>
+
+            <div th:if="${rsvstate}==3">
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==4">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==5">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
     </div>
 </body>
