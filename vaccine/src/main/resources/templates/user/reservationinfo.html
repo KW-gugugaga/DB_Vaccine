@@ -4,19 +4,30 @@
     <title>My Reservation Info</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
     <title>My Reservation Info</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <style>
+    body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
+        #title_1{
+        width:300px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
         table.type04 {
             border-collapse: separate;
             border-spacing: 0 15px;
             text-align: left;
             line-height: 1.5;
-            margin : 20px 10px;
+            margin : 0px 10px;
         }
         table.type04 th {
             width: 150px;
@@ -30,17 +41,14 @@
             padding: 10px;
             vertical-align: top;
             border-bottom: 1px solid #ccc;
-            font-family: 'M PLUS 1 Code', sans-serif;
         }
         #wrap{
             display: grid;
             place-items: center;
             min-height: 80vh;
-            padding-top: 75px;
         }
     </style>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -73,16 +81,18 @@
         </div>
     </div>
 </nav>
-
-
+<br>
     <wrap id="wrap">
-        <p style="width:400px; font-size:large; text-align: center;border: 5px solid #d6cdbf; padding: 0.3em 1em;border-radius: 2px;"><b>예약 목록</b></p>
-
+        <center>
+            <h3>
+                <p id="title_1"><b>예약 내역</b></p>
+            </h3>
+        </center>
         <span th:if="${rsvstate}==0">
                 <h4  style="border-radius: 15px 15px 15px 0; border-bottom: 5px solid #B9C4C4; padding: 0.5em; background: #CEDADA;">예약 내역이 없습니다!</h4>
              </span>
 
-        <table class="type04 card-body" th:unless="${rsvstate}==0">
+        <table class="type04 card-body" style="padding-top:0;" th:unless="${rsvstate}==0">
             <div id="info">
                 <tr>
                     <td th:text="'접종자 이름'"></td>
@@ -95,7 +105,7 @@
                 </tr>
             </div>
 
-            <div class="first" style="margin-top: 30px;">
+            <div class="first">
                 <tr></tr>
                 <tr>
                     <td th:text="'1차 접종 백신'"></td>
@@ -169,27 +179,30 @@
             </span>
         </table>
     </wrap>
-    <div style="text-align: center;">
+    <div style="text-align: center; padding-bottom: 20px;">
             <div th:if="${rsvstate}==1">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">접종 병원 평가</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==2">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=1차'">1차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">접종 병원 평가</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=1차'">1차 예약 취소</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+            </div>
+
+            <div th:if="${rsvstate}==3">
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==4">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">접종 병원 평가</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
 
             <div th:if="${rsvstate}==5">
-                    <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">접종 병원 평가</button>
+                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
             </div>
     </div>
-
 </body>
 </html>

@@ -4,32 +4,38 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
 
     <title>Login</title>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style>
     #navbarColor02 .{}
 
         body{
             background-image : url('img/v1.jpg');
-            background-size: cover;
+            background-size: 100%;
+            font-family: 'Jeju Gothic', sans-serif;
+
         }
     .login{
             display:grid;
             min-height:80vh;
             place-items:center;
         }
+        input[type=password] {font-family:'Malgun gothic', dotum, sans-serif;}
+
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         function findID() {
             let popupUrl = "/findID";
-            let popupOption = "width = 400px, height = 200px, top = 300px, left = 300px";
+            let popupOption = "width = 400px, height = 220px, top = 300px, left = 300px";
 
             window.open(popupUrl, "아이디 찾기", popupOption);
         };
 
         function findPW() {
             let popupUrl = "/findPW";
-            let popupOption = "width = 400px, height = 200px, top = 300px, left = 300px";
+            let popupOption = "width = 400px, height = 220px, top = 300px, left = 300px";
 
             window.open(popupUrl, "비밀번호 찾기", popupOption);
         };

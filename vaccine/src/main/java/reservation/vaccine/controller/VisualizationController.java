@@ -28,8 +28,6 @@ public class VisualizationController {
         List<Location> locations = visualizationService.visualizeByLocation();
         Map<String, Float> locationData = new HashMap<String, Float>();
         for(Location location : locations) {
-            System.out.println("location.getLid() = " + location.getRatio());
-            System.out.println("location.getLname() = " + location.getLname());
             locationData.put(location.getLname(), location.getRatio());
         }
         model.addAttribute("locationData", locationData);
@@ -42,10 +40,6 @@ public class VisualizationController {
         {
             ageVaccinated.add(visualizationService.findVaccinatedByAge(i));
             ageAll.add(visualizationService.findAllByAge(i));
-        }
-
-        for(int i = 0;i<8;i++) {
-            System.out.println((8-i) + "0대 접종자: "+ ageVaccinated.get(i) + " " + (8-i) + "0대 전체: "+ ageAll.get(i));
         }
 
         for(int i = 0;i<8;i++) {
@@ -64,7 +58,6 @@ public class VisualizationController {
 
         for(String key : AgeData.keySet()) {
             float value = (float) AgeData.get(key);
-            System.out.println(key + " : " + value);
         }
 
         model.addAttribute("AgeData", AgeData);
@@ -74,8 +67,6 @@ public class VisualizationController {
         int current_month = monthStr.getValue();
 
         int start_month = current_month-5;
-        System.out.println("current_month = " + current_month);
-        System.out.println("start_month = " + start_month);
 
         ArrayList<Integer> monthVaccinated = new ArrayList<Integer>();
         Map<String, Integer> MonthData = new LinkedHashMap<String, Integer>();
@@ -94,8 +85,6 @@ public class VisualizationController {
         for(String key : MonthData.keySet()) {
             int value1 = (int) MonthData.get(key);
             int value2 = (int) AccumulatedData.get(key);
-            System.out.println(key + " : " + value1);
-            System.out.println(key + " : " + value2);
         }
 
         model.addAttribute("MonthData", MonthData);

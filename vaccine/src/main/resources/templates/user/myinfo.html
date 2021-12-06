@@ -7,7 +7,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
     <style>
+     body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+    }
+        #title_1{
+        width:300px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
         /*.info{
             border: 1px solid black;
             border-radius: 2px;
@@ -18,7 +32,8 @@
             border-spacing: 0 15px;
             text-align: left;
             line-height: 1.5;
-            margin : 20px 10px;
+            margin : 5px 10px;
+            padding: 1em;
         }
         table.type04 th {
             width: 150px;
@@ -32,13 +47,13 @@
             padding: 10px;
             vertical-align: top;
             border-bottom: 1px solid #ccc;
-            font-family: 'M PLUS 1 Code', sans-serif;
+            //font-family: 'M PLUS 1 Code', sans-serif;
         }
         #wrap{
             display: grid;
             place-items: center;
-            min-height: 80vh;
-            margin-top: 10px;
+            min-height: 50vh;
+            margin-top: 5px;
         }
 
         /*
@@ -51,7 +66,7 @@
 
     </style>
 </head>
-<body class="bg-light">
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%;">
     <div class="container-fluid">
         <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px" style="padding-bottom:5px">
@@ -65,7 +80,7 @@
                     <a class="nav-link" href="hospitalpage" style="font-size:18px; padding-right:35px;padding-left:35px;" >백신 예약</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 확인/취소</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
@@ -83,10 +98,16 @@
         </div>
     </div>
 </nav>
-<wrap id="wrap">
-    <div class="card border-secondary mb-3" style="width: 600px; height: 92%;">
-        <h2 class="card-header">내 정보</h2>
-        <table class="type04 card-body" style="display: grid; height: 70%">
+<br>
+<center>
+    <h3>
+        <p id="title_1"><b>내 정보</b></p>
+    </h3>
+</center>
+    <wrap id="wrap">
+    <div class="card border-secondary mb-3" style="width: 600px; height: 95%;">
+
+        <table class="type04 card-body" style="display: grid; height: 70%; padding:14px; padding-top:0;">
             <div class="name">
                 <tr>
                     <td class="card-text" th:text="'이름'"></td>
@@ -141,7 +162,7 @@
     </div>
 </wrap>
 <div class="d-grid gap-2" style="text-align: center;">
-    <button class="btn btn-lg btn-dark" type="button" onclick="location.href='modify'" style="width:700px">정보 수정하기</button>
+    <button class="btn btn-lg btn-dark" type="button" onclick="location.href='modify'" style="width:200px">정보 수정하기</button>
 </div>
 
 </body>

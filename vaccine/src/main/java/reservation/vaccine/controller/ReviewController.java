@@ -140,7 +140,6 @@ public class ReviewController {
     @GetMapping("writeReview")
     public String GetWriteReview(Model model, HttpServletRequest req, @RequestParam("Hid") int Hid) {
         System.out.println("ReviewController.GetWriteReview");
-        System.out.println("Hid = " + Hid);
         String Hname = hospitalService.findHospitalNameByHid(Hid);
         model.addAttribute("Hname", Hname);
         model.addAttribute("Hid", Hid);
@@ -152,9 +151,6 @@ public class ReviewController {
                                 @RequestParam("rating") int rating, @RequestParam("Hname") String Hname,
                                 @RequestParam("Hid") int Hid, @RequestParam("review") String reviewText) throws IOException {
         System.out.println("ReviewController.PostWriteReview");
-        System.out.println("rating = " + rating);
-        System.out.println("Hid = " + Hid);
-        System.out.println("reviewText = " + reviewText);
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
@@ -171,15 +167,16 @@ public class ReviewController {
     @GetMapping("viewReview")
     public String GetViewReview(Model model, HttpServletRequest req, @RequestParam("Hid") int Hid) {
         System.out.println("ReviewController.GetViewReview");
-        System.out.println("Hid = " + Hid);
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
         Map<String, Integer> reviewInfo = new HashMap<String, Integer>();
+        String Hname = hospitalService.findHospitalNameByHid(Hid);
         reviewInfo.put("Uid", userInfo.getUid());
         reviewInfo.put("Hid", Hid);
         Review review = reviewService.findReview(reviewInfo);
-        System.out.println(review.toString());
+        model.addAttribute("RVid", review.getRVid());
+        model.addAttribute("Hname", Hname);
         model.addAttribute("review", review);
         if(review.getStar() == 1) {
             return "review/viewreview1";
@@ -192,5 +189,15 @@ public class ReviewController {
         } else {
             return "review/viewreview5";
         }
+    }
+
+    @PostMapping("deleteReview")
+    public void PostDeleteReview(Model model, HttpServletRequest req, HttpServletResponse res, @RequestParam("RVid") int RVid) throws IOException {
+        System.out.println("ReviewController.PostDeleteReview");
+        res.setContentType("text/html; charset=euc-kr");
+        reviewService.deleteReview(RVid);
+        PrintWriter out = res.getWriter();
+        out.println("<script>window.close();</script>");
+        out.flush();
     }
 }
