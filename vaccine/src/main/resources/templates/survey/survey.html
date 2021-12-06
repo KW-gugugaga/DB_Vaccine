@@ -5,13 +5,15 @@
     <title>Survey</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
 
     body{
         background-color:rgba(221,212,195,0.31);
         font-family: 'Jeju Gothic', sans-serif;
+        text-align:center;
     }
     #title_1{
         width:300px;
@@ -34,6 +36,7 @@
         margin-right: 3%;
         width:60%;
     }
+
     </style>
 </head>
 
@@ -80,16 +83,118 @@
         <small class="text-muted"><p>2차 접종 이후 14일이 경과된 접종자를 대상으로 한 설문조사입니다.</p></small>
     </h3>
 </center>
+<form class="survey" action="/survey" method="post">
+    <div class="form-check">
+    <strong>성별</strong>
+        <br>
+        <input type="radio" name="gender" value="M"> 남
+        <input type="radio" name="gender" value="F"> 여
+        <!-- radio: 단일 선택 -->
+    </div>
+    <div>
+        <strong>나이</strong>
+        <br>
+        <input type="radio" name="age" value="1"> 10대
+        <input type="radio" name="age" value="2"> 20대
+        <input type="radio" name="age" value="3"> 30대
+        <input type="radio" name="age" value="4"> 40대
+        <input type="radio" name="age" value="5"> 50대
+        <input type="radio" name="age" value="6"> 60대
+        <input type="radio" name="age" value="7"> 70대
+        <input type="radio" name="age" value="8"> 80대
+        <input type="radio" name="age" value="9"> 90대
+    </div>
+    <strong>백신 종류</strong>
+    <br>
+    <input type="radio" name="vac" value="1"> 화이자
+    <input type="radio" name="vac" value="2"> 모더나
+    <input type="radio" name="vac" value="3"> 아스트라제네카
+    <!-- radio: 단일 선택 -->
+    </div>
+    <div>
+        <strong>1차 접종 당일 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "1_1" value = "1"> 발열
+        <input type = "checkbox" name = "1_1" value = "2"> 두통
+        <input type = "checkbox" name = "1_1" value = "3"> 오한
+        <input type = "checkbox" name = "1_1" value = "4"> 피로
+        <input type = "checkbox" name = "1_1" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "1_1" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "1_1" value = "7"> 발열
+        <input type = "checkbox" name = "1_1" value = "8"> 근육통
+        <input type = "checkbox" name = "1_1" value = "9"> 오한
+        <br>
 
-    <table>
-        <th>성별</th>
-        <tr>
-            <div>
-                <input type = "radio" name = "gender" value = "M"> 남
-                <input type = "radio" name = "gender" value = "F"> 여
-                <!-- radio: 단일 선택 -->
-            </div>
-        </tr>
+    </div>
+    <div>
+        <strong>1차 접종 3일 후 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "1_2" value = "1"> 발열
+        <input type = "checkbox" name = "1_2" value = "2"> 두통
+        <input type = "checkbox" name = "1_2" value = "3"> 오한
+        <input type = "checkbox" name = "1_2" value = "4"> 피로
+        <input type = "checkbox" name = "1_2" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "1_2" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "1_2" value = "7"> 발열
+        <input type = "checkbox" name = "1_2" value = "8"> 근육통
+        <input type = "checkbox" name = "1_2" value = "9"> 오한
+        <br>
 
-    </table>
+    </div>
+    <div>
+        <strong>1차 접종 7일 후 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "1_3" value = "1"> 발열
+        <input type = "checkbox" name = "1_3" value = "2"> 두통
+        <input type = "checkbox" name = "1_3" value = "3"> 오한
+        <input type = "checkbox" name = "1_3" value = "4"> 피로
+        <input type = "checkbox" name = "1_3" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "1_3" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "1_3" value = "7"> 발열
+        <input type = "checkbox" name = "1_3" value = "8"> 근육통
+        <input type = "checkbox" name = "1_3" value = "9"> 오한
+        <br>
+        <label for="1_3">이외의 기타 증상:</label>
+        <textarea id="1_3" name="1_3" rows="3" cols="30"></textarea>
+    </div>
+    <div>
+        <strong>2차 접종 당일 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "2_1" value = "1"> 발열
+        <input type = "checkbox" name = "2_1" value = "2"> 두통
+        <input type = "checkbox" name = "2_1" value = "3"> 오한
+        <input type = "checkbox" name = "2_1" value = "4"> 피로
+        <input type = "checkbox" name = "2_1" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "2_1" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "2_1" value = "7"> 발열
+        <input type = "checkbox" name = "2_1" value = "8"> 근육통
+        <input type = "checkbox" name = "2_1" value = "9"> 오한
+        <br>
+
+    </div>
+    <div>
+        <strong>2차 접종 3일 후 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "2_2" value = "1"> 발열
+        <input type = "checkbox" name = "2_2" value = "2"> 두통
+        <input type = "checkbox" name = "2_2" value = "3"> 오한
+        <input type = "checkbox" name = "2_2" value = "4"> 피로
+        <input type = "checkbox" name = "2_2" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "2_2" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "2_2" value = "7"> 발열
+        <input type = "checkbox" name = "2_2" value = "8"> 근육통
+        <input type = "checkbox" name = "2_2" value = "9"> 오한
+        <br>
+    </div>
+    <div>
+        <strong>2차 접종 7일 후 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "2_3" value = "1"> 발열
+        <input type = "checkbox" name = "2_3" value = "2"> 두통
+        <input type = "checkbox" name = "2_3" value = "3"> 오한
+        <input type = "checkbox" name = "2_3" value = "4"> 피로
+        <input type = "checkbox" name = "2_3" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "2_3" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "2_3" value = "7"> 발열
+        <input type = "checkbox" name = "2_3" value = "8"> 근육통
+        <input type = "checkbox" name = "2_3" value = "9"> 오한
+        <br>
+        <label for="2_3">이외의 기타 증상:</label>
+        <textarea id="2_3" name="1_3" rows="3" cols="30"></textarea>
+    </div>
+</form>
 </body>
