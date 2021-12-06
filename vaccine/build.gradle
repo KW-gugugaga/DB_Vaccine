@@ -8,6 +8,12 @@ group = 'reservation'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -18,7 +24,6 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-  
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.25'
   //jsp dependencies 설정
@@ -26,6 +31,13 @@ dependencies {
 	implementation 'javax.servlet:jstl:1.2'
   // thymeleaf dependencies 설정
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	implementation 'org.jsoup:jsoup:1.14.2'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 test {
