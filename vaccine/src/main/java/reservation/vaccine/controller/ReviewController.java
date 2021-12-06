@@ -194,7 +194,6 @@ public class ReviewController {
     @PostMapping("deleteReview")
     public void PostDeleteReview(Model model, HttpServletRequest req, HttpServletResponse res, @RequestParam("RVid") int RVid) throws IOException {
         System.out.println("ReviewController.PostDeleteReview");
-        System.out.println("RVid = " + RVid);
         res.setContentType("text/html; charset=euc-kr");
         reviewService.deleteReview(RVid);
         PrintWriter out = res.getWriter();

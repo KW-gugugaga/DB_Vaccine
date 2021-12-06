@@ -6,10 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import reservation.vaccine.domain.Hospital;
-import reservation.vaccine.domain.Location;
-import reservation.vaccine.domain.UserInfo;
-import reservation.vaccine.domain.UserRsv;
+import reservation.vaccine.domain.*;
 import reservation.vaccine.service.HospitalService;
 import reservation.vaccine.service.ReviewService;
 import reservation.vaccine.service.UserService;
@@ -75,10 +72,6 @@ public class PageController {
         }
 
         for (int i = 0; i < 8; i++) {
-            System.out.println((8 - i) + "0대 접종자: " + ageVaccinated.get(i) + " " + (8 - i) + "0대 전체: " + ageAll.get(i));
-        }
-
-        for (int i = 0; i < 8; i++) {
             if (ageAll.get(i) != 0) {
                 float ratio = (float) (ageVaccinated.get(i)) / (ageAll.get(i));
                 if (i == 0)
@@ -93,7 +86,6 @@ public class PageController {
 
         for (String key : AgeData.keySet()) {
             float value = (float) AgeData.get(key);
-            System.out.println(key + " : " + value);
         }
 
         model.addAttribute("AgeData", AgeData);
@@ -103,8 +95,6 @@ public class PageController {
         int current_month = monthStr.getValue();
 
         int start_month = current_month - 5;
-        System.out.println("current_month = " + current_month);
-        System.out.println("start_month = " + start_month);
 
         ArrayList<Integer> monthVaccinated = new ArrayList<Integer>();
         Map<String, Integer> MonthData = new LinkedHashMap<String, Integer>();
@@ -122,8 +112,6 @@ public class PageController {
         for (String key : MonthData.keySet()) {
             int value1 = (int) MonthData.get(key);
             int value2 = (int) AccumulatedData.get(key);
-            System.out.println(key + " : " + value1);
-            System.out.println(key + " : " + value2);
         }
 
         model.addAttribute("MonthData", MonthData);
@@ -196,6 +184,7 @@ public class PageController {
                 avgStar = Float.toString(avg);
                 reviews = reviewService.findALlReviewByHid(Hid);
             }
+
             model.addAttribute("avgStar", avgStar);
             model.addAttribute("reviews", reviews);
             return "page/reservationpage";
@@ -271,9 +260,6 @@ public class PageController {
     @GetMapping("news")
     public String GetNews(Model model) {
         return "page/news";
-    }
-
-    private class Date {
     }
 
     public String setLocation(int lid) {

@@ -44,7 +44,7 @@
                        style="font-size:18px; padding-right:35px;padding-left:35px;">백신 예약</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 정보 확인</a>
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 확인/취소</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
@@ -81,7 +81,7 @@
         <table style="width: 100%;">
             <tr>
                 <td th:text="${hospital.Hname}"
-                    style="text-align: center; font-weight: bold; width: 50%; font-size: 35px;
+                    style="text-align: center; font-weight: bold; width: 50%; font-size: 28px;
                              text-decoration: underline; text-decoration-color: #d6cdbf;">병원 이름
                 </td>
                 <td rowspan="3" style="border-left: 1px solid black; text-align: center; width: 50%">
@@ -117,7 +117,7 @@
             <span th:if="${reviews != null}">
                 <tr th:each="review : ${reviews}">
                     <td>
-                        <p th:text="'✏ ' + ${review}" style="font-size: 16px; margin: 15px;"></p>
+                        <p th:text="'✏ ' + ${review}" style="font-size: 16px; margin: 15px; color: black;"></p>
                     </td>
                 </tr>
             </span>

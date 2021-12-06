@@ -195,7 +195,7 @@
     <select id="findALlReviewByHid" parameterType="int" resultType="string">
         select review
         FROM review
-        where Hid = 1
+        where Hid = #{Hid}
         order by RVid;
     </select>
 
