@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <title>Survey</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <style>
+
+    body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+        text-align:center;
+    }
+    #title_1{
+        width:300px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
+    #hospitalTable{
+        margin:auto;
+    }
+    #map{
+        float:left;
+        margin-left: 3%;
+        width:30%;
+    }
+    #table{
+        float:right;
+        margin-right: 3%;
+        width:60%;
+    }
+
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%; ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px"
+                                                     style="padding-bottom:5px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="hospitalpage"
+                       style="font-size:18px; padding-right:35px;padding-left:35px;">백신 예약</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 확인/취소</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<center>
+    <h3>
+        <p id="title_1"><b>설문조사</b></p>
+        <small class="text-muted"><p>2차 접종 이후 14일이 경과된 접종자를 대상으로 한 설문조사입니다.</p></small>
+    </h3>
+</center>
+<form class="survey" action="/survey" method="post">
+    <div class="form-check">
+    <strong>성별</strong>
+        <br>
+        <input type="radio" name="gender" value="M"> 남
+        <input type="radio" name="gender" value="F"> 여
+        <!-- radio: 단일 선택 -->
+    </div>
+    <div>
+        <strong>나이</strong>
+        <br>
+        <input type="radio" name="age" value="1"> 10대
+        <input type="radio" name="age" value="2"> 20대
+        <input type="radio" name="age" value="3"> 30대
+        <input type="radio" name="age" value="4"> 40대
+        <input type="radio" name="age" value="5"> 50대
+        <input type="radio" name="age" value="6"> 60대
+        <input type="radio" name="age" value="7"> 70대
+        <input type="radio" name="age" value="8"> 80대
+        <input type="radio" name="age" value="9"> 90대
+    </div>
+    <strong>백신 종류</strong>
+    <br>
+    <input type="radio" name="vac" value="1"> 화이자
+    <input type="radio" name="vac" value="2"> 모더나
+    <input type="radio" name="vac" value="3"> 아스트라제네카
+    <!-- radio: 단일 선택 -->
+    </div>
+    <div>
+        <strong>1차 접종 당일 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "1_1" value = "1"> 발열
+        <input type = "checkbox" name = "1_1" value = "2"> 두통
+        <input type = "checkbox" name = "1_1" value = "3"> 오한
+        <input type = "checkbox" name = "1_1" value = "4"> 피로
+        <input type = "checkbox" name = "1_1" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "1_1" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "1_1" value = "7"> 발열
+        <input type = "checkbox" name = "1_1" value = "8"> 근육통
+        <input type = "checkbox" name = "1_1" value = "9"> 오한
+        <br>
+
+    </div>
+    <div>
+        <strong>1차 접종 3일 후 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "1_2" value = "1"> 발열
+        <input type = "checkbox" name = "1_2" value = "2"> 두통
+        <input type = "checkbox" name = "1_2" value = "3"> 오한
+        <input type = "checkbox" name = "1_2" value = "4"> 피로
+        <input type = "checkbox" name = "1_2" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "1_2" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "1_2" value = "7"> 발열
+        <input type = "checkbox" name = "1_2" value = "8"> 근육통
+        <input type = "checkbox" name = "1_2" value = "9"> 오한
+        <br>
+
+    </div>
+    <div>
+        <strong>1차 접종 7일 후 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "1_3" value = "1"> 발열
+        <input type = "checkbox" name = "1_3" value = "2"> 두통
+        <input type = "checkbox" name = "1_3" value = "3"> 오한
+        <input type = "checkbox" name = "1_3" value = "4"> 피로
+        <input type = "checkbox" name = "1_3" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "1_3" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "1_3" value = "7"> 발열
+        <input type = "checkbox" name = "1_3" value = "8"> 근육통
+        <input type = "checkbox" name = "1_3" value = "9"> 오한
+        <br>
+        <label for="1_3">이외의 기타 증상:</label>
+        <textarea id="1_3" name="1_3" rows="3" cols="30"></textarea>
+    </div>
+    <div>
+        <strong>2차 접종 당일 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "2_1" value = "1"> 발열
+        <input type = "checkbox" name = "2_1" value = "2"> 두통
+        <input type = "checkbox" name = "2_1" value = "3"> 오한
+        <input type = "checkbox" name = "2_1" value = "4"> 피로
+        <input type = "checkbox" name = "2_1" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "2_1" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "2_1" value = "7"> 발열
+        <input type = "checkbox" name = "2_1" value = "8"> 근육통
+        <input type = "checkbox" name = "2_1" value = "9"> 오한
+        <br>
+
+    </div>
+    <div>
+        <strong>2차 접종 3일 후 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "2_2" value = "1"> 발열
+        <input type = "checkbox" name = "2_2" value = "2"> 두통
+        <input type = "checkbox" name = "2_2" value = "3"> 오한
+        <input type = "checkbox" name = "2_2" value = "4"> 피로
+        <input type = "checkbox" name = "2_2" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "2_2" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "2_2" value = "7"> 발열
+        <input type = "checkbox" name = "2_2" value = "8"> 근육통
+        <input type = "checkbox" name = "2_2" value = "9"> 오한
+        <br>
+    </div>
+    <div>
+        <strong>2차 접종 7일 후 증상 (중복 체크 가능)</strong>
+        <input type = "checkbox" name = "2_3" value = "1"> 발열
+        <input type = "checkbox" name = "2_3" value = "2"> 두통
+        <input type = "checkbox" name = "2_3" value = "3"> 오한
+        <input type = "checkbox" name = "2_3" value = "4"> 피로
+        <input type = "checkbox" name = "2_3" value = "5"> 주사 부위의 통증
+        <input type = "checkbox" name = "2_3" value = "6"> 메스꺼움
+        <input type = "checkbox" name = "2_3" value = "7"> 발열
+        <input type = "checkbox" name = "2_3" value = "8"> 근육통
+        <input type = "checkbox" name = "2_3" value = "9"> 오한
+        <br>
+        <label for="2_3">이외의 기타 증상:</label>
+        <textarea id="2_3" name="1_3" rows="3" cols="30"></textarea>
+    </div>
+</form>
+</body>
