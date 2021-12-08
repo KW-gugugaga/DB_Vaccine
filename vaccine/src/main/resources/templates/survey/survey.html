@@ -24,27 +24,17 @@
         box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
         margin-bottom:0px;
     }
-
-
-
     </style>
-    <script style="text/javascript">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
         function surveyBtn() {
-            var surveyForm = document.surveyForm;
-            var day1_1 = surveyForm.1_1.value;
-            var day3_1 = surveyForm.day1three.value;
-            var day7_1 = surveyForm.1_7.value;
-            var day1_2 = surveyForm.2_1.value;
-            var day3_2 = surveyForm.2_3.value;
-            var day7_2 = surveyForm.2_7.value;
-            if(day1_1 == null || day3_1 == null || day7_1 == null || day1_2 == null || day3_2 == null || day7_3 == null) {
-                alert('모든 질문에 응답해주십시오.);
+            if ($('input[type=radio]:checked').length < 6) {
+                alert('모든 항목에 응답해주십시오.');
             } else {
+                alert('설문에 응답해주셔서 감사합니다.');
                 surveyForm.submit();
             }
         }
-
-
     </script>
 </head>
 
@@ -120,6 +110,7 @@
                 <input type="radio" name="1_1" value="5"> 주사 부위의 통증
                 <input type="radio" name="1_1" value="6"> 메스꺼움
                 <input type="radio" name="1_1" value="7"> 근육통
+                <input type="radio" name="1_1" value="8"> 증상없음
             </td>
             </tr>
             <tr class="table-light">
@@ -132,34 +123,10 @@
             <input type="radio" name="1_3" value="5"> 주사 부위의 통증
             <input type="radio" name="1_3" value="6"> 메스꺼움
             <input type="radio" name="1_3" value="7"> 근육통
+                    <input type="radio" name="1_3" value="8"> 증상없음
                 </td>
            <p th:text="'1차 접종 백신 : ' + ${vac_1}" style="font-size: 15px;"></p>
 
-        <table>
-            <tr>
-                <tb><strong>1차 접종 당일 증상</strong></tb>
-            <tb>
-                <input type="radio" name="day1one" value="1"> 발열
-                <input type="radio" name="day1one" value="2"> 두통
-                <input type="radio" name="day1one" value="3"> 오한
-                <input type="radio" name="day1one" value="4"> 피로
-                <input type="radio" name="day1one" value="5"> 주사 부위의 통증
-                <input type="radio" name="day1one" value="6"> 메스꺼움
-                <input type="radio" name="day1one" value="7"> 근육통
-            </tb>
-            </tr>
-            <tr>
-                <tb><strong>1차 접종 3일 후 증상</strong></tb>
-
-            <tb><input type="radio" name="day1three" value="1"> 발열
-            <input type="radio" name="day1three" value="2"> 두통
-            <input type="radio" name="day1three" value="3"> 오한
-            <input type="radio" name="day1three" value="4"> 피로
-            <input type="radio" name="day1three" value="5"> 주사 부위의 통증
-            <input type="radio" name="day1three" value="6"> 메스꺼움
-            <input type="radio" name="day1three" value="7"> 근육통
-                </tb>
-            </tr>
             <tr class="table-light">
             <td><strong>1차 접종 7일 후 증상</strong></td>
                 <td>
@@ -170,6 +137,7 @@
             <input type="radio" name="1_7" value="5"> 주사 부위의 통증
             <input type="radio" name="1_7" value="6"> 메스꺼움
             <input type="radio" name="1_7" value="7"> 근육통
+                    <input type="radio" name="1_7" value="8"> 증상없음
                 </td>
             </tr>
             </tbody>
@@ -192,6 +160,7 @@
                 <input type="radio" name="2_1" value="5"> 주사 부위의 통증
                 <input type="radio" name="2_1" value="6"> 메스꺼움
                 <input type="radio" name="2_1" value="7"> 근육통
+                <input type="radio" name="2_1" value="8"> 증상없음
             </td>
             </tr>
             <tr class="table-light">
@@ -204,6 +173,7 @@
             <input type="radio" name="2_3" value="5"> 주사 부위의 통증
             <input type="radio" name="2_3" value="6"> 메스꺼움
             <input type="radio" name="2_3" value="7"> 근육통
+                    <input type="radio" name="2_3" value="8"> 증상없음
                 </td>
             </tr>
             <tr class="table-light">
@@ -216,6 +186,7 @@
             <input type="radio" name="2_7" value="5"> 주사 부위의 통증
             <input type="radio" name="2_7" value="6"> 메스꺼움
             <input type="radio" name="2_7" value="7"> 근육통
+                    <input type="radio" name="2_7" value="8"> 증상없음
                 </td>
             </tr>
             </tbody>
@@ -224,9 +195,6 @@
             <div class="survey_btn">
                 <input type="button" class="btn btn-dark" value="설문 제출하기" onclick="surveyBtn()">
             </div>
-            </tr>
-            </tbody>
-        </table>
         </div>
 </form>
 </span>
