@@ -46,10 +46,10 @@
 <h2>지역별 접종률</h2>
 <div id="columnchart" style="width: 700px; height: 400px"></div>
 <script th:inline="javascript">
-        google.charts.load('current', {packages : ['corechart']});
-        google.charts.setOnLoadCallback(drawColumnChart);
+        google.charts.load('current', {packages : ['geochart']});
+        google.charts.setOnLoadCallback(drawRegionsMap);
 
-        function drawColumnChart() {
+        function drawRegionsMap() {
             var real_data = [[${locationData}]];
             console.log(real_data);
 
@@ -68,7 +68,7 @@
                     title : '접종 완료자 비율'
                 }
             };
-            var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+            var chart = new google.visualization.GeoChart(document.getElementById('columnchart'));
             chart.draw(data, options);
         }
     </script>

@@ -21,11 +21,6 @@
         <collection property="vaccine" resultMap="Vaccine"/>
     </resultMap>
 
-    <!--user-->
-    <select id="findAll" resultType="reservation.vaccine.domain.UserInfo">
-        select * from user_info
-    </select>
-
     <select id="findUserByIdPw" resultType="reservation.vaccine.domain.UserInfo" parameterType="map">
         select * from user_info where ID = #{ID} and PW = #{PW}
     </select>
@@ -104,6 +99,12 @@
         from hospital as h join hospital_location as hl join vaccine as v
         on h.Hid = hl.Hid and h.Vid = v.Vid
         where h.Hid = #{Hid};
+    </select>
+
+    <select id="findHidbyHname" parameterType="string" resultType="int">
+        select Hid
+        from hospital
+        where Hname = #{Hname};
     </select>
 
     <select id="findHospitalNameByHid" resultType="String" parameterType="int">
@@ -204,4 +205,14 @@
         where RVid = #{RVid}
     </select>
 
+    <!--survey-->
+    <select id="insertSurvey" parameterType="reservation.vaccine.domain.Survey">
+        insert into survey values(#{Uid}, #{Vid_1}, #{day1_1}, #{day3_1}, #{day7_1}, #{Vid_2}, #{day1_2}, #{day3_2}, #{day7_2});
+    </select>
+
+    <select id="findVaccineNameByVid" parameterType="int" resultType="string">
+        select Vname
+        from vaccine
+        where Vid = #{Vid};
+    </select>
 </mapper>

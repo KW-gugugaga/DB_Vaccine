@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import reservation.vaccine.domain.*;
 import reservation.vaccine.service.*;
 
@@ -25,6 +26,8 @@ import java.util.*;
 public class PageController {
 
     private int checkRes = 0;
+    Map<String, Double> map = new HashMap<>();
+    int count = 0;
 
     @Autowired
     HospitalService hospitalService;
@@ -39,7 +42,7 @@ public class PageController {
     VisualizationService visualizationService;
 
     @Autowired
-    StatsService coronaVirusDataService;
+    CoronaVirusDataService coronaVirusDataService;
 
     @GetMapping("mainpage")
     public String GetMainPage(Model model, HttpServletRequest req) {
@@ -258,21 +261,26 @@ public class PageController {
     }
 
     @GetMapping("news")
-    public String korea(Model model) throws IOException {
-
-        List<Stats> koreaStatsList = StatsService.getKoreaCovidDatas();
-
+    public String GetNews(Model model) throws IOException {
+        List<KoreaStats> koreaStatsList = coronaVirusDataService.getKoreaCovidDatas();
         model.addAttribute("koreaStats", koreaStatsList);
-
         return "page/news";
-
     }
 
+    @PostMapping("distance")
+    @ResponseBody
+    public int PostDistance(@RequestParam("oMap") Map<String, List<String>> map) {
+        for(String key : map.keySet()) {
+            List<String> value = map.get(key);
+            for(String v : value) {
+                System.out.println("v = " + v);
+            }
+        }
+        return 1;
+    }
 
     public String setLocation(int lid) {
-
         String location = null;
-
         if (lid == 2)
             location = "서울특별시";
         else if (lid == 31)

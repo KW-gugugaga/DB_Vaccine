@@ -50,6 +50,7 @@
             place-items: center;
             min-height: 78vh;
         }
+        input[type=password] {font-family:'Malgun gothic', dotum, sans-serif;}
     </style>
     <script>
         function modifyform() {
@@ -88,7 +89,7 @@
                     <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 확인/취소</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">관련 정보 및 안내사항</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -132,7 +133,7 @@
                     <tr>
                         <td class="card-text" th:text="'비밀번호'"></td>
                         <td>
-                            <input type="text" name="PW" id="PW" th:value="${modifyUserinfo.PW}">
+                            <input type="password" name="PW" id="PW" th:value="${modifyUserinfo.PW}">
                         </td>
                     </tr>
                 </div>

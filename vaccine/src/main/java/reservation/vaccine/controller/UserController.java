@@ -203,10 +203,8 @@ public class UserController {
             model.addAttribute("hname1", Hname1);
             model.addAttribute("hname2", Hname2);
         }
-
         return "user/reservationinfo";
     }
-
 
     @GetMapping("cancel")
     public String GetCancel(Model model, HttpServletRequest req, @RequestParam("what") String what) {

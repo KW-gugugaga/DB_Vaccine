@@ -36,9 +36,9 @@ public interface Mapper {
     void reservation(int Hid);
     void reservation2nd(int Hid);
     String findHospitalNameByHid(int Hid);
-
     void cancelBackAll(int Hid);
     void cancelBackEach(int Hid);
+    int findHidByHname(String Hname);
 
     //visualization
     List<Location> visualizeByLocation();
@@ -53,5 +53,9 @@ public interface Mapper {
     Float getAvgStar(int Hid);
     List<String> findALlReviewByHid(int Hid);
     void deleteReview(int RVid);
+
+    //servey
+    void insertSurvey(Survey survey);
+    String findVaccineNameByVid(int Vid);
 
 }
