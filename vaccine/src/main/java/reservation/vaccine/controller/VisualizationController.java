@@ -12,6 +12,7 @@ import reservation.vaccine.service.VisualizationService;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Controller
@@ -99,12 +100,47 @@ public class VisualizationController {
         {
             System.out.println("dateVaccinated= "+ dateVaccinated.get(i));
         }
-        Map<String, Object> DayData = new HashMap<String, Object>();
+        Map<String, Object> ExistDay = new HashMap<String, Object>();
 
         for(int i = 0; i<dateVaccinated.size(); i++)
         {
-            DayData.put(dateVaccinated.get(i).get("date_2").toString(),dateVaccinated.get(i).get("count(*)"));
+            ExistDay.put(dateVaccinated.get(i).get("date_2").toString(),dateVaccinated.get(i).get("count(*)"));
+            System.out.println("DayData= "+ExistDay);
+        }
+        int days = (int)monthBefore.until(today,ChronoUnit.DAYS);
+
+        Map<String, Integer> DayData = new LinkedHashMap<String, Integer>();
+        System.out.println("days = " + days
+        );
+
+
+        for(int i = 0; i<days;i++)
+        {
+            DayData.put(monthBeforeStr,0);
+            monthBefore=monthBefore.plusDays(1);
+            monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             System.out.println("DayData= "+DayData);
+        }
+
+        int count =0;
+
+        for(String allDay : DayData.keySet())
+        {
+            for(String existDay : ExistDay.keySet())
+            {
+                if(allDay.equals(existDay))
+                {
+                    if(count==0)
+                        count = Integer.parseInt(ExistDay.get(existDay).toString());
+                    else
+                        count+= Integer.parseInt(ExistDay.get(existDay).toString());
+                    System.out.println("count = " + count);
+
+                }
+                DayData.put(allDay,count);
+
+                System.out.println("DayData= "+DayData);
+            }
         }
 
         model.addAttribute("DayData", DayData);
