@@ -82,50 +82,50 @@
     </div>
 </nav>
 <br>
-    <wrap id="wrap">
-        <center>
-            <h3>
-                <p id="title_1"><b>예약 내역</b></p>
-            </h3>
-        </center>
-        <center style="padding-top: 18%;">
+<wrap id="wrap">
+    <center>
+        <h3>
+            <p id="title_1"><b>예약 내역</b></p>
+        </h3>
+    </center>
+    <center style="padding-top: 18%;">
         <span th:if="${rsvstate}==0">
                 <p style="font-size: 18px; width: 50%; border-radius: 15px 15px 15px 0; border-bottom: 5px solid rgb(50 93 136 / 50%); padding: 0.5em; background: rgb(50 93 136 / 25%);">예약 내역이 없습니다!</p>
              </span>
-        </center>
+    </center>
 
-        <table class="type04 card-body" style="padding-top:0;" th:unless="${rsvstate}==0">
-            <div id="info">
-                <tr>
-                    <td th:text="'접종자 이름'"></td>
-                    <td th:text="${userinfo.Uname}"></td>
-                </tr>
+    <table class="type04 card-body" style="padding-top:0;" th:unless="${rsvstate}==0">
+        <div id="info">
+            <tr>
+                <td th:text="'접종자 이름'"></td>
+                <td th:text="${userinfo.Uname}"></td>
+            </tr>
 
-                <tr>
-                    <td th:text="'주민등록번호'"></td>
-                    <td th:text="${userinfo.ssn1} +'-' + ${userinfo.ssn2}"></td>
-                </tr>
-            </div>
+            <tr>
+                <td th:text="'주민등록번호'"></td>
+                <td th:text="${userinfo.ssn1} +'-' + ${userinfo.ssn2}"></td>
+            </tr>
+        </div>
 
-            <div class="first">
-                <tr></tr>
-                <tr>
-                    <td th:text="'1차 접종 백신'"></td>
-                    <td th:text="${vname1}"></td>
-                </tr>
+        <div class="first">
+            <tr></tr>
+            <tr>
+                <td th:text="'1차 접종 백신'"></td>
+                <td th:text="${vname1}"></td>
+            </tr>
 
-                <tr>
-                    <td th:text="'1차 접종 예약 의료기관'"></td>
-                    <td th:text="${hname1}"></td>
-                </tr>
+            <tr>
+                <td th:text="'1차 접종 예약 의료기관'"></td>
+                <td th:text="${hname1}"></td>
+            </tr>
 
-                <tr>
-                    <td th:text="'1차 접종 예약 일시'"></td>
-                    <td th:text="${userrsv.date_1} + ' ' + ${userrsv.hour_1} + '시'"></td>
-                </tr>
-            </div>
+            <tr>
+                <td th:text="'1차 접종 예약 일시'"></td>
+                <td th:text="${userrsv.date_1} + ' ' + ${userrsv.hour_1} + '시'"></td>
+            </tr>
+        </div>
 
-            <span th:if="${rsvstate}==1">
+        <span th:if="${rsvstate}==1">
                     <div class="second">
                         <tr></tr>
                         <tr>
@@ -145,7 +145,7 @@
                     </div>
             </span>
 
-            <span th:if="${rsvstate}==4">
+        <span th:if="${rsvstate}==4">
                     <tr></tr>
                     <tr>
                         <td th:text="'2차 접종 백신'"></td>
@@ -162,7 +162,7 @@
                     </tr>
             </span>
 
-            <span th:if="${rsvstate}==5">
+        <span th:if="${rsvstate}==5">
                 <tr></tr>
                 <tr>
                     <td th:text="'2차 접종 백신'"></td>
@@ -178,32 +178,32 @@
                     <td th:text="${userrsv.date_2} + ' ' + ${userrsv.hour_2} + '시'"></td>
                 </tr>
             </span>
-        </table>
-    </wrap>
-    <div style="text-align: center; padding-bottom: 20px;">
-            <div th:if="${rsvstate}==1">
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
-            </div>
-
-            <div th:if="${rsvstate}==2">
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=1차'">1차 예약 취소</button>
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
-            </div>
-
-            <div th:if="${rsvstate}==3">
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
-            </div>
-
-            <div th:if="${rsvstate}==4">
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
-            </div>
-
-            <div th:if="${rsvstate}==5">
-                <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
-            </div>
+    </table>
+</wrap>
+<div style="text-align: center; padding-bottom: 20px;">
+    <div th:if="${rsvstate}==1">
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=전체'">예약 전체 취소</button>
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
     </div>
+
+    <div th:if="${rsvstate}==2">
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=1차'">1차 예약 취소</button>
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+    </div>
+
+    <div th:if="${rsvstate}==3">
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+    </div>
+
+    <div th:if="${rsvstate}==4">
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='cancel?what=2차'">2차 예약 취소</button>
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+    </div>
+
+    <div th:if="${rsvstate}==5">
+        <button type="button" class="btn btn-lg btn-dark disabled" onclick="location.href='review'">병원 리뷰 작성/확인</button>
+    </div>
+</div>
 </body>
 </html>

@@ -2,9 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
-
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <title>News</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        body{
+            background-color:rgba(221,212,195,0.31);
+            font-family: 'Jeju Gothic', sans-serif;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed;width: 100%;z-index:1; ">
@@ -41,12 +47,9 @@
         </div>
     </div>
 </nav>
-<h2>최신 현황 확인 페이지</h2>
-<div class="container">
-
-    <h1 class="display-4">Coronavirus Tracker Application(Korea)</h1>
-    <p class="lead">한국의 코로나19 현황테이블</p>
-
+<h2 style="margin: ">최신 현황 확인 페이지</h2>
+<div class="container" style="padding-top: 50px;">
+    <h1 class="display-4" style="color: gray;">오늘의 코로나 확진자 현황</h1>
     <div class="jumbotron">
         <h1 class="display-4" th:text="${koreaStats[0].alltotal}"></h1>
         <p class="lead">Total cases reported</p>
