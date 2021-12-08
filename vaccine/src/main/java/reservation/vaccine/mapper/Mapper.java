@@ -37,9 +37,9 @@ public interface Mapper {
     void reservation(int Hid);
     void reservation2nd(int Hid);
     String findHospitalNameByHid(int Hid);
-
     void cancelBackAll(int Hid);
     void cancelBackEach(int Hid);
+    int findHidByHname(String Hname);
 
     //visualization
     List<Location> visualizeByLocation();

@@ -5,7 +5,8 @@
     <title>Hospital List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
 
@@ -34,6 +35,7 @@
         margin-right: 3%;
         width:60%;
     }
+
     </style>
 </head>
 
@@ -83,102 +85,141 @@
 
 <hr style="border: 2px">
 <div id="map" style="height:500px;"></div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+
+
+</script>
 <script th:inline="javascript">
-let name = [[${full_loc}]];
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level:7// 지도의 확대 레벨
-    };
-
-// 지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption);
-
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-var coords;
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch(name, function(result, status) {
-     coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-    // 정상적으로 검색이 완료됐으면
-     if (status === kakao.maps.services.Status.OK) {
-
-        console.log(result[0].y,result[0].x);
-
-        var imageSrc = 'img/loc.png', // 마커이미지의 주소입니다
-        imageSize = new kakao.maps.Size(54, 54), // 마커이미지의 크기입니다
-        imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption); // 마커가 표시될 위치입니다
-
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            image: markerImage,
-            position: coords
-        });
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
+    var JqMap = function(){
+        this.map = new Object();
     }
-});
-    [[${hospitals}]].forEach(item => {
-    console.log(item.hospitalLocation.rest_Haddr);
 
-    console.log(item.hname);
+    JqMap.prototype = {
+        /* key, value 값으로 구성된 데이터를 추가 */
+        put: function (key, value) {
+            this.map[key] = value;
+        },
+        /* 지정한 key값의 value값 반환 */
+        get: function (key) {
+            return this.map[key];
+        }
+    }
 
-    var geocoder2 = new kakao.maps.services.Geocoder();
+    let name = [[${full_loc}]];
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 7 // 지도의 확대 레벨
+        };
 
+    // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    var coords;
     // 주소로 좌표를 검색합니다
-    geocoder2.addressSearch(item.hospitalLocation.rest_Haddr, function(result2, status2) {
+    geocoder.addressSearch(name, function(result, status) {
+        coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
         // 정상적으로 검색이 완료됐으면
-         if (status2 === kakao.maps.services.Status.OK) {
+        if (status === kakao.maps.services.Status.OK) {
 
-            var coords2 = new kakao.maps.LatLng(result2[0].y, result2[0].x);
-            console.log(coords2);
+            console.log(result[0].y, result[0].x);
+
+            var imageSrc = 'img/loc.png', // 마커이미지의 주소입니다
+                imageSize = new kakao.maps.Size(54, 54), // 마커이미지의 크기입니다
+                imageOption = {
+                    offset: new kakao.maps.Point(27, 69)
+                }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+            // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption); // 마커가 표시될 위치입니다
+
 
             // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
                 map: map,
-                position: coords2,
-                clickable: true
+                image: markerImage,
+                position: coords
             });
 
-            // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-            var iwContent = '<div style="padding:5px;font-size:10px;">'+item.hname+'<br>'+'잔여백신:'+item.rest+'</div>'
-                iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-            // 인포윈도우를 생성합니다
-            var infowindow = new kakao.maps.InfoWindow({
-                content : iwContent,
-                removable : iwRemoveable
-            });
-            kakao.maps.event.addListener(marker, 'click', function() {
-                // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-                infowindow.open(map, marker);
-            });
-
-            if (coords !== undefined) {
-
-                var line = new kakao.maps.Polyline(); // for calculating length
-
-                var path = [ coords, coords2 ];
-
-                line.setPath(path);
-                var dist = line.getLength();
-                console.log("길이"+line.getLength());
-            }
-
-
-
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
         }
     });
-})
 
+    var oMap = new JqMap();
+
+    [[${hospitals}]].forEach(item => {
+        console.log(item.hospitalLocation.rest_Haddr);
+
+        console.log(item.hname);
+
+        var geocoder2 = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        geocoder2.addressSearch(item.hospitalLocation.rest_Haddr, function(result2, status2) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status2 === kakao.maps.services.Status.OK) {
+
+                var coords2 = new kakao.maps.LatLng(result2[0].y, result2[0].x);
+                console.log(coords2);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords2,
+                    clickable: true
+                });
+
+                // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+                var iwContent = '<div style="padding:5px;font-size:10px;">' + item.hname + '<br>' + '잔여백신:' + item.rest + '</div>'
+                iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+                // 인포윈도우를 생성합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: iwContent,
+                    removable: iwRemoveable
+                });
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                    infowindow.open(map, marker);
+                });
+
+                if (coords !== undefined) {
+                    var line = new kakao.maps.Polyline(); // for calculating length
+
+                    var path = [coords, coords2];
+
+                    line.setPath(path);
+                    var dist = line.getLength();
+                    var hname = item.hname;
+                    console.log(hname);
+                    console.log("길이" + line.getLength());
+                    oMap.put(hname, dist);
+                }
+            }
+        });
+    })
+
+    /*$.ajax({
+            url: '/distance', //Controller에서 인식할 주소
+            type: 'post', //POST 방식으로 전달
+            data: JSON.stringify(oMap),
+            success: function(cnt) { //컨트롤러에서 넘어온 cnt값을 받는다
+                if (cnt != 1) { //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+
+                } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+
+                }
+            },
+            error: function() {
+                alert("에러입니다");
+            }
+    });*/
 </script>
 <div id="table">
     <table id="hospitalTable" class="table table-hover">
@@ -210,13 +251,15 @@ geocoder.addressSearch(name, function(result, status) {
                 <td>
                     <span th:if="${hospital.rest == 0}">
                         <button name="resbutton" type="submit" onclick="location.href='reservationpage'"
-                                value="예약하기" class="btn btn-outline-secondary" style="width: 110%; align:center; border: 2px solid gray;" disabled>예약하기
+                                value="예약하기" class="btn btn-outline-secondary"
+                                style="width: 110%; align:center; border: 2px solid gray;" disabled>예약하기
                         </button>
                         <p style="color: red; font-size: 12px;">예약 불가</p>
                     </span>
                     <span th:if="${hospital.rest != 0}">
                         <button name="resbutton" type="submit" onclick="location.href='reservationpage'"
-                                value="예약하기" class="btn btn-outline-secondary" style="align:center; width: 110%; border: 2px solid black;">예약하기
+                                value="예약하기" class="btn btn-outline-secondary"
+                                style="align:center; width: 110%; border: 2px solid black;">예약하기
                         </button>
                     </span>
                 </td>

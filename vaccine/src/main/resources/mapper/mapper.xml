@@ -106,6 +106,12 @@
         where h.Hid = #{Hid};
     </select>
 
+    <select id="findHidbyHname" parameterType="string" resultType="int">
+        select Hid
+        from hospital
+        where Hname = #{Hname};
+    </select>
+
     <select id="findHospitalNameByHid" resultType="String" parameterType="int">
         select Hname
         from hospital
@@ -211,5 +217,4 @@
         delete from review
         where RVid = #{RVid}
     </select>
-
 </mapper>
