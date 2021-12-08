@@ -6,10 +6,19 @@
     <title>News</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style>
+        #title_1{
+            width:300px;
+            text-align:center;
+            border: 5px solid #beb8a8;
+            padding: 0.4em 1em 0.3em 1em;
+            border-radius: 15px;
+            box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+        }
         body{
             background-color:rgba(221,212,195,0.31);
             font-family: 'Jeju Gothic', sans-serif;
         }
+
     </style>
 </head>
 <body>
@@ -47,16 +56,19 @@
         </div>
     </div>
 </nav>
-<h2 style="margin: ">최신 현황 확인 페이지</h2>
+<p id="title_1">최신 현황 확인 페이지</p>
 <div class="container" style="padding-top: 50px;">
     <h1 class="display-4" style="color: gray;">오늘의 코로나 확진자 현황</h1>
-    <div class="jumbotron">
-        <h1 class="display-4" th:text="${koreaStats[0].alltotal}"></h1>
-        <p class="lead">Total cases reported</p>
-        <hr class="my-4">
-        <p>
-            <span>New cases reported since previous day</span>
-        </p>
+    <div class="jumbotron" style="height: 200px">
+        <div style="float: left; width: 500px;">
+            <h1 class="display-4" th:text="${koreaStats[0].alltotal}"></h1>
+            <p class="lead">총 확진자</p>
+        </div>
+        <hr style="float: left; border: 0.3px solid black; width: 0.1px; height: 60px;">
+        <div style="float:left; padding-left: 50px;">
+            <h1 class="display-4" th:text="${koreaStats[0].daytotal}"></h1>
+            <p class="lead" style="text-align: center;">오늘의 확진자</p>
+        </div>
     </div>
 
     <table class="table">
@@ -66,7 +78,7 @@
             <th>총 확진환자수</th>
             <th>총 격리해제수</th>
             <th>총 사망자</th>
-            <th>총 발생률</th>
+            <th>인구 10만 명당 발생률</th>
         </tr>
         <tr th:each="stat : ${koreaStats} ">
             <td th:text="${stat.country}"></td>
