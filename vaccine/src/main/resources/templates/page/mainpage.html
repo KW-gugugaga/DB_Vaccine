@@ -185,7 +185,12 @@
             <br>
             <div class="wrap">
                 <div class="news_button">
-                    <input class="button" type="button" onclick="location.href='news'" value="최신 정보 확인">
+                    <input class="button" type="button" onclick="location.href='news'" value="관련 정보 및 안내사항">
+                </div>
+            </div>
+            <div class="wrap">
+                <div class="survey_button">
+                    <input class="button" type="button" onclick="location.href='ReSur'" value="리뷰 남기기/설문조사">
                 </div>
             </div>
         </center>
@@ -221,6 +226,8 @@
             <li class="tab-link current" data-tab="tab-1">누적 접종 현황</li>
             <li class="tab-link" data-tab="tab-2">지역별 접종 현황</li>
             <li class="tab-link" data-tab="tab-3">나이별 접종 현황</li>
+            <li class="tab-link" data-tab="tab-4">나이s별 접종 현황</li>
+
         </ul>
 
         <div id="tab-1" class="tab-content current" style="width: 653px;">
@@ -371,7 +378,50 @@
         </script>
         <p style="color:#DA0000; font-size: 12px">※ (나이대 별 접종 완료자 수) / (해당 나이대 예약 프로그램 가입자 수)로 나타내었습니다.</p>
     </div>
+    <div id="tab-4" class="tab-content" style="width: 653px; height: 530px">
+        <div id="barchart2"></div>
+        <script th:inline="javascript">
+            google.charts.load('45', {packages : ['bar']});
+            google.charts.setOnLoadCallback(drawBarChart);
 
+            function drawBarChart() {
+                var real_data = [[${AgeData}]];
+                console.log(real_data);
+
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'age');
+                data.addColumn('number', '접종완료자 비율');
+                Object.keys(real_data).forEach(function(key) {
+                    data.addRow([ key, real_data[key] ]);
+                });
+                var options = {
+                    title : '나이별 접종 완료자',
+                    titleTextStyle : {
+                        fontSize: 18
+                    },
+                    hAxis : {
+                        title : '접종 완료자 비율',
+                        minValue: 0,
+                    },
+                    vAxis : {
+                        title : '나이',
+                    },
+                    width: 620,
+                    height: 500,
+                    legend: {
+                        textStyle: {fontSize: 12},
+                    },
+                    colors: ['#8E8C84'],
+                    chartArea:{left:100},
+                    fontName: 'Jeju Gothic'
+
+                };
+                var chart = new google.visualization.BarChart(document.getElementById('barchart2'));
+                chart.draw(data, options);
+            }
+
+        </script>
+    </div>
 </div>
 
 </div>
