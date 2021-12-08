@@ -88,9 +88,11 @@
                 <p id="title_1"><b>예약 내역</b></p>
             </h3>
         </center>
+        <center style="padding-top: 18%;">
         <span th:if="${rsvstate}==0">
-                <h4  style="border-radius: 15px 15px 15px 0; border-bottom: 5px solid #B9C4C4; padding: 0.5em; background: #CEDADA;">예약 내역이 없습니다!</h4>
+                <p style="font-size: 18px; width: 50%; border-radius: 15px 15px 15px 0; border-bottom: 5px solid rgb(50 93 136 / 50%); padding: 0.5em; background: rgb(50 93 136 / 25%);">예약 내역이 없습니다!</p>
              </span>
+        </center>
 
         <table class="type04 card-body" style="padding-top:0;" th:unless="${rsvstate}==0">
             <div id="info">
@@ -149,7 +151,6 @@
                         <td th:text="'2차 접종 백신'"></td>
                         <td th:text="${vname2}"></td>
                     </tr>
-
                     <tr>
                         <td th:text="'2차 접종 예약 의료기관'"></td>
                         <td th:text="${hname2}"></td>

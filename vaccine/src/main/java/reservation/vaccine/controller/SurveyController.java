@@ -35,13 +35,17 @@ public class SurveyController {
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         UserInfo userInfo = (UserInfo)user;
-        UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
-        String vac_1 = surveyService.findVaccineNameByVid(userRsv.getVid_1());
-        String vac_2 = surveyService.findVaccineNameByVid(userRsv.getVid_2());
-        System.out.println("vac_1 = " + vac_1);
-        System.out.println("vac_2 = " + vac_2);
-        model.addAttribute("vac_1", vac_1);
-        model.addAttribute("vac_2", vac_2);
+        int state = userInfo.getState();
+        if(state == 5) {
+            UserRsv userRsv = userService.findUserRsv(userInfo.getUid());
+            String vac_1 = surveyService.findVaccineNameByVid(userRsv.getVid_1());
+            String vac_2 = surveyService.findVaccineNameByVid(userRsv.getVid_2());
+            System.out.println("vac_1 = " + vac_1);
+            System.out.println("vac_2 = " + vac_2);
+            model.addAttribute("vac_1", vac_1);
+            model.addAttribute("vac_2", vac_2);
+        }
+        model.addAttribute("state", state);
         return "survey/survey";
     }
 
