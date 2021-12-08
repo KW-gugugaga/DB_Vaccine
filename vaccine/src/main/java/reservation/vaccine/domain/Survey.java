@@ -1,12 +1,29 @@
 package reservation.vaccine.domain;
 
 public class Survey {
-    private int Uid;
-    private int Vid;
-    private int state;
-    private int day1;
-    private int day2;
-    private int day3;
+    int Uid;
+
+    int Vid_1;
+    int day1_1;
+    int day3_1;
+    int day7_1;
+
+    int Vid_2;
+    int day1_2;
+    int day3_2;
+    int day7_2;
+
+    public Survey(int uid, int vid_1, int day1_1, int day3_1, int day7_1, int vid_2, int day1_2, int day3_2, int day7_2) {
+        Uid = uid;
+        Vid_1 = vid_1;
+        this.day1_1 = day1_1;
+        this.day3_1 = day3_1;
+        this.day7_1 = day7_1;
+        Vid_2 = vid_2;
+        this.day1_2 = day1_2;
+        this.day3_2 = day3_2;
+        this.day7_2 = day7_2;
+    }
 
     public int getUid() {
         return Uid;
@@ -16,43 +33,82 @@ public class Survey {
         Uid = uid;
     }
 
-    public int getVid() {
-        return Vid;
+    public int getVid_1() {
+        return Vid_1;
     }
 
-    public void setVid(int vid) {
-        Vid = vid;
+    public void setVid_1(int vid_1) {
+        Vid_1 = vid_1;
     }
 
-    public int getState() {
-        return state;
+    public int getDay1_1() {
+        return day1_1;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setDay1_1(int day1_1) {
+        this.day1_1 = day1_1;
     }
 
-    public int getDay1() {
-        return day1;
+    public int getDay3_1() {
+        return day3_1;
     }
 
-    public void setDay1(int day1) {
-        this.day1 = day1;
+    public void setDay3_1(int day3_1) {
+        this.day3_1 = day3_1;
     }
 
-    public int getDay2() {
-        return day2;
+    public int getDay7_1() {
+        return day7_1;
     }
 
-    public void setDay2(int day2) {
-        this.day2 = day2;
+    public void setDay7_1(int day7_1) {
+        this.day7_1 = day7_1;
     }
 
-    public int getDay3() {
-        return day3;
+    public int getVid_2() {
+        return Vid_2;
     }
 
-    public void setDay3(int day3) {
-        this.day3 = day3;
+    public void setVid_2(int vid_2) {
+        Vid_2 = vid_2;
+    }
+
+    public int getDay1_2() {
+        return day1_2;
+    }
+
+    public void setDay1_2(int day1_2) {
+        this.day1_2 = day1_2;
+    }
+
+    public int getDay3_2() {
+        return day3_2;
+    }
+
+    public void setDay3_2(int day3_2) {
+        this.day3_2 = day3_2;
+    }
+
+    public int getDay7_2() {
+        return day7_2;
+    }
+
+    public void setDay7_2(int day7_2) {
+        this.day7_2 = day7_2;
+    }
+
+    @Override
+    public String toString() {
+        return "Survey{" +
+                "Uid=" + Uid +
+                ", Vid_1=" + Vid_1 +
+                ", day1_1=" + day1_1 +
+                ", day3_1=" + day3_1 +
+                ", day7_1=" + day7_1 +
+                ", Vid_2=" + Vid_2 +
+                ", day1_2=" + day1_2 +
+                ", day3_2=" + day3_2 +
+                ", day7_2=" + day7_2 +
+                '}';
     }
 }

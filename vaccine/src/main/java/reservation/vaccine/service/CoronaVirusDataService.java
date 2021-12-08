@@ -21,14 +21,19 @@ public class CoronaVirusDataService {
         List<KoreaStats> koreaStatsList = new ArrayList<>();
         Document doc = Jsoup.connect(KOREA_COVID_DATAS_URL).get();
 
-        Elements contents = doc.select("table tbody tr");
+        Elements contents = doc.select(".data_table table tbody tr");
 
         for(Element content : contents){
             Elements tdContents = content.select("td");
 
             KoreaStats koreaStats = KoreaStats.builder()
                     .country(content.select("th").text())
-                    .total((tdContents.get(1).text()))
+                    .daytotal((tdContents.get(0).text()))
+                    .alltotal((tdContents.get(3).text()))
+                    .end((tdContents.get(4).text()))
+                    .death((tdContents.get(5).text()))
+                    .incident((tdContents.get(6).text()))
+
                     .build();
             koreaStatsList.add(koreaStats);
         }

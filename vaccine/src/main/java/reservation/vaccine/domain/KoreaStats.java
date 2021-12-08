@@ -12,13 +12,15 @@ public class KoreaStats {
 
     private String country; // 시도명
 
-    private String total; // 확진환자수
+    private String daytotal; //당일 확진
 
-    //private String death; // 사망자수
+    private String alltotal; // 총 확진
 
-    //private String incidence; // 발병률
+    private String end; // 격리해제
 
-    //private String inspection; // 일일 검사환자 수
+    private String death; // 사망자
+
+    private String incident; //발생률
 
 }
 

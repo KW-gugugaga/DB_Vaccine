@@ -57,4 +57,8 @@ public interface Mapper {
     List<String> findALlReviewByHid(int Hid);
     void deleteReview(int RVid);
 
+    //servey
+    void insertSurvey(Survey survey);
+    String findVaccineNameByVid(int Vid);
+
 }

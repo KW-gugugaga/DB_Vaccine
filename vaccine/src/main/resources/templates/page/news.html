@@ -48,7 +48,7 @@
     <p class="lead">한국의 코로나19 현황테이블</p>
 
     <div class="jumbotron">
-        <h1 class="display-4" th:text="${koreaStats[0].total}"></h1>
+        <h1 class="display-4" th:text="${koreaStats[0].alltotal}"></h1>
         <p class="lead">Total cases reported</p>
         <hr class="my-4">
         <p>
@@ -60,10 +60,18 @@
         <tr>
             <th>지역</th>
             <th>확진환자수(전일 대비 증감량)</th>
+            <th>총 확진환자수</th>
+            <th>총 격리해제수</th>
+            <th>총 사망자</th>
+            <th>총 발생률</th>
         </tr>
         <tr th:each="stat : ${koreaStats} ">
             <td th:text="${stat.country}"></td>
-            <td th:text="|${stat.total}">0</td>
+            <td th:text="${stat.daytotal}">0</td>
+            <td th:text="${stat.alltotal}">0</td>
+            <td th:text="${stat.end}">0</td>
+            <td th:text="${stat.death}">0</td>
+            <td th:text="${stat.incident}">0</td>
         </tr>
     </table>
 </div>
