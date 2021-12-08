@@ -15,14 +15,11 @@
             width: 100%;
             height: 60%;
             margin: 0 auto;
-            padding: 0;
-            padding-right: 14%;
+            padding: 5px;
 
         }
         div.tapp {
-            width: 80%;
             box-sizing: border-box;
-            float:center;
             }
 
 
@@ -64,6 +61,7 @@
         background-color:rgba(221,212,195,0.31);
         font-family: 'Jeju Gothic', sans-serif;
         text-align:center;
+        margin-bottom: 50px;
     }
     #title_1{
         width:300px;
@@ -74,21 +72,70 @@
         box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
     }
 
-    #table{
-        float:center;
-        margin-right: 3%;
-        width:80%;
+    .wrapper {
+      display: grid;
+      grid-template-columns: 338px 338px 338px;
+      grid-template-rows: 175px 175px;
+      grid-gap: 40px;
+      color: #444;
     }
 
+    .box {
+      color: #444;
+      border: 2px solid #8e8c84;
+      border-radius: 5px;
+      padding: 5px;
+    }
+
+    .a {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;
+      }
+      .b {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+      }
+      .c {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 2;
+      }
+      .d {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+      .e {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+      .f {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
 
 
     </style>
-    <script style="text/javascript">
+    <script th:inline="javascript" style="text/javascript">
         function surveyBtn() {
-            var surveyForm = document.surveyForm;
-            surveyForm.submit();
+            var surveyState = [[${surveyState}]];
+            console.log(surveyState);
+            if(surveyState == 1) {
+                alert('설문 응답 내역이 이미 존재하므로 재응답이 불가합니다.');
+            } else {
+                location.href = "survey";
+            }
         }
-
 
     </script>
 </head>
@@ -128,12 +175,16 @@
     </div>
 </nav>
 <br>
-
 <center>
-  <h3>
-    <p id="title_1"><b>설문조사 통계</b></p>
-  </h3>
-  <br>
+    <h3>
+        <p id="title_1"><b>설문조사 통계</b></p>
+    </h3>
+    <br>
+    <p style="color: #444; font-size: 14px; margin: 0">접종 완료자를 대상으로 한 설문조사 결과를 바탕으로 각 백신 종류 별, 일자 별로 가장 많은 응답을 기록한 3개의
+        후유증을 나타내었습니다.</p>
+    <br>
+    <p style="color: red; font-size: 14px; margin: 0">아직 설문조사를 완료하지 않았다면</p>
+    <button type="button" class="btn btn-lg btn-dark disabled" onclick="surveyBtn()" style="width: 230px; font-size: 14px;">설문조사 하러가기</button>
 </center>
 <div class="tapp">
     <script>
@@ -149,25 +200,355 @@
                 $("#"+tab_id).addClass('current');
             })
         })
+
+
     </script>
     <div class="container">
-
         <ul class="tabs">
             <li class="tab-link current" data-tab="tab-1">화이자</li>
             <li class="tab-link" data-tab="tab-2">모더나</li>
             <li class="tab-link" data-tab="tab-3">아스트라제네카</li>
-
         </ul>
+        <center>
+            <div id="tab-1" class="tab-content current" style="height: 420px">
+                <div class="wrapper">
+                    <div class="box a">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 당일
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${pfizer_day1_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box b">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 3일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${pfizer_day3_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box c">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 7일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${pfizer_day7_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box d">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 당일
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${pfizer_day1_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box e">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 3일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${pfizer_day3_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box f">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 7일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${pfizer_day7_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-        <div id="tab-1" class="tab-content current" style="width: 653px;">
-        </div>
-        <div id="tab-2" class="tab-content" style="width: 653px; height: 530px">
-        </div>
-        <div id="tab-3" class="tab-content" style="width: 653px; height: 530px">
+            <div id="tab-2" class="tab-content" style="height: 420px">
+                <div class="wrapper">
+                    <div class="box a">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 당일
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${az_day1_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box b">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 3일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${az_day3_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box c">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 7일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${az_day7_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box d">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 당일
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${az_day1_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box e">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 3일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${az_day3_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box f">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 7일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${az_day7_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-        </div>
-
+            <div id="tab-3" class="tab-content" style="height: 420px">
+                <div class="wrapper">
+                    <div class="box a">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 당일
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${mo_day1_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box b">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 3일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${mo_day3_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box c">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    1차 접종 7일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${mo_day7_1}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box d">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 당일
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${mo_day1_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box e">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 3일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${mo_day3_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box f">
+                        <table style="width: 100%; height: 80%">
+                            <thead>
+                            <tr style="margin:0 auto;text-align:center">
+                                <th scope="col"
+                                    style="text-weight:bold; font-size: 25px; text-align: center; font-weight: bold; text-decoration: underline; text-decoration-color: #f8f5f0;">
+                                    2차 접종 7일 후
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="p : ${mo_day7_2}">
+                            <tr>
+                                <td style="font-size: 18px; text-align: center; align: center;"><p th:text="${p}"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </center>
     </div>
-
 </div>
 </body>

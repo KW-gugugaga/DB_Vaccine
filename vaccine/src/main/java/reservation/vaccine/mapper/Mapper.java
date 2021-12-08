@@ -57,6 +57,12 @@ public interface Mapper {
     //servey
     void insertSurvey(Survey survey);
     String findVaccineNameByVid(int Vid);
-    List<Integer> getSymptoms_1(int Vid_1, String day);
-    List<Integer> getSymptoms_2(int Vid_2, String day);
+    List<Integer> getSymptoms_day1_1(int Vid_1);
+    List<Integer> getSymptoms_day3_1(int Vid_1);
+    List<Integer> getSymptoms_day7_1(int Vid_1);
+    List<Integer> getSymptoms_day1_2(int Vid_2);
+    List<Integer> getSymptoms_day3_2(int Vid_2);
+    List<Integer> getSymptoms_day7_2(int Vid_2);
+    String getSymptom(int Sid);
+    Integer findSurveyByUid(int Uid);
 }
