@@ -65,4 +65,9 @@ public class SurveyController {
         surveyService.insertSurvey(survey);
         return "redirect:mainpage";
     }
+
+    @GetMapping("surveystatistic")
+    public String GetSurveyStatistic(Model mode, HttpServletRequest req) {
+        return "survey/surveystatistic";
+    }
 }
