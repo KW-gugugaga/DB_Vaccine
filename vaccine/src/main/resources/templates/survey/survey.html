@@ -22,26 +22,8 @@
         padding: 0.4em 1em 0.3em 1em;
         border-radius: 15px;
         box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom:0px;
     }
-    #hospitalTable{
-        margin:auto;
-    }
-    #map{
-        float:left;
-        margin-left: 3%;
-        width:30%;
-    }
-    #table{
-        float:right;
-        margin-right: 3%;
-        width:60%;
-    }
-
-
-
-
-
-
 
 
     </style>
@@ -50,13 +32,6 @@
             var surveyForm = document.surveyForm;
             surveyForm.submit();
         }
-
-
-
-
-
-
-
 
     </script>
 </head>
@@ -116,13 +91,16 @@
 </center>
 <form class="survey" name="surveyForm" id="surveyForm" action="survey" method="post">
     <div class="form-check" style="font-size: 14px;">
-
-           <p th:text="'1차 접종 백신 : ' + ${vac_1}" style="font-size: 15px;"></p>
-
-        <table>
-            <tr>
-                <tb><strong>1차 접종 당일 증상</strong></tb>
-            <tb>
+        <table class="table table-hover" style="width:50%;margin: auto;">
+              <thead>
+                <tr class="table-light">
+                  <th colspan="2"><p th:text="'1차 접종 백신 : ' + ${vac_1}" style="font-size: 18px;margin:0;"></p></th>
+                </tr>
+              </thead>
+            <tbody>
+            <tr class="table-light">
+                <td><strong>1차 접종 당일 증상</strong></td>
+            <td>
                 <input type="radio" name="1_1" value="1"> 발열
                 <input type="radio" name="1_1" value="2"> 두통
                 <input type="radio" name="1_1" value="3"> 오한
@@ -130,36 +108,45 @@
                 <input type="radio" name="1_1" value="5"> 주사 부위의 통증
                 <input type="radio" name="1_1" value="6"> 메스꺼움
                 <input type="radio" name="1_1" value="7"> 근육통
-            </tb>
+            </td>
             </tr>
-            <tr>
-                <tb><strong>1차 접종 3일 후 증상</strong></tb>
-
-            <tb><input type="radio" name="1_3" value="1"> 발열
+            <tr class="table-light">
+            <td><strong>1차 접종 3일 후 증상</strong></td>
+                <td>
+            <input type="radio" name="1_3" value="1"> 발열
             <input type="radio" name="1_3" value="2"> 두통
             <input type="radio" name="1_3" value="3"> 오한
             <input type="radio" name="1_3" value="4"> 피로
             <input type="radio" name="1_3" value="5"> 주사 부위의 통증
             <input type="radio" name="1_3" value="6"> 메스꺼움
             <input type="radio" name="1_3" value="7"> 근육통
-                </tb>
+                </td>
             </tr>
-            <tr>
-            <tb><strong>1차 접종 7일 후 증상</strong></tb>
-
-                <tb><input type="radio" name="1_7" value="1"> 발열
+            <tr class="table-light">
+            <td><strong>1차 접종 7일 후 증상</strong></td>
+                <td>
+            <input type="radio" name="1_7" value="1"> 발열
             <input type="radio" name="1_7" value="2"> 두통
             <input type="radio" name="1_7" value="3"> 오한
             <input type="radio" name="1_7" value="4"> 피로
             <input type="radio" name="1_7" value="5"> 주사 부위의 통증
             <input type="radio" name="1_7" value="6"> 메스꺼움
-            <input type="radio" name="1_7" value="7"> 근육통</tb>
+            <input type="radio" name="1_7" value="7"> 근육통
+                </td>
             </tr>
+            </tbody>
        </table>
-            <div>
-                <br>
-                <p th:text="'2차 접종 백신 : ' + ${vac_2}" style="font-size: 15px;"></p>
-                <strong>2차 접종 당일 증상</strong>
+        <br>
+              <table class="table table-hover" style="width:50%;margin: auto;">
+              <thead>
+                <tr class="table-light">
+                  <th colspan="2"><p th:text="'2차 접종 백신 : ' + ${vac_2}" style="font-size: 18px;margin:0;"></p></th>
+                </tr>
+              </thead>
+            <tbody>
+            <tr class="table-light">
+                <td><strong>2차 접종 당일 증상</strong></td>
+            <td>
                 <input type="radio" name="2_1" value="1"> 발열
                 <input type="radio" name="2_1" value="2"> 두통
                 <input type="radio" name="2_1" value="3"> 오한
@@ -167,33 +154,34 @@
                 <input type="radio" name="2_1" value="5"> 주사 부위의 통증
                 <input type="radio" name="2_1" value="6"> 메스꺼움
                 <input type="radio" name="2_1" value="7"> 근육통
-                <br>
-                <br>
-            </div>
-            <div>
-                <strong>2차 접종 3일 후 증상</strong>
-                <input type="radio" name="2_3" value="1"> 발열
-                <input type="radio" name="2_3" value="2"> 두통
-                <input type="radio" name="2_3" value="3"> 오한
-                <input type="radio" name="2_3" value="4"> 피로
-                <input type="radio" name="2_3" value="5"> 주사 부위의 통증
-                <input type="radio" name="2_3" value="6"> 메스꺼움
-                <input type="radio" name="2_3" value="7"> 근육통
-                <br>
-                <br>
-            </div>
-            <div>
-                <strong>2차 접종 7일 후 증상</strong>
-                <input type="radio" name="2_7" value="1"> 발열
-                <input type="radio" name="2_7" value="2"> 두통
-                <input type="radio" name="2_7" value="3"> 오한
-                <input type="radio" name="2_7" value="4"> 피로
-                <input type="radio" name="2_7" value="5"> 주사 부위의 통증
-                <input type="radio" name="2_7" value="6"> 메스꺼움
-                <input type="radio" name="2_7" value="7"> 근육통
-                <br>
-                <br>
-            </div>
+            </td>
+            </tr>
+            <tr class="table-light">
+            <td><strong>2차 접종 3일 후 증상</strong></td>
+                <td>
+            <input type="radio" name="2_3" value="1"> 발열
+            <input type="radio" name="2_3" value="2"> 두통
+            <input type="radio" name="2_3" value="3"> 오한
+            <input type="radio" name="2_3" value="4"> 피로
+            <input type="radio" name="2_3" value="5"> 주사 부위의 통증
+            <input type="radio" name="2_3" value="6"> 메스꺼움
+            <input type="radio" name="2_3" value="7"> 근육통
+                </td>
+            </tr>
+            <tr class="table-light">
+            <td><strong>2차 접종 7일 후 증상</strong></td>
+                <td>
+            <input type="radio" name="2_7" value="1"> 발열
+            <input type="radio" name="2_7" value="2"> 두통
+            <input type="radio" name="2_7" value="3"> 오한
+            <input type="radio" name="2_7" value="4"> 피로
+            <input type="radio" name="2_7" value="5"> 주사 부위의 통증
+            <input type="radio" name="2_7" value="6"> 메스꺼움
+            <input type="radio" name="2_7" value="7"> 근육통
+                </td>
+            </tr>
+            </tbody>
+       </table>
             <br>
             <div class="survey_btn">
                 <input type="button" class="btn btn-dark" value="설문 제출하기" onclick="surveyBtn()">
