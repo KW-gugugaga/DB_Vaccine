@@ -216,5 +216,69 @@
         where Vid = #{Vid};
     </select>
 
+    <select id="getSymptoms_day1_1" parameterType="int" resultType="int">
+        select day1_1
+        from survey
+        where Vid_1 = #{Vid_1}
+        group by day1_1
+        order by count(*) desc
+        limit 0, 3;
+    </select>
 
+    <select id="getSymptoms_day3_1" parameterType="int" resultType="int">
+        select day3_1
+        from survey
+        where Vid_1 = #{Vid_1}
+        group by day3_1
+        order by count(*) desc
+        limit 0, 3;
+    </select>
+
+    <select id="getSymptoms_day7_1" parameterType="int" resultType="int">
+        select day7_1
+        from survey
+        where Vid_1 = #{Vid_1}
+        group by day7_1
+        order by count(*) desc
+        limit 0, 3;
+    </select>
+
+    <select id="getSymptoms_day1_2" parameterType="map" resultType="int">
+        select day1_2
+        from survey
+        where Vid_2 = #{Vid_2}
+        group by day1_2
+        order by count(*) desc
+        limit 0, 3;
+    </select>
+
+    <select id="getSymptoms_day3_2" parameterType="map" resultType="int">
+        select day3_2
+        from survey
+        where Vid_2 = #{Vid_2}
+        group by day3_2
+        order by count(*) desc
+        limit 0, 3;
+    </select>
+
+    <select id="getSymptoms_day7_2" parameterType="map" resultType="int">
+        select day7_2
+        from survey
+        where Vid_2 = #{Vid_2}
+        group by day3_2
+        order by count(*) desc
+        limit 0, 3;
+    </select>
+
+    <select id="getSymptom" parameterType="int" resultType="string">
+        select symp
+        from symptom
+        where Sid = #{Sid};
+    </select>
+
+    <select id="findSurveyByUid" parameterType="int" resultType="int">
+        select *
+        from survey
+        where Uid = #{Uid};
+    </select>
 </mapper>
