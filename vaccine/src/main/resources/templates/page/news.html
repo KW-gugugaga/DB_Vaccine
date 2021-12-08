@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style>
         #title_1{
-            width:300px;
+            width:500px;
             text-align:center;
             border: 5px solid #beb8a8;
             padding: 0.4em 1em 0.3em 1em;
@@ -56,10 +56,13 @@
         </div>
     </div>
 </nav>
-<p id="title_1">최신 현황 확인 페이지</p>
-<div class="container" style="padding-top: 50px;">
-    <h1 class="display-4" style="color: gray;">오늘의 코로나 확진자 현황</h1>
-    <div class="jumbotron" style="height: 200px">
+<br><br><br><br>
+<center>
+    <h3>
+        <p id="title_1"><b>오늘의 코로나 확진자 현황</b></p>
+    </h3>
+</center><div class="container" style="padding-top: 3px;">
+    <div class="jumbotron" style="height: 150px;padding:25px;">
         <div style="float: left; width: 500px;">
             <h1 class="display-4" th:text="${koreaStats[0].alltotal}"></h1>
             <p class="lead">총 확진자</p>
