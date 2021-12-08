@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <title>Survey</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b23e034432ccea604a12b6f38e505241&libraries=services,clusterer,drawing"></script>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <style>
+        .container{
+            width: 100%;
+            height: 60%;
+            margin: 0 auto;
+            padding: 0;
+            padding-right: 14%;
+
+        }
+        div.tapp {
+            width: 80%;
+            box-sizing: border-box;
+            float:center;
+            }
+
+
+        ul.tabs{
+            margin-top: 40px;
+            margin-bottom: 5px;
+            padding: 0px;
+            list-style: none;
+        }
+        ul.tabs li{
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        ul.tabs li.current{
+            background: #cfcac2;
+            color: #222;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content{
+            display: none;
+            background: #cfcac2;
+            padding: 15px;
+            height:50%
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content.current{
+            display: inherit;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+    body{
+        background-color:rgba(221,212,195,0.31);
+        font-family: 'Jeju Gothic', sans-serif;
+        text-align:center;
+    }
+    #title_1{
+        width:300px;
+        text-align:center;
+        border: 5px solid #beb8a8;
+        padding: 0.4em 1em 0.3em 1em;
+        border-radius: 15px;
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #table{
+        float:center;
+        margin-right: 3%;
+        width:80%;
+    }
+
+
+
+    </style>
+    <script style="text/javascript">
+        function surveyBtn() {
+            var surveyForm = document.surveyForm;
+            surveyForm.submit();
+        }
+
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%; ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="mainpage"><img alt="Brand" src="img/33.png" width="100px" height="44px"
+                                                     style="padding-bottom:5px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="hospitalpage"
+                       style="font-size:18px; padding-right:35px;padding-left:35px;">백신 예약</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservationinfo" style="font-size:18px; padding-right:35px;">예약 확인/취소</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">최신 정보 확인</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="myinfo" style="font-size:14px;">내 정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout" style="font-size:14px;">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+
+<center>
+  <h3>
+    <p id="title_1"><b>설문조사 통계</b></p>
+  </h3>
+  <br>
+</center>
+<div class="tapp">
+    <script>
+        $(document).ready(function(){
+
+            $('ul.tabs li').click(function(){
+                var tab_id = $(this).attr('data-tab');
+
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
+            })
+        })
+    </script>
+    <div class="container">
+
+        <ul class="tabs">
+            <li class="tab-link current" data-tab="tab-1">화이자</li>
+            <li class="tab-link" data-tab="tab-2">모더나</li>
+            <li class="tab-link" data-tab="tab-3">아스트라제네카</li>
+
+        </ul>
+
+        <div id="tab-1" class="tab-content current" style="width: 653px;">
+        </div>
+        <div id="tab-2" class="tab-content" style="width: 653px; height: 530px">
+        </div>
+        <div id="tab-3" class="tab-content" style="width: 653px; height: 530px">
+
+        </div>
+
+    </div>
+
+</div>
+</body>

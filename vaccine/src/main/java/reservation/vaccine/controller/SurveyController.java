@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 public class SurveyController {
@@ -64,5 +65,33 @@ public class SurveyController {
         System.out.println(survey.toString());
         surveyService.insertSurvey(survey);
         return "redirect:mainpage";
+    }
+
+    @GetMapping("surveystatistic")
+    public String GetSurveyStatistic(Model mode, HttpServletRequest req) {
+        //vid 0 : 화이자, vid 1 : 모더나, vid 2 : 아스트라제네카
+        //화이자
+        List<String> pfizer_day1_1 = surveyService.getSymptoms_1(0, "day1_1");
+        List<String> pfizer_day3_1 = null;
+        List<String> pfizer_day7_1 = null;
+        List<String> pfizer_day1_2 = null;
+        List<String> pfizer_day3_2 = null;
+        List<String> pfizer_day7_2 = null;
+
+        List<String> az_day1_1 = null;
+        List<String> az_day3_1 = null;
+        List<String> az_day7_1 = null;
+        List<String> az_day1_2 = null;
+        List<String> az_day3_2 = null;
+        List<String> az_day7_2 = null;
+
+        List<String> mo_day1_1 = null;
+        List<String> mo_day3_1 = null;
+        List<String> mo_day7_1 = null;
+        List<String> mo_day1_2 = null;
+        List<String> mo_day3_2 = null;
+        List<String> mo_day7_2 = null;
+
+        return "survey/surveystatistic";
     }
 }

@@ -37,12 +37,26 @@
         width:60%;
     }
 
+
+
+
+
+
+
+
     </style>
     <script style="text/javascript">
         function surveyBtn() {
             var surveyForm = document.surveyForm;
             surveyForm.submit();
         }
+
+
+
+
+
+
+
 
     </script>
 </head>
@@ -88,7 +102,8 @@
     <center style="padding-top: 18%;">
         <p style="font-size: 18px; width: 50%; border-radius: 15px 15px 15px 0; border-bottom: 5px solid rgb(50 93 136 / 50%); padding: 0.5em; background: rgb(50 93 136 / 25%);">
         2차 접종 완료 후 14일이 경과되어야 설문조사에 응답할 수 있습니다.</p>
-        <input type="button" class="btn btn-secondary" style="width: 150px;" value="뒤로가기" onclick="location.href='mainpage'">
+        <input type="button" class="btn btn-secondary" style="width: 150px;" value="뒤로가기"
+               onclick="location.href='mainpage'">
     </center>
 </span>
 <span th:if="${state == 5}">
@@ -101,42 +116,46 @@
 </center>
 <form class="survey" name="surveyForm" id="surveyForm" action="survey" method="post">
     <div class="form-check" style="font-size: 14px;">
-        <p th:text="'1차 접종 백신 : ' + ${vac_1}" style="font-size: 15px;"></p>
-        <div>
-            <strong>1차 접종 당일 증상</strong>
-            <input type="radio" name="1_1" value="1"> 발열
-            <input type="radio" name="1_1" value="2"> 두통
-            <input type="radio" name="1_1" value="3"> 오한
-            <input type="radio" name="1_1" value="4"> 피로
-            <input type="radio" name="1_1" value="5"> 주사 부위의 통증
-            <input type="radio" name="1_1" value="6"> 메스꺼움
-            <input type="radio" name="1_1" value="7"> 근육통
-            <br>
-            <br>
-        </div>
-        <div>
-            <strong>1차 접종 3일 후 증상</strong>
-            <input type="radio" name="1_3" value="1"> 발열
+
+           <p th:text="'1차 접종 백신 : ' + ${vac_1}" style="font-size: 15px;"></p>
+
+        <table>
+            <tr>
+                <tb><strong>1차 접종 당일 증상</strong></tb>
+            <tb>
+                <input type="radio" name="1_1" value="1"> 발열
+                <input type="radio" name="1_1" value="2"> 두통
+                <input type="radio" name="1_1" value="3"> 오한
+                <input type="radio" name="1_1" value="4"> 피로
+                <input type="radio" name="1_1" value="5"> 주사 부위의 통증
+                <input type="radio" name="1_1" value="6"> 메스꺼움
+                <input type="radio" name="1_1" value="7"> 근육통
+            </tb>
+            </tr>
+            <tr>
+                <tb><strong>1차 접종 3일 후 증상</strong></tb>
+
+            <tb><input type="radio" name="1_3" value="1"> 발열
             <input type="radio" name="1_3" value="2"> 두통
             <input type="radio" name="1_3" value="3"> 오한
             <input type="radio" name="1_3" value="4"> 피로
             <input type="radio" name="1_3" value="5"> 주사 부위의 통증
             <input type="radio" name="1_3" value="6"> 메스꺼움
             <input type="radio" name="1_3" value="7"> 근육통
-            <br>
-            <br>
-        </div>
-        <div>
-            <strong>1차 접종 7일 후 증상</strong>
-            <input type="radio" name="1_7" value="1"> 발열
+                </tb>
+            </tr>
+            <tr>
+            <tb><strong>1차 접종 7일 후 증상</strong></tb>
+
+                <tb><input type="radio" name="1_7" value="1"> 발열
             <input type="radio" name="1_7" value="2"> 두통
             <input type="radio" name="1_7" value="3"> 오한
             <input type="radio" name="1_7" value="4"> 피로
             <input type="radio" name="1_7" value="5"> 주사 부위의 통증
             <input type="radio" name="1_7" value="6"> 메스꺼움
-            <input type="radio" name="1_7" value="7"> 근육통
-            <br>
-            <br>
+            <input type="radio" name="1_7" value="7"> 근육통</tb>
+            </tr>
+       </table>
             <div>
                 <br>
                 <p th:text="'2차 접종 백신 : ' + ${vac_2}" style="font-size: 15px;"></p>
@@ -180,7 +199,6 @@
                 <input type="button" class="btn btn-dark" value="설문 제출하기" onclick="surveyBtn()">
             </div>
         </div>
-    </div>
 </form>
 </span>
 </body>
