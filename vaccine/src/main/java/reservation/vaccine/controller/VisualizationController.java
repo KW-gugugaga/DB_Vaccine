@@ -90,6 +90,25 @@ public class VisualizationController {
         model.addAttribute("MonthData", MonthData);
         model.addAttribute("AccumulatedData", AccumulatedData);
 
+        LocalDate monthBefore = today.minusMonths(1);
+        String monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println("monthBefore = " + monthBefore);
+
+        List<HashMap<String, Object>> dateVaccinated = visualizationService.findVaccinatedByDay(monthBeforeStr);
+        for(int i = 0; i<dateVaccinated.size(); i++)
+        {
+            System.out.println("dateVaccinated= "+ dateVaccinated.get(i));
+        }
+        Map<String, Object> DayData = new HashMap<String, Object>();
+
+        for(int i = 0; i<dateVaccinated.size(); i++)
+        {
+            DayData.put(dateVaccinated.get(i).get("date_2").toString(),dateVaccinated.get(i).get("count(*)"));
+            System.out.println("DayData= "+DayData);
+        }
+
+        model.addAttribute("DayData", DayData);
+
         return "page/visualization";
     }
 }

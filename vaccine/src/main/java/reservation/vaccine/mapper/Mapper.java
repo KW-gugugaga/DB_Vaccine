@@ -2,6 +2,7 @@ package reservation.vaccine.mapper;
 
 import reservation.vaccine.domain.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,8 @@ public interface Mapper {
     int findVaccinatedByAge(int ageGroup);
     int findAllByAge(int ageGroup);
     int findAllByStateDate2(int month);
+
+    List<HashMap<String, Object>> findVaccinatedByDay(String monthBefore);
 
     //review
     Integer findUserReviewByUidHid(Map<String, Integer> info);

@@ -168,6 +168,14 @@
         where ui.Uid=ur.Uid and month(ur.date_2)=#{month} and ui.state>=4;
     </select>
 
+    <select id="findVaccinatedByDay" resultType="HashMap" parameterType="String">
+        select ur.date_2, count(*)
+        from user_info as ui, user_rsv as ur
+        where ui.Uid=ur.Uid and ur.date_2>=#{monthBefore} and ui.state>=4
+        group by ur.date_2
+        having count(ur.date_2);
+    </select>
+
     <!--review-->
     <select id="findUserReviewByUidHid" parameterType="map" resultType="int">
         select RVid
