@@ -141,6 +141,7 @@
             };
             var chart = new google.visualization.ComboChart(document.getElementById('linecolumnchart'));
             chart.draw(data, options);
+
         }
     </script>
 </div>
@@ -179,6 +180,88 @@
         }
     </script>
 </div>
+
+<div id='geochart' ></div>
+<script type='text/javascript'>
+        google.charts.load('current', {'packages': ['geochart']});
+        google.charts.setOnLoadCallback(drawVisualization);
+
+        function drawVisualization() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Country');
+            data.addColumn('number', 'Value');
+            var ivalue = new Array();
+
+            data.addRows([['KR-11',0]]);
+            ivalue['KR-11'] = '#3182BD';
+
+            data.addRows([['KR-26',1]]);
+            ivalue['KR-26'] = '#3182BD';
+
+            data.addRows([['KR-27',2]]);
+            ivalue['KR-27'] = '#3182BD';
+
+            data.addRows([['KR-30',3]]);
+            ivalue['KR-30'] = '#3182BD';
+
+            data.addRows([['KR-29',4]]);
+            ivalue['KR-29'] = '#3182BD';
+
+            data.addRows([['KR-28',5]]);
+            ivalue['KR-28'] = '#3182BD';
+
+            data.addRows([['KR-31',6]]);
+            ivalue['KR-31'] = '#3182BD';
+
+            data.addRows([['KR-43',7]]);
+            ivalue['KR-43'] = '#3182BD';
+
+            data.addRows([['KR-44',8]]);
+            ivalue['KR-44'] = '#3182BD';
+
+            data.addRows([['KR-42',9]]);
+            ivalue['KR-42'] = '#9ECAE1';
+
+            data.addRows([['KR-41',10]]);
+            ivalue['KR-41'] = '#9ECAE1';
+
+            data.addRows([['KR-47',11]]);
+            ivalue['KR-47'] = '#9ECAE1';
+
+            data.addRows([['KR-48',12]]);
+            ivalue['KR-48'] = '#9ECAE1';
+
+            data.addRows([['KR-49',13]]);
+            ivalue['KR-49'] = '#9ECAE1';
+
+            data.addRows([['KR-45',14]]);
+            ivalue['KR-45'] = '#9ECAE1';
+
+            data.addRows([['KR-46',15]]);
+            ivalue['KR-46'] = '#9ECAE1';
+
+            var options = {
+                backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+                colorAxis:  {minValue: 0, maxValue: 21,  colors: ['#3182BD','#3182BD','#3182BD','#3182BD','#3182BD','#3182BD','#3182BD','#3182BD','#3182BD','#9ECAE1','#9ECAE1','#9ECAE1','#9ECAE1','#9ECAE1','#9ECAE1','#9ECAE1','#9ECAE1','#DEEBF7','#DEEBF7','#DEEBF7','#DEEBF7','#DEEBF7',]},
+                legend: 'none',
+                backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+                datalessRegionColor: '#f5f5f5',
+                displayMode: 'regions',
+                enableRegionInteractivity: 'true',
+                resolution: 'provinces',
+                sizeAxis: {minValue: 1, maxValue:1,minSize:10,  maxSize: 10},
+                region:'KR',
+                keepAspectRatio: true,
+                width:600,
+                height:400,
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById('geochart'));
+            chart.draw(data, options);
+
+        }
+ </script>
 
 </body>
 </html>

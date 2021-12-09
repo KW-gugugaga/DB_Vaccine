@@ -30,7 +30,7 @@
             width: 50%;
             float: left;
             box-sizing: border-box;
-            padding-top:7%;
+            padding-top:4%;
         }
         div.right {
             width: 50%;
@@ -155,7 +155,7 @@
 <div>
     <div class="left" >
         <center>
-            <h1 style="padding:4px; ">코로나19 백신 예약 시스템</h1>
+            <h1 style="padding:4px;">코로나19 백신 예약 시스템</h1>
             <h2><p style="padding:4px;padding-top:10px;" th:text="'안녕하세요. ' + ${Uname} + '님'">안녕하세요. 님</p></h2>
             <h4 style="padding:4px;">
                 <p th:if="${state} == 0">백신 예약 내역이 없습니다.</p>
@@ -191,7 +191,7 @@
             <br>
             <div class="wrap">
                 <div class="survey_button">
-                    <input class="button" type="button" onclick="location.href='survey'" value="접종 후 설문조사">
+                    <input class="button" type="button" onclick="location.href='surveystatistic'" value="부작용 설문조사 및 통계">
                 </div>
             </div>
         </center>
@@ -224,16 +224,67 @@
     <div class="container">
 
         <ul class="tabs">
-            <li class="tab-link current" data-tab="tab-1">누적 접종 현황</li>
-            <li class="tab-link" data-tab="tab-2">지역별 접종 현황</li>
-            <li class="tab-link" data-tab="tab-3">나이별 접종 현황</li>
-            <li class="tab-link" data-tab="tab-4">나이s별 접종 현황</li>
-
+            <li class="tab-link current" data-tab="tab-1">날짜별 누적 접종 현황</li>
+            <li class="tab-link" data-tab="tab-2">월별 누적 접종 현황</li>
+            <li class="tab-link" data-tab="tab-3">지역별 접종 현황</li>
+            <li class="tab-link" data-tab="tab-4">나이별 접종 현황</li>
         </ul>
 
-        <div id="tab-1" class="tab-content current" style="width: 653px;">
-            <div id="linecolumnchart" style="width: 620px; height: 500px"></div>
+        <div id="tab-1" class="tab-content current" style="width: 653px; height: 530px">
+            <div id="linechart" style="width: 620px; height: 500px"></div>
             <script th:inline="javascript">
+                google.charts.load('45', {packages : ['corechart']});
+                google.charts.setOnLoadCallback(drawLineChart);
+
+                function drawLineChart() {
+                    var real_data = [[${DayData}]];
+                    console.log(real_data);
+
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', '날짜');
+                    data.addColumn('number', '누적 접종완료자');
+                    Object.keys(real_data).forEach(function(key) {
+                        data.addRow([ key, real_data[key]]);
+                        console.log(data);
+                    });
+                    var options = {
+                        title : '날짜별 누적 접종 완료자',
+                        titleTextStyle : {
+                            fontSize: 18
+                        },
+                        hAxis : {
+                            title : '날짜',
+                            textStyle: {
+                                fontSize: 10,
+                            },
+                        },
+                        vAxis : {
+                            title : '누적 접종 완료자 수',
+                            format: '0',
+                        },
+
+                        width: 620,
+                        height: 500,
+                        legend: {
+                            textStyle: {fontSize: 12},
+                        },
+                        colors: ['#DA0000'],
+                        chartArea:{left:100},
+                        fontName: 'Jeju Gothic'
+
+                    };
+                        var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+                        chart.draw(data, options);
+                }
+
+            </script>
+            <p style="color:#DA0000; font-size: 12px">※ 오늘로부터 한달 이내의 접종완료자 수를 나타내었습니다.</p>
+        </div>
+    </div>
+    <div id="tab-2" class="tab-content" style="width: 653px; height: 530px">
+        <div id="linecolumnchart"></div>
+        <script th:inline="javascript">
+
                 google.charts.load('45', {packages : ['corechart']});
                 google.charts.setOnLoadCallback(drawComboChart);
 
@@ -272,6 +323,8 @@
                             0:{color: '#8E8C84'},
                             1: {type: 'line'}
                         },
+                        width: 620,
+                        height: 500,
                         chartArea:{left:100},
                         fontName: 'Jeju Gothic'
 
@@ -281,10 +334,9 @@
                 }
 
 
-            </script>
-        </div>
+        </script>
     </div>
-    <div id="tab-2" class="tab-content" style="width: 653px; height: 530px">
+    <div id="tab-3" class="tab-content" style="width: 653px; height: 530px">
         <div id="columnchart"></div>
         <script th:inline="javascript">
             google.charts.load('45', {packages : ['corechart']});
@@ -334,7 +386,7 @@
         </script>
         <p style="color:#DA0000; font-size: 12px">※ (지역별 접종 완료자 수 / 지역별 인구 수) * 1,000,000 으로 나타내었습니다.</p>
     </div>
-    <div id="tab-3" class="tab-content" style="width: 653px; height: 530px">
+    <div id="tab-4" class="tab-content" style="width: 653px; height: 530px">
         <div id="barchart"></div>
         <script th:inline="javascript">
             google.charts.load('45', {packages : ['bar']});
@@ -376,52 +428,9 @@
                 chart.draw(data, options);
             }
 
+
         </script>
         <p style="color:#DA0000; font-size: 12px">※ (나이대 별 접종 완료자 수) / (해당 나이대 예약 프로그램 가입자 수)로 나타내었습니다.</p>
-    </div>
-    <div id="tab-4" class="tab-content" style="width: 653px; height: 530px">
-        <div id="barchart2"></div>
-        <script th:inline="javascript">
-            google.charts.load('45', {packages : ['bar']});
-            google.charts.setOnLoadCallback(drawBarChart);
-
-            function drawBarChart() {
-                var real_data = [[${AgeData}]];
-                console.log(real_data);
-
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'age');
-                data.addColumn('number', '접종완료자 비율');
-                Object.keys(real_data).forEach(function(key) {
-                    data.addRow([ key, real_data[key] ]);
-                });
-                var options = {
-                    title : '나이별 접종 완료자',
-                    titleTextStyle : {
-                        fontSize: 18
-                    },
-                    hAxis : {
-                        title : '접종 완료자 비율',
-                        minValue: 0,
-                    },
-                    vAxis : {
-                        title : '나이',
-                    },
-                    width: 620,
-                    height: 500,
-                    legend: {
-                        textStyle: {fontSize: 12},
-                    },
-                    colors: ['#8E8C84'],
-                    chartArea:{left:100},
-                    fontName: 'Jeju Gothic'
-
-                };
-                var chart = new google.visualization.BarChart(document.getElementById('barchart2'));
-                chart.draw(data, options);
-            }
-
-        </script>
     </div>
 </div>
 

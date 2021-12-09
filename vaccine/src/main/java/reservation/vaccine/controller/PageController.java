@@ -120,6 +120,51 @@ public class PageController {
         model.addAttribute("MonthData", MonthData);
         model.addAttribute("AccumulatedData", AccumulatedData);
 
+        LocalDate monthBefore = today.minusMonths(1);
+        String monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println("monthBefore = " + monthBefore);
+
+        List<HashMap<String, Object>> dateVaccinated = visualizationService.findVaccinatedByDay(monthBeforeStr);
+        for(int i = 0; i<dateVaccinated.size(); i++)
+        {
+            System.out.println("dateVaccinated= "+ dateVaccinated.get(i));
+        }
+        Map<String, Object> ExistDay = new HashMap<String, Object>();
+
+        for(int i = 0; i<dateVaccinated.size(); i++)
+        {
+            ExistDay.put(dateVaccinated.get(i).get("date_2").toString(),dateVaccinated.get(i).get("count(*)"));
+        }
+        int days = (int)monthBefore.until(today,ChronoUnit.DAYS);
+
+        Map<String, Integer> DayData = new LinkedHashMap<String, Integer>();
+
+        for(int i = 0; i<days;i++)
+        {
+            DayData.put(monthBeforeStr,0);
+            monthBefore=monthBefore.plusDays(1);
+            monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+
+        int count =0;
+
+        for(String allDay : DayData.keySet())
+        {
+            for(String existDay : ExistDay.keySet())
+            {
+                if(allDay.equals(existDay))
+                {
+                    if(count==0)
+                        count = Integer.parseInt(ExistDay.get(existDay).toString());
+                    else
+                        count+= Integer.parseInt(ExistDay.get(existDay).toString());
+                }
+                DayData.put(allDay,count);
+            }
+        }
+
+        model.addAttribute("DayData", DayData);
+
         return "page/mainpage";
     }
 

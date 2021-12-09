@@ -110,16 +110,12 @@ public class VisualizationController {
         int days = (int)monthBefore.until(today,ChronoUnit.DAYS);
 
         Map<String, Integer> DayData = new LinkedHashMap<String, Integer>();
-        System.out.println("days = " + days
-        );
-
 
         for(int i = 0; i<days;i++)
         {
             DayData.put(monthBeforeStr,0);
             monthBefore=monthBefore.plusDays(1);
             monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            System.out.println("DayData= "+DayData);
         }
 
         int count =0;
@@ -139,7 +135,6 @@ public class VisualizationController {
                 }
                 DayData.put(allDay,count);
 
-                System.out.println("DayData= "+DayData);
             }
         }
 
