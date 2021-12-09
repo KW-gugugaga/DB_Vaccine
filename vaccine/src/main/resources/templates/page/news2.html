@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+  <title>News</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style>
+        #title_1{
+            width:500px;
+            text-align:center;
+            border: 5px solid #beb8a8;
+            padding: 0.4em 1em 0.3em 1em;
+            border-radius: 15px;
+            box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+        }
+        body{
+            background-color:rgba(221,212,195,0.31);
+            font-family: 'Jeju Gothic', sans-serif;
+        }
+
+
+    </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>
+    function Btn() {
+        $("#div1").load("guidepage");
+    }
+    </script>
+</head>
+<body>
+<div>
+  <center>
+    <h3>
+      <p id="title_1"><b>오늘의 코로나 확진자 현황</b></p>
+    </h3>
+  </center>
+  <div class="container" style="padding-top: 3px;">
+    <div class="jumbotron" style="height: 150px;padding:25px;">
+      <div style="float: left; width: 500px;">
+        <h1 class="display-4" th:text="${koreaStats[0].alltotal}"></h1>
+        <p class="lead">총 확진자</p>
+      </div>
+      <hr style="float: left; border: 0.3px solid black; width: 0.1px; height: 60px;">
+      <div style="float:left; padding-left: 50px;">
+        <h1 class="display-4" th:text="${koreaStats[0].daytotal}"></h1>
+        <p class="lead" style="text-align: center;">오늘의 확진자</p>
+      </div>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>지역</th>
+        <th>확진환자수(전일 대비 증감량)</th>
+        <th>총 확진환자수</th>
+        <th>총 격리해제수</th>
+        <th>총 사망자</th>
+        <th>인구 10만 명당 발생률</th>
+      </tr>
+      <tr th:each="stat : ${koreaStats} ">
+        <td th:text="${stat.country}"></td>
+        <td th:text="${stat.daytotal}">0</td>
+        <td th:text="${stat.alltotal}">0</td>
+        <td th:text="${stat.end}">0</td>
+        <td th:text="${stat.death}">0</td>
+        <td th:text="${stat.incident}">0</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>
