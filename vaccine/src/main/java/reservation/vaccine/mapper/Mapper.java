@@ -46,8 +46,11 @@ public interface Mapper {
     int findVaccinatedByAge(int ageGroup);
     int findAllByAge(int ageGroup);
     int findAllByStateDate2(int month);
-
+    int findAllPastByStateDate2(String month);
     List<HashMap<String, Object>> findVaccinatedByDay(String monthBefore);
+    int findPreviousVaccinatedByDay(String monthBefore);
+    int find1stVaccinatedByDay(String monthBefore);
+    int findPrevious1stVaccinatedByDay(String monthBefore);
 
     //review
     Integer findUserReviewByUidHid(Map<String, Integer> info);

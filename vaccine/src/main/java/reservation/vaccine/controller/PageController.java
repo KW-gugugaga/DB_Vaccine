@@ -58,13 +58,16 @@ public class PageController {
             model.addAttribute("Uname", userInfo.getUname());
         }
 
+        /*데이터 시각화*/
+        //지역 별
         List<Location> locations = visualizationService.visualizeByLocation();
-        Map<String, Float> locationData = new HashMap<String, Float>();
+        Map<String, Float> locationData = new LinkedHashMap<String, Float>();
         for (Location location : locations) {
             locationData.put(location.getLname(), location.getRatio());
         }
         model.addAttribute("locationData", locationData);
 
+        /*나이별 접종완료자*/
         ArrayList<Integer> ageVaccinated = new ArrayList<Integer>();
         ArrayList<Integer> ageAll = new ArrayList<Integer>();
         Map<String, Float> AgeData = new LinkedHashMap<String, Float>();
@@ -93,7 +96,80 @@ public class PageController {
 
         model.addAttribute("AgeData", AgeData);
 
+        /*날짜별 접종완료자*/
         LocalDate today = LocalDate.now();
+        LocalDate monthBefore = today.minusMonths(1);
+        String monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); //오늘로부터 한달 전 날짜 문자열
+        System.out.println("monthBefore = " + monthBefore);
+
+        int days = (int)monthBefore.until(today,ChronoUnit.DAYS);
+
+        //1차
+        int Vaccinated1stMonthAgo = visualizationService.findPrevious1stVaccinatedByDay(monthBeforeStr); //한달 전보다 이전 누적 접종완료자 수
+        System.out.println("Vaccinated1stMonthAgo = " + Vaccinated1stMonthAgo);
+
+        ArrayList<Integer> day1stVaccinated = new ArrayList<Integer>();
+        ArrayList<String> dayMonth = new ArrayList<String>();
+        Map<String, Integer> Day1stData = new LinkedHashMap<String, Integer>();
+        LocalDate tempDate=monthBefore;
+        String tempStr=monthBeforeStr;
+        for(int i=0;i<days;i++)
+        {
+            day1stVaccinated.add(visualizationService.find1stVaccinatedByDay(tempStr));
+            dayMonth.add(tempStr);
+            tempDate=tempDate.plusDays(1);
+            tempStr = tempDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        }
+        System.out.println("day1stVaccinated = " + day1stVaccinated);
+
+        int firstcount = visualizationService.findPrevious1stVaccinatedByDay(monthBeforeStr);
+        for (int i = 0; i < days; i++) {
+            firstcount += day1stVaccinated.get(i);
+            Day1stData.put(dayMonth.get(i), firstcount);
+        }
+        System.out.println("Day1stData = " + Day1stData);
+
+        model.addAttribute("Day1stData", Day1stData);
+
+        //완료자
+        int VaccinatedMonthAgo = visualizationService.findPreviousVaccinatedByDay(monthBeforeStr); //한달 전보다 이전 누적 접종완료자 수
+        System.out.println("VaccinatedMonthAgo = " + VaccinatedMonthAgo);
+
+        List<HashMap<String, Object>> dateVaccinated = visualizationService.findVaccinatedByDay(monthBeforeStr); //한달 내의 접종완료자 수
+        for(int i = 0; i<dateVaccinated.size(); i++)
+        {
+            System.out.println("dateVaccinated= "+ dateVaccinated.get(i));
+        }
+        Map<String, Object> ExistDay = new HashMap<String, Object>();
+
+        for(int i = 0; i<dateVaccinated.size(); i++) {
+            ExistDay.put(dateVaccinated.get(i).get("date_2").toString(),dateVaccinated.get(i).get("count(*)"));
+        }
+
+        Map<String, Integer> DayData = new LinkedHashMap<String, Integer>();
+
+        for(int i = 0; i<days;i++) {
+            DayData.put(monthBeforeStr,0);
+            monthBefore=monthBefore.plusDays(1);
+            monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+
+        int vaccinatedCount =0; //누적 완료자수 count
+        vaccinatedCount = VaccinatedMonthAgo;
+        for(String allDay : DayData.keySet()) {
+            for(String existDay : ExistDay.keySet()) {
+                if(allDay.equals(existDay)) {
+                    vaccinatedCount += Integer.parseInt(ExistDay.get(existDay).toString()); //누적
+                }
+            }
+            DayData.put(allDay,vaccinatedCount);
+        }
+
+        model.addAttribute("DayData", DayData);
+
+
+        /*월별 접종완료자*/
         Month monthStr = today.getMonth();
         int current_month = monthStr.getValue();
 
@@ -106,64 +182,18 @@ public class PageController {
             monthVaccinated.add(visualizationService.findAllByStateDate2(i));
         }
 
-        int accumulated = 0;
+        String sixmonthBefore = today.getYear()+"-"+start_month+"-"+1;
+        System.out.println("sixmonthBefore = " + sixmonthBefore);
+
+        int accumulated = visualizationService.findAllPastByStateDate2(sixmonthBefore);
+        System.out.println("accumulated = " + accumulated);
         for (int i = 0; i < 6; i++) {
             accumulated += monthVaccinated.get(i);
             MonthData.put((i + start_month) + "월", (monthVaccinated.get(i)));
             AccumulatedData.put((i + start_month) + "월", accumulated);
         }
-        for (String key : MonthData.keySet()) {
-            int value1 = (int) MonthData.get(key);
-            int value2 = (int) AccumulatedData.get(key);
-        }
-
         model.addAttribute("MonthData", MonthData);
         model.addAttribute("AccumulatedData", AccumulatedData);
-
-        LocalDate monthBefore = today.minusMonths(1);
-        String monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        System.out.println("monthBefore = " + monthBefore);
-
-        List<HashMap<String, Object>> dateVaccinated = visualizationService.findVaccinatedByDay(monthBeforeStr);
-        for(int i = 0; i<dateVaccinated.size(); i++)
-        {
-            System.out.println("dateVaccinated= "+ dateVaccinated.get(i));
-        }
-        Map<String, Object> ExistDay = new HashMap<String, Object>();
-
-        for(int i = 0; i<dateVaccinated.size(); i++)
-        {
-            ExistDay.put(dateVaccinated.get(i).get("date_2").toString(),dateVaccinated.get(i).get("count(*)"));
-        }
-        int days = (int)monthBefore.until(today,ChronoUnit.DAYS);
-
-        Map<String, Integer> DayData = new LinkedHashMap<String, Integer>();
-
-        for(int i = 0; i<days;i++)
-        {
-            DayData.put(monthBeforeStr,0);
-            monthBefore=monthBefore.plusDays(1);
-            monthBeforeStr = monthBefore.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-
-        int count =0;
-
-        for(String allDay : DayData.keySet())
-        {
-            for(String existDay : ExistDay.keySet())
-            {
-                if(allDay.equals(existDay))
-                {
-                    if(count==0)
-                        count = Integer.parseInt(ExistDay.get(existDay).toString());
-                    else
-                        count+= Integer.parseInt(ExistDay.get(existDay).toString());
-                }
-                DayData.put(allDay,count);
-            }
-        }
-
-        model.addAttribute("DayData", DayData);
 
         return "page/mainpage";
     }

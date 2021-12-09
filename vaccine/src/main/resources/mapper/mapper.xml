@@ -133,7 +133,7 @@
     <select id="visualizeByLocation" resultType="reservation.vaccine.domain.Location">
         select l.Lid, l.Lname, count(*) / l.population * 1000000 as ratio
         from location as l, user_info as ui
-        where l.Lid = ui.Lid and ui.state = 5
+        where l.Lid = ui.Lid and ui.state in (4,5)
         group by l.Lid
     </select>
 
@@ -169,12 +169,42 @@
         where ui.Uid=ur.Uid and month(ur.date_2)=#{month} and ui.state>=4;
     </select>
 
+    <select id="findAllPastByStateDate2" resultType="int" parameterType="String">
+        select count(*)
+        from  user_rsv as ur
+        where exists
+        (select ur.Uid
+        from user_info as ui
+        where ui.Uid=ur.Uid and ur.date_2&lt;#{month} and ui.state>=4);
+    </select>
+
     <select id="findVaccinatedByDay" resultType="HashMap" parameterType="String">
         select ur.date_2, count(*)
         from user_info as ui, user_rsv as ur
         where ui.Uid=ur.Uid and ur.date_2>=#{monthBefore} and ui.state>=4
         group by ur.date_2
         having count(ur.date_2);
+    </select>
+
+    <select id="findPreviousVaccinatedByDay" resultType="int" parameterType="String">
+        select count(*)
+        from user_info as ui, user_rsv as ur
+        where ui.Uid=ur.Uid and ur.date_2&lt;#{monthBefore} and ui.state in (4,5)
+    </select>
+
+    <select id="find1stVaccinatedByDay" resultType="int" parameterType="String">
+        select count(*)
+        from user_info as ui, user_rsv as ur
+        where ui.Uid=ur.Uid and ur.date_1=#{monthBefore} and ui.state in (2,3,4,5);
+    </select>
+
+    <select id="findPrevious1stVaccinatedByDay" resultType="int" parameterType="String">
+        select count(*)
+        from  user_rsv as ur
+        where exists(
+        select ur.Uid
+        from user_info as ui
+        where ui.Uid=ur.Uid and ur.date_1&lt;#{monthBefore} and ui.state in (2,3,4,5));
     </select>
 
     <!--review-->

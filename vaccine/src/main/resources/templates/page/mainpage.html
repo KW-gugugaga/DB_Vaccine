@@ -238,13 +238,15 @@
 
                 function drawLineChart() {
                     var real_data = [[${DayData}]];
+                    var first_data=[[${Day1stData}]]
                     console.log(real_data);
 
                     var data = new google.visualization.DataTable();
                     data.addColumn('string', '날짜');
                     data.addColumn('number', '누적 접종완료자');
+                    data.addColumn('number', '누적 1차접종자');
                     Object.keys(real_data).forEach(function(key) {
-                        data.addRow([ key, real_data[key]]);
+                        data.addRow([ key, real_data[key],first_data[key] ]);
                         console.log(data);
                     });
                     var options = {
@@ -259,7 +261,7 @@
                             },
                         },
                         vAxis : {
-                            title : '누적 접종 완료자 수',
+                            title : '누적 접종자 수',
                             format: '0',
                         },
 
@@ -268,7 +270,10 @@
                         legend: {
                             textStyle: {fontSize: 12},
                         },
-                        colors: ['#DA0000'],
+                        series: {
+                            0: {color: '#DA0000'},
+                            1: {type: 'line', color: '#93ADDD'},
+                        },
                         chartArea:{left:100},
                         fontName: 'Jeju Gothic'
 
@@ -278,7 +283,7 @@
                 }
 
             </script>
-            <p style="color:#DA0000; font-size: 12px">※ 오늘로부터 한달 이내의 접종완료자 수를 나타내었습니다.</p>
+            <p style="color:#DA0000; font-size: 12px">※ 오늘로부터 한달 이내의 1차 접종자 및 접종완료자 수를 나타내었습니다.</p>
         </div>
     </div>
     <div id="tab-2" class="tab-content" style="width: 653px; height: 530px">
