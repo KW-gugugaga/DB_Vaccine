@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 public class SurveyController {
@@ -30,7 +31,7 @@ public class SurveyController {
     SurveyService surveyService;
 
     @GetMapping("survey")
-    public String GetSurvey(Model model, HttpServletRequest req) {
+    public String GetSurvey(Model model, HttpServletRequest req, HttpServletResponse res) throws IOException {
         System.out.println("SurveyController.GetSurvey");
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
@@ -63,6 +64,65 @@ public class SurveyController {
         Survey survey = new Survey(userInfo.getUid(), vid_1, day1_1, day3_1, day7_1, vid_2, day1_2, day3_2, day7_2);
         System.out.println(survey.toString());
         surveyService.insertSurvey(survey);
-        return "redirect:mainpage";
+        return "redirect:surveystatistic";
+    }
+
+    @GetMapping("surveystatistic")
+    public String GetSurveyStatistic(Model model, HttpServletRequest req) {
+        //vid 0 : 화이자, vid 1 : 모더나, vid 2 : 아스트라제네카
+        HttpSession session = req.getSession();
+        Object user = session.getAttribute("user");
+        UserInfo userInfo = (UserInfo)user;
+        int state = userInfo.getState();
+        Integer surveyByUid = surveyService.findSurveyByUid(userInfo.getUid());
+        if(surveyByUid != null) {
+            model.addAttribute("surveyState", 1);
+        } else {
+            model.addAttribute("surveyState", 0);
+        }
+        //화이자
+        List<String> pfizer_day1_1 = surveyService.getSymptoms_day1_1(0);
+        List<String> pfizer_day3_1 = surveyService.getSymptoms_day3_1(0);
+        List<String> pfizer_day7_1 = surveyService.getSymptoms_day7_1(0);
+        List<String> pfizer_day1_2 = surveyService.getSymptoms_day1_2(0);
+        List<String> pfizer_day3_2 = surveyService.getSymptoms_day3_2(0);
+        List<String> pfizer_day7_2 = surveyService.getSymptoms_day7_2(0);
+        //아스트라
+        List<String> az_day1_1 = surveyService.getSymptoms_day1_1(1);
+        List<String> az_day3_1 = surveyService.getSymptoms_day3_1(1);
+        List<String> az_day7_1 = surveyService.getSymptoms_day7_1(1);
+        List<String> az_day1_2 = surveyService.getSymptoms_day1_2(1);
+        List<String> az_day3_2 = surveyService.getSymptoms_day3_2(1);
+        List<String> az_day7_2 = surveyService.getSymptoms_day7_2(1);
+        //모더나
+        List<String> mo_day1_1 = surveyService.getSymptoms_day1_1(2);
+        List<String> mo_day3_1 = surveyService.getSymptoms_day3_1(2);
+        List<String> mo_day7_1 = surveyService.getSymptoms_day7_1(2);
+        List<String> mo_day1_2 = surveyService.getSymptoms_day1_2(2);
+        List<String> mo_day3_2 = surveyService.getSymptoms_day3_2(2);
+        List<String> mo_day7_2 = surveyService.getSymptoms_day7_2(2);
+
+        model.addAttribute("pfizer_day1_1", pfizer_day1_1);
+        model.addAttribute("pfizer_day3_1", pfizer_day3_1);
+        model.addAttribute("pfizer_day7_1", pfizer_day7_1);
+        model.addAttribute("pfizer_day1_2", pfizer_day1_2);
+        model.addAttribute("pfizer_day3_2", pfizer_day3_2);
+        model.addAttribute("pfizer_day7_2", pfizer_day7_2);
+
+        model.addAttribute("az_day1_1", az_day1_1);
+        model.addAttribute("az_day3_1", az_day3_1);
+        model.addAttribute("az_day7_1", az_day7_1);
+        model.addAttribute("az_day1_2", az_day1_2);
+        model.addAttribute("az_day3_2", az_day3_2);
+        model.addAttribute("az_day7_2", az_day7_2);
+
+        model.addAttribute("mo_day1_1", mo_day1_1);
+        model.addAttribute("mo_day3_1", mo_day3_1);
+        model.addAttribute("mo_day7_1", mo_day7_1);
+        model.addAttribute("mo_day1_2", mo_day1_2);
+        model.addAttribute("mo_day3_2", mo_day3_2);
+        model.addAttribute("mo_day7_2", mo_day7_2);
+
+        return "survey/surveystatistic";
     }
 }
