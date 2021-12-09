@@ -19,7 +19,18 @@
             font-family: 'Jeju Gothic', sans-serif;
         }
 
+
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+    function BtnNews() {
+        $("#div1").load("news2");
+    }
+
+    function BtnGuide() {
+        $("#div1").load("guidepage");
+    }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed;width: 100%;z-index:1; ">
@@ -43,6 +54,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="news" style="font-size:18px;padding-right:35px;">관련 정보 및 안내사항</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="surveystatistic" style="font-size:18px;padding-right:35px;">부작용 설문조사 및 통계</a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
 
@@ -57,41 +71,48 @@
     </div>
 </nav>
 <br><br><br><br>
-<center>
-    <h3>
-        <p id="title_1"><b>오늘의 코로나 확진자 현황</b></p>
-    </h3>
-</center><div class="container" style="padding-top: 3px;">
-    <div class="jumbotron" style="height: 150px;padding:25px;">
-        <div style="float: left; width: 500px;">
-            <h1 class="display-4" th:text="${koreaStats[0].alltotal}"></h1>
-            <p class="lead">총 확진자</p>
+<center style="padding: 20px;">
+<input type="button" value="코로나 확진자 현황" class="btn btn-lg btn-dark disabled" style="width: 230px; font-size: 18px;" onclick="BtnNews()">
+<input type="button" value="접종 관련 안내페이지" class="btn btn-lg btn-dark disabled" style="width: 230px; font-size: 18px;" onclick="BtnGuide()">
+</center>
+<div id="div1">
+    <center>
+        <h3>
+            <p id="title_1"><b>오늘의 코로나 확진자 현황</b></p>
+        </h3>
+    </center>
+    <div class="container" style="padding-top: 3px;">
+        <div class="jumbotron" style="height: 150px;padding:25px;">
+            <div style="float: left; width: 500px;">
+                <h1 class="display-4" th:text="${koreaStats[0].alltotal}"></h1>
+                <p class="lead">총 확진자</p>
+            </div>
+            <hr style="float: left; border: 0.3px solid black; width: 0.1px; height: 60px;">
+            <div style="float:left; padding-left: 50px;">
+                <h1 class="display-4" th:text="${koreaStats[0].daytotal}"></h1>
+                <p class="lead" style="text-align: center;">오늘의 확진자</p>
+            </div>
         </div>
-        <hr style="float: left; border: 0.3px solid black; width: 0.1px; height: 60px;">
-        <div style="float:left; padding-left: 50px;">
-            <h1 class="display-4" th:text="${koreaStats[0].daytotal}"></h1>
-            <p class="lead" style="text-align: center;">오늘의 확진자</p>
-        </div>
-    </div>
 
-    <table class="table">
-        <tr>
-            <th>지역</th>
-            <th>확진환자수(전일 대비 증감량)</th>
-            <th>총 확진환자수</th>
-            <th>총 격리해제수</th>
-            <th>총 사망자</th>
-            <th>인구 10만 명당 발생률</th>
-        </tr>
-        <tr th:each="stat : ${koreaStats} ">
-            <td th:text="${stat.country}"></td>
-            <td th:text="${stat.daytotal}">0</td>
-            <td th:text="${stat.alltotal}">0</td>
-            <td th:text="${stat.end}">0</td>
-            <td th:text="${stat.death}">0</td>
-            <td th:text="${stat.incident}">0</td>
-        </tr>
-    </table>
+        <table class="table">
+            <tr>
+                <th>지역</th>
+                <th>확진환자수(전일 대비 증감량)</th>
+                <th>총 확진환자수</th>
+                <th>총 격리해제수</th>
+                <th>총 사망자</th>
+                <th>인구 10만 명당 발생률</th>
+            </tr>
+            <tr th:each="stat : ${koreaStats} ">
+                <td th:text="${stat.country}"></td>
+                <td th:text="${stat.daytotal}">0</td>
+                <td th:text="${stat.alltotal}">0</td>
+                <td th:text="${stat.end}">0</td>
+                <td th:text="${stat.death}">0</td>
+                <td th:text="${stat.incident}">0</td>
+            </tr>
+        </table>
+    </div>
 </div>
 </body>
 </html>

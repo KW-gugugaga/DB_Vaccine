@@ -64,7 +64,7 @@ public class SurveyController {
         Survey survey = new Survey(userInfo.getUid(), vid_1, day1_1, day3_1, day7_1, vid_2, day1_2, day3_2, day7_2);
         System.out.println(survey.toString());
         surveyService.insertSurvey(survey);
-        return "redirect:mainpage";
+        return "redirect:surveystatistic";
     }
 
     @GetMapping("surveystatistic")

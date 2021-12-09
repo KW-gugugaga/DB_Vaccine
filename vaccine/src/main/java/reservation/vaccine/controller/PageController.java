@@ -267,6 +267,13 @@ public class PageController {
         return "page/news";
     }
 
+    @GetMapping("news2")
+    public String GetNews2(Model model) throws IOException {
+        List<KoreaStats> koreaStatsList = coronaVirusDataService.getKoreaCovidDatas();
+        model.addAttribute("koreaStats", koreaStatsList);
+        return "page/news2";
+    }
+
     @PostMapping("distance")
     @ResponseBody
     public int PostDistance(@RequestParam("oMap") Map<String, List<String>> map) {
@@ -277,6 +284,11 @@ public class PageController {
             }
         }
         return 1;
+    }
+
+    @GetMapping("guidepage")
+    public String GetGuidePage(Model model) {
+        return "page/guidepage";
     }
 
     public String setLocation(int lid) {
