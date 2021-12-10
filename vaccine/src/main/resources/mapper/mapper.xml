@@ -135,6 +135,7 @@
         from location as l, user_info as ui
         where l.Lid = ui.Lid and ui.state in (4,5)
         group by l.Lid
+        order by l.Lid
     </select>
 
     <select id="findVaccinatedByAge" resultType="int" parameterType="int">

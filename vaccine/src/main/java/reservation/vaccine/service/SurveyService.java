@@ -61,7 +61,7 @@ public class SurveyService {
     }
 
     public List<String> getSymptoms_day3_2(int Vid_2) {
-        List<Integer> symptoms_day3_2 = mapper.getSymptoms_day3_1(Vid_2);
+        List<Integer> symptoms_day3_2 = mapper.getSymptoms_day3_2(Vid_2);
         List<String> symptoms_day3_2_str = new ArrayList<String>();
         for(Integer i : symptoms_day3_2) {
             symptoms_day3_2_str.add(mapper.getSymptom(i));
@@ -70,7 +70,7 @@ public class SurveyService {
     }
 
     public List<String> getSymptoms_day7_2(int Vid_2) {
-        List<Integer> symptoms_day7_2 = mapper.getSymptoms_day7_1(Vid_2);
+        List<Integer> symptoms_day7_2 = mapper.getSymptoms_day7_2(Vid_2);
         List<String> symptoms_day7_2_str = new ArrayList<String>();
         for(Integer i : symptoms_day7_2) {
             symptoms_day7_2_str.add(mapper.getSymptom(i));
