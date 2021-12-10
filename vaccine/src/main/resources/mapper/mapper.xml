@@ -155,13 +155,10 @@
         select count(*)
         from user_info as ui
         where
-        (
-        ((#{ageGroup}=8) and (ui.age>=80))
-        or
-        ((#{ageGroup} != 8) and  (ui.age between #{ageGroup}*10 and (#{ageGroup}*10)+9))
-        or
-        ((#{ageGroup}=1) and (ui.age&lt;20))
-        );
+        case when #{ageGroup}=8 then ui.age>=80
+        when #{ageGroup}=1 then ui.age&lt;20
+        ELSE (ui.age between #{ageGroup}*10 and (#{ageGroup}*10)+9)
+        END
     </select>
 
     <select id="findAllByStateDate2" resultType="int" parameterType="int">
